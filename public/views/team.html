@@ -1,0 +1,77 @@
+<h2 class="page-title col-md-offset-4">Time&nbsp;<span class="team-title-name">{{config.name}}</span></h2>
+<h2 ng-if="config.descr.length > 0" class="team-lemma col-md-offset-5 col-md-4">"{{config.descr}}"</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-11 col-centered" style="display: flex; justify-content: center;">
+      <div ng-repeat="member in team.members" class="col-md-2">
+        <div class="row">
+          <img class="profile-image" ng-src="{{member.url}}">
+        </div>
+        <div class="row">
+          <p class="team-member-name">{{member.name}}
+          <span ng-if="team.admin == member.id" class="team-admin">(admin)</span>
+          </p>
+        </div>
+        <div class="row">
+          <p class="team-member-username">{{member.username}}
+            <span ng-if="team.isLoggedAdmin && member.id != team.admin">
+              &nbsp;<a href="#" confirmed-click="removeFromTeam(member.id)">(remover)</a>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Competição</th>
+            <th>Início</th>
+            <th>Fim</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+    <div ng-show="team.isLoggedAdmin">
+      <div class="col-md-offset-1 col-md-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <a ng-class="tabSelected=='invites' ? 'team-tabs-selected' : 'team-tabs-unselected'" ng-click="changeTab('invites')">Convidados</a>
+                &nbsp;/&nbsp;
+                <a ng-class="tabSelected=='config' ? 'team-tabs-selected' : 'team-tabs-unselected'" ng-click="changeTab('config')">Configurações</a>
+              </th>
+            </tr>
+          </thead>
+          <tbody ng-show="tabSelected=='invites'">
+            <tr ng-repeat="invitee in team.invites" class="animation">
+              <td>{{invitee.email}}</td>
+              <td><a href="#" confirmed-click="removeFromTeam(invitee.id)">Remover</a></td>
+            </tr>
+            <tr ng-form="inviteForm">
+              <td><input type="email" class="form-control" ng-model="newInvite" name="newInvite" placeholder="E-mail" required></td>
+              <td><button ng-click="invite()" class="form-control" ng-disabled="inviteForm.$invalid">Convidar</button></td>
+            </tr>
+          </tbody>
+          <tbody ng-show="tabSelected=='config'">
+            <tr>
+              <td>Nome</td>
+              <td><input type="name" class="form-control" ng-model="config.name" placeholder="Nome do Time" maxlength="30" ng-change="edit()"></td>
+            </tr>
+            <tr>
+              <td>Lema</td>
+              <td><textarea class="form-control" ng-model="config.descr" placeholder="Lema do Time" maxlength="250" ng-change="edit()"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

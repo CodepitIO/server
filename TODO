@@ -1,0 +1,25 @@
+corretor do uva tá dando "reseted" nas submissões com erro de compilação
+quando a competição terminar, mostrar o resultado do frozen / blind sem precisar atualizar
+implementar upsolving
+ajeitar edição de contest
+mandar email ao cadastrar
+implementar rascunho
+dizer quem individualmente submeteu
+ajeitar o trocinho pra qnd mudar as questões durante o contest, atualizar automaticamente ((NAO PODE MUDAR QUESTOES DEPOIS QUE O CONTEST COMECA))
+implementar o botão de voltar
+mudar o login usado nos ojs
+opção de só visualizar quem tá participando do contest
+aparecer qnd n tiver nenhuma submissão no contest, ou ninguem estiver participando
+uma forma de mostrar melhor as competições inscrito
+http://angular-ui.github.io/ui-chart/
+colocar copyright
+verificar alguns erros que fazem o servidor cair, tipo passar null na senha nova
+dar disable nos cantos enquanto carrega, e botar o simbolo de loading
+não precisa de contestantId e contest pra pegar o catálogo, mas apenas contest, pois pegamos o outro a partir do id do usuário logado
+questões resolvidas vão pra baixo da área de catálogo
+entender por que as vezes qnd o contest acaba ele já não funciona o scroll
+tudo que pode dar null, como usuário deletado, tentar ver outra forma de fazer o toString()
+mudar o timeout do contest pra ser a cada X > 5 segundos, tá consumindo mto a cpu (na criação de contest tbm)
+surround everything with try catch on the server
+colocar o horário do servidor no rootScope
+tornar sobrenome obrigatorio (tá dando pau no servidor qnd não manda sobrenome)
