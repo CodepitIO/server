@@ -1,0 +1,10 @@
+@media (max-width: 1200px) {
+	#problem-search, header ul li a{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	#login-email, #login-password{
+		width: 160px;
+	}
+}

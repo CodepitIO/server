@@ -169,6 +169,8 @@ header{
   background: #45a7b9;
   float: left;
   padding: 0px 10px;
+  position: relative;
+  left: -15px;
 }
 
 #logo img{
@@ -179,6 +181,8 @@ header{
 header ul{
   float: left;
   padding-left: 0px;
+  position: relative;
+  left: -15px;
 }
 
 header ul li{
@@ -243,6 +247,8 @@ header .dropdown-menu li a{
   padding: 22px 30px;
   color: #8c9194;
   transition: all 0.1s linear;
+  position: relative;
+  left: -15px;
 }
 
 #problem-search.focused{
