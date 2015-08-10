@@ -198,7 +198,7 @@ header ul li a{
   height: 75px;
   line-height: 75px;
   padding: 0px 30px;
-  transition: all 0.05s linear;
+  transition: all 0.3s ease;
 }
 
 header ul li a:hover{
@@ -517,4 +517,73 @@ header .dropdown-menu li a{
   text-align: center;
   display: inline-block;
   vertical-align: top;
+}
+
+/* Register */
+#register-area h2, #register-area h3{
+  font: 300 30px "Open Sans";
+  color: #747474;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+#register-area h3{
+  font-size: 18px;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+
+#register-area input{
+  width: 100%;
+  font: 400 14px "Open Sans";
+  padding: 17px;
+  border: solid 1px #d0d0d0;
+  border-radius: 2px;
+}
+
+#register-area input:focus{
+  font: 600 14px "Open Sans";
+  padding: 17px 17px 17px 30px;
+  background: url("../imgs/register_area_bullet.png") no-repeat;
+  background-position: 16px 23px;
+}
+
+#register-area .register-area-split input:nth-child(1){
+  width: 50%;
+  float: left;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+#register-area .register-area-split input:nth-child(2){
+  width: 50%;
+  float: left;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+#register-area input.error{
+  border-width: 2px;
+  border-color: #AD7070;
+}
+
+#register-area small.error{
+  font: 600 12px "Open Sans";
+  color: #ad7070;
+  display: block;
+}
+
+#register-area button{
+  background-color: #45a7b9;
+  padding: 15px;
+  color: #fff;
+  font: 600 16px "Open Sans";
+  transition: all 0.3s ease;
+}
+
+#register-area button:hover{
+  background: #3B8B9A;
+  box-shadow: 0px 2px rgba(0,0,0,0.2);
 }

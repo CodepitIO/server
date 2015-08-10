@@ -1,44 +1,59 @@
-<h2 class="page-title col-md-offset-4">Registrar</h2>
-<div class="container-fluid">
-  <form name="registerProfileForm" novalidate>
-    <div class="row">
-      <div class="col-md-offset-3 col-md-4">
-        <table class="profile-table">
-          <tbody>
-            <tr>
-              <td>
-                <input type="text" class="form-control" ng-model="account.name" name="name" placeholder="Nome" ng-maxlength="100">
-              </td>
-              <td>
-                <input type="text" class="form-control" ng-model="account.surname" name="surname" placeholder="Sobrenome" ng-maxlength="100">
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2"><input type="email" class="form-control" ng-model="account.email" name="email" placeholder="Email *" required></td>
-            </tr>
-            <tr>
-              <td colspan="2"><input id="usernameInput" type="text" data-toggle="tooltip" title="Este nome aparecerá no placar das competições, quando você competir individualmente." class="form-control" ng-model="account.username" name="username" placeholder="Nome de perfil *" ng-maxlength="30" tooltip required></td>
-            </tr>
-            <tr>
-              <td><input type="password" class="form-control" ng-model="account.password" placeholder="Senha *" data-toggle="tooltip" name="pass" ng-maxlength="50" tooltip required></td>
-              <td><input type="password" class="form-control" ng-model="account.confirmPassword" placeholder="Repita senha *" name="confirmPass" match-field="{{account.password}}" ng-maxlength="50"></td>
-            </tr>
-            <tr>
-              <td colspan="2"><button type="button" ng-click="register()" class="btn btn-default btn-block" ng-disabled="registerProfileForm.$invalid">Registrar</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-3" style="margin-top: 5px;">
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.name.$error.maxlength">* seu nome pode ter no máximo 100 caracteres.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.surname.$error.maxlength">* seu sobrenome pode ter no máximo 100 caracteres.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.username.$error.maxlength">* seu nome de perfil pode ter no máximo 30 caracteres.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.email.$error.required || registerProfileForm.email.$error.email">* você deve inserir um email válido.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.username.$error.required">* você deve inserir um nome de perfil.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.pass.$error.required">* você deve inserir uma senha.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.pass.$error.maxlength || registerProfileForm.confirmPass.$error.maxlength">* sua senha deve ter no máximo 50 caracteres.</small>
-        <small style="display: block;" class="error ng-hide" ng-show="registerProfileForm.confirmPass.$error.matchField">* você deve confirmar a senha corretamente.</small>
-      </div>
+<div class="container" id="register-area">
+
+  <div class="row">
+
+    <div class="col-md-6 col-md-offset-3">
+
+      <h2>Registre-se</h2>
+      <h3>Registre-se no <strong>Maratonando</strong> e cemece a criar e competir em competições de programação. </h3>
+
+      <form name="registerProfileForm" novalidate>
+        <div class="form-group register-area-split">
+          <input type="text" placeholder="Nome"  ng-model="account.name" name="name" maxlength="100" />
+          <input type="text" placeholder="Sobrenome" ng-model="account.surname" name="surname" maxlength="100" />
+          <br style="clear: both" />
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Nome de usuário*" tooltip="Este nome aparecerá no placar das competições, quando você competir individualmente." ng-model="account.username" name="username" maxlength="30" required
+          ng-class="{'error': registerProfileForm.username.$dirty && registerProfileForm.username.$error.required }" />
+          <small class="error" 
+            ng-show="registerProfileForm.username.$dirty && registerProfileForm.username.$error.required">* você deve inserir um nome de usuário.</small>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email*" 
+            ng-class="{'error': registerProfileForm.email.$dirty && (registerProfileForm.email.$error.required || registerProfileForm.email.$error.email) }" 
+            ng-model="account.email" name="email" required />
+          <small class="error" 
+          ng-show="registerProfileForm.email.$dirty && (registerProfileForm.email.$error.required || registerProfileForm.email.$error.email)">* você deve inserir um email válido.</small>
+        </div>
+        <div class="form-group register-area-split">
+          <input type="password" name="password" placeholder="Senha*" ng-model="account.password" maxlength="50" required
+          ng-class="{'error': registerProfileForm.password.$dirty && registerProfileForm.password.$error.required }"/>
+          <input type="password" name="confirmPassword" placeholder="Repita a senha*" ng-model="account.confirmPassword" name="confirmPass" match-field="{{account.password}}" maxlength="50" required
+          ng-class="{'error': registerProfileForm.confirmPassword.$dirty && (registerProfileForm.confirmPassword.$error.required || registerProfileForm.confirmPassword.$error.matchField) }" />
+          <br style="clear: both" />
+          <small class="error"
+           ng-show="registerProfileForm.password.$dirty && registerProfileForm.password.$error.required">
+            * você deve inserir uma senha.
+          </small>
+          <small class="error"
+           ng-show="registerProfileForm.confirmPassword.$dirty && registerProfileForm.confirmPassword.$error.required">
+            * você deve repetir a sua senha.
+          </small>
+          <small class="error"
+            ng-show="registerProfileForm.confirmPassword.$dirty && registerProfileForm.confirmPassword.$error.matchField">
+            * você deve confirmar a senha corretamente.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-block" ng-click="register()" class="btn btn-default btn-block" ng-disabled="registerProfileForm.$invalid">Enviar</button>
+        </div>
+
+      </form>
     </div>
-  </form>
+
+
+  </div>
+
 </div>
