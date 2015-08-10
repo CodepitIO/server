@@ -30,7 +30,11 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'public/dist/app.min.css': ['public/css/*.css']
+					'public/dist/app.min.css': [
+						'public/css/style.css', 
+						'public/css/contest.css',
+						'public/css/responsive.css' 
+					]
 				}
 			}
 		},
