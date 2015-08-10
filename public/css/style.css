@@ -505,3 +505,10 @@ header .dropdown-menu li a{
 #news{
   margin-top: 40px;
 }
+
+/* Loader */
+.spinner-loader{
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
