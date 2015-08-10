@@ -16,14 +16,7 @@ npm-debug.log
 /judger/node_modules/*
 
 cpp/matchProblems
-public/imgs/site/*
-public/libs/*
-public/_index.html
-public/js/*
-public/css/*
+public/bower_components/*
 
 .tmp
 nohup.out
-Gruntfile.js
-bower.json
-.bowerrc

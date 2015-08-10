@@ -1,33 +1,45 @@
+<div id="top-user-area">
+
 <div ng-show="$root.loadingUser">
   <i style="margin: 10px;" class="pull-right fa fa-spinner fa-spin fa-2x"></i>
 </div>
+
 <div ng-hide="$root.loadingUser">
+
   <div ng-hide="$root.user">
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
-      <li ng-class="{'menu-active': isActive('/register')}"><a href="/register">Registrar</a></li>
-    </ul>
-    <form class="navbar-form navbar-right row">
-      <div class="form-group">
-        <label class="sr-only" for="inputEmail">Email</label>
-        <input type="email" class="form-control" ng-model="account.email" placeholder="Email">
-      </div>
-      <div class="form-group">
-        <label class="sr-only" for="inputPassword">Senha</label>
-        <input type="password" class="form-control" ng-model="account.password" placeholder="Senha">
-      </div>
-      <button type="submit" ng-click="login()" class="btn btn-default">Entrar</button>
-    </form>
+
+      <form>
+          <input id="login-email" type="email" ng-model="account.email" placeholder="Email">
+          <input id="login-password" type="password" ng-model="account.password" placeholder="Senha">
+          <button id="login-submit" type="submit" ng-click="login()" class="btn btn-default">
+            <i class="fa fa-arrow-right"></i>
+          </button>
+      </form>
+
+      <a id="register-btn" class="btn btn-icon" href="/register">
+        <span>
+          <i class="fa fa-user"></i>
+        </span>
+        Registre-se
+      </a>
+      
   </div>
+
   <div ng-show="$root.user">
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 5px;">
-      <li ng-class="{'menu-active': isActive('/profile')}"><a href="/profile">Perfil</a></li>
-      <li><a href="#" ng-click="logout()">Sair</a></li>
-    </ul>
-    <div ng-show="loadedPictureUrl">
-      <img class="pull-right profile-image" ng-src="{{pictureUrl}}">
-    </div>
-    <div ng-hide="loadedPictureUrl">
-      <i style="margin: 10px;" class="pull-right fa fa-spinner fa-spin fa-2x"></i>
-    </div>
+
+    <a id="logout-btn" class="btn btn-icon" ng-click="logout()">
+      <span>
+        <i class="fa fa-user"></i>
+      </span>
+      Sair
+    </a>
+
+    <a id="top-user-info" href="/profile">
+      <img ng-src="{{ pictureUrl }}">
+      Perfil
+    </a>
+
   </div>
+</div>
+
 </div>
