@@ -59,66 +59,7 @@
 	  </div>
 	</header>
 
-	<section id="new-user-action" ng-hide="$root.user || !isActive('/')">
-		<div class="container">
-			<div class="row">
-				<div id="action-info" class="col-sm-7">
-					<img src="imgs/action_logo.png" />
-					<h2>Crie e participe de <strong>competições de programação</strong> individuais ou em time.</h2>
-					<a href="#">Saiba mais</a>
-				</div>
-				<div class="col-sm-5 form-box">
-	    		<div class="form-top">
-		    		<div class="form-top-left">
-		    			<h3>Crie sua conta</h3>
-		        		<p>Preencha os campos abaixo para entrar no Maratonando</p>
-		    		</div>
-		    		<div class="form-top-right">
-		    			<i class="fa fa-user"></i>
-		    		</div>
-	        </div>
-	        <div class="form-bottom">
-	            <form role="form" action="" method="post">
-	            	<table class="profile-table">
-				          <tbody>
-				            <tr>
-				              <td>
-				                <input type="text" class="form-control" ng-model="account.name" name="name" placeholder="Nome" ng-maxlength="100">
-				              </td>
-				              <td>
-				                <input type="text" class="form-control" ng-model="account.surname" name="surname" placeholder="Sobrenome" ng-maxlength="100">
-				              </td>
-				            </tr>
-				            <tr>
-				              <td colspan="2"><input type="email" class="form-control" ng-model="account.email" name="email" placeholder="Email *" required></td>
-				            </tr>
-				            <tr>
-				              <td colspan="2"><input id="usernameInput" type="text" data-toggle="tooltip" title="Este nome aparecerá no placar das competições, quando você competir individualmente." class="form-control" ng-model="account.username" name="username" placeholder="Nome de perfil *" ng-maxlength="30" tooltip required></td>
-				            </tr>
-				            <tr>
-				              <td><input type="password" class="form-control" ng-model="account.password" placeholder="Senha *" data-toggle="tooltip" name="pass" ng-maxlength="50" tooltip required></td>
-				              <td><input type="password" class="form-control" ng-model="account.confirmPassword" placeholder="Repita senha *" name="confirmPass" match-field="{{account.password}}" ng-maxlength="50"></td>
-				            </tr>
-				            <tr>
-				              <td colspan="2">
-				              	<button type="button" ng-click="register()" class="btn btn-default btn-block" ng-disabled="registerProfileForm.$invalid">Registrar</button>
-				              </td>
-				            </tr>
-				          </tbody>
-				        </table>
-				      </form>
-	        </div>
-	      </div>
-      </div>
-		</div>
-	</section>
-
-	<div id="wrapper" class="bs-component">
-
-		<div id="news" ng-view></div>
-
-		
-	</div>
+	<div ng-view></div>
 
 	<ng-include src="'views/footer.html'"></ng-include>
 
