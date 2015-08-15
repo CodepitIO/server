@@ -1,7 +1,18 @@
-<h2 class="page-title col-md-offset-4">Competições Criadas</h2>
-<div class="row">
-  <div class="col-md-offset-1 col-md-8">
-    <table class="table table-striped">
+<div class="container-fluid" id="breadcrumbs">
+  <div class="row">
+    <div class="col-md-12">
+      <span>Maratonando / Competições</span>
+      <h2>Suas competições</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div id="contests-list" class="col-md-9">
+
+      <div class="table-container">
+        <table class="table table-striped">
       <thead>
         <tr>
           <th class="col-md-3"><a href="#" ng-click="order('name')">Nome</a></th>
@@ -13,6 +24,7 @@
         </tr>
       </thead>
       <tbody>
+        <tr ng-if="contests.length == 0"><td colspan="6"><span style="font-style: italic;">Você não criou nenhuma competição.</span></td></tr>
         <tr class="animation" ng-repeat="contest in contests | orderBy:predicate:reverse">
           <td><a ng-href="contest/{{contest._id}}">{{contest.name}}</a><sup ng-if="isNewContest(contest.date_created)" style="color: #F55; font-size: 8px;">&nbsp;NOVA</sup></td>
           <td>{{contest.date_start | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</td>
@@ -34,5 +46,10 @@
         </tr>
       </tbody>
     </table>
+      </div>
+
+    </div>
+    <div id="contests-sidebar" class="col-md-3">
+    </div>
   </div>
 </div>
