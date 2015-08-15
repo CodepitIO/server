@@ -716,6 +716,7 @@ footer ul li a:first-child{
 
 .table-container table{
   border-top: solid 1px #f1f0f0;
+  margin-bottom: 0px;
 }
 
 .table-container table tr td, .table-container table tr th{
