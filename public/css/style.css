@@ -391,6 +391,20 @@ header .dropdown-menu li a{
   color: #85939C;
 }
 
+#create-contest-btn{
+  background-color: #45A7B9;
+  font: 600 14px "Open Sans";
+  margin: 20px 20px 0px 20px;
+  color: #fff;
+  float: left;
+  position: relative;
+  left: -15px;
+}
+
+#create-contest-btn span{
+  background-color: #3C93A2;
+}
+
 
 /* Call to action for new users */
 
@@ -401,7 +415,7 @@ header .dropdown-menu li a{
 }
 
 .form-top {
-  margin-top: 60px;
+  margin-top: 34px;
   overflow: hidden;
   padding: 0 25px 15px 25px;
   background: #444;
@@ -454,9 +468,7 @@ header .dropdown-menu li a{
   padding: 0px 5px 0px 5px;
 }
 
-#new-user-action input[type="text"],
-#new-user-action input[type="email"],
-#new-user-action input[type="password"]{
+#new-user-action input{
     height: 50px;
     margin: 0px 10px 10px 0px;
     padding: 0 20px;

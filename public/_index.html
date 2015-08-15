@@ -35,6 +35,13 @@
 		  			<img src="imgs/logo_new.png" />
 		  		</a>
 
+		  		<a ng-if="$root.user" id="create-contest-btn" class="btn btn-icon" ng-click="/contest/create">
+			      <span>
+			        <i class="fa fa-plus"></i>
+			      </span>
+			      Criar competição
+			    </a>
+
 		  		<ul>
 		  			<li>
 			  			<div class="dropdown">
@@ -54,12 +61,14 @@
 		  			</li>
 		  		</ul>
 
-		  		<form id="problem-search">
+		  		<!--<form id="problem-search">
 		  			<label for="problem-search-input">
 		  				<i class="fa fa-search"></i>
 		  			</label>
 		  			<input  id="problem-search-input" type="text" name="problem-search" placeholder="Buscar problemas">
-		  		</form>
+		  		</form>-->
+
+		  		
 
 		  		<login-form></login-form>
 		  		
