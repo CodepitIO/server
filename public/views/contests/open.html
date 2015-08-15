@@ -45,7 +45,7 @@
                 <i class="fa fa-globe contests-view-table-icon" ng-if="!contest.watchPrivate" data-toggle="tooltip" title="Qualquer um pode entrar no link." tooltip></i>
               </td>
               <td ng-if="$root.user" class="contests-view-table-td">
-                <a class="join-contest-button" href="#" ng-hide="contest.isInContest" ng-click="setJoinContestData(contest)"><i class="fa fa-user-plus contests-view-table-icon join-contest-icon" data-toggle="tooltip" title="Participar." tooltip></i></button>
+                <a class="join-contest-button" href="#" data-toggle="modal" data-target="#join-contest-modal" ng-hide="contest.isInContest" ng-click="setJoinContestData(contest)" ><i class="fa fa-user-plus contests-view-table-icon join-contest-icon"></i></a>
                 <a ng-show="contest.isInContest && isInFuture(contest.date_start)" href="#" confirmed-click="leave(contest)" style="color: #F66;"><i class="fa fa-user-times contests-view-table-icon" data-toggle="tooltip" title="Sair da competição (só possível enquanto ela não começa)." tooltip></i></a>
                 <a ng-show="contest.isAdmin" ng-href="contest/{{contest._id}}/edit"><i class="fa fa-cog contests-view-table-icon" data-toggle="tooltip" title="Editar." tooltip></i></a>
                 <a ng-show="contest.isAdmin" href="#" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
@@ -90,7 +90,7 @@
                 <i class="fa fa-globe contests-view-table-icon" ng-if="!contest.watchPrivate" data-toggle="tooltip" title="Qualquer um pode entrar no link." tooltip></i>
               </td>
               <td ng-if="$root.user" class="contests-view-table-td">
-                <a class="join-contest-button" href="#" ng-hide="contest.isInContest" ng-click="setJoinContestData(contest)"><i class="fa fa-user-plus contests-view-table-icon join-contest-icon" data-toggle="tooltip" title="Participar." tooltip></i></button>
+                <a class="join-contest-button" href="#" data-toggle="modal" data-target="#join-contest-modal" ng-hide="contest.isInContest" ng-click="setJoinContestData(contest)" ><i class="fa fa-user-plus contests-view-table-icon join-contest-icon"></i></a>
                 <a ng-show="contest.isInContest && isInFuture(contest.date_start)" href="#" confirmed-click="leave(contest)" style="color: #F66;"><i class="fa fa-user-times contests-view-table-icon" data-toggle="tooltip" title="Sair da competição (só possível enquanto ela não começa)." tooltip></i></a>
                 <a ng-show="contest.isAdmin" ng-href="contest/{{contest._id}}/edit"><i class="fa fa-cog contests-view-table-icon" data-toggle="tooltip" title="Editar." tooltip></i></a>
                 <a ng-show="contest.isAdmin" href="#" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
@@ -102,6 +102,39 @@
       
     </div>
     <div id="contests-sidebar" class="col-md-3">
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="join-contest-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{curContest.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <form name="joinContestForm">
+          <div class="form-group" style="width: 100%;">
+            <input ng-if="curContest.isPrivate" style="margin-bottom: 6px;" type="password" ng-model="joinContest.password" class="form-control" placeholder="Senha">
+            <div ng-show="curContest.contestantType == '2'">
+              <p>Escolha um time&nbsp;<i class="fa fa-question-circle" tooltip-placement="left" tooltip="Como um perfil pode estar vinculado a times diferentes, você se registrar na competição com um time X não irá automaticamente adicionar os outros membros do time X na competição. Para isso, cada membro deve individualmente se cadastrar informando o time que quer representar (ou se quer competir individualmente). Note que você pode competir sozinho representando o time."></i></p>
+              <select class="form-control" ng-model="joinContest.team" ng-options="team.id as team.name for team in teams"></select>
+            </div>
+            <div ng-show="curContest.contestantType == '3' || !curContest.contestantType">
+              <p>Escolha entre competir individualmente ou em time&nbsp;<i class="fa fa-question-circle" tooltip-placement="left" tooltip="Como um perfil pode estar vinculado a times diferentes, você se registrar na competição com um time X não irá automaticamente adicionar os outros membros do time X na competição. Para isso, cada membro deve individualmente se cadastrar informando o time que quer representar (ou se quer competir individualmente). Note que você pode competir sozinho representando o time."></i></p>
+              <select class="form-control" ng-model="joinContest.team" ng-options="team.id as team.name for team in teamsAndSingle"></select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="join()" data-dismiss="modal" >Participar</button>
+      </div>
     </div>
   </div>
 </div>
