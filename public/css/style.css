@@ -722,3 +722,64 @@ footer ul li a:first-child{
 .table-container table tr td, .table-container table tr th{
   padding: 15px;
 }
+
+/* Contest view */
+#contest-view-container{
+  padding: 30px;
+}
+
+#contest-view-time h4, #contest-view-upsolving h4{
+  margin-top: 13px;
+}
+
+#contest-view-status h3{
+  font: 300 26px "Open Sans";
+  text-align: center;
+  margin: 0px;
+}
+
+#contest-view-upsolving{
+  text-align: right;
+}
+
+#contest-view-upsolving p{
+  margin-top: 7px;
+}
+
+#contest-view-upsolving p input{
+  transform: scale(1.5);
+  margin-right: 8px;
+  position: relative;
+  top: 2px;
+}
+
+#contest-view-upsolving p span{
+  margin-left: 5px;
+}
+
+#contest-view-container .nav-tabs{
+  text-align: center;
+}
+
+#contest-view-container .nav-tabs>li{
+  float: none;
+  display: inline-block;
+  border-radius: 0px;
+}
+
+#contest-view-container .nav-tabs > li.active a{
+  padding: 15px 30px;
+  border-top: solid 3px #45A7B9;
+}
+
+#contest-view-container .tab-pane{
+  padding: 30px;
+}
+
+#contest-view-container table td{
+  padding: 15px;
+}
+
+#contest-view-tabs{
+  margin-top: 40px;
+}
