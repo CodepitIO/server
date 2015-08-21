@@ -22,6 +22,4 @@ public/bower_components/*
 
 .tmp
 nohup.out
-Gruntfile.js
-bower.json
 .bowerrc
