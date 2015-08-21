@@ -238,6 +238,10 @@ tr.pe-submission {
   background-color: #FCFFCC;
 }
 
+tr.draft-submission {
+  background-color: #DDD;
+}
+
 tr.submission-row {
   border-style: none none solid none;
   border-color: #999;

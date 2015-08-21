@@ -149,6 +149,7 @@ app.controller('SingleContestController', [
 			"9": "Erro Desconhecido",
 			"10": "Uso de função restrita",
 			"11": "Submissão inválida",
+			"15": "Rascunho"
 		};
 		$scope.languages = {
 			"cpp": "C++",
@@ -157,6 +158,24 @@ app.controller('SingleContestController', [
 
 		$scope.submission = {
 			contestId: $scope.id
+		};
+
+		$scope.toggleUpsolving = function() {
+			var tmp = $scope.ord;
+			$scope.ord = $scope.ord2;
+			$scope.ord2 = tmp;
+
+			tmp = $scope.scores;
+			$scope.scores = $scope.scores2;
+			$scope.scores2 = tmp;
+
+			tmp = $scope.submissions;
+			$scope.submissions = $scope.submissions2;
+			$scope.submissions2 = tmp;
+
+			if (!$scope.$$phase) {
+				$scope.$digest();
+			}
 		};
 
 		$scope.getMinutesBetweenDates = function(startDate, endDate) {
@@ -294,7 +313,11 @@ app.controller('SingleContestController', [
 					$scope.inContest = data.inContest;
 					$scope.contestants = data.contestants;
 					$scope.scores = data.scores;
-					$scope.submissions = data.submissions;
+					$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+					$scope.submissions2 = data.submissions;
+					$scope.submissions = data.submissions.filter(function(obj) {
+						return obj.time * 60 < $scope.totalDuration;
+					});
 
 					for (var i = 0; i < $scope.submissions.length; i++) {
 						var id = $scope.submissions[i]._id;
@@ -304,13 +327,16 @@ app.controller('SingleContestController', [
 						}
 					}
 
-					$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
-
 					$scope.timeLeft = Math.max($scope.getSecondsBetweenDates(new Date(), data.end), 0);
 					$scope.timeToFrozen = $scope.getSecondsBetweenDates(data.frozen, data.end);
 					$scope.timeToBlind = $scope.getSecondsBetweenDates(data.blind, data.end);
 					$scope.progressBarValue = $scope.totalDuration - $scope.timeLeft;
 					var refreshCounter = 0;
+
+					if ($scope.timeLeft === 0) {
+						$scope.scores2 = data.upsolvingScores;
+						$scope.ord2 = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
+					}
 
 					if ($scope.timeLeft > 0) {
 						$scope.setBarType();
@@ -376,6 +402,9 @@ app.controller('SingleContestController', [
 		};
 
 		$scope.getSubmissionClass = function(verdict) {
+			if (verdict == 15) {
+				return 'draft-submission';
+			}
 			if (!verdict || verdict < 0 || verdict > 10) {
 				return 'pending-submission';
 			}
