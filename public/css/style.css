@@ -1,0 +1,160 @@
+.container {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+}
+
+html,
+body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+#wrapper {
+  min-height:100%;
+  position:relative;
+}
+#header {
+  background-color: rgba(245, 245, 245, 1); background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(148, 148, 148, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(148, 148, 148, 0.15)),color-stop(0.75,rgba(148, 148, 148, 0.15)),color-stop(0.75,transparent),to(transparent)));
+  background-image: -webkit-linear-gradient(45deg,rgba(148, 148, 148, 0.15) 25%,transparent 25%,transparent 50%,rgba(148, 148, 148, 0.15) 50%,rgba(148, 148, 148, 0.15) 75%,transparent 75%,transparent);
+  background-image: linear-gradient(45deg,rgba(148, 148, 148, 0.15) 25%,transparent 25%,transparent 50%,rgba(148, 148, 148, 0.15) 50%,rgba(148, 148, 148, 0.15) 75%,transparent 75%,transparent);
+  background-size: 220px 220px;
+  padding:10px;
+  border-bottom: 1px solid #999;
+}
+#content {
+  min-height: 505px; /* Fix a height here */
+  overflow: auto;
+}
+#footer {
+  text-align: center;
+  background: rgba(148, 148, 148, 0.15);
+  width:100%;
+  border-top: 1px solid #999;
+}
+#footer p {
+  margin: 0px;
+  padding: 5px;
+}
+
+th {
+  color: #777;
+}
+
+.mrt-logo {
+  background-image: url("/../imgs/Maratonando-Logo.png");
+  background-size: 178px 50px;
+  width: 180px;
+  height: 50px;
+  background-repeat: no-repeat;
+  display: block;
+  margin: 0 15px 0 6px;
+}
+
+.mrt-logo-beta {
+    color: rgb(255, 255, 255);
+    font-size: 0.56em;
+    padding-left: 3px;
+}
+
+.page-title {
+  margin-top: 0px;
+  color: #777;
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 2px #CCCCCC;
+}
+
+.team-lemma {
+  color: #999;
+  font-style: italic;
+  font-size: 11px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.profile-table {
+  border-spacing: 5px;
+  border-collapse: separate;
+}
+
+.team-admin {
+  color: red;
+  font-style: italic;
+  font-size: 11px;
+}
+
+.team-member-name {
+  color: #777;
+  font-weight: 300;
+  margin: 0;
+}
+
+.team-member-username {
+  color: #777;
+  font-style: italic;
+  margin: 0;
+}
+
+.team-title-name {
+  color: #959595;
+  text-align: center;
+}
+
+.col-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.team-tabs-selected {
+  color: #777;
+  cursor: default;
+  pointer-events: none;
+}
+
+.team-tabs-selected:hover {
+  color: #777;
+  text-decoration: none;
+}
+
+.team-tabs-unselected {
+  color: #BBB;
+}
+
+.team-tabs-unselected:hover {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: #999;
+}
+
+.menu-active::first-line {
+  color: black;
+  opacity: 1;
+}
+
+.animation {
+  -webkit-transition: 0.5s;
+  border: none;
+}
+.animation.ng-enter {
+  opacity: 0;
+}
+.animation.ng-leave {
+  opacity: 1;
+}
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}

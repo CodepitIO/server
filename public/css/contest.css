@@ -1,0 +1,331 @@
+.create-contest-add-descr {
+  font-size: 12px;
+}
+
+.calendar-area {
+  position: relative;
+  display: block;
+}
+
+.calendar-text {
+  position: relative;
+}
+
+.calendar-text:read-only {
+  cursor: default;
+  background-color: #FFF;
+}
+
+.calendar-disabled:read-only,
+.timepicker-disabled input.form-control {
+  cursor: default;
+  background-color: #DCDCDC;
+  pointer-events: none;
+}
+
+.create-contest-table {
+  border-spacing: 5px;
+  border-collapse: separate;
+  width: 100%;
+}
+
+.contests-view-table-td {
+  text-align: center;
+}
+
+.contests-view-table-icon {
+  display: inline-block;
+}
+
+.calendar-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 3px 3px 0 0;
+  background-color: #EEE;
+  opacity: 0.8;
+  border-radius: 20%;
+  -moz-border-radius: 20%;
+  -webkit-border-radius: 20%;
+}
+
+.duration-area {
+  position: relative;
+  display: flexbox;
+}
+
+.duration-number {
+  position: relative;
+}
+
+.duration-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px 32px 0 0;
+  font-size: 10px;
+  font-style: italic;
+  color: #AAA;
+  cursor: default;
+}
+
+.question-mark {
+  cursor: pointer;
+}
+
+.contest-date-text {
+  font-size: 11px;
+  text-align: center;
+  padding-top: 9px;
+}
+
+.contest-date-text > span {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.contest-accessibility-buttons {
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+.contest-draggable-problem {
+  cursor: move;
+}
+
+.contest-remove-problem {
+  font-size: 10px;
+}
+
+.contest-remove-problem:hover {
+  text-decoration: none;
+}
+
+.btn-access.active {
+  background-color: white;
+  box-shadow: none;
+}
+
+.btn-access.focus {
+  background-color: #CCC;
+}
+
+.access-active {
+  background-color: #CCC;
+  pointer-events: none;
+}
+
+.balloon {
+  width: 32px;
+  position: relative;
+  margin: auto;
+  display: inline-block;
+  top: 0;
+}
+
+.balloon-contest {
+  display: block;
+}
+
+.balloon:hover {
+  text-decoration: none;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  top: -3px;
+}
+
+.balloon-label {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 2px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  text-shadow:
+    -1px 0px 0 #000,
+    0px 1px 0 #000,
+    1px 0px 0 #000,
+    0px -1px 0 #000;
+}
+
+.rating {
+    outline: 0;
+    color: #777;
+    cursor: pointer;
+}
+
+.rating-unchanged {
+    color: #CCC;
+}
+
+.problem-tag {
+  display: inline-block;
+  background-color: #DDD;
+  border-radius: 35%;
+  -moz-border-radius: 35%;
+  -webkit-border-radius: 35%;
+  padding: 3px;
+  margin: 3px;
+}
+
+a.balloon-label,
+a.balloon-label:link,
+a.balloon-label:visited,
+a.balloon-label:hover,
+a.balloon-label:active {
+    color: white;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+.join-contest-button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+
+.scoreboard-submission {
+  text-align: center;
+}
+
+.green-score {
+  display: inline-block;
+  background-color: #BDF2BD;
+  padding: 5px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.red-score {
+  display: inline-block;
+  background-color: #F2BDBD;
+  padding: 5px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.gray-score {
+  display: inline-block;
+  background-color: #CCC;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+tr.error-submission {
+  background-color: #D3E3FB;
+}
+
+tr.wa-submission {
+  background-color: #FFBBBA;
+}
+
+tr.accepted-submission {
+  background-color: #CEE0BC;
+}
+
+tr.pe-submission {
+  background-color: #FCFFCC;
+}
+
+tr.submission-row {
+  border-style: none none solid none;
+  border-color: #999;
+  border-width: 2px;
+}
+
+tr.submission-row-parent {
+  border-style: none none solid none;
+  border-color: #999;
+  border-width: 3px;
+}
+
+#blue .ui-slider-range {
+  background: rgba(66, 139, 202, 1);
+  background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent)));
+  background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent);
+  background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent);
+  background-size: 40px 40px;
+}
+
+#blue .ui-slider-handle {
+  border-color: #729fcf;
+  height: 31px;
+  width: 20px;
+}
+
+.ui-slider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  height: 20px;
+  background: #F7F7F7;
+  border: none;
+  -webkit-box-shadow: inset 1px 1px 5px -1px rgba(217,217,217,1);
+  -moz-box-shadow: inset 1px 1px 5px -1px rgba(217,217,217,1);
+  box-shadow: inset 1px 1px 5px -1px rgba(217,217,217,1);
+}
+
+.smooth_blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    50% { background-color: #FFF; }
+}
+@-webkit-keyframes blinker {  
+    50% { background-color: #FFF; }
+}
+@keyframes blinker {  
+    50% { background-color: #FFF; }
+}
+
+.glyphicon {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-left:before {
+  content: "\f053";
+}
+.glyphicon-chevron-right:before {
+  content: "\f054";
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
