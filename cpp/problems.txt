@@ -44119,2364 +44119,6 @@
 [LiveArchive 6780] Surveillance
 https://icpcarchive.ecs.baylor.edu/external/67/6780.html
 5430d5c47455fe8016912bac
-[URI 1002] Área do Círculo
-https://www.urionlinejudge.com.br/repository/UOJ_1002.html
-5430fc2887d434df18f05136
-[URI 1004] Produto Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1004.html
-5430fc2887d434df18f05137
-[URI 1003] Soma Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1003.html
-5430fc2887d434df18f05138
-[URI 1001] Extremamente Básico
-https://www.urionlinejudge.com.br/repository/UOJ_1001.html
-5430fc2887d434df18f05139
-[URI 1005] Média 1
-https://www.urionlinejudge.com.br/repository/UOJ_1005.html
-5430fc2887d434df18f0513a
-[URI 1009] Salário com Bônus
-https://www.urionlinejudge.com.br/repository/UOJ_1009.html
-5430fc2887d434df18f0513b
-[URI 1007] Diferença
-https://www.urionlinejudge.com.br/repository/UOJ_1007.html
-5430fc2887d434df18f0513c
-[URI 1008] Salário
-https://www.urionlinejudge.com.br/repository/UOJ_1008.html
-5430fc2887d434df18f0513d
-[URI 1006] Média 2
-https://www.urionlinejudge.com.br/repository/UOJ_1006.html
-5430fc2887d434df18f0513e
-[URI 1010] Cálculo Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1010.html
-5430fc2887d434df18f0513f
-[URI 1012] Área
-https://www.urionlinejudge.com.br/repository/UOJ_1012.html
-5430fc2887d434df18f05140
-[URI 1013] O Maior
-https://www.urionlinejudge.com.br/repository/UOJ_1013.html
-5430fc2887d434df18f05141
-[URI 1011] Esfera
-https://www.urionlinejudge.com.br/repository/UOJ_1011.html
-5430fc2887d434df18f05142
-[URI 1014] Consumo
-https://www.urionlinejudge.com.br/repository/UOJ_1014.html
-5430fc2887d434df18f05143
-[URI 1015] Distância Entre 2 Pontos
-https://www.urionlinejudge.com.br/repository/UOJ_1015.html
-5430fc2887d434df18f05144
-[URI 1019] Conversão de Tempo
-https://www.urionlinejudge.com.br/repository/UOJ_1019.html
-5430fc2887d434df18f05145
-[URI 1024] Criptografia
-https://www.urionlinejudge.com.br/repository/UOJ_1024.html
-5430fc2887d434df18f05146
-[URI 1017] Gasto de Combustível
-https://www.urionlinejudge.com.br/repository/UOJ_1017.html
-5430fc2887d434df18f05147
-[URI 1022] TDA Racional
-https://www.urionlinejudge.com.br/repository/UOJ_1022.html
-5430fc2887d434df18f05148
-[URI 1018] Cédulas
-https://www.urionlinejudge.com.br/repository/UOJ_1018.html
-5430fc2887d434df18f05149
-[URI 1016] Distância
-https://www.urionlinejudge.com.br/repository/UOJ_1016.html
-5430fc2887d434df18f0514a
-[URI 1020] Idade em Dias
-https://www.urionlinejudge.com.br/repository/UOJ_1020.html
-5430fc2887d434df18f0514b
-[URI 1023] Estiagem
-https://www.urionlinejudge.com.br/repository/UOJ_1023.html
-5430fc2887d434df18f0514c
-[URI 1021] Notas e Moedas
-https://www.urionlinejudge.com.br/repository/UOJ_1021.html
-5430fc2887d434df18f0514d
-[URI 1026] Carrega ou não Carrega?
-https://www.urionlinejudge.com.br/repository/UOJ_1026.html
-5430fc2987d434df18f0514e
-[URI 1027] Onda Crítica
-https://www.urionlinejudge.com.br/repository/UOJ_1027.html
-5430fc2987d434df18f0514f
-[URI 1025] Onde está o Mármore?
-https://www.urionlinejudge.com.br/repository/UOJ_1025.html
-5430fc2987d434df18f05150
-[URI 1028] Figurinhas
-https://www.urionlinejudge.com.br/repository/UOJ_1028.html
-5430fc2987d434df18f05151
-[URI 1029] Fibonacci, Quantas Chamadas?
-https://www.urionlinejudge.com.br/repository/UOJ_1029.html
-5430fc2987d434df18f05152
-[URI 1034] Festival de Estátuas de Gelo
-https://www.urionlinejudge.com.br/repository/UOJ_1034.html
-5430fc2a87d434df18f05153
-[URI 1031] Crise de Energia
-https://www.urionlinejudge.com.br/repository/UOJ_1031.html
-5430fc2a87d434df18f05154
-[URI 1032] Josephus e o Seu Primo
-https://www.urionlinejudge.com.br/repository/UOJ_1032.html
-5430fc2a87d434df18f05155
-[URI 1033] Quantas Chamadas Recursivas?
-https://www.urionlinejudge.com.br/repository/UOJ_1033.html
-5430fc2a87d434df18f05156
-[URI 1030] A Lenda de Flavious Josephus
-https://www.urionlinejudge.com.br/repository/UOJ_1030.html
-5430fc2a87d434df18f05157
-[URI 1036] Fórmula de Báscara
-https://www.urionlinejudge.com.br/repository/UOJ_1036.html
-5430fc2a87d434df18f05158
-[URI 1038] Lanche
-https://www.urionlinejudge.com.br/repository/UOJ_1038.html
-5430fc2a87d434df18f05159
-[URI 1039] Flores de Fogo
-https://www.urionlinejudge.com.br/repository/UOJ_1039.html
-5430fc2a87d434df18f0515a
-[URI 1037] Intervalo
-https://www.urionlinejudge.com.br/repository/UOJ_1037.html
-5430fc2a87d434df18f0515b
-[URI 1035] Teste de Seleção 1
-https://www.urionlinejudge.com.br/repository/UOJ_1035.html
-5430fc2a87d434df18f0515c
-[URI 1043] Triângulo
-https://www.urionlinejudge.com.br/repository/UOJ_1043.html
-5430fc2a87d434df18f0515d
-[URI 1048] Reajuste Salarial
-https://www.urionlinejudge.com.br/repository/UOJ_1048.html
-5430fc2a87d434df18f0515e
-[URI 1044] Múltiplos
-https://www.urionlinejudge.com.br/repository/UOJ_1044.html
-5430fc2a87d434df18f0515f
-[URI 1041] Coordenadas de um Ponto
-https://www.urionlinejudge.com.br/repository/UOJ_1041.html
-5430fc2a87d434df18f05160
-[URI 1042] Sort Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1042.html
-5430fc2a87d434df18f05161
-[URI 1040] Média 3
-https://www.urionlinejudge.com.br/repository/UOJ_1040.html
-5430fc2a87d434df18f05162
-[URI 1046] Tempo de Jogo
-https://www.urionlinejudge.com.br/repository/UOJ_1046.html
-5430fc2a87d434df18f05163
-[URI 1045] Tipo de Triângulos
-https://www.urionlinejudge.com.br/repository/UOJ_1045.html
-5430fc2a87d434df18f05164
-[URI 1047] Tempo de Jogo com Minutos
-https://www.urionlinejudge.com.br/repository/UOJ_1047.html
-5430fc2a87d434df18f05165
-[URI 1051] Imposto de Renda
-https://www.urionlinejudge.com.br/repository/UOJ_1051.html
-5430fc2b87d434df18f05166
-[URI 1053] Desenho Contínuo
-https://www.urionlinejudge.com.br/repository/UOJ_1053.html
-5430fc2b87d434df18f05167
-[URI 1050] DDD
-https://www.urionlinejudge.com.br/repository/UOJ_1050.html
-5430fc2b87d434df18f05168
-[URI 1049] Animal
-https://www.urionlinejudge.com.br/repository/UOJ_1049.html
-5430fc2b87d434df18f05169
-[URI 1052] Mês
-https://www.urionlinejudge.com.br/repository/UOJ_1052.html
-5430fc2b87d434df18f0516a
-[URI 1055] Soma Permutada Elegante
-https://www.urionlinejudge.com.br/repository/UOJ_1055.html
-5430fc2b87d434df18f0516b
-[URI 1058] Zonas de Ataque Independentes
-https://www.urionlinejudge.com.br/repository/UOJ_1058.html
-5430fc2b87d434df18f0516c
-[URI 1056] Fatores e Múltiplos
-https://www.urionlinejudge.com.br/repository/UOJ_1056.html
-5430fc2b87d434df18f0516d
-[URI 1054] Sapo Dinâmico
-https://www.urionlinejudge.com.br/repository/UOJ_1054.html
-5430fc2b87d434df18f0516e
-[URI 1057] Chegando Junto
-https://www.urionlinejudge.com.br/repository/UOJ_1057.html
-5430fc2b87d434df18f0516f
-[URI 1061] Tempo de um Evento
-https://www.urionlinejudge.com.br/repository/UOJ_1061.html
-5430fc2b87d434df18f05170
-[URI 1063] Trilhos Novamente… Traçando Movimentos
-https://www.urionlinejudge.com.br/repository/UOJ_1063.html
-5430fc2b87d434df18f05171
-[URI 1060] Números Positivos
-https://www.urionlinejudge.com.br/repository/UOJ_1060.html
-5430fc2b87d434df18f05172
-[URI 1059] Números Pares
-https://www.urionlinejudge.com.br/repository/UOJ_1059.html
-5430fc2b87d434df18f05173
-[URI 1062] Trilhos
-https://www.urionlinejudge.com.br/repository/UOJ_1062.html
-5430fc2b87d434df18f05174
-[URI 1066] Pares, Ímpares, Positivos e Negativos
-https://www.urionlinejudge.com.br/repository/UOJ_1066.html
-5430fc2c87d434df18f05175
-[URI 1065] Pares entre Cinco Números
-https://www.urionlinejudge.com.br/repository/UOJ_1065.html
-5430fc2c87d434df18f05176
-[URI 1068] Balanço de Parenteses I
-https://www.urionlinejudge.com.br/repository/UOJ_1068.html
-5430fc2c87d434df18f05177
-[URI 1064] Positivos e Média
-https://www.urionlinejudge.com.br/repository/UOJ_1064.html
-5430fc2c87d434df18f05178
-[URI 1067] Números Ímpares
-https://www.urionlinejudge.com.br/repository/UOJ_1067.html
-5430fc2c87d434df18f05179
-[URI 1071] Soma de Impares Consecutivos I
-https://www.urionlinejudge.com.br/repository/UOJ_1071.html
-5430fc2c87d434df18f0517a
-[URI 1070] Seis Números Ímpares
-https://www.urionlinejudge.com.br/repository/UOJ_1070.html
-5430fc2c87d434df18f0517b
-[URI 1069] Diamantes e Areia
-https://www.urionlinejudge.com.br/repository/UOJ_1069.html
-5430fc2c87d434df18f0517c
-[URI 1072] Intervalo 2
-https://www.urionlinejudge.com.br/repository/UOJ_1072.html
-5430fc2c87d434df18f0517d
-[URI 1074] Par ou Ímpar
-https://www.urionlinejudge.com.br/repository/UOJ_1074.html
-5430fc2d87d434df18f0517e
-[URI 1075] Resto 2
-https://www.urionlinejudge.com.br/repository/UOJ_1075.html
-5430fc2d87d434df18f0517f
-[URI 1076] Desenhando Labirintos
-https://www.urionlinejudge.com.br/repository/UOJ_1076.html
-5430fc2d87d434df18f05180
-[URI 1073] Quadrado de Pares
-https://www.urionlinejudge.com.br/repository/UOJ_1073.html
-5430fc2d87d434df18f05181
-[URI 1077] Infixa para Posfixa
-https://www.urionlinejudge.com.br/repository/UOJ_1077.html
-5430fc2d87d434df18f05182
-[URI 1080] Maior e Posição
-https://www.urionlinejudge.com.br/repository/UOJ_1080.html
-5430fc2e87d434df18f05183
-[URI 1079] Médias Ponderadas
-https://www.urionlinejudge.com.br/repository/UOJ_1079.html
-5430fc2e87d434df18f05184
-[URI 1081] DFSr – Hierarquia de Profundidade
-https://www.urionlinejudge.com.br/repository/UOJ_1081.html
-5430fc2e87d434df18f05185
-[URI 1082] Componentes Conexos
-https://www.urionlinejudge.com.br/repository/UOJ_1082.html
-5430fc2e87d434df18f05186
-[URI 1078] Tabuada
-https://www.urionlinejudge.com.br/repository/UOJ_1078.html
-5430fc2e87d434df18f05187
-[URI 1085] Babel
-https://www.urionlinejudge.com.br/repository/UOJ_1085.html
-5430fc2e87d434df18f05188
-[URI 1084] Apagando e Ganhando
-https://www.urionlinejudge.com.br/repository/UOJ_1084.html
-5430fc2e87d434df18f05189
-[URI 1086] O Salão do Clube
-https://www.urionlinejudge.com.br/repository/UOJ_1086.html
-5430fc2e87d434df18f0518a
-[URI 1087] Dama
-https://www.urionlinejudge.com.br/repository/UOJ_1087.html
-5430fc2e87d434df18f0518b
-[URI 1083] LEXSIM - Avaliador Lexico e Sintático
-https://www.urionlinejudge.com.br/repository/UOJ_1083.html
-5430fc2e87d434df18f0518c
-[URI 1090] Set
-https://www.urionlinejudge.com.br/repository/UOJ_1090.html
-5430fc2f87d434df18f0518d
-[URI 1089] Loop Musical
-https://www.urionlinejudge.com.br/repository/UOJ_1089.html
-5430fc2f87d434df18f0518e
-[URI 1092] Maior Subseqüência Crescente
-https://www.urionlinejudge.com.br/repository/UOJ_1092.html
-5430fc2f87d434df18f0518f
-[URI 1091] Divisão da Nlogônia
-https://www.urionlinejudge.com.br/repository/UOJ_1091.html
-5430fc2f87d434df18f05190
-[URI 1088] Bolhas e Baldes
-https://www.urionlinejudge.com.br/repository/UOJ_1088.html
-5430fc2f87d434df18f05191
-[URI 1095] Sequencia IJ 1
-https://www.urionlinejudge.com.br/repository/UOJ_1095.html
-5430fc2f87d434df18f05192
-[URI 1094] Experiências
-https://www.urionlinejudge.com.br/repository/UOJ_1094.html
-5430fc2f87d434df18f05193
-[URI 1097] Sequencia IJ 3
-https://www.urionlinejudge.com.br/repository/UOJ_1097.html
-5430fc2f87d434df18f05194
-[URI 1096] Sequencia IJ 2
-https://www.urionlinejudge.com.br/repository/UOJ_1096.html
-5430fc2f87d434df18f05195
-[URI 1093] Vampiros
-https://www.urionlinejudge.com.br/repository/UOJ_1093.html
-5430fc3087d434df18f05196
-[URI 1099] Soma de Valores Ímpares Consecutivos II
-https://www.urionlinejudge.com.br/repository/UOJ_1099.html
-5430fc3087d434df18f05197
-[URI 1100] Movimentos do Cavalo
-https://www.urionlinejudge.com.br/repository/UOJ_1100.html
-5430fc3087d434df18f05198
-[URI 1102] Ataque Fulminante
-https://www.urionlinejudge.com.br/repository/UOJ_1102.html
-5430fc3087d434df18f05199
-[URI 1101] Sequência de Números e Soma
-https://www.urionlinejudge.com.br/repository/UOJ_1101.html
-5430fc3087d434df18f0519a
-[URI 1098] Sequencia IJ 4
-https://www.urionlinejudge.com.br/repository/UOJ_1098.html
-5430fc3087d434df18f0519b
-[URI 1104] Troca de Cartas
-https://www.urionlinejudge.com.br/repository/UOJ_1104.html
-5430fc3087d434df18f0519c
-[URI 1105] Sub-prime
-https://www.urionlinejudge.com.br/repository/UOJ_1105.html
-5430fc3087d434df18f0519d
-[URI 1107] Escultura à Laser
-https://www.urionlinejudge.com.br/repository/UOJ_1107.html
-5430fc3287d434df18f0519e
-[URI 1106] Dragster
-https://www.urionlinejudge.com.br/repository/UOJ_1106.html
-5430fc3287d434df18f0519f
-[URI 1103] Alarme Despertador
-https://www.urionlinejudge.com.br/repository/UOJ_1103.html
-5430fc3287d434df18f051a0
-[URI 1109] Burlando a Maratona
-https://www.urionlinejudge.com.br/repository/UOJ_1109.html
-5430fc3287d434df18f051a1
-[URI 1112] Schweisen
-https://www.urionlinejudge.com.br/repository/UOJ_1112.html
-5430fc3287d434df18f051a2
-[URI 1110] Jogando Cartas Fora
-https://www.urionlinejudge.com.br/repository/UOJ_1110.html
-5430fc3287d434df18f051a3
-[URI 1111] Desrugenstein
-https://www.urionlinejudge.com.br/repository/UOJ_1111.html
-5430fc3287d434df18f051a4
-[URI 1108] Torres de Telefonia Celular
-https://www.urionlinejudge.com.br/repository/UOJ_1108.html
-5430fc3287d434df18f051a5
-[URI 1114] Senha Fixa
-https://www.urionlinejudge.com.br/repository/UOJ_1114.html
-5430fc3387d434df18f051a6
-[URI 1115] Quadrante
-https://www.urionlinejudge.com.br/repository/UOJ_1115.html
-5430fc3387d434df18f051a7
-[URI 1116] Dividindo X por Y
-https://www.urionlinejudge.com.br/repository/UOJ_1116.html
-5430fc3387d434df18f051a8
-[URI 1117] Validação de Nota
-https://www.urionlinejudge.com.br/repository/UOJ_1117.html
-5430fc3387d434df18f051a9
-[URI 1113] Crescente e Decrescente
-https://www.urionlinejudge.com.br/repository/UOJ_1113.html
-5430fc3387d434df18f051aa
-[URI 1119] A Fila de Desempregados
-https://www.urionlinejudge.com.br/repository/UOJ_1119.html
-5430fc3387d434df18f051ab
-[URI 1120] Revisão de Contrato
-https://www.urionlinejudge.com.br/repository/UOJ_1120.html
-5430fc3487d434df18f051ac
-[URI 1124] Elevador
-https://www.urionlinejudge.com.br/repository/UOJ_1124.html
-5430fc3487d434df18f051ad
-[URI 1125] Fórmula 1
-https://www.urionlinejudge.com.br/repository/UOJ_1125.html
-5430fc3487d434df18f051ae
-[URI 1118] Várias notas com Validação
-https://www.urionlinejudge.com.br/repository/UOJ_1118.html
-5430fc3487d434df18f051af
-[URI 1122] Livro-Caixa
-https://www.urionlinejudge.com.br/repository/UOJ_1122.html
-5430fc3487d434df18f051b0
-[URI 1123] Desvio de Rota
-https://www.urionlinejudge.com.br/repository/UOJ_1123.html
-5430fc3487d434df18f051b1
-[URI 1129] Leitura Ótica
-https://www.urionlinejudge.com.br/repository/UOJ_1129.html
-5430fc3487d434df18f051b2
-[URI 1130] Jogo da Velha
-https://www.urionlinejudge.com.br/repository/UOJ_1130.html
-5430fc3587d434df18f051b3
-[URI 1121] Robô Colecionador
-https://www.urionlinejudge.com.br/repository/UOJ_1121.html
-5430fc3587d434df18f051b4
-[URI 1127] Plágio Musical
-https://www.urionlinejudge.com.br/repository/UOJ_1127.html
-5430fc3587d434df18f051b5
-[URI 1128] Ir e Vir
-https://www.urionlinejudge.com.br/repository/UOJ_1128.html
-5430fc3587d434df18f051b6
-[URI 1134] Tipo de Combustível
-https://www.urionlinejudge.com.br/repository/UOJ_1134.html
-5430fc3587d434df18f051b7
-[URI 1135] Colônia de Formigas
-https://www.urionlinejudge.com.br/repository/UOJ_1135.html
-5430fc3587d434df18f051b8
-[URI 1126] Guerra nas Estrelas
-https://www.urionlinejudge.com.br/repository/UOJ_1126.html
-5430fc3587d434df18f051b9
-[URI 1133] Resto da Divisão
-https://www.urionlinejudge.com.br/repository/UOJ_1133.html
-5430fc3587d434df18f051ba
-[URI 1132] Múltiplos de 13
-https://www.urionlinejudge.com.br/repository/UOJ_1132.html
-5430fc3587d434df18f051bb
-[URI 1139] Necessidades Elétricas
-https://www.urionlinejudge.com.br/repository/UOJ_1139.html
-5430fc3587d434df18f051bc
-[URI 1140] Flores Florescem da França
-https://www.urionlinejudge.com.br/repository/UOJ_1140.html
-5430fc3587d434df18f051bd
-[URI 1131] Grenais
-https://www.urionlinejudge.com.br/repository/UOJ_1131.html
-5430fc3587d434df18f051be
-[URI 1137] Pontos Cocirculares
-https://www.urionlinejudge.com.br/repository/UOJ_1137.html
-5430fc3787d434df18f051bf
-[URI 1138] Contagem de Dígitos
-https://www.urionlinejudge.com.br/repository/UOJ_1138.html
-5430fc3787d434df18f051c0
-[URI 1149] Somando Inteiros Consecutivos
-https://www.urionlinejudge.com.br/repository/UOJ_1149.html
-5430fc3887d434df18f051c1
-[URI 1136] Bingo!
-https://www.urionlinejudge.com.br/repository/UOJ_1136.html
-5430fc3887d434df18f051c2
-[URI 1144] Sequência Lógica
-https://www.urionlinejudge.com.br/repository/UOJ_1144.html
-5430fc3887d434df18f051c3
-[URI 1142] PUM
-https://www.urionlinejudge.com.br/repository/UOJ_1142.html
-5430fc3887d434df18f051c4
-[URI 1143] Quadrado e ao Cubo
-https://www.urionlinejudge.com.br/repository/UOJ_1143.html
-5430fc3887d434df18f051c5
-[URI 1154] Idades
-https://www.urionlinejudge.com.br/repository/UOJ_1154.html
-5430fc3987d434df18f051c6
-[URI 1148] Países em Guerra
-https://www.urionlinejudge.com.br/repository/UOJ_1148.html
-5430fc3987d434df18f051c7
-[URI 1141] Cultivando Strings
-https://www.urionlinejudge.com.br/repository/UOJ_1141.html
-5430fc3987d434df18f051c8
-[URI 1146] Sequências Crescentes
-https://www.urionlinejudge.com.br/repository/UOJ_1146.html
-5430fc3a87d434df18f051c9
-[URI 1147] Fuga do Cavalo
-https://www.urionlinejudge.com.br/repository/UOJ_1147.html
-5430fc3a87d434df18f051ca
-[URI 1153] Fatorial Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1153.html
-5430fc3b87d434df18f051cb
-[URI 1145] Sequência Lógica 2
-https://www.urionlinejudge.com.br/repository/UOJ_1145.html
-5430fc3b87d434df18f051cc
-[URI 1159] Soma de Pares Consecutivos
-https://www.urionlinejudge.com.br/repository/UOJ_1159.html
-5430fc3b87d434df18f051cd
-[URI 1152] Estradas Escuras
-https://www.urionlinejudge.com.br/repository/UOJ_1152.html
-5430fc3b87d434df18f051ce
-[URI 1151] Fibonacci Fácil
-https://www.urionlinejudge.com.br/repository/UOJ_1151.html
-5430fc3c87d434df18f051cf
-[URI 1158] Soma de Ímpares Consecutivos III
-https://www.urionlinejudge.com.br/repository/UOJ_1158.html
-5430fc3c87d434df18f051d0
-[URI 1150] Ultrapassando Z
-https://www.urionlinejudge.com.br/repository/UOJ_1150.html
-5430fc3c87d434df18f051d1
-[URI 1164] Número Perfeito
-https://www.urionlinejudge.com.br/repository/UOJ_1164.html
-5430fc3d87d434df18f051d2
-[URI 1157] Divisores I
-https://www.urionlinejudge.com.br/repository/UOJ_1157.html
-5430fc3d87d434df18f051d3
-[URI 1156] Sequência S II
-https://www.urionlinejudge.com.br/repository/UOJ_1156.html
-5430fc3d87d434df18f051d4
-[URI 1155] Sequência S
-https://www.urionlinejudge.com.br/repository/UOJ_1155.html
-5430fc3d87d434df18f051d5
-[URI 1163] Angry Ducks
-https://www.urionlinejudge.com.br/repository/UOJ_1163.html
-5430fc3d87d434df18f051d6
-[URI 1170] Blobs
-https://www.urionlinejudge.com.br/repository/UOJ_1170.html
-5430fc3d87d434df18f051d7
-[URI 1162] Organizador de Vagões
-https://www.urionlinejudge.com.br/repository/UOJ_1162.html
-5430fc3d87d434df18f051d8
-[URI 1161] Soma de Fatoriais
-https://www.urionlinejudge.com.br/repository/UOJ_1161.html
-5430fc3d87d434df18f051d9
-[URI 1168] LED
-https://www.urionlinejudge.com.br/repository/UOJ_1168.html
-5430fc3e87d434df18f051da
-[URI 1160] Crescimento Populacional
-https://www.urionlinejudge.com.br/repository/UOJ_1160.html
-5430fc3e87d434df18f051db
-[URI 1175] Troca em Vetor I
-https://www.urionlinejudge.com.br/repository/UOJ_1175.html
-5430fc3e87d434df18f051dc
-[URI 1167] Acampamento de Férias
-https://www.urionlinejudge.com.br/repository/UOJ_1167.html
-5430fc3e87d434df18f051dd
-[URI 1166] Torre de Hanoi, Novamente!
-https://www.urionlinejudge.com.br/repository/UOJ_1166.html
-5430fc3e87d434df18f051de
-[URI 1165] Número Primo
-https://www.urionlinejudge.com.br/repository/UOJ_1165.html
-5430fc3e87d434df18f051df
-[URI 1169] Trigo no Tabuleiro
-https://www.urionlinejudge.com.br/repository/UOJ_1169.html
-5430fc3e87d434df18f051e0
-[URI 1174] Seleçao em Vetor I
-https://www.urionlinejudge.com.br/repository/UOJ_1174.html
-5430fc3e87d434df18f051e1
-[URI 1172] Substituição em Vetor I
-https://www.urionlinejudge.com.br/repository/UOJ_1172.html
-5430fc3f87d434df18f051e2
-[URI 1180] Menor e Posição
-https://www.urionlinejudge.com.br/repository/UOJ_1180.html
-5430fc3f87d434df18f051e3
-[URI 1171] Frequência de Números
-https://www.urionlinejudge.com.br/repository/UOJ_1171.html
-5430fc3f87d434df18f051e4
-[URI 1173] Preenchimento de Vetor I
-https://www.urionlinejudge.com.br/repository/UOJ_1173.html
-5430fc3f87d434df18f051e5
-[URI 1185] Acima da Diagonal Secundária
-https://www.urionlinejudge.com.br/repository/UOJ_1185.html
-5430fc3f87d434df18f051e6
-[URI 1179] Preenchimento de Vetor IV
-https://www.urionlinejudge.com.br/repository/UOJ_1179.html
-5430fc3f87d434df18f051e7
-[URI 1176] Fibonacci em Vetor
-https://www.urionlinejudge.com.br/repository/UOJ_1176.html
-5430fc3f87d434df18f051e8
-[URI 1177] Preenchimento de Vetor II
-https://www.urionlinejudge.com.br/repository/UOJ_1177.html
-5430fc3f87d434df18f051e9
-[URI 1178] Preenchimento de Vetor III
-https://www.urionlinejudge.com.br/repository/UOJ_1178.html
-5430fc3f87d434df18f051ea
-[URI 1190] Área Direita
-https://www.urionlinejudge.com.br/repository/UOJ_1190.html
-5430fc4087d434df18f051eb
-[URI 1184] Abaixo da Diagonal Principal
-https://www.urionlinejudge.com.br/repository/UOJ_1184.html
-5430fc4087d434df18f051ec
-[URI 1181] Linha na Matriz
-https://www.urionlinejudge.com.br/repository/UOJ_1181.html
-5430fc4187d434df18f051ed
-[URI 1183] Acima da Diagonal Principal
-https://www.urionlinejudge.com.br/repository/UOJ_1183.html
-5430fc4187d434df18f051ee
-[URI 1182] Coluna na Matriz
-https://www.urionlinejudge.com.br/repository/UOJ_1182.html
-5430fc4187d434df18f051ef
-[URI 1197] Volta à Faculdade de Física
-https://www.urionlinejudge.com.br/repository/UOJ_1197.html
-5430fc4187d434df18f051f0
-[URI 1189] Área Esquerda
-https://www.urionlinejudge.com.br/repository/UOJ_1189.html
-5430fc4287d434df18f051f1
-[URI 1186] Abaixo da Diagonal Secundária
-https://www.urionlinejudge.com.br/repository/UOJ_1186.html
-5430fc4287d434df18f051f2
-[URI 1188] Área Inferior
-https://www.urionlinejudge.com.br/repository/UOJ_1188.html
-5430fc4287d434df18f051f3
-[URI 1187] Área Superior
-https://www.urionlinejudge.com.br/repository/UOJ_1187.html
-5430fc4287d434df18f051f4
-[URI 1202] Festival das Noites Brancas
-https://www.urionlinejudge.com.br/repository/UOJ_1202.html
-5430fc4287d434df18f051f5
-[URI 1196] WERTYU
-https://www.urionlinejudge.com.br/repository/UOJ_1196.html
-5430fc4287d434df18f051f6
-[URI 1191] Recuperação da Árvore
-https://www.urionlinejudge.com.br/repository/UOJ_1191.html
-5430fc4387d434df18f051f7
-[URI 1192] O jogo Matemático de Paula
-https://www.urionlinejudge.com.br/repository/UOJ_1192.html
-5430fc4387d434df18f051f8
-[URI 1207] Os Benefícios da Vodka
-https://www.urionlinejudge.com.br/repository/UOJ_1207.html
-5430fc4387d434df18f051f9
-[URI 1201] Operações em ABP II
-https://www.urionlinejudge.com.br/repository/UOJ_1201.html
-5430fc4387d434df18f051fa
-[URI 1195] Árvore Binária de Busca
-https://www.urionlinejudge.com.br/repository/UOJ_1195.html
-5430fc4387d434df18f051fb
-[URI 1193] Conversão entre Bases
-https://www.urionlinejudge.com.br/repository/UOJ_1193.html
-5430fc4487d434df18f051fc
-[URI 1212] Aritmética Primária
-https://www.urionlinejudge.com.br/repository/UOJ_1212.html
-5430fc4487d434df18f051fd
-[URI 1194] Prefixa, Infixa e Posfixa
-https://www.urionlinejudge.com.br/repository/UOJ_1194.html
-5430fc4487d434df18f051fe
-[URI 1200] Operações em ABP I
-https://www.urionlinejudge.com.br/repository/UOJ_1200.html
-5430fc4487d434df18f051ff
-[URI 1206] Desafio de São Petersburgo
-https://www.urionlinejudge.com.br/repository/UOJ_1206.html
-5430fc4487d434df18f05200
-[URI 1198] O Bravo Guerreiro Hashmat
-https://www.urionlinejudge.com.br/repository/UOJ_1198.html
-5430fc4587d434df18f05201
-[URI 1217] Getline Two - Frutas
-https://www.urionlinejudge.com.br/repository/UOJ_1217.html
-5430fc4587d434df18f05202
-[URI 1199] Conversão Simples de Base
-https://www.urionlinejudge.com.br/repository/UOJ_1199.html
-5430fc4587d434df18f05203
-[URI 1205] Cerco a Leningrado
-https://www.urionlinejudge.com.br/repository/UOJ_1205.html
-5430fc4587d434df18f05204
-[URI 1211] Lista Telefônica Econômica
-https://www.urionlinejudge.com.br/repository/UOJ_1211.html
-5430fc4587d434df18f05205
-[URI 1222] Concurso de Contos
-https://www.urionlinejudge.com.br/repository/UOJ_1222.html
-5430fc4687d434df18f05206
-[URI 1210] Produção Ótima de Ótima Vodka
-https://www.urionlinejudge.com.br/repository/UOJ_1210.html
-5430fc4687d434df18f05207
-[URI 1204] Myachowski, o Futebol Russo
-https://www.urionlinejudge.com.br/repository/UOJ_1204.html
-5430fc4687d434df18f05208
-[URI 1203] Pontes de São Petersburgo
-https://www.urionlinejudge.com.br/repository/UOJ_1203.html
-5430fc4687d434df18f05209
-[URI 1216] Getline One
-https://www.urionlinejudge.com.br/repository/UOJ_1216.html
-5430fc4687d434df18f0520a
-[URI 1227] Perdido na Noite
-https://www.urionlinejudge.com.br/repository/UOJ_1227.html
-5430fc4787d434df18f0520b
-[URI 1208] As dinastias de São Petersburgo
-https://www.urionlinejudge.com.br/repository/UOJ_1208.html
-5430fc4787d434df18f0520c
-[URI 1215] Primeiro Dicionário de Andy
-https://www.urionlinejudge.com.br/repository/UOJ_1215.html
-5430fc4787d434df18f0520d
-[URI 1221] Primo Rápido
-https://www.urionlinejudge.com.br/repository/UOJ_1221.html
-5430fc4787d434df18f0520e
-[URI 1209] Festas de São Petersburgo
-https://www.urionlinejudge.com.br/repository/UOJ_1209.html
-5430fc4787d434df18f0520f
-[URI 1213] Ones
-https://www.urionlinejudge.com.br/repository/UOJ_1213.html
-5430fc4887d434df18f05210
-[URI 1232] Ciclo de Rubik
-https://www.urionlinejudge.com.br/repository/UOJ_1232.html
-5430fc4887d434df18f05211
-[URI 1214] Acima da Média
-https://www.urionlinejudge.com.br/repository/UOJ_1214.html
-5430fc4987d434df18f05212
-[URI 1226] Elevador Espacial
-https://www.urionlinejudge.com.br/repository/UOJ_1226.html
-5430fc4987d434df18f05213
-[URI 1220] A Viagem
-https://www.urionlinejudge.com.br/repository/UOJ_1220.html
-5430fc4987d434df18f05214
-[URI 1219] Flores Coloridas
-https://www.urionlinejudge.com.br/repository/UOJ_1219.html
-5430fc4987d434df18f05215
-[URI 1237] Comparação de Substring
-https://www.urionlinejudge.com.br/repository/UOJ_1237.html
-5430fc4987d434df18f05216
-[URI 1218] Getline Three -  Calçados
-https://www.urionlinejudge.com.br/repository/UOJ_1218.html
-5430fc4a87d434df18f05217
-[URI 1225] Coral Perfeito
-https://www.urionlinejudge.com.br/repository/UOJ_1225.html
-5430fc4a87d434df18f05218
-[URI 1231] Palavras
-https://www.urionlinejudge.com.br/repository/UOJ_1231.html
-5430fc4a87d434df18f05219
-[URI 1223] Tobogan de Bolinhas
-https://www.urionlinejudge.com.br/repository/UOJ_1223.html
-5430fc4a87d434df18f0521a
-[URI 1242] Ácido Ribonucleico Alienígena
-https://www.urionlinejudge.com.br/repository/UOJ_1242.html
-5430fc4a87d434df18f0521b
-[URI 1224] Cartões
-https://www.urionlinejudge.com.br/repository/UOJ_1224.html
-5430fc4a87d434df18f0521c
-[URI 1230] Integral
-https://www.urionlinejudge.com.br/repository/UOJ_1230.html
-5430fc4a87d434df18f0521d
-[URI 1236] Compactação de Nulos e Brancos
-https://www.urionlinejudge.com.br/repository/UOJ_1236.html
-5430fc4a87d434df18f0521e
-[URI 1229] Combate ao Câncer
-https://www.urionlinejudge.com.br/repository/UOJ_1229.html
-5430fc4c87d434df18f0521f
-[URI 1228] Grid de Largada
-https://www.urionlinejudge.com.br/repository/UOJ_1228.html
-5430fc4c87d434df18f05220
-[URI 1235] De Dentro para Fora
-https://www.urionlinejudge.com.br/repository/UOJ_1235.html
-5430fc4c87d434df18f05221
-[URI 1247] Guarda Costeira
-https://www.urionlinejudge.com.br/repository/UOJ_1247.html
-5430fc4c87d434df18f05222
-[URI 1241] Encaixa ou Não II
-https://www.urionlinejudge.com.br/repository/UOJ_1241.html
-5430fc4c87d434df18f05223
-[URI 1240] Encaixa ou Não I
-https://www.urionlinejudge.com.br/repository/UOJ_1240.html
-5430fc4c87d434df18f05224
-[URI 1233] Estrela
-https://www.urionlinejudge.com.br/repository/UOJ_1233.html
-5430fc4c87d434df18f05225
-[URI 1252] Sort! Sort!! e Sort!!!
-https://www.urionlinejudge.com.br/repository/UOJ_1252.html
-5430fc4d87d434df18f05226
-[URI 1234] Sentença Dançante
-https://www.urionlinejudge.com.br/repository/UOJ_1234.html
-5430fc4d87d434df18f05227
-[URI 1246] Estacionamento
-https://www.urionlinejudge.com.br/repository/UOJ_1246.html
-5430fc4d87d434df18f05228
-[URI 1238] Combinador
-https://www.urionlinejudge.com.br/repository/UOJ_1238.html
-5430fc4d87d434df18f05229
-[URI 1245] Botas Perdidas
-https://www.urionlinejudge.com.br/repository/UOJ_1245.html
-5430fc4d87d434df18f0522a
-[URI 1239] Atalhos Bloggo
-https://www.urionlinejudge.com.br/repository/UOJ_1239.html
-5430fc4e87d434df18f0522b
-[URI 1257] Array Hash
-https://www.urionlinejudge.com.br/repository/UOJ_1257.html
-5430fc4e87d434df18f0522c
-[URI 1251] Diga-me a Frequência
-https://www.urionlinejudge.com.br/repository/UOJ_1251.html
-5430fc4e87d434df18f0522d
-[URI 1243] O Quão Fácil é...
-https://www.urionlinejudge.com.br/repository/UOJ_1243.html
-5430fc4f87d434df18f0522e
-[URI 1244] Ordenação por Tamanho
-https://www.urionlinejudge.com.br/repository/UOJ_1244.html
-5430fc4f87d434df18f0522f
-[URI 1262] Leitura Múltipla
-https://www.urionlinejudge.com.br/repository/UOJ_1262.html
-5430fc4f87d434df18f05230
-[URI 1250] KiloMan
-https://www.urionlinejudge.com.br/repository/UOJ_1250.html
-5430fc4f87d434df18f05231
-[URI 1248] Plano de Dieta
-https://www.urionlinejudge.com.br/repository/UOJ_1248.html
-5430fc4f87d434df18f05232
-[URI 1256] Tabelas Hash
-https://www.urionlinejudge.com.br/repository/UOJ_1256.html
-5430fc4f87d434df18f05233
-[URI 1253] Cifra de César
-https://www.urionlinejudge.com.br/repository/UOJ_1253.html
-5430fc5187d434df18f05234
-[URI 1249] Rot13
-https://www.urionlinejudge.com.br/repository/UOJ_1249.html
-5430fc5187d434df18f05235
-[URI 1255] Frequência de Letras
-https://www.urionlinejudge.com.br/repository/UOJ_1255.html
-5430fc5187d434df18f05236
-[URI 1267] Biblioteca Pascal
-https://www.urionlinejudge.com.br/repository/UOJ_1267.html
-5430fc5187d434df18f05237
-[URI 1261] Pontos de Feno
-https://www.urionlinejudge.com.br/repository/UOJ_1261.html
-5430fc5187d434df18f05238
-[URI 1258] Camisetas
-https://www.urionlinejudge.com.br/repository/UOJ_1258.html
-5430fc5287d434df18f05239
-[URI 1260] Espécies de Madeira
-https://www.urionlinejudge.com.br/repository/UOJ_1260.html
-5430fc5287d434df18f0523a
-[URI 1272] Mensagem Oculta
-https://www.urionlinejudge.com.br/repository/UOJ_1272.html
-5430fc5287d434df18f0523b
-[URI 1254] Substituição de Tag
-https://www.urionlinejudge.com.br/repository/UOJ_1254.html
-5430fc5287d434df18f0523c
-[URI 1266] Tornado!
-https://www.urionlinejudge.com.br/repository/UOJ_1266.html
-5430fc5287d434df18f0523d
-[URI 1263] Aliteração
-https://www.urionlinejudge.com.br/repository/UOJ_1263.html
-5430fc5387d434df18f0523e
-[URI 1265] DJ na Computação
-https://www.urionlinejudge.com.br/repository/UOJ_1265.html
-5430fc5387d434df18f0523f
-[URI 1259] Pares e Ímpares
-https://www.urionlinejudge.com.br/repository/UOJ_1259.html
-5430fc5387d434df18f05240
-[URI 1277] Pouca Frequência
-https://www.urionlinejudge.com.br/repository/UOJ_1277.html
-5430fc5387d434df18f05241
-[URI 1271] Onde estão meus Genes
-https://www.urionlinejudge.com.br/repository/UOJ_1271.html
-5430fc5387d434df18f05242
-[URI 1268] Missão Impossível
-https://www.urionlinejudge.com.br/repository/UOJ_1268.html
-5430fc5487d434df18f05243
-[URI 1264] Um Problema Fácil!
-https://www.urionlinejudge.com.br/repository/UOJ_1264.html
-5430fc5487d434df18f05244
-[URI 1282] Organizando Pacotes
-https://www.urionlinejudge.com.br/repository/UOJ_1282.html
-5430fc5487d434df18f05245
-[URI 1270] Fibra Óptica
-https://www.urionlinejudge.com.br/repository/UOJ_1270.html
-5430fc5487d434df18f05246
-[URI 1276] Faixa de Letras
-https://www.urionlinejudge.com.br/repository/UOJ_1276.html
-5430fc5487d434df18f05247
-[URI 1269] ICPC Ataca Novamente
-https://www.urionlinejudge.com.br/repository/UOJ_1269.html
-5430fc5687d434df18f05248
-[URI 1273] Justificador
-https://www.urionlinejudge.com.br/repository/UOJ_1273.html
-5430fc5687d434df18f05249
-[URI 1287] Processador Amigável de Inteiros
-https://www.urionlinejudge.com.br/repository/UOJ_1287.html
-5430fc5687d434df18f0524a
-[URI 1281] Ida à Feira
-https://www.urionlinejudge.com.br/repository/UOJ_1281.html
-5430fc5687d434df18f0524b
-[URI 1275] Light Up
-https://www.urionlinejudge.com.br/repository/UOJ_1275.html
-5430fc5687d434df18f0524c
-[URI 1274] P-Networks
-https://www.urionlinejudge.com.br/repository/UOJ_1274.html
-5430fc5787d434df18f0524d
-[URI 1286] Motoboy
-https://www.urionlinejudge.com.br/repository/UOJ_1286.html
-5430fc5787d434df18f0524e
-[URI 1278] Justificador II
-https://www.urionlinejudge.com.br/repository/UOJ_1278.html
-5430fc5787d434df18f0524f
-[URI 1292] Problema com um Pentágono
-https://www.urionlinejudge.com.br/repository/UOJ_1292.html
-5430fc5787d434df18f05250
-[URI 1280] Amigos
-https://www.urionlinejudge.com.br/repository/UOJ_1280.html
-5430fc5787d434df18f05251
-[URI 1291] Será Isso Integração?
-https://www.urionlinejudge.com.br/repository/UOJ_1291.html
-5430fc5887d434df18f05252
-[URI 1283] Caixas e Pedras
-https://www.urionlinejudge.com.br/repository/UOJ_1283.html
-5430fc5887d434df18f05253
-[URI 1279] Ano Bissexto ou Ano não Bissexto
-https://www.urionlinejudge.com.br/repository/UOJ_1279.html
-5430fc5887d434df18f05254
-[URI 1297] Proteção do Meio Ambiente
-https://www.urionlinejudge.com.br/repository/UOJ_1297.html
-5430fc5887d434df18f05255
-[URI 1285] Dígitos Diferentes
-https://www.urionlinejudge.com.br/repository/UOJ_1285.html
-5430fc5887d434df18f05256
-[URI 1296] Medianas
-https://www.urionlinejudge.com.br/repository/UOJ_1296.html
-5430fc5987d434df18f05257
-[URI 1288] Canhao de Destruição
-https://www.urionlinejudge.com.br/repository/UOJ_1288.html
-5430fc5987d434df18f05258
-[URI 1284] Digitando no Telefone Celular
-https://www.urionlinejudge.com.br/repository/UOJ_1284.html
-5430fc5987d434df18f05259
-[URI 1290] Caixas Muito Especiais
-https://www.urionlinejudge.com.br/repository/UOJ_1290.html
-5430fc5987d434df18f0525a
-[URI 1302] Juntando Casais
-https://www.urionlinejudge.com.br/repository/UOJ_1302.html
-5430fc5a87d434df18f0525b
-[URI 1293] Romeu e Julieta!
-https://www.urionlinejudge.com.br/repository/UOJ_1293.html
-5430fc5a87d434df18f0525c
-[URI 1289] Qual é a Probabilidade?
-https://www.urionlinejudge.com.br/repository/UOJ_1289.html
-5430fc5b87d434df18f0525d
-[URI 1301] Produto do Intervalo
-https://www.urionlinejudge.com.br/repository/UOJ_1301.html
-5430fc5b87d434df18f0525e
-[URI 1295] Problema dos Pares Mais Próximos
-https://www.urionlinejudge.com.br/repository/UOJ_1295.html
-5430fc5b87d434df18f0525f
-[URI 1307] Tudo o que Você Precisa é Amor
-https://www.urionlinejudge.com.br/repository/UOJ_1307.html
-5430fc5b87d434df18f05260
-[URI 1298] Corrija o Labirinto
-https://www.urionlinejudge.com.br/repository/UOJ_1298.html
-5430fc5c87d434df18f05261
-[URI 1300] Horas e Minutos
-https://www.urionlinejudge.com.br/repository/UOJ_1300.html
-5430fc5c87d434df18f05262
-[URI 1306] Numerando Estradas
-https://www.urionlinejudge.com.br/repository/UOJ_1306.html
-5430fc5d87d434df18f05263
-[URI 1294] A Maior e Menor Caixa
-https://www.urionlinejudge.com.br/repository/UOJ_1294.html
-5430fc5d87d434df18f05264
-[URI 1312] Empilhamento de Bolas
-https://www.urionlinejudge.com.br/repository/UOJ_1312.html
-5430fc5d87d434df18f05265
-[URI 1305] Arredondamento por Valor de Corte
-https://www.urionlinejudge.com.br/repository/UOJ_1305.html
-5430fc5d87d434df18f05266
-[URI 1311] Companheiros de Exército
-https://www.urionlinejudge.com.br/repository/UOJ_1311.html
-5430fc5d87d434df18f05267
-[URI 1303] Spurs Rocks
-https://www.urionlinejudge.com.br/repository/UOJ_1303.html
-5430fc5d87d434df18f05268
-[URI 1299] Jogo de Mosaicos
-https://www.urionlinejudge.com.br/repository/UOJ_1299.html
-5430fc5d87d434df18f05269
-[URI 1314] Labirintos de Cerca Viva
-https://www.urionlinejudge.com.br/repository/UOJ_1314.html
-5430fc5e87d434df18f0526a
-[URI 1310] Lucro
-https://www.urionlinejudge.com.br/repository/UOJ_1310.html
-5430fc5e87d434df18f0526b
-[URI 1308] Guerreiros Etruscos Nunca Jogam Xadrez
-https://www.urionlinejudge.com.br/repository/UOJ_1308.html
-5430fc5e87d434df18f0526c
-[URI 1304] Velocidade Média
-https://www.urionlinejudge.com.br/repository/UOJ_1304.html
-5430fc5e87d434df18f0526d
-[URI 1319] Garota Hiperativa
-https://www.urionlinejudge.com.br/repository/UOJ_1319.html
-5430fc5e87d434df18f0526e
-[URI 1313] Dicionário Portuñol
-https://www.urionlinejudge.com.br/repository/UOJ_1313.html
-5430fc5e87d434df18f0526f
-[URI 1317] Eu Odeio SPAM, Mas Algumas Pessoas Amam
-https://www.urionlinejudge.com.br/repository/UOJ_1317.html
-5430fc6087d434df18f05270
-[URI 1315] Não tão Convexo
-https://www.urionlinejudge.com.br/repository/UOJ_1315.html
-5430fc6087d434df18f05271
-[URI 1309] Formatação Monetária
-https://www.urionlinejudge.com.br/repository/UOJ_1309.html
-5430fc6087d434df18f05272
-[URI 1318] Bilhetes Falsos
-https://www.urionlinejudge.com.br/repository/UOJ_1318.html
-5430fc6087d434df18f05273
-[URI 1324] Bóson de Higgs
-https://www.urionlinejudge.com.br/repository/UOJ_1324.html
-5430fc6087d434df18f05274
-[URI 1322] Desejos das Crianças
-https://www.urionlinejudge.com.br/repository/UOJ_1322.html
-5430fc6187d434df18f05275
-[URI 1323] Feynman
-https://www.urionlinejudge.com.br/repository/UOJ_1323.html
-5430fc6187d434df18f05276
-[URI 1316] Compra Livre de Impostos
-https://www.urionlinejudge.com.br/repository/UOJ_1316.html
-5430fc6187d434df18f05277
-[URI 1320] Metrô Engenhoso
-https://www.urionlinejudge.com.br/repository/UOJ_1320.html
-5430fc6187d434df18f05278
-[URI 1329] Cara ou Coroa
-https://www.urionlinejudge.com.br/repository/UOJ_1329.html
-5430fc6187d434df18f05279
-[URI 1327] Drop Out
-https://www.urionlinejudge.com.br/repository/UOJ_1327.html
-5430fc6187d434df18f0527a
-[URI 1325] Mapas Bolha
-https://www.urionlinejudge.com.br/repository/UOJ_1325.html
-5430fc6287d434df18f0527b
-[URI 1328] Vá com Calma
-https://www.urionlinejudge.com.br/repository/UOJ_1328.html
-5430fc6287d434df18f0527c
-[URI 1334] Poluição Elétrica
-https://www.urionlinejudge.com.br/repository/UOJ_1334.html
-5430fc6287d434df18f0527d
-[URI 1321] Jollo
-https://www.urionlinejudge.com.br/repository/UOJ_1321.html
-5430fc6287d434df18f0527e
-[URI 1332] Um-Dois-Três
-https://www.urionlinejudge.com.br/repository/UOJ_1332.html
-5430fc6287d434df18f0527f
-[URI 1333] Os doces de Candy
-https://www.urionlinejudge.com.br/repository/UOJ_1333.html
-5430fc6387d434df18f05280
-[URI 1330] A Terra Herdada por Tio Tom
-https://www.urionlinejudge.com.br/repository/UOJ_1330.html
-5430fc6387d434df18f05281
-[URI 1326] Química
-https://www.urionlinejudge.com.br/repository/UOJ_1326.html
-5430fc6387d434df18f05282
-[URI 1339] O Cubo Mágico do Avô
-https://www.urionlinejudge.com.br/repository/UOJ_1339.html
-5430fc6487d434df18f05283
-[URI 1337] Poker do Rei
-https://www.urionlinejudge.com.br/repository/UOJ_1337.html
-5430fc6487d434df18f05284
-[URI 1335] Recuperação de Arquivos
-https://www.urionlinejudge.com.br/repository/UOJ_1335.html
-5430fc6487d434df18f05285
-[URI 1338] It-miha
-https://www.urionlinejudge.com.br/repository/UOJ_1338.html
-5430fc6487d434df18f05286
-[URI 1331] Blocos
-https://www.urionlinejudge.com.br/repository/UOJ_1331.html
-5430fc6587d434df18f05287
-[URI 1342] Dado
-https://www.urionlinejudge.com.br/repository/UOJ_1342.html
-5430fc6587d434df18f05288
-[URI 1344] Parceiros de Telecomunicação
-https://www.urionlinejudge.com.br/repository/UOJ_1344.html
-5430fc6587d434df18f05289
-[URI 1340] Eu Posso Adivinhar a Estrutura de Dados!
-https://www.urionlinejudge.com.br/repository/UOJ_1340.html
-5430fc6687d434df18f0528a
-[URI 1343] Runner Pawns
-https://www.urionlinejudge.com.br/repository/UOJ_1343.html
-5430fc6687d434df18f0528b
-[URI 1336] Cerca do Jardim
-https://www.urionlinejudge.com.br/repository/UOJ_1336.html
-5430fc6687d434df18f0528c
-[URI 1349] Efeito Ruído
-https://www.urionlinejudge.com.br/repository/UOJ_1349.html
-5430fc6687d434df18f0528d
-[URI 1347] Mina Kriptonita
-https://www.urionlinejudge.com.br/repository/UOJ_1347.html
-5430fc6687d434df18f0528e
-[URI 1345] Região Segura
-https://www.urionlinejudge.com.br/repository/UOJ_1345.html
-5430fc6787d434df18f0528f
-[URI 1354] Um Quadrado Grande, Por Favor
-https://www.urionlinejudge.com.br/repository/UOJ_1354.html
-5430fc6787d434df18f05290
-[URI 1341] Crianças em uma Grade
-https://www.urionlinejudge.com.br/repository/UOJ_1341.html
-5430fc6787d434df18f05291
-[URI 1348] X-Mart
-https://www.urionlinejudge.com.br/repository/UOJ_1348.html
-5430fc6787d434df18f05292
-[URI 1352] Loteria Quadrada
-https://www.urionlinejudge.com.br/repository/UOJ_1352.html
-5430fc6787d434df18f05293
-[URI 1350] Esta Sentença é Falsa
-https://www.urionlinejudge.com.br/repository/UOJ_1350.html
-5430fc6887d434df18f05294
-[URI 1353] Super Poker
-https://www.urionlinejudge.com.br/repository/UOJ_1353.html
-5430fc6887d434df18f05295
-[URI 1359] Taxa de Divisão de Terreno
-https://www.urionlinejudge.com.br/repository/UOJ_1359.html
-5430fc6887d434df18f05296
-[URI 1346] Brincadeira de Criança
-https://www.urionlinejudge.com.br/repository/UOJ_1346.html
-5430fc6987d434df18f05297
-[URI 1357] Em Braille
-https://www.urionlinejudge.com.br/repository/UOJ_1357.html
-5430fc6987d434df18f05298
-[URI 1355] Compressor
-https://www.urionlinejudge.com.br/repository/UOJ_1355.html
-5430fc6a87d434df18f05299
-[URI 1365] Procurando Assentos
-https://www.urionlinejudge.com.br/repository/UOJ_1365.html
-5430fc6a87d434df18f0529a
-[URI 1351] Supermercado
-https://www.urionlinejudge.com.br/repository/UOJ_1351.html
-5430fc6a87d434df18f0529b
-[URI 1358] Cortando Extremidades
-https://www.urionlinejudge.com.br/repository/UOJ_1358.html
-5430fc6a87d434df18f0529c
-[URI 1363] Competição de Placas de Carros
-https://www.urionlinejudge.com.br/repository/UOJ_1363.html
-5430fc6a87d434df18f0529d
-[URI 1370] Regata de Cientistas
-https://www.urionlinejudge.com.br/repository/UOJ_1370.html
-5430fc6b87d434df18f0529e
-[URI 1360] Truque de Mágica
-https://www.urionlinejudge.com.br/repository/UOJ_1360.html
-5430fc6b87d434df18f0529f
-[URI 1356] Júpiter Ataca!
-https://www.urionlinejudge.com.br/repository/UOJ_1356.html
-5430fc6b87d434df18f052a0
-[URI 1364] Emoticons :-)
-https://www.urionlinejudge.com.br/repository/UOJ_1364.html
-5430fc6b87d434df18f052a1
-[URI 1368] Cubos Coloridos
-https://www.urionlinejudge.com.br/repository/UOJ_1368.html
-5430fc6b87d434df18f052a2
-[URI 1375] Painel de Posições
-https://www.urionlinejudge.com.br/repository/UOJ_1375.html
-5430fc6c87d434df18f052a3
-[URI 1361] Desenhando o Edifício
-https://www.urionlinejudge.com.br/repository/UOJ_1361.html
-5430fc6c87d434df18f052a4
-[URI 1362] Minha Camiseta Me Serve
-https://www.urionlinejudge.com.br/repository/UOJ_1362.html
-5430fc6c87d434df18f052a5
-[URI 1369] Gerente de Espaço
-https://www.urionlinejudge.com.br/repository/UOJ_1369.html
-5430fc6c87d434df18f052a6
-[URI 1373] Sequências de DNA
-https://www.urionlinejudge.com.br/repository/UOJ_1373.html
-5430fc6d87d434df18f052a7
-[URI 1366] Jogo de Varetas
-https://www.urionlinejudge.com.br/repository/UOJ_1366.html
-5430fc6d87d434df18f052a8
-[URI 1380] Crescimento das Populações de Bacilos
-https://www.urionlinejudge.com.br/repository/UOJ_1380.html
-5430fc6d87d434df18f052a9
-[URI 1367] Ajude!
-https://www.urionlinejudge.com.br/repository/UOJ_1367.html
-5430fc6d87d434df18f052aa
-[URI 1374] Eletricidade
-https://www.urionlinejudge.com.br/repository/UOJ_1374.html
-5430fc6e87d434df18f052ab
-[URI 1378] Triângulos Isósceles
-https://www.urionlinejudge.com.br/repository/UOJ_1378.html
-5430fc6e87d434df18f052ac
-[URI 1372] Doces
-https://www.urionlinejudge.com.br/repository/UOJ_1372.html
-5430fc6f87d434df18f052ad
-[URI 1371] Fechem as Portas!
-https://www.urionlinejudge.com.br/repository/UOJ_1371.html
-5430fc6f87d434df18f052ae
-[URI 1389] O Problema do Sapateiro Viajante
-https://www.urionlinejudge.com.br/repository/UOJ_1389.html
-5430fc6f87d434df18f052af
-[URI 1383] Sudoku
-https://www.urionlinejudge.com.br/repository/UOJ_1383.html
-5430fc6f87d434df18f052b0
-[URI 1379] Problema com Mediana e Média
-https://www.urionlinejudge.com.br/repository/UOJ_1379.html
-5430fc6f87d434df18f052b1
-[URI 1376] Irmãos
-https://www.urionlinejudge.com.br/repository/UOJ_1376.html
-5430fc7087d434df18f052b2
-[URI 1394] Hooligan
-https://www.urionlinejudge.com.br/repository/UOJ_1394.html
-5430fc7087d434df18f052b3
-[URI 1377] Recuperador de Arquivos
-https://www.urionlinejudge.com.br/repository/UOJ_1377.html
-5430fc7087d434df18f052b4
-[URI 1387] Og
-https://www.urionlinejudge.com.br/repository/UOJ_1387.html
-5430fc7087d434df18f052b5
-[URI 1384] Sapo Preguiçoso
-https://www.urionlinejudge.com.br/repository/UOJ_1384.html
-5430fc7087d434df18f052b6
-[URI 1399] Transformador de Matriz
-https://www.urionlinejudge.com.br/repository/UOJ_1399.html
-5430fc7187d434df18f052b7
-[URI 1382] Elementar, meu Caro Watson!
-https://www.urionlinejudge.com.br/repository/UOJ_1382.html
-5430fc7187d434df18f052b8
-[URI 1381] Equações Diofantinas
-https://www.urionlinejudge.com.br/repository/UOJ_1381.html
-5430fc7187d434df18f052b9
-[URI 1392] Conta de Luz
-https://www.urionlinejudge.com.br/repository/UOJ_1392.html
-5430fc7187d434df18f052ba
-[URI 1388] Onde Estão as Bolhas?
-https://www.urionlinejudge.com.br/repository/UOJ_1388.html
-5430fc7287d434df18f052bb
-[URI 1404] MegaDamas
-https://www.urionlinejudge.com.br/repository/UOJ_1404.html
-5430fc7287d434df18f052bc
-[URI 1385] Recuperação de Relatório
-https://www.urionlinejudge.com.br/repository/UOJ_1385.html
-5430fc7287d434df18f052bd
-[URI 1386] Códigos Ambíguos
-https://www.urionlinejudge.com.br/repository/UOJ_1386.html
-5430fc7287d434df18f052be
-[URI 1397] Jogo do Maior
-https://www.urionlinejudge.com.br/repository/UOJ_1397.html
-5430fc7287d434df18f052bf
-[URI 1393] Lajotas Hexagonais
-https://www.urionlinejudge.com.br/repository/UOJ_1393.html
-5430fc7387d434df18f052c0
-[URI 1390] Bases
-https://www.urionlinejudge.com.br/repository/UOJ_1390.html
-5430fc7387d434df18f052c1
-[URI 1410] Ele Está Impedido!
-https://www.urionlinejudge.com.br/repository/UOJ_1410.html
-5430fc7387d434df18f052c2
-[URI 1391] Quase Menor Caminho
-https://www.urionlinejudge.com.br/repository/UOJ_1391.html
-5430fc7387d434df18f052c3
-[URI 1402] Será Que Indiana Jones Chega Lá?
-https://www.urionlinejudge.com.br/repository/UOJ_1402.html
-5430fc7487d434df18f052c4
-[URI 1398] Oceano Profundo! Faça-o Raso!!
-https://www.urionlinejudge.com.br/repository/UOJ_1398.html
-5430fc7487d434df18f052c5
-[URI 1415] Galou Está de Volta!
-https://www.urionlinejudge.com.br/repository/UOJ_1415.html
-5430fc7487d434df18f052c6
-[URI 1395] Números e Operações
-https://www.urionlinejudge.com.br/repository/UOJ_1395.html
-5430fc7487d434df18f052c7
-[URI 1396] Hoje tem Prova da Cris!
-https://www.urionlinejudge.com.br/repository/UOJ_1396.html
-5430fc7587d434df18f052c8
-[URI 1403] Meu Avô é Famoso
-https://www.urionlinejudge.com.br/repository/UOJ_1403.html
-5430fc7587d434df18f052c9
-[URI 1407] Loteria de Fim de Semana
-https://www.urionlinejudge.com.br/repository/UOJ_1407.html
-5430fc7587d434df18f052ca
-[URI 1420] Contando os Segundos
-https://www.urionlinejudge.com.br/repository/UOJ_1420.html
-5430fc7587d434df18f052cb
-[URI 1400] Jogo - Contando
-https://www.urionlinejudge.com.br/repository/UOJ_1400.html
-5430fc7687d434df18f052cc
-[URI 1401] Gerando Permutações Ordenadas Rapidamente
-https://www.urionlinejudge.com.br/repository/UOJ_1401.html
-5430fc7687d434df18f052cd
-[URI 1408] Mário
-https://www.urionlinejudge.com.br/repository/UOJ_1408.html
-5430fc7687d434df18f052ce
-[URI 1413] Apresse-se!
-https://www.urionlinejudge.com.br/repository/UOJ_1413.html
-5430fc7687d434df18f052cf
-[URI 1425] Presente?!
-https://www.urionlinejudge.com.br/repository/UOJ_1425.html
-5430fc7787d434df18f052d0
-[URI 1406] Jukebox
-https://www.urionlinejudge.com.br/repository/UOJ_1406.html
-5430fc7787d434df18f052d1
-[URI 1405] O Problema da Parada
-https://www.urionlinejudge.com.br/repository/UOJ_1405.html
-5430fc7787d434df18f052d2
-[URI 1409] Zak Galou
-https://www.urionlinejudge.com.br/repository/UOJ_1409.html
-5430fc7887d434df18f052d3
-[URI 1418] Outra Crise
-https://www.urionlinejudge.com.br/repository/UOJ_1418.html
-5430fc7887d434df18f052d4
-[URI 1430] Composição de Jingles
-https://www.urionlinejudge.com.br/repository/UOJ_1430.html
-5430fc7887d434df18f052d5
-[URI 1412] Cadeado com Segredo
-https://www.urionlinejudge.com.br/repository/UOJ_1412.html
-5430fc7987d434df18f052d6
-[URI 1414] Copa do Mundo
-https://www.urionlinejudge.com.br/repository/UOJ_1414.html
-5430fc7987d434df18f052d7
-[URI 1411] Encolhendo Polígonos
-https://www.urionlinejudge.com.br/repository/UOJ_1411.html
-5430fc7987d434df18f052d8
-[URI 1423] A aventura de Super Mario
-https://www.urionlinejudge.com.br/repository/UOJ_1423.html
-5430fc7987d434df18f052d9
-[URI 1435] Matriz Quadrada I
-https://www.urionlinejudge.com.br/repository/UOJ_1435.html
-5430fc7a87d434df18f052da
-[URI 1417] Liga da Justiça
-https://www.urionlinejudge.com.br/repository/UOJ_1417.html
-5430fc7b87d434df18f052db
-[URI 1416] Placar do ICPC
-https://www.urionlinejudge.com.br/repository/UOJ_1416.html
-5430fc7b87d434df18f052dc
-[URI 1419] Bakugan
-https://www.urionlinejudge.com.br/repository/UOJ_1419.html
-5430fc7b87d434df18f052dd
-[URI 1428] Procurando Nessy
-https://www.urionlinejudge.com.br/repository/UOJ_1428.html
-5430fc7b87d434df18f052de
-[URI 1440] Praça de Alimentação
-https://www.urionlinejudge.com.br/repository/UOJ_1440.html
-5430fc7b87d434df18f052df
-[URI 1421] Tic-Tac-Toe?
-https://www.urionlinejudge.com.br/repository/UOJ_1421.html
-5430fc7c87d434df18f052e0
-[URI 1424] Problema Fácil de Rujia Liu?
-https://www.urionlinejudge.com.br/repository/UOJ_1424.html
-5430fc7c87d434df18f052e1
-[URI 1422] Bactérias
-https://www.urionlinejudge.com.br/repository/UOJ_1422.html
-5430fc7c87d434df18f052e2
-[URI 1433] O Clube da Divisão
-https://www.urionlinejudge.com.br/repository/UOJ_1433.html
-5430fc7c87d434df18f052e3
-[URI 1445] Quem Vai à Festa?
-https://www.urionlinejudge.com.br/repository/UOJ_1445.html
-5430fc7d87d434df18f052e4
-[URI 1426] Coloque Tijolos na Parede
-https://www.urionlinejudge.com.br/repository/UOJ_1426.html
-5430fc7d87d434df18f052e5
-[URI 1427] O Problema da Scrooge Co.
-https://www.urionlinejudge.com.br/repository/UOJ_1427.html
-5430fc7d87d434df18f052e6
-[URI 1429] Fatorial de Novo!
-https://www.urionlinejudge.com.br/repository/UOJ_1429.html
-5430fc7d87d434df18f052e7
-[URI 1438] Desempilhando Caixas
-https://www.urionlinejudge.com.br/repository/UOJ_1438.html
-5430fc7e87d434df18f052e8
-[URI 1450] Os Joguinhos de Ramsés
-https://www.urionlinejudge.com.br/repository/UOJ_1450.html
-5430fc7e87d434df18f052e9
-[URI 1431] Níveis de Klingon
-https://www.urionlinejudge.com.br/repository/UOJ_1431.html
-5430fc7e87d434df18f052ea
-[URI 1432] Strings Binárias Triple-Free
-https://www.urionlinejudge.com.br/repository/UOJ_1432.html
-5430fc7e87d434df18f052eb
-[URI 1443] Engarrafamento
-https://www.urionlinejudge.com.br/repository/UOJ_1443.html
-5430fc7e87d434df18f052ec
-[URI 1434] Patrulheiros Romanos
-https://www.urionlinejudge.com.br/repository/UOJ_1434.html
-5430fc7e87d434df18f052ed
-[URI 1455] Final do ICPC
-https://www.urionlinejudge.com.br/repository/UOJ_1455.html
-5430fc7f87d434df18f052ee
-[URI 1436] Jogo do Tijolo
-https://www.urionlinejudge.com.br/repository/UOJ_1436.html
-5430fc7f87d434df18f052ef
-[URI 1437] Esquerda, Volver!
-https://www.urionlinejudge.com.br/repository/UOJ_1437.html
-5430fc7f87d434df18f052f0
-[URI 1439] Bora Bora
-https://www.urionlinejudge.com.br/repository/UOJ_1439.html
-5430fc7f87d434df18f052f1
-[URI 1448] Telefone Sem Fio
-https://www.urionlinejudge.com.br/repository/UOJ_1448.html
-5430fc8087d434df18f052f2
-[URI 1441] Sequências de Granizo
-https://www.urionlinejudge.com.br/repository/UOJ_1441.html
-5430fc8087d434df18f052f3
-[URI 1442] Desvio de Rua
-https://www.urionlinejudge.com.br/repository/UOJ_1442.html
-5430fc8087d434df18f052f4
-[URI 1460] Parreiral
-https://www.urionlinejudge.com.br/repository/UOJ_1460.html
-5430fc8087d434df18f052f5
-[URI 1453] Palavras-Cruzadas Sem Palavras
-https://www.urionlinejudge.com.br/repository/UOJ_1453.html
-5430fc8087d434df18f052f6
-[URI 1444] Corrida dos Marrecos
-https://www.urionlinejudge.com.br/repository/UOJ_1444.html
-5430fc8187d434df18f052f7
-[URI 1446] Diagrama de Venn?
-https://www.urionlinejudge.com.br/repository/UOJ_1446.html
-5430fc8187d434df18f052f8
-[URI 1465] Complexo, Difícil e Complicado
-https://www.urionlinejudge.com.br/repository/UOJ_1465.html
-5430fc8287d434df18f052f9
-[URI 1449] O Fantástico Jaspion
-https://www.urionlinejudge.com.br/repository/UOJ_1449.html
-5430fc8287d434df18f052fa
-[URI 1458] Campeonato de SMS
-https://www.urionlinejudge.com.br/repository/UOJ_1458.html
-5430fc8287d434df18f052fb
-[URI 1447] Back to the Future
-https://www.urionlinejudge.com.br/repository/UOJ_1447.html
-5430fc8287d434df18f052fc
-[URI 1451] Teclado Quebrado
-https://www.urionlinejudge.com.br/repository/UOJ_1451.html
-5430fc8487d434df18f052fd
-[URI 1470] Máquina Dobradora
-https://www.urionlinejudge.com.br/repository/UOJ_1470.html
-5430fc8487d434df18f052fe
-[URI 1463] Árvore Binária de Expressão
-https://www.urionlinejudge.com.br/repository/UOJ_1463.html
-5430fc8487d434df18f052ff
-[URI 1452] Gloud Computing
-https://www.urionlinejudge.com.br/repository/UOJ_1452.html
-5430fc8487d434df18f05300
-[URI 1454] O País das Bicicletas
-https://www.urionlinejudge.com.br/repository/UOJ_1454.html
-5430fc8487d434df18f05301
-[URI 1456] Brainfuck
-https://www.urionlinejudge.com.br/repository/UOJ_1456.html
-5430fc8587d434df18f05302
-[URI 1475] Remendo
-https://www.urionlinejudge.com.br/repository/UOJ_1475.html
-5430fc8587d434df18f05303
-[URI 1457] Oráculo de Alexandria
-https://www.urionlinejudge.com.br/repository/UOJ_1457.html
-5430fc8587d434df18f05304
-[URI 1459] Foco
-https://www.urionlinejudge.com.br/repository/UOJ_1459.html
-5430fc8587d434df18f05305
-[URI 1468] Balão
-https://www.urionlinejudge.com.br/repository/UOJ_1468.html
-5430fc8587d434df18f05306
-[URI 1461] Caminhos Simétricos Ótimos
-https://www.urionlinejudge.com.br/repository/UOJ_1461.html
-5430fc8587d434df18f05307
-[URI 1480] O Famoso Campo Minado
-https://www.urionlinejudge.com.br/repository/UOJ_1480.html
-5430fc8587d434df18f05308
-[URI 1464] Camadas de Cebola
-https://www.urionlinejudge.com.br/repository/UOJ_1464.html
-5430fc8687d434df18f05309
-[URI 1473] Linhas de Contêiners
-https://www.urionlinejudge.com.br/repository/UOJ_1473.html
-5430fc8687d434df18f0530a
-[URI 1462] Popularidade no Facebook
-https://www.urionlinejudge.com.br/repository/UOJ_1462.html
-5430fc8687d434df18f0530b
-[URI 1466] Percurso em Árvore por Nível
-https://www.urionlinejudge.com.br/repository/UOJ_1466.html
-5430fc8687d434df18f0530c
-[URI 1481] A Fazenda de Ostras de Zing Zhu
-https://www.urionlinejudge.com.br/repository/UOJ_1481.html
-5430fc8787d434df18f0530d
-[URI 1467] Zerinho ou Um
-https://www.urionlinejudge.com.br/repository/UOJ_1467.html
-5430fc8787d434df18f0530e
-[URI 1478] Matriz Quadrada II
-https://www.urionlinejudge.com.br/repository/UOJ_1478.html
-5430fc8787d434df18f0530f
-[URI 1469] Chefe
-https://www.urionlinejudge.com.br/repository/UOJ_1469.html
-5430fc8787d434df18f05310
-[URI 1471] Mergulho
-https://www.urionlinejudge.com.br/repository/UOJ_1471.html
-5430fc8787d434df18f05311
-[URI 1486] Circuito Bioquímico Digital
-https://www.urionlinejudge.com.br/repository/UOJ_1486.html
-5430fc8887d434df18f05312
-[URI 1472] Triângulos
-https://www.urionlinejudge.com.br/repository/UOJ_1472.html
-5430fc8887d434df18f05313
-[URI 1484] Tecle & Some
-https://www.urionlinejudge.com.br/repository/UOJ_1484.html
-5430fc8887d434df18f05314
-[URI 1474] Ônibus
-https://www.urionlinejudge.com.br/repository/UOJ_1474.html
-5430fc8887d434df18f05315
-[URI 1476] Caminhão
-https://www.urionlinejudge.com.br/repository/UOJ_1476.html
-5430fc8887d434df18f05316
-[URI 1477] Homem, Elefante e Rato
-https://www.urionlinejudge.com.br/repository/UOJ_1477.html
-5430fc8a87d434df18f05317
-[URI 1491] Linguagem de Blogger
-https://www.urionlinejudge.com.br/repository/UOJ_1491.html
-5430fc8a87d434df18f05318
-[URI 1489] Engenharia de Software
-https://www.urionlinejudge.com.br/repository/UOJ_1489.html
-5430fc8a87d434df18f05319
-[URI 1479] Ajude seu General
-https://www.urionlinejudge.com.br/repository/UOJ_1479.html
-5430fc8a87d434df18f0531a
-[URI 1482] Noite no Museu
-https://www.urionlinejudge.com.br/repository/UOJ_1482.html
-5430fc8a87d434df18f0531b
-[URI 1494] Onze
-https://www.urionlinejudge.com.br/repository/UOJ_1494.html
-5430fc8b87d434df18f0531c
-[URI 1496] Suba os "Ultras"
-https://www.urionlinejudge.com.br/repository/UOJ_1496.html
-5430fc8b87d434df18f0531d
-[URI 1483] Jogo do Bicho
-https://www.urionlinejudge.com.br/repository/UOJ_1483.html
-5430fc8b87d434df18f0531e
-[URI 1485] Roleta Turca
-https://www.urionlinejudge.com.br/repository/UOJ_1485.html
-5430fc8c87d434df18f0531f
-[URI 1487] Six Flags
-https://www.urionlinejudge.com.br/repository/UOJ_1487.html
-5430fc8c87d434df18f05320
-[URI 1499] Junte Dois Reinos
-https://www.urionlinejudge.com.br/repository/UOJ_1499.html
-5430fc8d87d434df18f05321
-[URI 1501] Quantos Zeros e Quantos Dígitos?
-https://www.urionlinejudge.com.br/repository/UOJ_1501.html
-5430fc8d87d434df18f05322
-[URI 1488] Números Mágicos?
-https://www.urionlinejudge.com.br/repository/UOJ_1488.html
-5430fc8d87d434df18f05323
-[URI 1490] Torres que Atacam
-https://www.urionlinejudge.com.br/repository/UOJ_1490.html
-5430fc8d87d434df18f05324
-[URI 1492] Contando Uns
-https://www.urionlinejudge.com.br/repository/UOJ_1492.html
-5430fc8d87d434df18f05325
-[URI 1507] Subsequências
-https://www.urionlinejudge.com.br/repository/UOJ_1507.html
-5430fc8e87d434df18f05326
-[URI 1504] Curo Railroad
-https://www.urionlinejudge.com.br/repository/UOJ_1504.html
-5430fc8e87d434df18f05327
-[URI 1493] Abastecimento de Água Disjunto
-https://www.urionlinejudge.com.br/repository/UOJ_1493.html
-5430fc8e87d434df18f05328
-[URI 1495] Futebol
-https://www.urionlinejudge.com.br/repository/UOJ_1495.html
-5430fc8e87d434df18f05329
-[URI 1497] Esconde-Esconde
-https://www.urionlinejudge.com.br/repository/UOJ_1497.html
-5430fc8e87d434df18f0532a
-[URI 1505] Curo Factories
-https://www.urionlinejudge.com.br/repository/UOJ_1505.html
-5430fc8f87d434df18f0532b
-[URI 1512] Azulejos
-https://www.urionlinejudge.com.br/repository/UOJ_1512.html
-5430fc8f87d434df18f0532c
-[URI 1498] Inversão de Huffman
-https://www.urionlinejudge.com.br/repository/UOJ_1498.html
-5430fc8f87d434df18f0532d
-[URI 1500] Consultas Horríveis
-https://www.urionlinejudge.com.br/repository/UOJ_1500.html
-5430fc8f87d434df18f0532e
-[URI 1502] Travessia
-https://www.urionlinejudge.com.br/repository/UOJ_1502.html
-5430fc9087d434df18f0532f
-[URI 1517] Maçãs
-https://www.urionlinejudge.com.br/repository/UOJ_1517.html
-5430fc9087d434df18f05330
-[URI 1510] O Passeio Turístico
-https://www.urionlinejudge.com.br/repository/UOJ_1510.html
-5430fc9087d434df18f05331
-[URI 1503] Maior Palíndromo Comum Você Deve Encontrar
-https://www.urionlinejudge.com.br/repository/UOJ_1503.html
-5430fc9187d434df18f05332
-[URI 1506] Rabito e Bones
-https://www.urionlinejudge.com.br/repository/UOJ_1506.html
-5430fc9187d434df18f05333
-[URI 1522] Jogo das Pilhas
-https://www.urionlinejudge.com.br/repository/UOJ_1522.html
-5430fc9287d434df18f05334
-[URI 1515] Hello Galaxy
-https://www.urionlinejudge.com.br/repository/UOJ_1515.html
-5430fc9287d434df18f05335
-[URI 1508] Raio Laser
-https://www.urionlinejudge.com.br/repository/UOJ_1508.html
-5430fc9287d434df18f05336
-[URI 1509] Contando Ambiguidades
-https://www.urionlinejudge.com.br/repository/UOJ_1509.html
-5430fc9287d434df18f05337
-[URI 1511] Tabuleiro GCD
-https://www.urionlinejudge.com.br/repository/UOJ_1511.html
-5430fc9387d434df18f05338
-[URI 1527] Guildas
-https://www.urionlinejudge.com.br/repository/UOJ_1527.html
-5430fc9387d434df18f05339
-[URI 1513] Cavalo
-https://www.urionlinejudge.com.br/repository/UOJ_1513.html
-5430fc9387d434df18f0533a
-[URI 1520] Parafusos e Porcas
-https://www.urionlinejudge.com.br/repository/UOJ_1520.html
-5430fc9387d434df18f0533b
-[URI 1514] Competição
-https://www.urionlinejudge.com.br/repository/UOJ_1514.html
-5430fc9487d434df18f0533c
-[URI 1516] Imagem
-https://www.urionlinejudge.com.br/repository/UOJ_1516.html
-5430fc9487d434df18f0533d
-[URI 1529] Max, o Louco
-https://www.urionlinejudge.com.br/repository/UOJ_1529.html
-5430fc9487d434df18f0533e
-[URI 1518] Tartarugas
-https://www.urionlinejudge.com.br/repository/UOJ_1518.html
-5430fc9587d434df18f0533f
-[URI 1525] Gruntz
-https://www.urionlinejudge.com.br/repository/UOJ_1525.html
-5430fc9587d434df18f05340
-[URI 1534] Matriz 123
-https://www.urionlinejudge.com.br/repository/UOJ_1534.html
-5430fc9687d434df18f05341
-[URI 1519] Abreviações
-https://www.urionlinejudge.com.br/repository/UOJ_1519.html
-5430fc9687d434df18f05342
-[URI 1521] O Culpado
-https://www.urionlinejudge.com.br/repository/UOJ_1521.html
-5430fc9687d434df18f05343
-[URI 1523] Estacionamento Linear
-https://www.urionlinejudge.com.br/repository/UOJ_1523.html
-5430fc9687d434df18f05344
-[URI 1532] Arremesso de Bolas
-https://www.urionlinejudge.com.br/repository/UOJ_1532.html
-5430fc9687d434df18f05345
-[URI 1539] Empresa de Telecom
-https://www.urionlinejudge.com.br/repository/UOJ_1539.html
-5430fc9787d434df18f05346
-[URI 1526] Transportando Lanches
-https://www.urionlinejudge.com.br/repository/UOJ_1526.html
-5430fc9787d434df18f05347
-[URI 1524] Fila do Bandejão
-https://www.urionlinejudge.com.br/repository/UOJ_1524.html
-5430fc9887d434df18f05348
-[URI 1528] Cordas Emaranhadas
-https://www.urionlinejudge.com.br/repository/UOJ_1528.html
-5430fc9887d434df18f05349
-[URI 1537] Fila do Banco
-https://www.urionlinejudge.com.br/repository/UOJ_1537.html
-5430fc9887d434df18f0534a
-[URI 1533] Detetive Watson
-https://www.urionlinejudge.com.br/repository/UOJ_1533.html
-5430fc9987d434df18f0534b
-[URI 1544] O Último Dígito Não-Zero
-https://www.urionlinejudge.com.br/repository/UOJ_1544.html
-5430fc9987d434df18f0534c
-[URI 1530] Quantas Substrings?
-https://www.urionlinejudge.com.br/repository/UOJ_1530.html
-5430fc9987d434df18f0534d
-[URI 1531] Fibonacci de Novo!
-https://www.urionlinejudge.com.br/repository/UOJ_1531.html
-5430fc9987d434df18f0534e
-[URI 1542] Lendo Livros
-https://www.urionlinejudge.com.br/repository/UOJ_1542.html
-5430fc9a87d434df18f0534f
-[URI 1538] Sequência Alienígena
-https://www.urionlinejudge.com.br/repository/UOJ_1538.html
-5430fc9a87d434df18f05350
-[URI 1549] Dividindo a Coca
-https://www.urionlinejudge.com.br/repository/UOJ_1549.html
-5430fc9a87d434df18f05351
-[URI 1535] Números Casal-Solteirão-Solteirona
-https://www.urionlinejudge.com.br/repository/UOJ_1535.html
-5430fc9a87d434df18f05352
-[URI 1536] Libertadores
-https://www.urionlinejudge.com.br/repository/UOJ_1536.html
-5430fc9b87d434df18f05353
-[URI 1547] Adivinha
-https://www.urionlinejudge.com.br/repository/UOJ_1547.html
-5430fc9b87d434df18f05354
-[URI 1556] Removendo Letras
-https://www.urionlinejudge.com.br/repository/UOJ_1556.html
-5430fc9b87d434df18f05355
-[URI 1540] Planejando a Energia
-https://www.urionlinejudge.com.br/repository/UOJ_1540.html
-5430fc9b87d434df18f05356
-[URI 1543] Quadro Premiado
-https://www.urionlinejudge.com.br/repository/UOJ_1543.html
-5430fc9b87d434df18f05357
-[URI 1541] Construindo Casas
-https://www.urionlinejudge.com.br/repository/UOJ_1541.html
-5430fc9c87d434df18f05358
-[URI 1552] Resgate em Queda Livre
-https://www.urionlinejudge.com.br/repository/UOJ_1552.html
-5430fc9c87d434df18f05359
-[URI 1561] Relógio Binário
-https://www.urionlinejudge.com.br/repository/UOJ_1561.html
-5430fc9c87d434df18f0535a
-[URI 1548] Fila do Recreio
-https://www.urionlinejudge.com.br/repository/UOJ_1548.html
-5430fc9c87d434df18f0535b
-[URI 1545] Cartões II
-https://www.urionlinejudge.com.br/repository/UOJ_1545.html
-5430fc9c87d434df18f0535c
-[URI 1554] Bilhar N+1
-https://www.urionlinejudge.com.br/repository/UOJ_1554.html
-5430fc9d87d434df18f0535d
-[URI 1546] Feedback
-https://www.urionlinejudge.com.br/repository/UOJ_1546.html
-5430fc9d87d434df18f0535e
-[URI 1566] Altura
-https://www.urionlinejudge.com.br/repository/UOJ_1566.html
-5430fc9e87d434df18f0535f
-[URI 1555] Funções
-https://www.urionlinejudge.com.br/repository/UOJ_1555.html
-5430fc9e87d434df18f05360
-[URI 1550] Inversão
-https://www.urionlinejudge.com.br/repository/UOJ_1550.html
-5430fc9e87d434df18f05361
-[URI 1551] Frase Completa
-https://www.urionlinejudge.com.br/repository/UOJ_1551.html
-5430fc9f87d434df18f05362
-[URI 1571] Um Quadrado & Triângulos Equiláteros
-https://www.urionlinejudge.com.br/repository/UOJ_1571.html
-5430fc9f87d434df18f05363
-[URI 1559] 2048
-https://www.urionlinejudge.com.br/repository/UOJ_1559.html
-5430fc9f87d434df18f05364
-[URI 1557] Matriz Quadrada III
-https://www.urionlinejudge.com.br/repository/UOJ_1557.html
-5430fca087d434df18f05365
-[URI 1560] Energia dos Triângulos
-https://www.urionlinejudge.com.br/repository/UOJ_1560.html
-5430fca087d434df18f05366
-[URI 1553] Perguntas mais Frequentes
-https://www.urionlinejudge.com.br/repository/UOJ_1553.html
-5430fca087d434df18f05367
-[URI 1564] Vai Ter Copa?
-https://www.urionlinejudge.com.br/repository/UOJ_1564.html
-5430fca087d434df18f05368
-[URI 1576] O Problema da Linha do Horizonte
-https://www.urionlinejudge.com.br/repository/UOJ_1576.html
-5430fca087d434df18f05369
-[URI 1565] Ligue os Pontos
-https://www.urionlinejudge.com.br/repository/UOJ_1565.html
-5430fca187d434df18f0536a
-[URI 1562] Escolhendo as Duplas
-https://www.urionlinejudge.com.br/repository/UOJ_1562.html
-5430fca187d434df18f0536b
-[URI 1558] Soma de Dois Quadrados
-https://www.urionlinejudge.com.br/repository/UOJ_1558.html
-5430fca187d434df18f0536c
-[URI 1569] Sobe e Desce
-https://www.urionlinejudge.com.br/repository/UOJ_1569.html
-5430fca187d434df18f0536d
-[URI 1578] Matriz de Quadrados
-https://www.urionlinejudge.com.br/repository/UOJ_1578.html
-5430fca287d434df18f0536e
-[URI 1570] Um Dia na Terra da Matemática
-https://www.urionlinejudge.com.br/repository/UOJ_1570.html
-5430fca287d434df18f0536f
-[URI 1567] (2/3/4)-D Sqr/Rects/Cubes/Boxes?
-https://www.urionlinejudge.com.br/repository/UOJ_1567.html
-5430fca287d434df18f05370
-[URI 1563] O Grande Problema
-https://www.urionlinejudge.com.br/repository/UOJ_1563.html
-5430fca387d434df18f05371
-[URI 1574] Instruções do Robô
-https://www.urionlinejudge.com.br/repository/UOJ_1574.html
-5430fca387d434df18f05372
-[URI 1583] Contaminação
-https://www.urionlinejudge.com.br/repository/UOJ_1583.html
-5430fca387d434df18f05373
-[URI 1575] Perseguindo Don Giovanni
-https://www.urionlinejudge.com.br/repository/UOJ_1575.html
-5430fca387d434df18f05374
-[URI 1572] O Torneio Surreal
-https://www.urionlinejudge.com.br/repository/UOJ_1572.html
-5430fca387d434df18f05375
-[URI 1568] {soma+=i++} até N
-https://www.urionlinejudge.com.br/repository/UOJ_1568.html
-5430fca387d434df18f05376
-[URI 1581] Conversa Internacional
-https://www.urionlinejudge.com.br/repository/UOJ_1581.html
-5430fca387d434df18f05377
-[URI 1588] Ajude a Federação
-https://www.urionlinejudge.com.br/repository/UOJ_1588.html
-5430fca387d434df18f05378
-[URI 1577] Polígonos Regulares Construtíveis
-https://www.urionlinejudge.com.br/repository/UOJ_1577.html
-5430fca587d434df18f05379
-[URI 1579] Transporte de Painéis Solares
-https://www.urionlinejudge.com.br/repository/UOJ_1579.html
-5430fca587d434df18f0537a
-[URI 1586] Cabo de Guerra
-https://www.urionlinejudge.com.br/repository/UOJ_1586.html
-5430fca587d434df18f0537b
-[URI 1573] Fábrica de Chocolate
-https://www.urionlinejudge.com.br/repository/UOJ_1573.html
-5430fca587d434df18f0537c
-[URI 1593] Função Binária
-https://www.urionlinejudge.com.br/repository/UOJ_1593.html
-5430fca587d434df18f0537d
-[URI 1591] Dia da Vovó
-https://www.urionlinejudge.com.br/repository/UOJ_1591.html
-5430fca687d434df18f0537e
-[URI 1584] Espertofone
-https://www.urionlinejudge.com.br/repository/UOJ_1584.html
-5430fca687d434df18f0537f
-[URI 1582] O Teorema de Pitágoras
-https://www.urionlinejudge.com.br/repository/UOJ_1582.html
-5430fca687d434df18f05380
-[URI 1580] Quid Est Veritas? Est Vir Qui Adest!
-https://www.urionlinejudge.com.br/repository/UOJ_1580.html
-5430fca687d434df18f05381
-[URI 1598] O Verdadeiro Valor Dos Tapetes
-https://www.urionlinejudge.com.br/repository/UOJ_1598.html
-5430fca787d434df18f05382
-[URI 1596] Torneio de Yusuf II
-https://www.urionlinejudge.com.br/repository/UOJ_1596.html
-5430fca787d434df18f05383
-[URI 1589] Bob Conduite
-https://www.urionlinejudge.com.br/repository/UOJ_1589.html
-5430fca787d434df18f05384
-[URI 1605] Montando Sua Própria Cáfila
-https://www.urionlinejudge.com.br/repository/UOJ_1605.html
-5430fca787d434df18f05385
-[URI 1587] BIT Park
-https://www.urionlinejudge.com.br/repository/UOJ_1587.html
-5430fca787d434df18f05386
-[URI 1585] Fazendo Pandorgas
-https://www.urionlinejudge.com.br/repository/UOJ_1585.html
-5430fca787d434df18f05387
-[URI 1594] Guloso
-https://www.urionlinejudge.com.br/repository/UOJ_1594.html
-5430fca887d434df18f05388
-[URI 1603] Canais de Qanat
-https://www.urionlinejudge.com.br/repository/UOJ_1603.html
-5430fca887d434df18f05389
-[URI 1592] Elias e Golias
-https://www.urionlinejudge.com.br/repository/UOJ_1592.html
-5430fca887d434df18f0538a
-[URI 1610] Dudo Faz Serviço
-https://www.urionlinejudge.com.br/repository/UOJ_1610.html
-5430fcaa87d434df18f0538b
-[URI 1590] Cuarenta e Dois
-https://www.urionlinejudge.com.br/repository/UOJ_1590.html
-5430fcab87d434df18f0538c
-[URI 1597] Desmascarando o Empregado do Sultão
-https://www.urionlinejudge.com.br/repository/UOJ_1597.html
-5430fcac87d434df18f0538d
-[URI 1599] Picos do Átlas
-https://www.urionlinejudge.com.br/repository/UOJ_1599.html
-5430fcac87d434df18f0538e
-[URI 1608] Bolos da Maria
-https://www.urionlinejudge.com.br/repository/UOJ_1608.html
-5430fcac87d434df18f0538f
-[URI 1615] Insatisfação nas Eleições
-https://www.urionlinejudge.com.br/repository/UOJ_1615.html
-5430fcac87d434df18f05390
-[URI 1595] Humm.. Andar ou Correr.. Eis a Questão
-https://www.urionlinejudge.com.br/repository/UOJ_1595.html
-5430fcad87d434df18f05391
-[URI 1601] Partição do Rebanho
-https://www.urionlinejudge.com.br/repository/UOJ_1601.html
-5430fcae87d434df18f05392
-[URI 1604] Pair-voting no Conselho de Gueliz
-https://www.urionlinejudge.com.br/repository/UOJ_1604.html
-5430fcae87d434df18f05393
-[URI 1613] Goemon em Apuros
-https://www.urionlinejudge.com.br/repository/UOJ_1613.html
-5430fcae87d434df18f05394
-[URI 1620] Triangulação de Delaunay
-https://www.urionlinejudge.com.br/repository/UOJ_1620.html
-5430fcae87d434df18f05395
-[URI 1600] O Gato do Zelador do Armazém
-https://www.urionlinejudge.com.br/repository/UOJ_1600.html
-5430fcae87d434df18f05396
-[URI 1606] As Dicas de Ali Babá
-https://www.urionlinejudge.com.br/repository/UOJ_1606.html
-5430fcaf87d434df18f05397
-[URI 1628] ChessGuess
-https://www.urionlinejudge.com.br/repository/UOJ_1628.html
-5430fcaf87d434df18f05398
-[URI 1618] Colisão
-https://www.urionlinejudge.com.br/repository/UOJ_1618.html
-5430fcaf87d434df18f05399
-[URI 1609] Contando Carneirinhos
-https://www.urionlinejudge.com.br/repository/UOJ_1609.html
-5430fcaf87d434df18f0539a
-[URI 1602] Hiperprimos
-https://www.urionlinejudge.com.br/repository/UOJ_1602.html
-5430fcaf87d434df18f0539b
-[URI 1614] Helpeie o Turista
-https://www.urionlinejudge.com.br/repository/UOJ_1614.html
-5430fcb087d434df18f0539c
-[URI 1633] SBC
-https://www.urionlinejudge.com.br/repository/UOJ_1633.html
-5430fcb087d434df18f0539d
-[URI 1623] Linguagem
-https://www.urionlinejudge.com.br/repository/UOJ_1623.html
-5430fcb187d434df18f0539e
-[URI 1611] Elevador Lotado
-https://www.urionlinejudge.com.br/repository/UOJ_1611.html
-5430fcb187d434df18f0539f
-[URI 1607] Avance as Letras
-https://www.urionlinejudge.com.br/repository/UOJ_1607.html
-5430fcb187d434df18f053a0
-[URI 1619] Diferença entre Datas
-https://www.urionlinejudge.com.br/repository/UOJ_1619.html
-5430fcb187d434df18f053a1
-[URI 1612] Formiguinha
-https://www.urionlinejudge.com.br/repository/UOJ_1612.html
-5430fcb187d434df18f053a2
-[URI 1626] Maratona All FACE
-https://www.urionlinejudge.com.br/repository/UOJ_1626.html
-5430fcb187d434df18f053a3
-[URI 1616] Baile de Formatura
-https://www.urionlinejudge.com.br/repository/UOJ_1616.html
-5430fcb187d434df18f053a4
-[URI 1624] Promoção
-https://www.urionlinejudge.com.br/repository/UOJ_1624.html
-5430fcb287d434df18f053a5
-[URI 1617] Caminho Seguro
-https://www.urionlinejudge.com.br/repository/UOJ_1617.html
-5430fcb287d434df18f053a6
-[URI 1621] Labirinto
-https://www.urionlinejudge.com.br/repository/UOJ_1621.html
-5430fcb287d434df18f053a7
-[URI 1631] O Fantástico Bolo de Bobby
-https://www.urionlinejudge.com.br/repository/UOJ_1631.html
-5430fcb387d434df18f053a8
-[URI 1627] Último Dano
-https://www.urionlinejudge.com.br/repository/UOJ_1627.html
-5430fcb387d434df18f053a9
-[URI 1622] Lâmpadas
-https://www.urionlinejudge.com.br/repository/UOJ_1622.html
-5430fcb387d434df18f053aa
-[URI 1629] DescompactaFACE
-https://www.urionlinejudge.com.br/repository/UOJ_1629.html
-5430fcb487d434df18f053ab
-[URI 1632] Variações
-https://www.urionlinejudge.com.br/repository/UOJ_1632.html
-5430fcb587d434df18f053ac
-[URI 1625] Robocopia
-https://www.urionlinejudge.com.br/repository/UOJ_1625.html
-5430fcb587d434df18f053ad
-[URI 1630] Estacas
-https://www.urionlinejudge.com.br/repository/UOJ_1630.html
-5430fcb687d434df18f053ae
-[URI 1634] Outra Loteria
-https://www.urionlinejudge.com.br/repository/UOJ_1634.html
-54ffc24e445ce7db916d990e
-[URI 1635] Resultado das Eleições
-https://www.urionlinejudge.com.br/repository/UOJ_1635.html
-54ffc24e445ce7db916d990f
-[URI 1638] Tamanho da Porção de Comida
-https://www.urionlinejudge.com.br/repository/UOJ_1638.html
-54ffc24f445ce7db916d9910
-[URI 1639] Gerando Números Aleatórios
-https://www.urionlinejudge.com.br/repository/UOJ_1639.html
-54ffc24f445ce7db916d9911
-[URI 1636] Permutações Antimonotônicas Cíclicas
-https://www.urionlinejudge.com.br/repository/UOJ_1636.html
-54ffc24f445ce7db916d9912
-[URI 1637] Codificação Gamma de Elias
-https://www.urionlinejudge.com.br/repository/UOJ_1637.html
-54ffc24f445ce7db916d9913
-[URI 1640] Reservando Hotéis
-https://www.urionlinejudge.com.br/repository/UOJ_1640.html
-54ffc24f445ce7db916d9914
-[URI 1643] Converter Kilometros para Milhas
-https://www.urionlinejudge.com.br/repository/UOJ_1643.html
-54ffc24f445ce7db916d9915
-[URI 1642] Teclado Quebrado
-https://www.urionlinejudge.com.br/repository/UOJ_1642.html
-54ffc24f445ce7db916d9916
-[URI 1644] Decifre o Texto
-https://www.urionlinejudge.com.br/repository/UOJ_1644.html
-54ffc24f445ce7db916d9917
-[URI 1641] Restaurante e Pizzaria do Alfredo
-https://www.urionlinejudge.com.br/repository/UOJ_1641.html
-54ffc24f445ce7db916d9918
-[URI 1645] El Dorado
-https://www.urionlinejudge.com.br/repository/UOJ_1645.html
-54ffc24f445ce7db916d9919
-[URI 1648] Ajude Bob
-https://www.urionlinejudge.com.br/repository/UOJ_1648.html
-54ffc24f445ce7db916d991a
-[URI 1647] Um Jogo com Bolas de Gude
-https://www.urionlinejudge.com.br/repository/UOJ_1647.html
-54ffc24f445ce7db916d991b
-[URI 1649] Ferramenta Irritante de Pintura
-https://www.urionlinejudge.com.br/repository/UOJ_1649.html
-54ffc24f445ce7db916d991c
-[URI 1646] Floresta
-https://www.urionlinejudge.com.br/repository/UOJ_1646.html
-54ffc24f445ce7db916d991d
-[URI 1650] Pintura Preto e Branco
-https://www.urionlinejudge.com.br/repository/UOJ_1650.html
-54ffc24f445ce7db916d991e
-[URI 1653] Expressões
-https://www.urionlinejudge.com.br/repository/UOJ_1653.html
-54ffc24f445ce7db916d991f
-[URI 1652] Deli Deli
-https://www.urionlinejudge.com.br/repository/UOJ_1652.html
-54ffc24f445ce7db916d9920
-[URI 1654] Mercearia
-https://www.urionlinejudge.com.br/repository/UOJ_1654.html
-54ffc24f445ce7db916d9921
-[URI 1651] Cilindro
-https://www.urionlinejudge.com.br/repository/UOJ_1651.html
-54ffc24f445ce7db916d9922
-[URI 1655] 106 Milhas Para Chicago
-https://www.urionlinejudge.com.br/repository/UOJ_1655.html
-54ffc24f445ce7db916d9923
-[URI 1658] Grupos Diedro
-https://www.urionlinejudge.com.br/repository/UOJ_1658.html
-54ffc24f445ce7db916d9924
-[URI 1659] Chamadas Econômicas
-https://www.urionlinejudge.com.br/repository/UOJ_1659.html
-54ffc24f445ce7db916d9925
-[URI 1656] Doces do Dia das Bruxas
-https://www.urionlinejudge.com.br/repository/UOJ_1656.html
-54ffc24f445ce7db916d9926
-[URI 1657] Corretor Automático de Erros de Soletração
-https://www.urionlinejudge.com.br/repository/UOJ_1657.html
-54ffc24f445ce7db916d9927
-[URI 1660] Flavius Josephus Está de Volta
-https://www.urionlinejudge.com.br/repository/UOJ_1660.html
-54ffc24f445ce7db916d9928
-[URI 1663] Permutações Ambíguas
-https://www.urionlinejudge.com.br/repository/UOJ_1663.html
-54ffc251445ce7db916d9929
-[URI 1661] Comércio de Vinhos na Gergóvia
-https://www.urionlinejudge.com.br/repository/UOJ_1661.html
-54ffc252445ce7db916d992a
-[URI 1665] Decorando a Parede
-https://www.urionlinejudge.com.br/repository/UOJ_1665.html
-54ffc252445ce7db916d992b
-[URI 1662] Quadrados Homogêneos
-https://www.urionlinejudge.com.br/repository/UOJ_1662.html
-54ffc252445ce7db916d992c
-[URI 1664] Bullshit Bingo
-https://www.urionlinejudge.com.br/repository/UOJ_1664.html
-54ffc252445ce7db916d992d
-[URI 1668] Ajude o Autor do Problema
-https://www.urionlinejudge.com.br/repository/UOJ_1668.html
-54ffc252445ce7db916d992e
-[URI 1666] Qualquer Tolo Consegue
-https://www.urionlinejudge.com.br/repository/UOJ_1666.html
-54ffc252445ce7db916d992f
-[URI 1667] HTML
-https://www.urionlinejudge.com.br/repository/UOJ_1667.html
-54ffc252445ce7db916d9930
-[URI 1669] Todos os Discos Considerados
-https://www.urionlinejudge.com.br/repository/UOJ_1669.html
-54ffc252445ce7db916d9931
-[URI 1673] Codificação Run-length
-https://www.urionlinejudge.com.br/repository/UOJ_1673.html
-54ffc252445ce7db916d9932
-[URI 1670] Lógica Booleana
-https://www.urionlinejudge.com.br/repository/UOJ_1670.html
-54ffc252445ce7db916d9933
-[URI 1671] Código
-https://www.urionlinejudge.com.br/repository/UOJ_1671.html
-54ffc252445ce7db916d9934
-[URI 1672] Em Perigo
-https://www.urionlinejudge.com.br/repository/UOJ_1672.html
-54ffc252445ce7db916d9935
-[URI 1678] Gerenciamento de Partição Fixa em Competição
-https://www.urionlinejudge.com.br/repository/UOJ_1678.html
-54ffc252445ce7db916d9936
-[URI 1675] Construção de Procura Binária de Heap
-https://www.urionlinejudge.com.br/repository/UOJ_1675.html
-54ffc252445ce7db916d9937
-[URI 1674] Fractran
-https://www.urionlinejudge.com.br/repository/UOJ_1674.html
-54ffc252445ce7db916d9938
-[URI 1676] Precisa-se de Ajuda
-https://www.urionlinejudge.com.br/repository/UOJ_1676.html
-54ffc252445ce7db916d9939
-[URI 1677] A Base de um Gráfico
-https://www.urionlinejudge.com.br/repository/UOJ_1677.html
-54ffc252445ce7db916d993a
-[URI 1683] Maior Retângulo em um Histograma
-https://www.urionlinejudge.com.br/repository/UOJ_1683.html
-54ffc252445ce7db916d993b
-[URI 1680] Borda
-https://www.urionlinejudge.com.br/repository/UOJ_1680.html
-54ffc252445ce7db916d993c
-[URI 1681] Dobra
-https://www.urionlinejudge.com.br/repository/UOJ_1681.html
-54ffc252445ce7db916d993d
-[URI 1679] Bebida, com Gelo
-https://www.urionlinejudge.com.br/repository/UOJ_1679.html
-54ffc252445ce7db916d993e
-[URI 1682] Código Genético
-https://www.urionlinejudge.com.br/repository/UOJ_1682.html
-54ffc252445ce7db916d993f
-[URI 1688] Nim Intergalático
-https://www.urionlinejudge.com.br/repository/UOJ_1688.html
-54ffc252445ce7db916d9940
-[URI 1685] Praça de Daniel
-https://www.urionlinejudge.com.br/repository/UOJ_1685.html
-54ffc252445ce7db916d9941
-[URI 1684] Maratona Doce
-https://www.urionlinejudge.com.br/repository/UOJ_1684.html
-54ffc253445ce7db916d9942
-[URI 1686] Sequência de Palíndromos
-https://www.urionlinejudge.com.br/repository/UOJ_1686.html
-54ffc253445ce7db916d9943
-[URI 1687] Destrave o Celular
-https://www.urionlinejudge.com.br/repository/UOJ_1687.html
-54ffc253445ce7db916d9944
-[URI 1690] Soma de Sobconjuntos
-https://www.urionlinejudge.com.br/repository/UOJ_1690.html
-54ffc253445ce7db916d9945
-[URI 1689] Radares
-https://www.urionlinejudge.com.br/repository/UOJ_1689.html
-54ffc253445ce7db916d9946
-[URI 1691] Super Circunferência
-https://www.urionlinejudge.com.br/repository/UOJ_1691.html
-54ffc253445ce7db916d9947
-[URI 1694] Loteria
-https://www.urionlinejudge.com.br/repository/UOJ_1694.html
-54ffc253445ce7db916d9948
-[URI 1692] Curo Ataque
-https://www.urionlinejudge.com.br/repository/UOJ_1692.html
-54ffc253445ce7db916d9949
-[URI 1695] Ordenando Árvores
-https://www.urionlinejudge.com.br/repository/UOJ_1695.html
-54ffc253445ce7db916d994a
-[URI 1693] Apenas Outro Problema de Física
-https://www.urionlinejudge.com.br/repository/UOJ_1693.html
-54ffc253445ce7db916d994b
-[URI 1700] Antenas
-https://www.urionlinejudge.com.br/repository/UOJ_1700.html
-54ffc254445ce7db916d994c
-[URI 1696] Brincando Com Operadores
-https://www.urionlinejudge.com.br/repository/UOJ_1696.html
-54ffc254445ce7db916d994d
-[URI 1699] Jogo Entediante
-https://www.urionlinejudge.com.br/repository/UOJ_1699.html
-54ffc254445ce7db916d994e
-[URI 1697] Jaida e o Jogo Multiplicativo
-https://www.urionlinejudge.com.br/repository/UOJ_1697.html
-54ffc254445ce7db916d994f
-[URI 1698] Metrô Brasileiro
-https://www.urionlinejudge.com.br/repository/UOJ_1698.html
-54ffc254445ce7db916d9950
-[URI 1705] Apaixonado por Binário
-https://www.urionlinejudge.com.br/repository/UOJ_1705.html
-54ffc254445ce7db916d9951
-[URI 1701] Sequência de Fibo
-https://www.urionlinejudge.com.br/repository/UOJ_1701.html
-54ffc254445ce7db916d9952
-[URI 1704] Arrumando as Tarefas
-https://www.urionlinejudge.com.br/repository/UOJ_1704.html
-54ffc254445ce7db916d9953
-[URI 1702] Colorindo Grafos
-https://www.urionlinejudge.com.br/repository/UOJ_1702.html
-54ffc254445ce7db916d9954
-[URI 1703] Pulando Pedras
-https://www.urionlinejudge.com.br/repository/UOJ_1703.html
-54ffc254445ce7db916d9955
-[URI 1710] Confederação
-https://www.urionlinejudge.com.br/repository/UOJ_1710.html
-54ffc254445ce7db916d9956
-[URI 1707] Jogo com Números
-https://www.urionlinejudge.com.br/repository/UOJ_1707.html
-54ffc254445ce7db916d9957
-[URI 1709] Baralho Embaralhado
-https://www.urionlinejudge.com.br/repository/UOJ_1709.html
-54ffc254445ce7db916d9958
-[URI 1706] Pontes Mágicas
-https://www.urionlinejudge.com.br/repository/UOJ_1706.html
-54ffc254445ce7db916d9959
-[URI 1708] Volta
-https://www.urionlinejudge.com.br/repository/UOJ_1708.html
-54ffc254445ce7db916d995a
-[URI 1714] Letras
-https://www.urionlinejudge.com.br/repository/UOJ_1714.html
-54ffc254445ce7db916d995b
-[URI 1712] Ecologia
-https://www.urionlinejudge.com.br/repository/UOJ_1712.html
-54ffc254445ce7db916d995c
-[URI 1715] Handebol
-https://www.urionlinejudge.com.br/repository/UOJ_1715.html
-54ffc254445ce7db916d995d
-[URI 1711] Dona Minhoca
-https://www.urionlinejudge.com.br/repository/UOJ_1711.html
-54ffc254445ce7db916d995e
-[URI 1713] Teletransporte
-https://www.urionlinejudge.com.br/repository/UOJ_1713.html
-54ffc254445ce7db916d995f
-[URI 1717] Corte
-https://www.urionlinejudge.com.br/repository/UOJ_1717.html
-54ffc254445ce7db916d9960
-[URI 1719] Computadores Simples
-https://www.urionlinejudge.com.br/repository/UOJ_1719.html
-54ffc254445ce7db916d9961
-[URI 1720] Sonho de Mondriaan
-https://www.urionlinejudge.com.br/repository/UOJ_1720.html
-54ffc254445ce7db916d9962
-[URI 1716] RSA
-https://www.urionlinejudge.com.br/repository/UOJ_1716.html
-54ffc254445ce7db916d9963
-[URI 1718] Pizza do Vô Pepe
-https://www.urionlinejudge.com.br/repository/UOJ_1718.html
-54ffc254445ce7db916d9964
-[URI 1721] Equidistância
-https://www.urionlinejudge.com.br/repository/UOJ_1721.html
-54ffc256445ce7db916d9965
-[URI 1724] Caminhada em um Grafo
-https://www.urionlinejudge.com.br/repository/UOJ_1724.html
-54ffc256445ce7db916d9966
-[URI 1723] Árvores Filogenéticas Herdadas
-https://www.urionlinejudge.com.br/repository/UOJ_1723.html
-54ffc256445ce7db916d9967
-[URI 1722] Quantos Fibs?
-https://www.urionlinejudge.com.br/repository/UOJ_1722.html
-54ffc256445ce7db916d9968
-[URI 1725] Quadtree II
-https://www.urionlinejudge.com.br/repository/UOJ_1725.html
-54ffc257445ce7db916d9969
-[URI 1726] Amigos
-https://www.urionlinejudge.com.br/repository/UOJ_1726.html
-54ffc257445ce7db916d996a
-[URI 1729] Média Não é Rápida o Suficiente!
-https://www.urionlinejudge.com.br/repository/UOJ_1729.html
-54ffc257445ce7db916d996b
-[URI 1728] Difícil de Acreditar, Mas é Verdade!
-https://www.urionlinejudge.com.br/repository/UOJ_1728.html
-54ffc257445ce7db916d996c
-[URI 1727] Copa Européia 2000
-https://www.urionlinejudge.com.br/repository/UOJ_1727.html
-54ffc257445ce7db916d996d
-[URI 1730] Global Roaming
-https://www.urionlinejudge.com.br/repository/UOJ_1730.html
-54ffc257445ce7db916d996e
-[URI 1731] Frutas Avançadas
-https://www.urionlinejudge.com.br/repository/UOJ_1731.html
-54ffc257445ce7db916d996f
-[URI 1732] Abelha Maja
-https://www.urionlinejudge.com.br/repository/UOJ_1732.html
-54ffc257445ce7db916d9970
-[URI 1734] Limite Encontrado
-https://www.urionlinejudge.com.br/repository/UOJ_1734.html
-54ffc257445ce7db916d9971
-[URI 1735] Codifique a Árvore
-https://www.urionlinejudge.com.br/repository/UOJ_1735.html
-54ffc257445ce7db916d9972
-[URI 1733] Vladimir o Vampiro
-https://www.urionlinejudge.com.br/repository/UOJ_1733.html
-54ffc257445ce7db916d9973
-[URI 1736] Decodifique a Árvore
-https://www.urionlinejudge.com.br/repository/UOJ_1736.html
-54ffc257445ce7db916d9974
-[URI 1737] Etaoin Shrdlu
-https://www.urionlinejudge.com.br/repository/UOJ_1737.html
-54ffc257445ce7db916d9975
-[URI 1739] Sequência de Threebonacci
-https://www.urionlinejudge.com.br/repository/UOJ_1739.html
-54ffc257445ce7db916d9976
-[URI 1738] Rede de Fibra
-https://www.urionlinejudge.com.br/repository/UOJ_1738.html
-54ffc257445ce7db916d9977
-[URI 1740] Está Ordenado?
-https://www.urionlinejudge.com.br/repository/UOJ_1740.html
-54ffc257445ce7db916d9978
-[URI 1741] Notação Reversa de João
-https://www.urionlinejudge.com.br/repository/UOJ_1741.html
-54ffc257445ce7db916d9979
-[URI 1742] Entrando em Confusão
-https://www.urionlinejudge.com.br/repository/UOJ_1742.html
-54ffc258445ce7db916d997a
-[URI 1744] Pedras Pretas e Brancas
-https://www.urionlinejudge.com.br/repository/UOJ_1744.html
-54ffc258445ce7db916d997b
-[URI 1743] Máquina de Verificação Automatizada
-https://www.urionlinejudge.com.br/repository/UOJ_1743.html
-54ffc258445ce7db916d997c
-[URI 1745] Contando Substhreengs
-https://www.urionlinejudge.com.br/repository/UOJ_1745.html
-54ffc258445ce7db916d997d
-[URI 1746] Dividindo os Nomes
-https://www.urionlinejudge.com.br/repository/UOJ_1746.html
-54ffc258445ce7db916d997e
-[URI 1747] Distribuição Igual
-https://www.urionlinejudge.com.br/repository/UOJ_1747.html
-54ffc258445ce7db916d997f
-[URI 1749] Colisão Galática
-https://www.urionlinejudge.com.br/repository/UOJ_1749.html
-54ffc258445ce7db916d9980
-[URI 1750] Ajude o Cupido
-https://www.urionlinejudge.com.br/repository/UOJ_1750.html
-54ffc258445ce7db916d9981
-[URI 1748] Cerque Os Vegetais
-https://www.urionlinejudge.com.br/repository/UOJ_1748.html
-54ffc258445ce7db916d9982
-[URI 1752] Jornada Pelo Reino
-https://www.urionlinejudge.com.br/repository/UOJ_1752.html
-54ffc258445ce7db916d9983
-[URI 1753] Cavaleiros Da Tàvola Redonda
-https://www.urionlinejudge.com.br/repository/UOJ_1753.html
-54ffc258445ce7db916d9984
-[URI 1751] Alpinista Intrépido
-https://www.urionlinejudge.com.br/repository/UOJ_1751.html
-54ffc258445ce7db916d9985
-[URI 1754] A Sala do Tempo
-https://www.urionlinejudge.com.br/repository/UOJ_1754.html
-54ffc258445ce7db916d9986
-[URI 1755] O Troco
-https://www.urionlinejudge.com.br/repository/UOJ_1755.html
-54ffc258445ce7db916d9987
-[URI 1758] Pontos Extras
-https://www.urionlinejudge.com.br/repository/UOJ_1758.html
-54ffc258445ce7db916d9988
-[URI 1757] Viagem Barril
-https://www.urionlinejudge.com.br/repository/UOJ_1757.html
-54ffc258445ce7db916d9989
-[URI 1756] Algoritmo Genético
-https://www.urionlinejudge.com.br/repository/UOJ_1756.html
-54ffc258445ce7db916d998a
-[URI 1760] Floco de Neve de Koch
-https://www.urionlinejudge.com.br/repository/UOJ_1760.html
-54ffc258445ce7db916d998b
-[URI 1759] Ho Ho Ho
-https://www.urionlinejudge.com.br/repository/UOJ_1759.html
-54ffc258445ce7db916d998c
-[URI 1763] Tradutor do Papai Noel
-https://www.urionlinejudge.com.br/repository/UOJ_1763.html
-54ffc259445ce7db916d998d
-[URI 1764] Itinerário do Papai Noel
-https://www.urionlinejudge.com.br/repository/UOJ_1764.html
-54ffc259445ce7db916d998e
-[URI 1761] Decoração Natalina
-https://www.urionlinejudge.com.br/repository/UOJ_1761.html
-54ffc259445ce7db916d998f
-[URI 1762] Trenós do Papai Noel
-https://www.urionlinejudge.com.br/repository/UOJ_1762.html
-54ffc259445ce7db916d9990
-[URI 1765] Trapézios de Natal
-https://www.urionlinejudge.com.br/repository/UOJ_1765.html
-54ffc259445ce7db916d9991
-[URI 1768] Árvore de Natal
-https://www.urionlinejudge.com.br/repository/UOJ_1768.html
-54ffc259445ce7db916d9992
-[URI 1769] CPF 1
-https://www.urionlinejudge.com.br/repository/UOJ_1769.html
-54ffc259445ce7db916d9993
-[URI 1767] Saco do Papai Noel
-https://www.urionlinejudge.com.br/repository/UOJ_1767.html
-54ffc259445ce7db916d9994
-[URI 1766] O Elfo das Trevas
-https://www.urionlinejudge.com.br/repository/UOJ_1766.html
-54ffc259445ce7db916d9995
-[URI 1770] Shuffle
-https://www.urionlinejudge.com.br/repository/UOJ_1770.html
-54ffc259445ce7db916d9996
-[URI 1772] Embaralhamento de Bits
-https://www.urionlinejudge.com.br/repository/UOJ_1772.html
-54ffc259445ce7db916d9997
-[URI 1773] Preso no Castelo
-https://www.urionlinejudge.com.br/repository/UOJ_1773.html
-54ffc259445ce7db916d9998
-[URI 1774] Roteadores
-https://www.urionlinejudge.com.br/repository/UOJ_1774.html
-54ffc259445ce7db916d9999
-[URI 1771] Cartelas de Bingo Aleatórias
-https://www.urionlinejudge.com.br/repository/UOJ_1771.html
-54ffc259445ce7db916d999a
-[URI 1775] André e os Mentos
-https://www.urionlinejudge.com.br/repository/UOJ_1775.html
-54ffc259445ce7db916d999b
-[URI 1778] Defesa ao Grafo
-https://www.urionlinejudge.com.br/repository/UOJ_1778.html
-54ffc259445ce7db916d999c
-[URI 1776] Baile de Formatura
-https://www.urionlinejudge.com.br/repository/UOJ_1776.html
-54ffc259445ce7db916d999d
-[URI 1777] Calçada da Fama
-https://www.urionlinejudge.com.br/repository/UOJ_1777.html
-54ffc259445ce7db916d999e
-[URI 1780] Formação de Robôs
-https://www.urionlinejudge.com.br/repository/UOJ_1780.html
-54ffc259445ce7db916d999f
-[URI 1779] Estimando a Média
-https://www.urionlinejudge.com.br/repository/UOJ_1779.html
-54ffc259445ce7db916d99a0
-[URI 1784] Jacutingas vs Jaburus
-https://www.urionlinejudge.com.br/repository/UOJ_1784.html
-54ffc259445ce7db916d99a1
-[URI 1783] Ih, Ferrou, um Buraco Negro!
-https://www.urionlinejudge.com.br/repository/UOJ_1783.html
-54ffc25a445ce7db916d99a2
-[URI 1785] Kaprekar
-https://www.urionlinejudge.com.br/repository/UOJ_1785.html
-54ffc25a445ce7db916d99a3
-[URI 1781] Guga e a String
-https://www.urionlinejudge.com.br/repository/UOJ_1781.html
-54ffc25a445ce7db916d99a4
-[URI 1782] Honorável Presente
-https://www.urionlinejudge.com.br/repository/UOJ_1782.html
-54ffc25a445ce7db916d99a5
-[URI 1786] CPF 2
-https://www.urionlinejudge.com.br/repository/UOJ_1786.html
-54ffc25a445ce7db916d99a6
 [UVa 12809] Binary Search Tree
 http://uva.onlinejudge.org/external/128/12809.html
 54ffc39ad0095dde91c6bad1
@@ -48202,181 +45844,4 @@
 [LiveArchive 7096] A Rational Sequence
 https://icpcarchive.ecs.baylor.edu/external/70/7096.html
 55c0f91e9b6a001a6e7bf453
-[URI 1787] URI
-https://www.urionlinejudge.com.br/repository/UOJ_1787.html
-55c0f9239b6a001a6e7bf455
-[URI 1794] Lavanderia
-https://www.urionlinejudge.com.br/repository/UOJ_1794.html
-55c0f9239b6a001a6e7bf45a
-[URI 1793] Escada Rolante
-https://www.urionlinejudge.com.br/repository/UOJ_1793.html
-55c0f9239b6a001a6e7bf45f
-[URI 1805] Soma Natural
-https://www.urionlinejudge.com.br/repository/UOJ_1805.html
-55c0f9249b6a001a6e7bf464
-[URI 1809] Agentes Secretos
-https://www.urionlinejudge.com.br/repository/UOJ_1809.html
-55c0f9249b6a001a6e7bf469
-[URI 1814] DNA Storage?
-https://www.urionlinejudge.com.br/repository/UOJ_1814.html
-55c0f9249b6a001a6e7bf46e
-[URI 1819] Estimando a Produção
-https://www.urionlinejudge.com.br/repository/UOJ_1819.html
-55c0f9249b6a001a6e7bf473
-[URI 1824] Sapos de Tsé-Tsé
-https://www.urionlinejudge.com.br/repository/UOJ_1824.html
-55c0f9249b6a001a6e7bf478
-[URI 1832] EBCDIC
-https://www.urionlinejudge.com.br/repository/UOJ_1832.html
-55c0f9249b6a001a6e7bf47d
-[URI 1828] Bazinga!
-https://www.urionlinejudge.com.br/repository/UOJ_1828.html
-55c0f9249b6a001a6e7bf482
-[URI 1840] O Prisioneiro de Azkaban
-https://www.urionlinejudge.com.br/repository/UOJ_1840.html
-55c0f9249b6a001a6e7bf487
-[URI 1845] Efílogo
-https://www.urionlinejudge.com.br/repository/UOJ_1845.html
-55c0f9249b6a001a6e7bf48c
-[URI 1789] A Corrida de Lesmas
-https://www.urionlinejudge.com.br/repository/UOJ_1789.html
-55c0f9239b6a001a6e7bf456
-[URI 1795] Triângulo Trinomial
-https://www.urionlinejudge.com.br/repository/UOJ_1795.html
-55c0f9239b6a001a6e7bf45b
-[URI 1796] Economia Brasileira
-https://www.urionlinejudge.com.br/repository/UOJ_1796.html
-55c0f9239b6a001a6e7bf460
-[URI 1807] Triângulo Trinomial, a Vingança
-https://www.urionlinejudge.com.br/repository/UOJ_1807.html
-55c0f9249b6a001a6e7bf465
-[URI 1812] Um Cluster Para Evitar Enchentes
-https://www.urionlinejudge.com.br/repository/UOJ_1812.html
-55c0f9249b6a001a6e7bf46a
-[URI 1817] Arqueólogos de Tsing Ling
-https://www.urionlinejudge.com.br/repository/UOJ_1817.html
-55c0f9249b6a001a6e7bf46f
-[URI 1818] Centro de Convenções
-https://www.urionlinejudge.com.br/repository/UOJ_1818.html
-55c0f9249b6a001a6e7bf474
-[URI 1821] Miai Chinês
-https://www.urionlinejudge.com.br/repository/UOJ_1821.html
-55c0f9249b6a001a6e7bf479
-[URI 1830] Caixas de Bombons
-https://www.urionlinejudge.com.br/repository/UOJ_1830.html
-55c0f9249b6a001a6e7bf47e
-[URI 1835] Promessa de Campanha
-https://www.urionlinejudge.com.br/repository/UOJ_1835.html
-55c0f9249b6a001a6e7bf483
-[URI 1839] A Câmara Secreta
-https://www.urionlinejudge.com.br/repository/UOJ_1839.html
-55c0f9249b6a001a6e7bf488
-[URI 1838] A Pedra Filosofal
-https://www.urionlinejudge.com.br/repository/UOJ_1838.html
-55c0f9249b6a001a6e7bf48d
-[URI 1790] Detectando Pontes
-https://www.urionlinejudge.com.br/repository/UOJ_1790.html
-55c0f9239b6a001a6e7bf457
-[URI 1788] Brincando com Números
-https://www.urionlinejudge.com.br/repository/UOJ_1788.html
-55c0f9239b6a001a6e7bf459
-[URI 1791] Descobrindo uma Matriz
-https://www.urionlinejudge.com.br/repository/UOJ_1791.html
-55c0f9239b6a001a6e7bf45c
-[URI 1799] O Rato no Labirinto
-https://www.urionlinejudge.com.br/repository/UOJ_1799.html
-55c0f9239b6a001a6e7bf45e
-[URI 1800] Onde Estão Minhas Chaves
-https://www.urionlinejudge.com.br/repository/UOJ_1800.html
-55c0f9239b6a001a6e7bf461
-[URI 1798] Cortando Canos
-https://www.urionlinejudge.com.br/repository/UOJ_1798.html
-55c0f9239b6a001a6e7bf463
-[URI 1804] Precisa-se de Matemáticos em Marte
-https://www.urionlinejudge.com.br/repository/UOJ_1804.html
-55c0f9249b6a001a6e7bf466
-[URI 1803] Matring
-https://www.urionlinejudge.com.br/repository/UOJ_1803.html
-55c0f9249b6a001a6e7bf468
-[URI 1810] Beverly Hills, Century City
-https://www.urionlinejudge.com.br/repository/UOJ_1810.html
-55c0f9249b6a001a6e7bf46b
-[URI 1808] O Retorno do Rei
-https://www.urionlinejudge.com.br/repository/UOJ_1808.html
-55c0f9249b6a001a6e7bf46d
-[URI 1815] Drunk People?
-https://www.urionlinejudge.com.br/repository/UOJ_1815.html
-55c0f9249b6a001a6e7bf470
-[URI 1813] Anacrônico?
-https://www.urionlinejudge.com.br/repository/UOJ_1813.html
-55c0f9249b6a001a6e7bf472
-[URI 1816] Vikings em Praga?
-https://www.urionlinejudge.com.br/repository/UOJ_1816.html
-55c0f9249b6a001a6e7bf475
-[URI 1822] Obras da China
-https://www.urionlinejudge.com.br/repository/UOJ_1822.html
-55c0f9249b6a001a6e7bf477
-[URI 1825] Formigando
-https://www.urionlinejudge.com.br/repository/UOJ_1825.html
-55c0f9249b6a001a6e7bf47a
-[URI 1823] O Penúltimo Imperador
-https://www.urionlinejudge.com.br/repository/UOJ_1823.html
-55c0f9249b6a001a6e7bf47c
-[URI 1829] Jogo do Maior Número
-https://www.urionlinejudge.com.br/repository/UOJ_1829.html
-55c0f9249b6a001a6e7bf47f
-[URI 1834] Vogons!
-https://www.urionlinejudge.com.br/repository/UOJ_1834.html
-55c0f9249b6a001a6e7bf481
-[URI 1831] Dia Difícil de Trabalho
-https://www.urionlinejudge.com.br/repository/UOJ_1831.html
-55c0f9249b6a001a6e7bf484
-[URI 1833] Decoração Natalina
-https://www.urionlinejudge.com.br/repository/UOJ_1833.html
-55c0f9249b6a001a6e7bf486
-[URI 1842] A Ordem da Fênix
-https://www.urionlinejudge.com.br/repository/UOJ_1842.html
-55c0f9249b6a001a6e7bf489
-[URI 1844] As Relíquias da Morte
-https://www.urionlinejudge.com.br/repository/UOJ_1844.html
-55c0f9249b6a001a6e7bf48b
-[URI 1841] O Cálice de Fogo
-https://www.urionlinejudge.com.br/repository/UOJ_1841.html
-55c0f9249b6a001a6e7bf48e
-[URI 1792] Ataque Programado
-https://www.urionlinejudge.com.br/repository/UOJ_1792.html
-55c0f9239b6a001a6e7bf458
-[URI 1797] Ferozes e Curiosos
-https://www.urionlinejudge.com.br/repository/UOJ_1797.html
-55c0f9239b6a001a6e7bf45d
-[URI 1802] Catálogo de Livros
-https://www.urionlinejudge.com.br/repository/UOJ_1802.html
-55c0f9239b6a001a6e7bf462
-[URI 1801] Brincando com Números
-https://www.urionlinejudge.com.br/repository/UOJ_1801.html
-55c0f9249b6a001a6e7bf467
-[URI 1806] Agente 004
-https://www.urionlinejudge.com.br/repository/UOJ_1806.html
-55c0f9249b6a001a6e7bf46c
-[URI 1811] O Óscar Vai Para...
-https://www.urionlinejudge.com.br/repository/UOJ_1811.html
-55c0f9249b6a001a6e7bf471
-[URI 1820] Grupos da Universidade de Sing Pil
-https://www.urionlinejudge.com.br/repository/UOJ_1820.html
-55c0f9249b6a001a6e7bf476
-[URI 1827] Matriz Quadrada IV
-https://www.urionlinejudge.com.br/repository/UOJ_1827.html
-55c0f9249b6a001a6e7bf47b
-[URI 1826] A Linguagem é Infinita?
-https://www.urionlinejudge.com.br/repository/UOJ_1826.html
-55c0f9249b6a001a6e7bf480
-[URI 1837] Prefácio
-https://www.urionlinejudge.com.br/repository/UOJ_1837.html
-55c0f9249b6a001a6e7bf485
-[URI 1836] Pokémon!
-https://www.urionlinejudge.com.br/repository/UOJ_1836.html
-55c0f9249b6a001a6e7bf48a
-[URI 1843] O Enigma do Príncipe
-https://www.urionlinejudge.com.br/repository/UOJ_1843.html
-55c0f9249b6a001a6e7bf48f
 
