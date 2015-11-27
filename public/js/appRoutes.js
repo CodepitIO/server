@@ -42,6 +42,10 @@ angular.module('appRoutes', []).config([
 		}).when('/submission/:id', {
 			templateUrl: 'views/submission.html',
 			controller: 'SubmissionController'
+		}).when('/problems/:id', {
+			templateUrl: function(attr) {
+				return 'problems/' + attr.id + '.html';
+			}
 		}).otherwise({
 			redirectTo: '/'
 		});

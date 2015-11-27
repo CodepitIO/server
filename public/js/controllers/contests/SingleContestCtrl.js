@@ -149,11 +149,14 @@ app.controller('SingleContestController', [
 			"9": "Erro Desconhecido",
 			"10": "Uso de função restrita",
 			"11": "Submissão inválida",
+			"12": "Erro de Submissão",
 			"15": "Rascunho"
 		};
 		$scope.languages = {
+			"c": "C",
 			"cpp": "C++",
-			"java": "Java"
+			"cpp11": "C++11",
+			"java": "Java",
 		};
 
 		$scope.submission = {
@@ -402,7 +405,7 @@ app.controller('SingleContestController', [
 		};
 
 		$scope.getSubmissionClass = function(verdict) {
-			if (verdict == 15) {
+			if (verdict > 10) {
 				return 'draft-submission';
 			}
 			if (!verdict || verdict < 0 || verdict > 10) {
