@@ -16,7 +16,9 @@ npm-debug.log
 /node_modules/*
 /judger/node_modules/*
 
+problems/
 cpp/matchProblems
+cpp/problems.txt
 public/imgs/site/*
 public/libs/*
 public/bower_components/*

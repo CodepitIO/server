@@ -72,6 +72,9 @@
                   </select>
                 </td>
               </tr>
+              <tr ng-if="submission.language=='java'">
+                <td colspan="3"><small>* Para submissões em Java, o nome da classe que contém o método <b>main</b> deve ser <b>Main</b>.</small></td>
+              </tr>
               <tr>
                 <td colspan="3"><button type="button" ng-click="submit()" class="btn btn-default btn-block" ng-class="{'disabled': submittingProblem}" style="margin-top:15px;">Submeter&nbsp;<i class="fa fa-paper-plane-o"></i></button></td>
               </tr>
