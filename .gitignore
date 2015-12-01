@@ -18,7 +18,7 @@ npm-debug.log
 
 problems/
 cpp/matchProblems
-cpp/problems.txt
+cpp/*.txt
 public/imgs/site/*
 public/libs/*
 public/bower_components/*
