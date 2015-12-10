@@ -16,13 +16,15 @@ npm-debug.log
 /node_modules/*
 /judger/node_modules/*
 
-problems/
-cpp/matchProblems
-cpp/*.txt
-public/imgs/site/*
-public/libs/*
-public/bower_components/*
+/problems/*
+/cpp/matchProblems
+/public/imgs/site/*
+/public/libs/*
+/public/problems/*
+/public/bower_components/*
 
+*.DS_STORE
+*.txt
 .tmp
 nohup.out
 .bowerrc
