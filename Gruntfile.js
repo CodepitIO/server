@@ -163,7 +163,7 @@ module.exports = function(grunt) {
 			},
 			fonts: {
 				files: [{
-					cwd: 'public/libs/font-awesome/fonts/',
+					cwd: 'public/bower_components/font-awesome/fonts/',
 					expand: true,
 					src: ['**/*'],
 					dest: 'public/fonts',
