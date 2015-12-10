@@ -32,7 +32,7 @@ app.controller('ProfileController', [
 			handle: 'tomer'
 		}];
 
-		$scope.addHandle = function(){
+		$scope.addHandle = function() {
 			$scope.handles.push({
 				oj: 'codeforces',
 				handle: ''
