@@ -27,6 +27,18 @@ app.controller('ProfileController', [
 		$scope.teams = [];
 		$scope.invited = [];
 
+		$scope.handles = [{
+			oj: 'codeforces',
+			handle: 'tomer'
+		}];
+
+		$scope.addHandle = function(){
+			$scope.handles.push({
+				oj: 'codeforces',
+				handle: ''
+			});
+		};
+
 		var getTeams = function() {
 			team.getFromUser({
 					id: $rootScope.user._id
