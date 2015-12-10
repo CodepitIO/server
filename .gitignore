@@ -16,6 +16,8 @@ npm-debug.log
 /node_modules/*
 /judger/node_modules/*
 
+Prova.pdf
+facebook
 problems/
 cpp/matchProblems
 cpp/*.txt
