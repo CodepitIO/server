@@ -19,7 +19,8 @@ npm-debug.log
 /problems/*
 /cpp/matchProblems
 /public/imgs/site/*
-/public/libs/*
+/public/dist/*
+/public/fonts/*
 /public/problems/*
 /public/bower_components/*
 
