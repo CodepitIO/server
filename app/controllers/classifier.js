@@ -55,9 +55,8 @@ var getSolvedProblems = function(user, res) {
     }
     result = result.result;
     var hasSolved = {};
-    var solved = {
-      general: [],
-    };
+    var general = [];
+    var solved = {};
     for (var i = 0; i < result.length; i++) {
       if (result[i].author.teamId) {
         continue;
@@ -66,8 +65,8 @@ var getSolvedProblems = function(user, res) {
       if (problem) {
         var id = problem.id;
         if (result[i].verdict === 'OK' && !hasSolved[id]) {
-          if (solved.general.length < MAX_GENERAL_SOLVED_LENGTH) {
-            solved.general.push({id: id, level: problem.level});
+          if (general.length < MAX_GENERAL_SOLVED_LENGTH) {
+            general.push({id: id, level: problem.level});
           }
           for (var j = 0; j < result[i].problem.tags.length; j++) {
             var tag = result[i].problem.tags[j];
@@ -87,8 +86,13 @@ var getSolvedProblems = function(user, res) {
         qnt: solved[i].length,
       }
     }
+    general = {
+      level: getTagLevel(general),
+      qnt: general.length,
+    };
     return res.json({
-      tagData: tagData,
+      allTags: tagData,
+      general: general,
       problems: problems,
       hasSolved: hasSolved,
     });
