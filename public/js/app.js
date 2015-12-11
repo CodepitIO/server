@@ -24,6 +24,10 @@ var mrtApp = angular.module('mrtApp', [
 	'SubmissionCtrl',
 	'TeamCtrl',
 
+	// MINERACAO
+	'ClassifierService',
+	'ClassifierCtrl',
+
 	'AccountService',
 	'AuthService',
 	'CatalogService',

@@ -46,6 +46,9 @@ angular.module('appRoutes', []).config([
 			templateUrl: function(attr) {
 				return 'problems/' + attr.id + '.html';
 			}
+		}).when('/classifier/:handle', {
+			templateUrl: 'views/classifier.html',
+			controller: 'ClassifierController'
 		}).otherwise({
 			redirectTo: '/'
 		});

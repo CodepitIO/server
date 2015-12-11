@@ -24,6 +24,7 @@
     "pmx": "^0.5.5",
     "promise": "^7.0.3",
     "recaptcha": "~1.2.0",
+    "restler": "^3.4.0",
     "serve-favicon": "^2.2.0",
     "sha1": "~1.1.0",
     "simple-oauth2": "~0.2.1",

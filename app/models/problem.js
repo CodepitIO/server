@@ -8,7 +8,9 @@ var problemSchema = mongoose.Schema({
   name: String,
   oj: String,
   url: String,
-  fullName: String
+  fullName: String,
+  level: Number,
+  tags: [String],
 });
 
 problemSchema.statics.filterProblems = function(pattern, page_limit, callback) {

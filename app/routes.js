@@ -10,6 +10,7 @@ var ProblemsCtrl = require('./controllers/problems');
 var SubmissionCtrl = require('./controllers/submission');
 var TagCtrl = require('./controllers/tag');
 var CatalogCtrl = require('./controllers/catalog');
+var ClassifierCtrl = require('./controllers/classifier');
 
 var Util = require('./utils/functions');
 
@@ -71,6 +72,9 @@ module.exports = function(app, passport) {
   // catalog
   app.post('/api/catalog/update', isLoggedIn, CatalogCtrl.update);
   app.post('/api/catalog/get', isLoggedIn, CatalogCtrl.get);
+
+  // classifier
+  app.get('/api/classifier/:handle', ClassifierCtrl.get);
 
   // authentication
   app.post('/api/login', isLoggedOff, function(req, res) {
