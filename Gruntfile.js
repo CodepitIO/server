@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'public/dist/app.min.css': ['public/css/*.css']
+					'public/dist/app.min.css': ['public/css/style.css', 'public/css/contest.css']
 				}
 			}
 		},
@@ -167,7 +167,16 @@ module.exports = function(grunt) {
 					expand: true,
 					src: ['**/*'],
 					dest: 'public/fonts',
+				}, {
+					cwd: 'public/bower_components/bootstrap/fonts/',
+					expand: true,
+					src: ['**/*'],
+					dest: 'public/fonts',
 				}, ]
+			},
+			dummy: {
+				src: 'public/css/dummy.css',
+				dest: 'public/dist/dummy.css',
 			}
 		},
 	});
@@ -234,6 +243,7 @@ module.exports = function(grunt) {
 		'uglify:generated',
 		'usemin',
 		'clean:dottemp',
+		'copy:dummy',
 		//'nodemon:dev',
 		'watch:dev'
 	]);

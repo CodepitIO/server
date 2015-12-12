@@ -1,0 +1,46 @@
+<!-- <input-stars list-class="yas" ng-model="aff" max="5" readonly="true"></input-stars> -->
+<div>
+	<span class="label label-very-easy" ng-show="true">Very Easy</span>
+	<span class="label label-success" ng-show="true">Easy</span>
+	<span class="label label-warning" ng-show="true">Medium</span>
+	<span class="label label-danger" ng-show="true">Hard</span>
+	<span class="label label-very-danger" ng-show="true">Very Hard</span>
+</div>
+
+<div class="col-md-4">
+
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Based on what you know most</h3>
+	  </div>
+		<table class="table">
+	    <tr ng-repeat="p in masterTagProblems | limitTo:knowMostEntries">
+	    	<td class="classifier-id" width="10%">{{$index+1}}</td>
+	    	<td class="classifier-name">
+	    		<strong>{{p.name}}</strong><br />
+	    		<span class="classifier-tags">{{p.tags | beautifyTags}}</span>
+	    	</td>
+				<td><span class="label label-very-danger" ng-show="true">Very Hard</span></td>
+	    </tr>
+			<tr><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries = knowMostEntries+5">Load more...</button></td></tr>
+	  </table>
+	</div>
+</div>
+
+<div class="col-md-4">
+	<div class="panel panel-default">
+	  <div class="panel-heading">Based on a tag (tag)</div>
+	  <div class="panel-body">
+	    Panel content
+	  </div>
+	</div>
+</div>
+
+<div class="col-md-4">
+	<div class="panel panel-default">
+	  <div class="panel-heading">Based on problem (problem)</div>
+	  <div class="panel-body">
+	    Panel content
+	  </div>
+	</div>
+</div>

@@ -1,3 +1,21 @@
+.yas {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.yas li {
+  display: inline;
+}
+
+.label-very-easy {
+  background-color: #97CB9E;
+}
+
+.label-very-danger {
+  background-color: #500;
+}
+
 .create-contest-add-descr {
   font-size: 12px;
 }
@@ -285,25 +303,25 @@ tr.submission-row-parent {
     -webkit-animation-duration: 1s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
-    
+
     -moz-animation-name: blinker;
     -moz-animation-duration: 1s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
-    
+
     animation-name: blinker;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@-moz-keyframes blinker {  
+@-moz-keyframes blinker {
     50% { background-color: #FFF; }
 }
-@-webkit-keyframes blinker {  
+@-webkit-keyframes blinker {
     50% { background-color: #FFF; }
 }
-@keyframes blinker {  
+@keyframes blinker {
     50% { background-color: #FFF; }
 }
 
