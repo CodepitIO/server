@@ -1,39 +1,39 @@
 <div class="col-md-4">
 	<div class="panel panel-default classifier-panel">
 	  <div class="panel-heading">
-	    <h3 class="panel-title">Based on what you <strong>know most</strong></h3>
+	    <h3 class="panel-title">Based on the subjects <strong>you know most</strong></h3>
 	  </div>
 		<table class="table">
 		<tr class="classifier-filter">
 			<!-- se liga que o id do input tem que ser igual ao do label -->
 			<td colspan="3">
-				<input type="checkbox" name="rGroup" value="1" id="r1" checked="checked" />
+					<input type="checkbox" name="rGroup" value="1" id="r1" ng-model="sel1.r1" />
 			    <label class="classifier-radio" for="r1">
 			    	<span class="label label-very-easy" ng-show="true">Very Easy</span>
 			    </label>
 
-			    <input type="checkbox" name="rGroup" value="2" id="r2" />
+			    <input type="checkbox" name="rGroup" value="2" id="r2" ng-model="sel1.r2" />
 			    <label class="classifier-radio" for="r2">
 			    	<span class="label label-success" ng-show="true">Easy</span>
 			    </label>
 
-			    <input type="checkbox" name="rGroup" value="3" id="r3" />
+			    <input type="checkbox" name="rGroup" value="3" id="r3" ng-model="sel1.r3" />
 			    <label class="classifier-radio" for="r3">
 			    	<span class="label label-warning" ng-show="true">Medium</span>
 			    </label>
 
-			    <input type="checkbox" name="rGroup" value="4" id="r4" />
+			    <input type="checkbox" name="rGroup" value="4" id="r4" ng-model="sel1.r4" />
 			    <label class="classifier-radio" for="r4">
 			    	<span class="label label-danger" ng-show="true">Hard</span>
 			    </label>
 
-			    <input type="checkbox" name="rGroup" value="5" id="r5" />
+			    <input type="checkbox" name="rGroup" value="5" id="r5" ng-model="sel1.r5" />
 			    <label class="classifier-radio" for="r5">
 			    	<span class="label label-very-danger" ng-show="true">Very Hard</span>
 			    </label>
 		    </td>
 		</tr>
-	    <tr ng-repeat="p in masterTagProblems | limitTo:knowMostEntries">
+	    <tr ng-repeat="p in masterTagProblems | filter:isCoolLevel1 | limitTo:knowMostEntries">
 	    	<td class="classifier-id" width="10%">{{$index+1}}</td>
 	    	<td class="classifier-name">
 	    		<strong><a ng-href="/problems/{{p._id}}" target="_blank">{{p.name}}</a></strong><br />
@@ -41,7 +41,10 @@
 	    	</td>
 				<td><span class="label" ng-class="'{{getProblemLevel(p) | problemLevelClass}}'">{{getProblemLevel(p) | problemLevel}}</span></td>
 	    </tr>
-			<tr><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries = knowMostEntries+5">Load more...</button></td></tr>
+			<tr ng-show="loading">
+			  <td><i style="margin: 10px;" class="fa fa-spinner fa-spin fa-2x"></i></td>
+			</tr>
+			<tr ng-hide="loading"><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries = knowMostEntries+5">Load more...</button></td></tr>
 	  </table>
 	</div>
 </div>
@@ -54,7 +57,36 @@
 			</select>
 		</div>
 		<table class="table">
-	    <tr ng-repeat="p in taggedProblems | filter:{tags:selectedTag} | limitTo:knowMostEntries2">
+			<tr class="classifier-filter">
+				<!-- se liga que o id do input tem que ser igual ao do label -->
+				<td colspan="3">
+						<input type="checkbox" name="rGroup" value="1" id="t1" ng-model="sel2.r1" />
+				    <label class="classifier-radio" for="t1">
+				    	<span class="label label-very-easy" ng-show="true">Very Easy</span>
+				    </label>
+
+				    <input type="checkbox" name="rGroup" value="2" id="t2" ng-model="sel2.r2" />
+				    <label class="classifier-radio" for="t2">
+				    	<span class="label label-success" ng-show="true">Easy</span>
+				    </label>
+
+				    <input type="checkbox" name="rGroup" value="3" id="t3" ng-model="sel2.r3" />
+				    <label class="classifier-radio" for="t3">
+				    	<span class="label label-warning" ng-show="true">Medium</span>
+				    </label>
+
+				    <input type="checkbox" name="rGroup" value="4" id="t4" ng-model="sel2.r4" />
+				    <label class="classifier-radio" for="t4">
+				    	<span class="label label-danger" ng-show="true">Hard</span>
+				    </label>
+
+				    <input type="checkbox" name="rGroup" value="5" id="t5" ng-model="sel2.r5" />
+				    <label class="classifier-radio" for="t5">
+				    	<span class="label label-very-danger" ng-show="true">Very Hard</span>
+				    </label>
+			    </td>
+			</tr>
+	    <tr ng-repeat="p in taggedProblems | filter:isCoolLevel2 | filter:{tags:selectedTag} | limitTo:knowMostEntries2">
 	    	<td class="classifier-id" width="10%">{{$index+1}}</td>
 	    	<td class="classifier-name">
 	    		<strong><a ng-href="/problems/{{p._id}}" target="_blank">{{p.name}}</a></strong><br />
@@ -62,16 +94,34 @@
 	    	</td>
 				<td><span class="label" ng-class="'{{getProblemLevel(p) | problemLevelClass}}'" ng-show="true">{{getProblemLevel(p) | problemLevel}}</span></td>
 	    </tr>
-			<tr><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries2 = knowMostEntries2+5">Load more...</button></td></tr>
+			<tr ng-show="loading">
+			  <td><i style="margin: 10px;" class="fa fa-spinner fa-spin fa-2x"></i></td>
+			</tr>
+			<tr ng-hide="loading"><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries2 = knowMostEntries2+5">Load more...</button></td></tr>
 	  </table>
 	</div>
 </div>
 
 <div class="col-md-4">
 	<div class="panel panel-default classifier-panel">
-	  <div class="panel-heading">Based on problem <input type="text" class="form-control classifier-input" placeholder="Problem name"/> </div>
-	  <div class="panel-body">
-	    Panel content
-	  </div>
+	  <div class="panel-heading">Based on problem&nbsp;<input type="text" ng-model="problemSelected" placeholder="Problem name" typeahead="problem as problem.name for problem in allProblems | filter:{name:$viewValue} | limitTo:10" typeahead-on-select="changeProblem($item, $model, $label)" class="form-control classifier-input"></div>
+		<table class="table">
+			<tr class="classifier-filter">
+				<td colspan="2" ng-show="problemSelected && problemSelected.tags">
+					<a ng-href="/problems/{{problemSelected._id}}" target="_blank"><i class="fa fa-external-link"></i></a>&nbsp;
+					<span class="classifier-tags">{{problemSelected.tags | beautifyTags}}</span>
+					<span class="label" ng-class="getProblemLevelClass(problemSelected)" ng-show="true">{{getProblemLevel(problemSelected) | problemLevel}}</span>
+				</td>
+			</tr>
+	    <tr ng-repeat="p in similarProblems | limitTo:knowMostEntries3">
+	    	<td class="classifier-id" width="10%">{{$index+1}}</td>
+	    	<td class="classifier-name">
+	    		<strong><a ng-href="/problems/{{p._id}}" target="_blank">{{p.name}}</a></strong><br />
+	    		<span class="classifier-tags">{{p.tags | beautifyTags}}</span>
+	    	</td>
+				<td><span class="label" ng-class="'{{getProblemLevel(p) | problemLevelClass}}'" ng-show="true">{{getProblemLevel(p) | problemLevel}}</span></td>
+	    </tr>
+			<tr ng-hide="loading"><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries3 = knowMostEntries3+5">Load more...</button></td></tr>
+	  </table>
 	</div>
 </div>
