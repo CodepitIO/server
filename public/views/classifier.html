@@ -1,25 +1,54 @@
 <div class="col-md-4">
-	<div class="panel panel-default">
+	<div class="panel panel-default classifier-panel">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Based on what you <strong>know most</strong></h3>
 	  </div>
 		<table class="table">
+		<tr class="classifier-filter">
+			<!-- se liga que o id do input tem que ser igual ao do label -->
+			<td colspan="3">
+				<input type="radio" name="rGroup" value="1" id="r1" checked="checked" />
+			    <label class="classifier-radio" for="r1">
+			    	<span class="label label-very-easy" ng-show="true">Very Easy</span>
+			    </label>
+
+			    <input type="radio" name="rGroup" value="2" id="r2" />
+			    <label class="classifier-radio" for="r2">
+			    	<span class="label label-success" ng-show="true">Easy</span>
+			    </label>
+
+			    <input type="radio" name="rGroup" value="3" id="r3" />
+			    <label class="classifier-radio" for="r3">
+			    	<span class="label label-warning" ng-show="true">Medium</span>
+			    </label>
+
+			    <input type="radio" name="rGroup" value="4" id="r4" />
+			    <label class="classifier-radio" for="r4">
+			    	<span class="label label-danger" ng-show="true">Hard</span>
+			    </label>
+
+			    <input type="radio" name="rGroup" value="5" id="r5" />
+			    <label class="classifier-radio" for="r5">
+			    	<span class="label label-very-danger" ng-show="true">Very Hard</span>
+			    </label>
+		    </td>
+		</tr>
 	    <tr ng-repeat="p in masterTagProblems | limitTo:knowMostEntries">
 	    	<td class="classifier-id" width="10%">{{$index+1}}</td>
 	    	<td class="classifier-name">
 	    		<strong><a ng-href="/problems/{{p._id}}" target="_blank">{{p.name}}</a></strong><br />
 	    		<span class="classifier-tags">{{p.tags | beautifyTags}}</span>
 	    	</td>
-				<td><span class="label" ng-class="'{{getProblemLevel(p) | problemLevelClass}}'" ng-show="true">{{getProblemLevel(p) | problemLevel}}</span></td>
+				<td><span class="label" ng-class="'{{getProblemLevel(p) | problemLevelClass}}'">{{getProblemLevel(p) | problemLevel}}</span></td>
 	    </tr>
 			<tr><td colspan="3"><button type="button" class="btn btn-default btn-block" ng-click="knowMostEntries = knowMostEntries+5">Load more...</button></td></tr>
 	  </table>
 	</div>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 classifier-panel">
 	<div class="panel panel-default">
-	  <div class="panel-heading form-inline">Based on a tag:
+	  <div class="panel-heading form-inline">Based on tag&nbsp;
 			<select ng-model="selectedTag" class="form-control">
 			  <option ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
 			</select>
@@ -39,8 +68,8 @@
 </div>
 
 <div class="col-md-4">
-	<div class="panel panel-default">
-	  <div class="panel-heading">Based on problem (problem)</div>
+	<div class="panel panel-default classifier-panel">
+	  <div class="panel-heading">Based on problem <input type="text" class="form-control classifier-input" placeholder="Problem name"/> </div>
 	  <div class="panel-body">
 	    Panel content
 	  </div>

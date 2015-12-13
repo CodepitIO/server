@@ -335,7 +335,46 @@ button:disabled {
   background: #FDFDFD;
 }
 
+.classifier-diff{
+  vertical-align: middle !important;
+  text-align: right;
+}
+
 .classifier-tags{
   color: #ccc;
   font-size: 10px;
+}
+
+.classifier-panel .panel-heading{
+  font-size: 16px;
+}
+
+.classifier-select, .classifier-input{
+  width: auto;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.classifier-filter{
+  padding: 5px 0px;
+  text-align: center;
+}
+
+.classifier-radio{
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.classifier-panel input[type=radio]{
+    display:none
+}
+
+.classifier-panel input[type=radio] + .classifier-radio{
+  opacity: 0.2;
+}
+
+.classifier-panel input[type=radio]:checked + .classifier-radio{
+    opacity: 1;
 }
