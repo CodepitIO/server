@@ -367,14 +367,14 @@ button:disabled {
     cursor: pointer;
 }
 
-.classifier-panel input[type=radio]{
-    display:none
+.classifier-panel input[type=checkbox]{
+    display:none;
 }
 
-.classifier-panel input[type=radio] + .classifier-radio{
+.classifier-panel input[type=checkbox] + .classifier-radio{
   opacity: 0.2;
 }
 
-.classifier-panel input[type=radio]:checked + .classifier-radio{
+.classifier-panel input[type=checkbox]:checked + .classifier-radio{
     opacity: 1;
 }
