@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 			dist: {
 				src: ['public/js/**/*.js', 'tmp/*.js'],
 				dest: 'public/dist/app.min.js'
-			}
+			},
 		},
 
 		jshint: {
@@ -235,6 +235,6 @@ module.exports = function(grunt) {
 		'usemin',
 		'clean:dottemp',
 		//'nodemon:dev',
-		'watch:dev'
+		//'watch:dev'
 	]);
 };

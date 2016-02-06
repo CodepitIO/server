@@ -1,18 +1,20 @@
+'use strict';
+console.log("oi");
 // modules =================================================
 require('pmx').init({http: true});
 
-var express        = require('express');
-var app            = express();
-var bodyParser     = require('body-parser');
-var methodOverride = require('method-override');
-var passport	   = require('passport');
-var mongoose = require('mongoose');
-var cookieParser   = require('cookie-parser');
-var connect		   = require('connect');
-var compression	   = require('compression');
-var favicon 	   = require('serve-favicon');
-var _ = require('underscore');
-
+const bodyParser     = require('body-parser'),
+      methodOverride = require('method-override'),
+      passport	     = require('passport'),
+      cookieParser   = require('cookie-parser'),
+      connect		     = require('connect'),
+      compression	   = require('compression'),
+      favicon 	     = require('serve-favicon'),
+      express        = require('express'),
+      app            = express(),
+      server         = require('http').Server(app),
+      mongoose       = require('mongoose'),
+      db             = require('./config/db');
 
 // configuration ===========================================
 // set locale
@@ -20,29 +22,22 @@ app.locals.moment = require('moment-timezone');
 app.locals.moment.locale('pt');
 app.locals.moment.tz('America/Recife');
 
-// run submitter and judger
-var argv = require('optimist').argv;
-if (argv.j || argv.judge) {
-  require('./config/daemons')();  
-}
-
 // connect to db
-var db = require('./config/db');
 mongoose.connect(db.url); // connect to our database
-//var Promise = require('bluebird');
-//Promise.promisifyAll(require("mongoose"));
 
-// passport authentication
+// general config (cookies, compression, etc.)
 app.use(cookieParser());
-require('./config/passport')(passport); // pass passport for configuration
 app.use(connect.cookieSession({ secret: 'dDADW!#%@!davDgDOSAdsaweA2$kdasda@$!ads', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(compression());
 app.use(favicon(__dirname + '/public/imgs/favicon.ico'));
 
-// config files
-var port = process.env.PORT || 3000; // set our port
+// passport authentication
+require('./config/passport')(passport); // pass passport for configuration
+app.use(passport.initialize());
+app.use(passport.session());
+
+// socket
+//require('./app/socket')(server);
 
 // get all data/stuff of the body (POST) parameters
 app.use(bodyParser.json()); // parse application/json
@@ -55,6 +50,7 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 require('./app/routes')(app, passport); // pass our application into our routes
 
 // start app ===============================================
-app.listen(port);
-console.log('Listening to port ' + port); 			// shoutout to the user
-exports = module.exports = app; 						// expose app
+var port = process.env.PORT || 3000; // set our port
+server.listen(port);
+console.log('Listening to port ' + port);
+exports = module.exports = app;
