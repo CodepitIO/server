@@ -10,18 +10,20 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && \
     apt-get -y install nodejs git-all build-essential
 
+RUN npm install -g grunt-cli nodemon bower pm2 forever
+
 # Provides cached layer for node_modules
-# ADD paickage.json /tmp/package.json
-# RUN cd /tmp && npm install
-# RUN mkdir -p /site && cp -a /tmp/node_modules /site/
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
 
 # Define working directory
 RUN mkdir -p /site
 WORKDIR /site
-# ADD . /site
+ADD . /site
+RUN cp -a /tmp/node_modules /site/ && rm -rf /tmp
 
-#RUN cd /site && \
-#    npm run bower && \
-#    npm run grunt
+RUN cd /site && \
+    bower install --allow-root && \
+    grunt all
 
 CMD /bin/bash
