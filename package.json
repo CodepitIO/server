@@ -4,7 +4,6 @@
   "dependencies": {
     "async": "^1.4.0",
     "bcrypt-nodejs": "0.0.3",
-    "bluebird": "^2.9.34",
     "body-parser": "~1.4.2",
     "compression": "~1.4.3",
     "connect": "~2.14.4",

@@ -26,4 +26,6 @@ ADD . /site
 #    bower install --allow-root && \
 #    grunt all
 
-CMD ["/bin/bash"]
+EXPOSE 3000
+
+CMD /bin/bash
