@@ -24,4 +24,6 @@ WORKDIR /site
 #    npm run bower && \
 #    npm run grunt
 
+EXPOSE 3000
+
 CMD /bin/bash

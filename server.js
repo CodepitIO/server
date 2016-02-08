@@ -1,7 +1,6 @@
 'use strict';
-console.log("oi");
 // modules =================================================
-require('pmx').init({http: true});
+// require('pmx').init({http: true});
 
 const bodyParser     = require('body-parser'),
       methodOverride = require('method-override'),
