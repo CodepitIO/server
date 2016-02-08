@@ -8,7 +8,7 @@ MAINTAINER Gustavo Stor
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential
+    apt-get -y install nodejs git-all build-essential vim
 
 RUN npm install -g grunt-cli nodemon bower pm2 forever
 
@@ -26,6 +26,6 @@ ADD . /site
 #    bower install --allow-root && \
 #    grunt all
 
-EXPOSE 3000
+# EXPOSE 3000
 
 CMD /bin/bash

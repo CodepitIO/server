@@ -1,7 +1,6 @@
 'use strict';
 // modules =================================================
 // require('pmx').init({http: true});
-
 const bodyParser     = require('body-parser'),
       methodOverride = require('method-override'),
       passport	     = require('passport'),
