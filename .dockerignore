@@ -11,6 +11,8 @@ lib-cov
 .gitignore
 .git
 Dockerfile
+*.swp
+*.last_boot
 
 pids
 logs

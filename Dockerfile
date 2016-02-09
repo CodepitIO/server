@@ -12,20 +12,13 @@ RUN apt-get update && \
 
 RUN npm install -g grunt-cli nodemon bower pm2 forever
 
-# Provides cached layer for node_modules
-# ADD package.json /tmp/package.json
-# RUN cd /tmp && npm install
+ENV wd www
 
 # Define working directory
-RUN mkdir -p /site
-WORKDIR /site
-ADD . /site
-# RUN cp -a /tmp/node_modules /site/ && rm -rf /tmp
+RUN mkdir -p /${wd}
+WORKDIR /${wd}
+ADD . /${wd}
 
-# RUN cd /site && \
-#    bower install --allow-root && \
-#    grunt all
-
-# EXPOSE 3000
+RUN g++ /${wd}/cpp/matchProblems.cpp -o /${wd}/cpp/matchProblems --std=c++0x
 
 CMD /bin/bash

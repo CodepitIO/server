@@ -1,7 +1,6 @@
 'use strict';
 
-var url = `mongodb://${process.env.DB_ADDR_PORT}/maratonando`;
-console.log(url);
+var url = `mongodb://localhost:27017/maratonando`;
 module.exports = {
   'url' : url,
 };
