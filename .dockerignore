@@ -10,7 +10,8 @@ lib-cov
 .dockerignore
 .gitignore
 .git
-Dockerfile
+Dockerfile.*
+supervisor.*
 *.swp
 *.last_boot
 

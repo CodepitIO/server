@@ -20,7 +20,7 @@ do
 done
 
 function bootstrap {
-  bash -c "npm install && bower install --allow-root && grunt all"
+  bash -c "npm install && bower install --allow-root && grunt dev"
 }
 
 FILENAME=$PWD/.last_boot
@@ -45,6 +45,6 @@ then
 fi
 
 if $START; then
-  nodemon server  
+  nodemon server
 fi
 

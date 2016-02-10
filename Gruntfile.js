@@ -185,10 +185,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-nodemon');
 
-	grunt.registerTask('test', [
+	grunt.registerTask('prod', [
+		'clean:dist',
 		'html2js:dist',
-	]);
-	grunt.registerTask('build', [
+		'concat:dist',
+		'clean:temp',
+		'uglify:dist',
+		'cssmin:dist',
 		'clean:fonts',
 		'copy:index',
 		'useminPrepare',
@@ -199,24 +202,7 @@ module.exports = function(grunt) {
 		'usemin',
 		'clean:dottemp',
 	]);
-	grunt.registerTask('htmlfix', [
-		'copy:index',
-		'useminPrepare',
-		'usemin',
-	]);
-	grunt.registerTask('min', [
-		'clean:dist',
-		'jsbeautifier',
-		'jshint',
-		'html2js:dist',
-		'concat:dist',
-		'clean:temp',
-		'uglify:dist',
-		'cssmin:dist',
-		//'express:dev',
-		//'watch:dev'
-	]);
-	grunt.registerTask('all', [
+	grunt.registerTask('dev', [
 		'clean:dist',
 		'jsbeautifier',
 		'jshint',
@@ -234,7 +220,6 @@ module.exports = function(grunt) {
 		'uglify:generated',
 		'usemin',
 		'clean:dottemp',
-		//'nodemon:dev',
-		//'watch:dev'
+		'watch:dev'
 	]);
 };
