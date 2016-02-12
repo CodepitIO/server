@@ -10,10 +10,11 @@ lib-cov
 .dockerignore
 .gitignore
 .git
-Dockerfile.*
-supervisor.*
+.Dockerfile.*
+.supervisor.*
 *.swp
-*.last_boot
+*.bower.json.md5
+*.package.json.md5
 
 pids
 logs

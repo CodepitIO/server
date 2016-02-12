@@ -11,16 +11,13 @@ RUN apt-get update && \
     apt-get -y install nodejs git-all build-essential vim supervisor
 RUN mkdir -p /var/log/supervisor
 
-RUN npm install -g grunt-cli nodemon bower pm2 forever
+RUN npm install -g grunt-cli nodemon bower pm2 node-gyp
 
 ENV WD www
 
 # Define working directory
 RUN mkdir -p /${WD}
 WORKDIR /${WD}
-ADD . /${WD}
-
-RUN g++ /${WD}/cpp/matchProblems.cpp -o /${WD}/cpp/matchProblems --std=c++0x
 
 COPY supervisord.dev.conf /etc/supervisor/conf.d/supervisord.conf
 

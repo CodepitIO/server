@@ -26,7 +26,6 @@ exports.validateDate = function (datestr) {
 
 exports.inArray = function (k, a, callback) {
   var self = a;
-  console.log(k);
   return (function check(i) {
       if (i >= self.length) {
           return callback(false);

@@ -23,6 +23,11 @@ app.locals.moment.tz('America/Recife');
 // connect to db
 mongoose.connect(db.url); // connect to our database
 
+// setup development stuff
+if (app.get('env') === 'development') {
+  require('./app/utils/devSetup')();
+}
+
 // general config (cookies, compression, etc.)
 app.use(cookieParser());
 app.use(connect.cookieSession({ secret: 'dDADW!#%@!davDgDOSAdsaweA2$kdasda@$!ads', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));

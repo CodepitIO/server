@@ -7,8 +7,9 @@ lib-cov
 *.pid
 *.gz
 *.DS_Store
-*.last_boot
 *.swp
+*.bower.json.md5
+*.package.json.md5
 
 pids
 logs

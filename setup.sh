@@ -19,32 +19,34 @@ do
   shift
 done
 
-function bootstrap {
-  bash -c "npm install && bower install --allow-root && grunt dev"
+BOWER_JSON=$PWD/bower.json
+
+BOWER_HASH_FILE=$PWD/.bower.json.md5
+
+# Compiling matchProblems.cpp
+bash -c "g++ cpp/matchProblems.cpp -o cpp/matchProblems --std=c++0x"
+
+function shouldInstall {
+  local FILENAME=$PWD/$1
+  local HASHFILENAME=$PWD/.$1.md5
+  local MD5=0
+  if [ -f $HASHFILENAME ]; then
+    MD5=$(<$HASHFILENAME)
+  fi
+  local NEW_MD5=`md5sum ${FILENAME} | awk '{ print $1 }'`
+  if $FORCE || [ "$MD5" != "$NEW_MD5" ]; then
+    echo "Running '$2'... this might take a while if it's the first time installing."
+    bash -c "$2"
+    if [ $? -eq 0 ]; then
+      echo $NEW_MD5 > $HASHFILENAME
+    fi
+  fi
 }
 
-FILENAME=$PWD/.last_boot
-LASTTIME=0
-
-echo $FILENAME
-if [ -f $FILENAME ]; then
-  LASTTIME=$(<$FILENAME)
-fi
-
-THRESHOLDMILLIS=$((3*24*60*60))
-TODAYMILLIS=$(date +%s)
-COMPTIMEMILLIS=$(($TODAYMILLIS-$THRESHOLDMILLIS))
-
-if $FORCE || (($LASTTIME < $COMPTIMEMILLIS));
-then
-  bootstrap
-  if [ $? -eq 0 ]
-  then
-    echo $TODAYMILLIS > $FILENAME
-  fi
-fi
+shouldInstall "package.json" "npm install"
+shouldInstall "bower.json" "bower install --allow-root"
 
 if $START; then
-  nodemon server
+  grunt dev
 fi
 
