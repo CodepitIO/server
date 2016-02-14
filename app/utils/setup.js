@@ -1,7 +1,7 @@
 'Use strict';
 
 const mongoose = require('mongoose'),
-      redis = require('../../config/local-redis'),
+      redis = require('../../config/redis').defaultClient,
       config = require('../../config/global').GLOBAL,
       async = require('async'),
       _ = require('underscore'),
@@ -74,11 +74,18 @@ var extractProblemsHtml = function(file, folder, callback) {
   });
 }
 
+var tryMakeTxt = function() {
+  const problemsFile = path.join(__dirname, "..", "..", "cpp", "problems.txt");
+  fs.stat(problemsFile, (err) => {
+    if (err) redis.publish(config.LOAD_PROBLEMS_TXT_CHN, 0);
+  });
+}
+
 module.exports = function() {
   const seedFile = path.join(__dirname, '.seed.tar.bz2');
   const tmpSeedFolder = path.join(__dirname, 'tmp');
   hasSeeded(seedFile, (seeded) => {
-    if (seeded) return;
+    if (seeded) return tryMakeTxt();
     console.log('Seeding application... This might take a few minutes.');
     redis.sadd(config._name, config.SEEDED);
     untar(seedFile, __dirname, () => {

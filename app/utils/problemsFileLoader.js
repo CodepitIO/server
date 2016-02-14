@@ -5,13 +5,13 @@ const fs = require('fs'),
       async = require('async'),
       argv = require('optimist').argv,
       mongoose = require('mongoose'),
-      redis = require('redis').createClient({ host: 'redis' }),
+      redis = require('../../config/redis').createClient(),
       Problem = require('../models/problem'),
       config = require('../../config/global').GLOBAL,
       db = require('../../config/db');
 
+const problemsFile = path.join(__dirname, "..", "..", "cpp", "problems.txt");
 var load = function() {
-  var problemsFile = path.join(__dirname, "..", "..", "cpp", "problems.txt");
   fs.unlink(problemsFile, () => {
     Problem.find().select('_id oj fullName url').exec().then((problems) => {
       console.log(`Loading ${problems.length} problems to txt file...`);

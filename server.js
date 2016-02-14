@@ -13,7 +13,7 @@ const bodyParser     = require('body-parser'),
       server         = require('http').Server(app),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
-      redis          = require('./config/local-redis');
+      redis          = require('./config/redis').defaultClient;
 
 // configuration ===========================================
 // set locale
