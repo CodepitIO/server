@@ -19,6 +19,6 @@ ENV WD www
 RUN mkdir -p /${WD}
 WORKDIR /${WD}
 
-COPY supervisord.dev.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .supervisord.dev.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
