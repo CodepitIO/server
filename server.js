@@ -12,7 +12,8 @@ const bodyParser     = require('body-parser'),
       app            = express(),
       server         = require('http').Server(app),
       mongoose       = require('mongoose'),
-      db             = require('./config/db');
+      db             = require('./config/db'),
+      redis          = require('./config/local-redis');
 
 // configuration ===========================================
 // set locale
@@ -20,13 +21,13 @@ app.locals.moment = require('moment-timezone');
 app.locals.moment.locale('pt');
 app.locals.moment.tz('America/Recife');
 
-// connect to db
+// connect to db and redis
 mongoose.connect(db.url); // connect to our database
+redis.on('error', (err) => {
+  console.log(err);
+});
 
-// setup development stuff
-if (app.get('env') === 'development') {
-  require('./app/utils/devSetup')();
-}
+require('./app/utils/setup')();
 
 // general config (cookies, compression, etc.)
 app.use(cookieParser());

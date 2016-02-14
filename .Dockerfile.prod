@@ -36,6 +36,6 @@ RUN cp -a /tmp/node_modules /${WD}/ && \
 ARG NODE_INSTANCES="1"
 ENV NODE_INSTANCES ${NODE_INSTANCES}
 
-COPY supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]

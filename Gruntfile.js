@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 				script: 'server.js',
 				options: {
 					cwd: __dirname,
-					ignore: ['node_modules/**', 'public/**', '.tmp/**', 'Gruntfile.js'],
+					ignore: ['node_modules/**', 'public/**', '**/*.json', '.tmp/**', 'Gruntfile.js'],
 					legacyWatch: true,
 				},
 			}

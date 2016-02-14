@@ -15,6 +15,7 @@ lib-cov
 *.swp
 *.bower.json.md5
 *.package.json.md5
+app/utils/tmp/
 
 pids
 logs
@@ -26,6 +27,7 @@ node_modules/*
 
 problems/*
 cpp/matchProblems
+cpp/problems.txt
 public/imgs/site/*
 public/dist/*
 public/fonts/*
