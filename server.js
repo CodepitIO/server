@@ -3,17 +3,18 @@
 // require('pmx').init({http: true});
 const bodyParser     = require('body-parser'),
       methodOverride = require('method-override'),
-      passport	     = require('passport'),
+      passport       = require('passport'),
       cookieParser   = require('cookie-parser'),
-      connect		     = require('connect'),
+      connect        = require('connect'),
       compression	   = require('compression'),
-      favicon 	     = require('serve-favicon'),
+      favicon 	   = require('serve-favicon'),
       express        = require('express'),
       app            = express(),
       server         = require('http').Server(app),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
-      redis          = require('./config/redis').defaultClient;
+      redis          = require('./config/redis').defaultClient,
+      services       = require('./app/services');
 
 // configuration ===========================================
 // set locale
@@ -26,8 +27,6 @@ mongoose.connect(db.url); // connect to our database
 redis.on('error', (err) => {
   console.log(err);
 });
-
-require('./app/utils/setup')();
 
 // general config (cookies, compression, etc.)
 app.use(cookieParser());

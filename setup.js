@@ -1,8 +1,8 @@
 'Use strict';
 
 const mongoose = require('mongoose'),
-      redis = require('../../config/redis').defaultClient,
-      config = require('../../config/global').GLOBAL,
+      redis = require('./config/redis').defaultClient,
+      config = require('./config/globals').GLOBAL_SET,
       async = require('async'),
       _ = require('underscore'),
       exec = require('child_process').exec,
@@ -10,9 +10,11 @@ const mongoose = require('mongoose'),
       readline = require('readline'),
       fs = require('fs'),
       path = require('path'),
-      Problem = require('../models/problem'),
+      Problem = require('./app/models/problem'),
       ObjectId = require('mongoose').Types.ObjectId,
-      ProblemsFileLoader = require('./problemsFileLoader');
+      
+
+mongoose.connect(db.url); // connect to our database
 
 var hasSeeded = function(seedFile, callback) {
   redis.sismember(config._name, config.SEEDED, (err, res) => {

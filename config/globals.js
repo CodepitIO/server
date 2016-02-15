@@ -1,7 +1,9 @@
 module.exports = {
-  GLOBAL: {
+  GLOBAL_SET: {
     _name: 'GLOBAL_CONFIG',
     SEEDED: 'SEEDED',
-    LOAD_PROBLEMS_TXT_CHN: 'LOAD_PROBLEMS_TXT_CHN',
   },
+  CHANNELS: {
+  	LOAD_PROBLEMS: 'LOAD_PROBLEMS_CHANNEL',
+  }
 };
