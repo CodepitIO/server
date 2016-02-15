@@ -43,7 +43,7 @@ function shouldInstall {
   fi
 }
 
-shouldInstall "package.json" "npm install"
+shouldInstall "package.json" "npm install --no-bin-links"
 shouldInstall "bower.json" "bower install --allow-root"
 
 if $START; then
