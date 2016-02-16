@@ -1,8 +1,10 @@
-'Use strict';
+'use strict';
 
 const mongoose = require('mongoose'),
+      db = require('./config/db'),
       redis = require('./config/redis').defaultClient,
-      config = require('./config/globals').GLOBAL_SET,
+      globals = require('./config/globals').GLOBAL_SET,
+      channels = require('./config/globals').CHANNELS,
       async = require('async'),
       _ = require('underscore'),
       exec = require('child_process').exec,
@@ -11,13 +13,12 @@ const mongoose = require('mongoose'),
       fs = require('fs'),
       path = require('path'),
       Problem = require('./app/models/problem'),
-      ObjectId = require('mongoose').Types.ObjectId,
-      
+      ObjectId = require('mongoose').Types.ObjectId;
 
 mongoose.connect(db.url); // connect to our database
 
 var hasSeeded = function(seedFile, callback) {
-  redis.sismember(config._name, config.SEEDED, (err, res) => {
+  redis.sismember(globals._name, globals.SEEDED, (err, res) => {
     return callback(res !== 0);
   });
 }
@@ -76,32 +77,37 @@ var extractProblemsHtml = function(file, folder, callback) {
   });
 }
 
-var tryMakeTxt = function() {
-  const problemsFile = path.join(__dirname, "..", "..", "cpp", "problems.txt");
-  fs.stat(problemsFile, (err) => {
-    if (err) redis.publish(config.LOAD_PROBLEMS_TXT_CHN, 0);
-  });
+var closes;
+var tryCloseProcess = function() {
+  closes++;
+  if (closes === 2) process.exit();
 }
 
-module.exports = function() {
-  const seedFile = path.join(__dirname, '.seed.tar.bz2');
-  const tmpSeedFolder = path.join(__dirname, 'tmp');
+var setup = function() {
+  closes = 0;
+  const seedFile = path.join(__dirname, 'app', 'utils','.seed.tar.bz2');
+  const tmpSeedFolder = path.join(__dirname, 'app', 'utils', '.tmp');
   hasSeeded(seedFile, (seeded) => {
-    if (seeded) return tryMakeTxt();
+    if (seeded) {
+      console.log('Already seeded.');
+      return;
+    }
     console.log('Seeding application... This might take a few minutes.');
-    redis.sadd(config._name, config.SEEDED);
-    untar(seedFile, __dirname, () => {
+    redis.sadd(globals._name, globals.SEEDED);
+    untar(seedFile, path.join(tmpSeedFolder, '..'), () => {
       const problemsFile = path.join(tmpSeedFolder, 'problems.json');
       const problemsTarGz = path.join(tmpSeedFolder, 'problems.tar.gz');
-      const problemsHtmlFolder = path.join(__dirname, '..', '..', 'public', 'problems');
+      const problemsHtmlFolder = path.join(__dirname, 'public', 'problems');
       importProblems(problemsFile, (err) => {
         if (err) console.log(err);
-        else {
-          console.log(`Imported ${problemsFile} to problems collection successfully`);
-          redis.publish(config.LOAD_PROBLEMS_TXT_CHN, 0);
-        }
+        else console.log(`Imported ${problemsFile} to problems collection successfully`);
+        tryCloseProcess();
       });
-      extractProblemsHtml(problemsTarGz, problemsHtmlFolder, () => {});
+      extractProblemsHtml(problemsTarGz, problemsHtmlFolder, () => {
+        tryCloseProcess();
+      });
     });
   });
 }
+
+setup();
