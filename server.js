@@ -10,13 +10,35 @@ const bodyParser     = require('body-parser'),
       favicon 	   = require('serve-favicon'),
       express        = require('express'),
       app            = express(),
-      server         = require('http').Server(app),
+      http           = require('http'),
+      https          = require('https'),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
       redis          = require('./config/redis').defaultClient,
       services       = require('./app/services');
 
 // configuration ===========================================
+// setup server
+var createNormalServer = false;
+if (app.get('env') === 'production') {
+  try {
+    var privateKey = fs.readFileSync('/etc/ssl/cert.key', 'utf8');
+    var certificate = fs.readFileSync('/etc/ssl/cert_chain.crt', 'utf8');
+    var credentials = {key: privateKey, cert: certificate};
+  } catch (e) {
+    createNormalServer = true;
+  }
+} else {
+  createNormalServer = true;
+}
+
+var server;
+if (createNormalServer) {
+  server = http.createServer(app);
+} else {
+  server = https.createServer(credentials, app);
+}
+
 // set locale
 app.locals.moment = require('moment-timezone');
 app.locals.moment.locale('pt');
