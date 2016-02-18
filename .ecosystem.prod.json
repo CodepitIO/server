@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name"        : "site",
+      "script"      : "server.js",
+      "merge_logs"  : true,
+      "max_memory_restart": "300M",
+      "instances"   : process.env.NODE_INSTANCES || 1,
+      "next_gen_js" : true,
+    },
+    {
+      "name"       : "services",
+      "script"     : "app/services.js",
+      "max_memory_restart": "400M",
+      "next_gen_js": true,
+    }
+  ]
+}
