@@ -11,11 +11,9 @@ lib-cov
 .gitignore
 .git
 .Dockerfile.*
-.supervisord.*
 *.swp
 *.bower.json.md5
 *.package.json.md5
-app/utils/tmp/
 
 pids
 logs

@@ -19,10 +19,6 @@ do
   shift
 done
 
-BOWER_JSON=$PWD/bower.json
-
-BOWER_HASH_FILE=$PWD/.bower.json.md5
-
 # Compiling matchProblems.cpp
 bash -c "g++ cpp/matchProblems.cpp -o cpp/matchProblems --std=c++0x"
 
