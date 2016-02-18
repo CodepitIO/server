@@ -1,29 +1,19 @@
 'use strict';
 
-const mongoose = require('mongoose'),
-      db = require('./config/db'),
-      redis = require('./config/redis').defaultClient,
-      globals = require('./config/globals').GLOBAL_SET,
-      channels = require('./config/globals').CHANNELS,
+const globals = require('../../config/globals').GLOBAL_SET,
+      channels = require('../../config/globals').CHANNELS,
+      redis = require('../../config/redis').createClient(),
       async = require('async'),
       _ = require('underscore'),
-      exec = require('child_process').exec,
       spawn = require('child_process').spawn,
+      exec = require('child_process').exec,
       readline = require('readline'),
       fs = require('fs'),
       path = require('path'),
-      Problem = require('./app/models/problem'),
+      Problem = require('../models/problem'),
       ObjectId = require('mongoose').Types.ObjectId;
 
-mongoose.connect(db.url); // connect to our database
-
-var hasSeeded = function(seedFile, callback) {
-  redis.sismember(globals._name, globals.SEEDED, (err, res) => {
-    return callback(res !== 0);
-  });
-}
-
-var untar = function(file, folder, callback) {
+function untar(file, folder, callback) {
   var flags;
   if (path.extname(file) == '.bz2') flags = '-jxf';
   else if (path.extname(file) == '.gz') flags = '-zxf';
@@ -38,10 +28,13 @@ var untar = function(file, folder, callback) {
   });
 }
 
-var importProblems = function(problemsFile, callback) {
+function importProblems(problemsFile, callback) {
   console.log(`Importing problems file ${problemsFile} to database`);
   Problem.count((err, count) => {
-    if (count !== 0) return callback(new Error("problems table is not pure."));
+    if (count !== 0) {
+      console.log("Not seeding `problems` collections because it have elements.")
+      return callback();
+    }
 
     const rl = readline.createInterface({
       input: fs.createReadStream(problemsFile)
@@ -50,18 +43,22 @@ var importProblems = function(problemsFile, callback) {
     rl.on('line', (line) => {
       var newProblemJson = JSON.parse(line);
       newProblemJson._id = new ObjectId(newProblemJson._id.$oid);
-      var newProblem = new Problem(newProblemJson);
-      newProblem.save();
+      (new Problem(newProblemJson)).save();
     });
-    rl.on('close', callback);
+
+    rl.on('close', function(err) {
+      if (err) console.log(err);
+      else console.log(`Imported ${problemsFile} to problems collection successfully`);
+      return callback();
+    });
   });
 }
 
-var isHtml = function(file) {
+function isHtml(file) {
   return path.extname(file) === '.html';
 }
 
-var extractProblemsHtml = function(file, folder, callback) {
+function extractProblemsHtml(file, folder, callback) {
   console.log('Extracting problems html folder');
   fs.mkdir(folder, (err) => {
     async.waterfall([
@@ -77,37 +74,27 @@ var extractProblemsHtml = function(file, folder, callback) {
   });
 }
 
-var closes;
-var tryCloseProcess = function() {
-  closes++;
-  if (closes === 2) process.exit();
-}
-
-var setup = function() {
-  closes = 0;
-  const seedFile = path.join(__dirname, 'app', 'utils','.seed.tar.bz2');
-  const tmpSeedFolder = path.join(__dirname, 'app', 'utils', '.tmp');
-  hasSeeded(seedFile, (seeded) => {
+module.exports = function(callback) {
+  const seedFile = path.join(__dirname, '.seed.tar.bz2');
+  const tmpSeedFolder = path.join(__dirname, 'tmp');
+  redis.sismember(globals._name, globals.SEEDED, (err, seeded) => {
     if (seeded) {
-      console.log('Already seeded.');
-      return;
+      console.log('Already seeded before.');
+      return callback();
     }
     console.log('Seeding application... This might take a few minutes.');
     redis.sadd(globals._name, globals.SEEDED);
-    untar(seedFile, path.join(tmpSeedFolder, '..'), () => {
+    untar(seedFile, __dirname, () => {
       const problemsFile = path.join(tmpSeedFolder, 'problems.json');
       const problemsTarGz = path.join(tmpSeedFolder, 'problems.tar.gz');
-      const problemsHtmlFolder = path.join(__dirname, 'public', 'problems');
-      importProblems(problemsFile, (err) => {
-        if (err) console.log(err);
-        else console.log(`Imported ${problemsFile} to problems collection successfully`);
-        tryCloseProcess();
-      });
-      extractProblemsHtml(problemsTarGz, problemsHtmlFolder, () => {
-        tryCloseProcess();
+      const problemsHtmlFolder = path.join(__dirname, '..', '..', 'public', 'problems');
+      async.parallel([
+        (callback) => { importProblems(problemsFile, callback); },
+        (callback) => { extractProblemsHtml(problemsTarGz, problemsHtmlFolder, callback); },
+      ], function() {
+        console.log(`Removed ${tmpSeedFolder} folder.`);
+        return exec(`rm -rf ${tmpSeedFolder}`, callback);
       });
     });
   });
 }
-
-setup();

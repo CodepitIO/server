@@ -5,10 +5,11 @@ const fs = require('fs'),
       async = require('async'),
       argv = require('optimist').argv,
       mongoose = require('mongoose'),
-      redis = require('../config/redis').createClient(),
+      redis = require('../config/redis').defaultClient,
       Problem = require('./models/problem'),
       config = require('../config/globals').CHANNELS,
-      db = require('../config/db');
+      db = require('../config/db'),
+      setup = require('./utils/setup');
 
 const problemsFile = path.join(__dirname, "..", "cpp", "problems.txt");
 
@@ -18,12 +19,11 @@ var loadProblemsTxt = function() {
   fs.unlink(problemsFile, () => {
     Problem.find().select('_id oj fullName url').exec().then((problems) => {
       console.log(`Loading ${problems.length} problems to txt file...`);
-      async.eachSeries(problems, (problem, cb) => {
-        if (problem.oj === 'uri' || problem.fullName.substring(0,1) !== '[') return cb();
-        fs.appendFile(problemsFile, problem.fullName + "\n\r" + problem.url + "\n\r" + problem._id + "\n\r", {flags: 'a', mode: '0666'}, cb); 
-      }, (err) => {
-        console.log('Completed problems loading to txt.');
-      });
+      for (var i = 0; i < problems.length; i++) {
+        if (problems[i].oj === 'uri' || problems[i].fullName.substring(0,1) !== '[') continue;
+        fs.appendFileSync(problemsFile, problems[i].fullName + "\n\r" + problems[i].url + "\n\r" + problems[i]._id + "\n\r", {flags: 'a', mode: '0666'});
+      }
+      console.log('Completed problems loading to txt.');
     });
   });
 }
@@ -35,11 +35,12 @@ job[config.LOAD_PROBLEMS] = function(check) {
   });
 }
 
-module.exports = (function() {
+function main() {
+  console.log('Services waiting for events.');
+  mongoose.connect(db.url);
   redis.subscribe(config.LOAD_PROBLEMS);
   redis.on('message', (channel, message) => { job[channel](message); });
-  console.log('Waiting 5 minutes until trying to load problems txt.');
-  setTimeout(function() {
-    job[channel](message);
-  }, 5 * 60 * 1000);
-})();
+  setup(() => { job[config.LOAD_PROBLEMS](true); });
+};
+
+main();

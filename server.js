@@ -7,15 +7,14 @@ const bodyParser     = require('body-parser'),
       cookieParser   = require('cookie-parser'),
       connect        = require('connect'),
       compression	   = require('compression'),
-      favicon 	   = require('serve-favicon'),
+      favicon 	     = require('serve-favicon'),
       express        = require('express'),
       app            = express(),
       http           = require('http'),
       https          = require('https'),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
-      redis          = require('./config/redis').defaultClient,
-      services       = require('./app/services');
+      redis          = require('./config/redis').defaultClient;
 
 // configuration ===========================================
 // setup server
