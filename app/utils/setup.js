@@ -83,7 +83,6 @@ module.exports = function(callback) {
       return callback();
     }
     console.log('Seeding application... This might take a few minutes.');
-    redis.sadd(globals._name, globals.SEEDED);
     untar(seedFile, __dirname, () => {
       const problemsFile = path.join(tmpSeedFolder, 'problems.json');
       const problemsTarGz = path.join(tmpSeedFolder, 'problems.tar.gz');
@@ -92,6 +91,7 @@ module.exports = function(callback) {
         (callback) => { importProblems(problemsFile, callback); },
         (callback) => { extractProblemsHtml(problemsTarGz, problemsHtmlFolder, callback); },
       ], function() {
+        redis.sadd(globals._name, globals.SEEDED);
         console.log(`Removed ${tmpSeedFolder} folder.`);
         return exec(`rm -rf ${tmpSeedFolder}`, callback);
       });
