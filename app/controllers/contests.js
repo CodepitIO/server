@@ -75,6 +75,10 @@ exports.getByFilter = function(req, res, next) {
         $lte: now
       }
     }
+  } else if (filter == 'participated') {
+    opts = {
+      'contestants.id': req.user.id
+    }
   } else {
     return res.json(InvalidOperation);
   }
