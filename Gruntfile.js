@@ -7,8 +7,13 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		nodemon: {
-			dev: {
-				script: 'server.js'
+			all: {
+				script: 'server.js',
+				options: {
+					cwd: __dirname,
+					ignore: ['node_modules/**', 'public/**', '**/*.json', '.tmp/**', 'Gruntfile.js'],
+					legacyWatch: true,
+				},
 			}
 		},
 
@@ -30,11 +35,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'public/dist/app.min.css': [
-						'public/css/style.css',
-						'public/css/contest.css',
-						'public/css/responsive.css'
-					]
+					'public/dist/app.min.css': ['public/css/*.css']
 				}
 			}
 		},
@@ -42,7 +43,7 @@ module.exports = function(grunt) {
 		html2js: {
 			dist: {
 				src: ['public/views/**/*.html'],
-				dest: 'tmp/templates.js'
+				dest: '.tmp/templates.js'
 			},
 			options: {
 				base: 'public/',
@@ -62,10 +63,7 @@ module.exports = function(grunt) {
 		},
 
 		clean: {
-			temp: {
-				src: ['tmp']
-			},
-			dottemp: {
+			tmp: {
 				src: ['.tmp']
 			},
 			dist: {
@@ -81,26 +79,42 @@ module.exports = function(grunt) {
 				separator: ';'
 			},
 			dist: {
-				src: ['public/js/**/*.js', 'tmp/*.js'],
+				src: ['public/js/**/*.js', '.tmp/templates.js'],
 				dest: 'public/dist/app.min.js'
-			}
+			},
 		},
 
 		jshint: {
 			all: ['Gruntfile.js', 'public/js/**/*.js']
 		},
 
-		watch: {
+		concurrent: {
 			dev: {
-				files: ['Gruntfile.js', 'public/js/**/*.js', 'public/css/*.css', 'public/views/**/*.html', 'public/_index.html'],
+				tasks: ['nodemon', 'watch:content', 'watch:index'],
+				options: {
+					limit: 3,
+					logConcurrentOutput: true,
+				},
+			},
+		},
+
+		watch: {
+			content: {
+				files: ['public/js/**/*.js', 'public/css/*.css', 'public/views/**/*.html'],
 				tasks: [
 					'jshint',
 					'html2js:dist',
 					'concat:dist',
-					'clean:temp',
-					'uglify:dist',
 					'cssmin:dist',
-					'clean:dottemp',
+					'clean:tmp',
+				],
+				options: {
+					atbegin: false
+				},
+			},
+			index: {
+				files: ['public/_index.html'],
+				tasks: [
 					'copy:index',
 					'useminPrepare',
 					'usemin',
@@ -188,45 +202,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-concurrent');
 
-	grunt.registerTask('test', [
-		'html2js:dist',
-	]);
-	grunt.registerTask('build', [
-		'clean:fonts',
-		'copy:index',
-		'useminPrepare',
-		'concat:generated',
-		'cssmin:generated',
-		'copy:fonts',
-		'uglify:generated',
-		'usemin',
-		'clean:dottemp',
-	]);
-	grunt.registerTask('htmlfix', [
-		'copy:index',
-		'useminPrepare',
-		'usemin',
-	]);
-	grunt.registerTask('min', [
+	grunt.registerTask('prod', [
 		'clean:dist',
-		'jsbeautifier',
-		'jshint',
 		'html2js:dist',
 		'concat:dist',
-		'clean:temp',
-		'uglify:dist',
-		'cssmin:dist',
-		//'express:dev',
-		//'watch:dev'
-	]);
-	grunt.registerTask('all', [
-		'clean:dist',
-		'jsbeautifier',
-		'jshint',
-		'html2js:dist',
-		'concat:dist',
-		'clean:temp',
 		'uglify:dist',
 		'cssmin:dist',
 		'clean:fonts',
@@ -237,8 +218,24 @@ module.exports = function(grunt) {
 		'copy:fonts',
 		'uglify:generated',
 		'usemin',
-		'clean:dottemp',
-		//'nodemon:dev',
-		'watch:dev'
+		'clean:tmp',
+	]);
+	grunt.registerTask('dev', [
+		'clean:dist',
+		'jsbeautifier',
+		'jshint',
+		'html2js:dist',
+		'concat:dist',
+		'cssmin:dist',
+		'clean:fonts',
+		'copy:index',
+		'useminPrepare',
+		'concat:generated',
+		'cssmin:generated',
+		'copy:fonts',
+		'uglify:generated',
+		'usemin',
+		'clean:tmp',
+		'concurrent:dev',
 	]);
 };

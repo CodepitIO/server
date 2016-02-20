@@ -1,0 +1,41 @@
+# Set the base image to Ubuntu
+FROM    ubuntu:14.04
+
+# File Author / Maintainer
+MAINTAINER Gustavo Stor
+
+# Install Node.js and other dependencies
+RUN apt-get update && \
+    apt-get -y install curl && \
+    curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && \
+    apt-get -y install nodejs git-all build-essential vim supervisor
+RUN mkdir -p /var/log/supervisor
+
+RUN npm install -g grunt-cli nodemon bower pm2 forever
+
+ENV WD www
+
+# Install node_modules and bower_components
+COPY package.json /tmp/package.json
+RUN cd /tmp && npm install
+
+COPY [".bowerrc", "bower.json", "/tmp/"]
+RUN cd /tmp && bower install --allow-root
+
+# Define working directory
+RUN mkdir -p /${WD}
+WORKDIR /${WD}
+ADD . /${WD}
+
+RUN cp -a /tmp/node_modules /${WD}/ && \
+    cp -a /tmp/public/bower_components /${WD}/public/ && \
+    rm -rf /tmp && \
+    grunt prod && \
+    g++ /${WD}/cpp/matchProblems.cpp -o /${WD}/cpp/matchProblems --std=c++0x
+
+ARG NODE_INSTANCES="1"
+ENV NODE_INSTANCES ${NODE_INSTANCES}
+
+COPY .supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
+
+CMD ["/usr/bin/supervisord"]

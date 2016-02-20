@@ -18,11 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
 	<!-- endbuild -->
 
-	<!-- build:css dist/app.min.css -->
-	<link rel="stylesheet" href="css/contest.css">
-	<link rel="stylesheet" href="css/style.css">
-	<!-- endbuild -->
-
+	<link rel="stylesheet" type="text/css" href="dist/app.min.css">
 </head>
 <body ng-app="mrtApp">
 
@@ -80,6 +76,18 @@
 	<div ng-view></div>
 
 	<ng-include src="'views/footer.html'"></ng-include>
+  <div id="content" class="container" ng-view></div>
+		<footer id="footer">
+			<p></p>
+		  <p>ⓒ 2015 - 2015 Maratonando</p>
+		  <p>
+		  	<a target="_blank" href="//github.com/godely"><i style="color: black" class="fa fa-github-square fa-2x"></i></a>&nbsp;
+		  	<a target="_blank" href="//facebook.com/stor"><i style="color: #3b5998" class="fa fa-facebook-square fa-2x"></i></a>&nbsp;
+		  	<a target="_blank" href="//br.linkedin.com/pub/gustavo-stor/b4/597/746"><i style="color: #007bb6" class="fa fa-linkedin-square fa-2x"></i></a>&nbsp;
+		  	<a target="_blank" href="mailto:gustavostor@gmail.com"><i style="color: #D9342D" class="fa fa-envelope-square fa-2x"></i></a>
+		  </p>
+		</footer>
+	</div>
 
 	<!-- build:js dist/general.min.js -->
 	<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
@@ -88,15 +96,17 @@
 	<script src="bower_components/moment/moment.js"></script>
 	<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
 	<script src="bower_components/moment/locale/pt-br.js"></script>
+	<script src="bower_components/socket.io-client/socket.io.js"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/angular.min.js -->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="bower_components/angular-socket-io/socket.js"></script>
 	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 	<script src="bower_components/angular-moment/angular-moment.js"></script>
-	<script src="bower_components/angular-ui-slider/src/slider.js"></script>	
+	<script src="bower_components/angular-ui-slider/src/slider.js"></script>
 	<script src="bower_components/angular-ui-sortable/sortable.min.js"></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>

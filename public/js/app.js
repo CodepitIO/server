@@ -10,6 +10,7 @@ var mrtApp = angular.module('mrtApp', [
 	'ui.slider',
 	'ui.sortable',
 	'ui-notification',
+	'btford.socket-io',
 
 	'ContestsCtrl',
 	'CreateContestCtrl',
@@ -35,6 +36,8 @@ var mrtApp = angular.module('mrtApp', [
 	'TagService',
 	'TeamService',
 	'UtilService',
+
+	'SocketService',
 ]).constant('angularMomentConfig', {
 	preprocess: 'utc',
 	timezone: 'America/Recife' // optional

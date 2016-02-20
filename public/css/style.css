@@ -137,6 +137,10 @@ button:disabled {
   color: #999;
 }
 
+.menu-active::first-line {
+  color: black;
+  opacity: 1;
+}
 
 .animation {
   -webkit-transition: 0.5s;
