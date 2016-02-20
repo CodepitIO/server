@@ -12,32 +12,12 @@ const bodyParser     = require('body-parser'),
       express        = require('express'),
       app            = express(),
       http           = require('http'),
-      https          = require('https'),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
       redis          = require('./config/redis').defaultClient;
 
 // configuration ===========================================
-// setup server
-var createNormalServer = false;
-if (app.get('env') === 'production') {
-  try {
-    var privateKey = fs.readFileSync('./certificates/cert.key', 'utf8');
-    var certificate = fs.readFileSync('./certificates/cert_chain.crt', 'utf8');
-    var credentials = {key: privateKey, cert: certificate};
-  } catch (e) {
-    createNormalServer = true;
-  }
-} else {
-  createNormalServer = true;
-}
-
-var server;
-if (createNormalServer) {
-  server = http.createServer(app);
-} else {
-  server = https.createServer(credentials, app);
-}
+server = http.createServer(app);
 
 // set locale
 app.locals.moment = require('moment-timezone');
