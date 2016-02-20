@@ -2,6 +2,7 @@
 // modules =================================================
 // require('pmx').init({http: true});
 const bodyParser     = require('body-parser'),
+      fs             = require('fs'),
       methodOverride = require('method-override'),
       passport       = require('passport'),
       cookieParser   = require('cookie-parser'),
@@ -21,8 +22,8 @@ const bodyParser     = require('body-parser'),
 var createNormalServer = false;
 if (app.get('env') === 'production') {
   try {
-    var privateKey = fs.readFileSync('/etc/ssl/cert.key', 'utf8');
-    var certificate = fs.readFileSync('/etc/ssl/cert_chain.crt', 'utf8');
+    var privateKey = fs.readFileSync('./certificates/cert.key', 'utf8');
+    var certificate = fs.readFileSync('./certificates/cert_chain.crt', 'utf8');
     var credentials = {key: privateKey, cert: certificate};
   } catch (e) {
     createNormalServer = true;

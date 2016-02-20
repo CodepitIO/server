@@ -28,6 +28,7 @@ npm-debug.log
 /public/problems/*
 /public/bower_components/*
 /public/index.html
+/certificates
 
 *.DS_STORE
 *.txt
