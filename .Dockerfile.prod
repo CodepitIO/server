@@ -33,6 +33,7 @@ RUN cp -a /tmp/node_modules /${WD}/ && \
     grunt prod && \
     g++ /${WD}/cpp/matchProblems.cpp -o /${WD}/cpp/matchProblems --std=c++0x
 
+VOLUME /${WD}/public
 ARG NODE_INSTANCES="1"
 ENV NODE_INSTANCES ${NODE_INSTANCES}
 
