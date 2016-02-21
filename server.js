@@ -17,7 +17,7 @@ const bodyParser     = require('body-parser'),
       redis          = require('./config/redis').defaultClient;
 
 // configuration ===========================================
-server = http.createServer(app);
+var server = http.createServer(app);
 
 // set locale
 app.locals.moment = require('moment-timezone');
