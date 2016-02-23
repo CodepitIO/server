@@ -31,13 +31,6 @@
 		  			<img src="imgs/logo_new.png" />
 		  		</a>
 
-		  		<a ng-if="$root.user" id="create-contest-btn" class="btn btn-icon" ng-click="/contest/create">
-			      <span>
-			        <i class="fa fa-plus"></i>
-			      </span>
-			      Criar competição
-			    </a>
-
 		  		<ul>
 		  			<li>
 			  			<div class="dropdown">
@@ -73,21 +66,11 @@
 	  </div>
 	</header>
 
-	<div ng-view></div>
+	<div id="wrapper" class="bs-component">
+		<div ng-view></div>
+	</div>
 
 	<ng-include src="'views/footer.html'"></ng-include>
-  <div id="content" class="container" ng-view></div>
-		<footer id="footer">
-			<p></p>
-		  <p>ⓒ 2015 - 2015 Maratonando</p>
-		  <p>
-		  	<a target="_blank" href="//github.com/godely"><i style="color: black" class="fa fa-github-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="//facebook.com/stor"><i style="color: #3b5998" class="fa fa-facebook-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="//br.linkedin.com/pub/gustavo-stor/b4/597/746"><i style="color: #007bb6" class="fa fa-linkedin-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="mailto:gustavostor@gmail.com"><i style="color: #D9342D" class="fa fa-envelope-square fa-2x"></i></a>
-		  </p>
-		</footer>
-	</div>
 
 	<!-- build:js dist/general.min.js -->
 	<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>

@@ -1,5 +1,5 @@
-<section id="new-user-action" ng-hide="$root.user">
-  <div class="container">
+<section id="new-user-action">
+  <div class="container" ng-hide="$root.user">
     <div class="row">
       <div id="action-info" class="col-sm-7">
         <img src="imgs/action_logo.png" />
@@ -50,62 +50,60 @@
       </div>
     </div>
   </div>
-</section>
-
-<div id="news" class="container">
-<div class="panel panel-default">
-  <div class="panel-heading">Novidades<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 14 de outubro de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">O novo corretor está no ar! Ele está mais robusto e tolerante a falhas, o que significa que muito provavelmente ele não irá cair -- a submissão só ficará pendente por muito tempo caso o próprio Online Judge a qual ela tenha sido submetida esteja fora do ar. Essa mudança em si não deve ser muito visível para vocês, a menos que vocês já tenham experienciado contests em que o nosso corretor caía, e suas submissões deixavam de ser enviadas. Bem, isso não deve mais acontecer, mas ainda assim estaremos de olho no novo corretor para corrigir quaisquer falhas que ele venha a ter. Como todo o código foi reescrito de forma limpa e concisa, tratar os erros na nova versão será bem mais fácil do que anteriormente. Uma coisa, porém, vocês devem perceber a partir de agora: o corretor está bem mais rápido! Vamos ver se vocês percebem isso durante os próximos contests :)</p>
-    <p style="text-align:justify;">Agora, claro que não iríamos publicar uma notícia chamada Novidades e só falar de uma mudança que poucos perceberão. Implementamos o corretor para o Codeforces! Já está liberada a criação de competições com questões de lá. Como as questões do Codeforces geralmente possuem tags ao lado, que dão spoiler do assunto da questão, ou simplesmente a letra da questão que dá uma noção de o quão difícil ela é, nós importamos todos os problemas localmente, de forma que não será possível a visualização de nenhuma informação extra sobre as questões de lá. Estamos consciente de que problemas novos do Codeforces surgem com muito mais frequência do que nos outros juízes online e, por isso, estamos desenvolvendo um sistema que irá automaticamente atrás de problemas novos de todos os OJs diariamente.</p>
-    <p style="text-align:justify;">Por fim, eu gostaria de esclarecer a todos sobre a situação com o URI. Foi realmente um erro meu ter implementado um corretor automático para o sistema deles sem os ter contactado previamente, pois como fazíamos muitas submissões para lá, o sistema deles acabava por ficar instável. Por isso, eu estou em contato direto com eles para implementar o nosso novo corretor para o URI, que respeitará limites de submissões por tempo e outras regras, além de utilizar outros métodos que deixarão as nossas requisições mais leves.</p>
-    <p style="text-align:justify;">Por enquanto é só. Aproveitem o novo corretor e o mais novo OJ integrado!</p>
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">URI down<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 28 de agosto de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">Pelo fato de eu ter integrado meu sistema com o Portal URI Online Judge sem pedir autorização, ou seja, sem o consentimento deles ou sem qualquer aviso ou alinhamento prévio, o corretor do URI estará fora do ar até resolvermos esta questão.</p>
-  </div>
-</div>
-<div class="panel panel-default">
+  <div class="container" id="news">
+    <div class="panel panel-default">
+      <div class="panel-heading">Novidades<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 14 de outubro de 2015</span></div>
+      <div class="panel-body">
+        <p style="text-align:justify;">O novo corretor está no ar! Ele está mais robusto e tolerante a falhas, o que significa que muito provavelmente ele não irá cair -- a submissão só ficará pendente por muito tempo caso o próprio Online Judge a qual ela tenha sido submetida esteja fora do ar. Essa mudança em si não deve ser muito visível para vocês, a menos que vocês já tenham experienciado contests em que o nosso corretor caía, e suas submissões deixavam de ser enviadas. Bem, isso não deve mais acontecer, mas ainda assim estaremos de olho no novo corretor para corrigir quaisquer falhas que ele venha a ter. Como todo o código foi reescrito de forma limpa e concisa, tratar os erros na nova versão será bem mais fácil do que anteriormente. Uma coisa, porém, vocês devem perceber a partir de agora: o corretor está bem mais rápido! Vamos ver se vocês percebem isso durante os próximos contests :)</p>
+        <p style="text-align:justify;">Agora, claro que não iríamos publicar uma notícia chamada Novidades e só falar de uma mudança que poucos perceberão. Implementamos o corretor para o Codeforces! Já está liberada a criação de competições com questões de lá. Como as questões do Codeforces geralmente possuem tags ao lado, que dão spoiler do assunto da questão, ou simplesmente a letra da questão que dá uma noção de o quão difícil ela é, nós importamos todos os problemas localmente, de forma que não será possível a visualização de nenhuma informação extra sobre as questões de lá. Estamos consciente de que problemas novos do Codeforces surgem com muito mais frequência do que nos outros juízes online e, por isso, estamos desenvolvendo um sistema que irá automaticamente atrás de problemas novos de todos os OJs diariamente.</p>
+        <p style="text-align:justify;">Por fim, eu gostaria de esclarecer a todos sobre a situação com o URI. Foi realmente um erro meu ter implementado um corretor automático para o sistema deles sem os ter contactado previamente, pois como fazíamos muitas submissões para lá, o sistema deles acabava por ficar instável. Por isso, eu estou em contato direto com eles para implementar o nosso novo corretor para o URI, que respeitará limites de submissões por tempo e outras regras, além de utilizar outros métodos que deixarão as nossas requisições mais leves.</p>
+        <p style="text-align:justify;">Por enquanto é só. Aproveitem o novo corretor e o mais novo OJ integrado!</p>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">URI down<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 28 de agosto de 2015</span></div>
+      <div class="panel-body">
+        <p style="text-align:justify;">Pelo fato de eu ter integrado meu sistema com o Portal URI Online Judge sem pedir autorização, ou seja, sem o consentimento deles ou sem qualquer aviso ou alinhamento prévio, o corretor do URI estará fora do ar até resolvermos esta questão.</p>
+      </div>
+    </div>
+    <div class="panel panel-default">
   <div class="panel-heading">Heads up<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 21 de agosto de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">Hoje nós descobrimos uma falha no nosso corretor, o que levava a um memory leak bem desagradável. Isso fez com que o corretor resetasse hoje nada menos do que 130 vezes - temos um mecanismo que reseta o corretor quando um memory leak é detectado. Graças a esses eventos, conseguimos identificar a fonte do memory leak e o erro foi corrigido. Gostaria de pedir desculpas e mais uma vez enfatizar que, como estamos em Beta, erros como esse podem acontecer. Muitas coisas novas estão sendo preparadas para o Maratonando, mas como estamos todos treinando para a competição que muitos de vocês também participarão - as subregionais de 12 de setembro, pretendemos lançar as novas features depois da competição.</p>
-    <p style="text-align:justify;">E quais são as novas features? Estamos trabalhando pesado no novo corretor do Maratonando. Ele será altamente paralelizável e rápido. Atualmente, só temos uma conta por Online Judge, e dentro de um Online Judge, as submissões são feitas sincronamente. No novo corretor em que estamos trabalhando, além de várias contas por OJ trabalhando independentemente, cada conta tratará as submissões de forma assíncrona, o que agilizará muito mais o processo.</p>
-    <p style="text-align:justify;">Além do corretor, estamos mudando a cara do Maratonando! Segue um preview de como está ficando a nova interface:</p>
-    <a href="/imgs/newhome.png" target="_blank"><img height="400" width="700" src="imgs/newhome.png"/></a>
-    <p style="text-align:justify;">Fiquem ligados :)</p>
+    <div class="panel-body">
+      <p style="text-align:justify;">Hoje nós descobrimos uma falha no nosso corretor, o que levava a um memory leak bem desagradável. Isso fez com que o corretor resetasse hoje nada menos do que 130 vezes - temos um mecanismo que reseta o corretor quando um memory leak é detectado. Graças a esses eventos, conseguimos identificar a fonte do memory leak e o erro foi corrigido. Gostaria de pedir desculpas e mais uma vez enfatizar que, como estamos em Beta, erros como esse podem acontecer. Muitas coisas novas estão sendo preparadas para o Maratonando, mas como estamos todos treinando para a competição que muitos de vocês também participarão - as subregionais de 12 de setembro, pretendemos lançar as novas features depois da competição.</p>
+      <p style="text-align:justify;">E quais são as novas features? Estamos trabalhando pesado no novo corretor do Maratonando. Ele será altamente paralelizável e rápido. Atualmente, só temos uma conta por Online Judge, e dentro de um Online Judge, as submissões são feitas sincronamente. No novo corretor em que estamos trabalhando, além de várias contas por OJ trabalhando independentemente, cada conta tratará as submissões de forma assíncrona, o que agilizará muito mais o processo.</p>
+      <p style="text-align:justify;">Além do corretor, estamos mudando a cara do Maratonando! Segue um preview de como está ficando a nova interface:</p>
+      <a href="/imgs/newhome.png" target="_blank"><img height="400" width="700" src="imgs/newhome.png"/></a>
+      <p style="text-align:justify;">Fiquem ligados :)</p>
+    </div>
   </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">Instabilidade Recente<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 7 de agosto de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">Peço desculpas pela recente instabilidade do Maratonando. A instância da Amazon que estamos usando para hospedar o servidor era a mais simples, e o servidor não estava preparado para lidar com várias pessoas utilizando o sistema simultaneamente. Fiz uma série de melhorias hoje, e amanhã de manhã testaremos novamente o sistema com uma carga grande de pessoas utilizando simultaneamente. Acho que agora vai :)</p>
+  <div class="panel panel-default">
+    <div class="panel-heading">Instabilidade Recente<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 7 de agosto de 2015</span></div>
+    <div class="panel-body">
+      <p style="text-align:justify;">Peço desculpas pela recente instabilidade do Maratonando. A instância da Amazon que estamos usando para hospedar o servidor era a mais simples, e o servidor não estava preparado para lidar com várias pessoas utilizando o sistema simultaneamente. Fiz uma série de melhorias hoje, e amanhã de manhã testaremos novamente o sistema com uma carga grande de pessoas utilizando simultaneamente. Acho que agora vai :)</p>
+    </div>
   </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading"><i class="fa fa-user-secret"></i>&nbsp;Espectadores&nbsp;<i class="fa fa-globe"></i><span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 31 de julho de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">Agora é possível definir quem pode assistir as competições - todo mundo <i class="fa fa-globe"></i>, ou apenas quem está registrado <i class="fa fa-user-secret"></i>. Combinando isso com competições privadas, você pode ter competições em que apenas as pessoas com senha podem visualizar :-)</p>
-    <p style="text-align:justify;">Algumas outras menores modificações foram feitas para melhorar a organização e entendimento da plataforma.</p>
+  <div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-user-secret"></i>&nbsp;Espectadores&nbsp;<i class="fa fa-globe"></i><span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 31 de julho de 2015</span></div>
+    <div class="panel-body">
+      <p style="text-align:justify;">Agora é possível definir quem pode assistir as competições - todo mundo <i class="fa fa-globe"></i>, ou apenas quem está registrado <i class="fa fa-user-secret"></i>. Combinando isso com competições privadas, você pode ter competições em que apenas as pessoas com senha podem visualizar :-)</p>
+      <p style="text-align:justify;">Algumas outras menores modificações foram feitas para melhorar a organização e entendimento da plataforma.</p>
+    </div>
   </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">Edição de competições<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 29 de julho de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">A partir de agora, já é possível editar competições depois de criadas :)</p>
-    <p style="text-align:justify;">Atentem que você é livre para editar qualquer atributo até que a competição se dê início. Após isso, a modificação de problemas e e a data de início serão bloqueadas.</p>
+  <div class="panel panel-default">
+    <div class="panel-heading">Edição de competições<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 29 de julho de 2015</span></div>
+    <div class="panel-body">
+      <p style="text-align:justify;">A partir de agora, já é possível editar competições depois de criadas :)</p>
+      <p style="text-align:justify;">Atentem que você é livre para editar qualquer atributo até que a competição se dê início. Após isso, a modificação de problemas e e a data de início serão bloqueadas.</p>
+    </div>
   </div>
-</div>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Sobre o Maratonando<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 18 de julho de 2015</span></div>
-  <div class="panel-body">
-    <p style="text-align:justify;">No ensino fundamental e médio existem várias olimpíadas que as escolas incentivam o aluno a participar, como: Olimpíada Brasileira de Matemática (OBM), Olimpíada Brasileira de Física (OBF) e Olimpíada Brasileira de Química (OBQ), para citar algumas. Poucos sabem, porém, que existe a Olimpíada Brasileira de Informática (OBI), a Olimpíada Internacional de Informática (IOI, do inglês International Olympiad in Informatics), e a Competição Internacional de Programação para o Colegiado (ICPC, do inglês International Collegiate Programming Contest), entre várias outras competições virtuais.
-    <p style="text-align:justify;">O mundo digital está tão em vigor hoje em dia que não é nada improvável que, muito em breve, jovens aprendam a programar na escola. Mas enquanto esse dia não chega, a Web é repleta de oportunidades de preparação para essas competições. Enquanto que na Rússia e na China os alunos são informados desde cedo sobre várias oportunidades que fogem dos assuntos do ensino fundamental e médio, no Brasil não há incentivo algum para o estudante.
-    <p style="text-align:justify;">Oportunidades de aprendizado na Web não faltam. O Codeforces, plataforma russa, mas com idioma disponível em inglês, promove competições regulares de algoritmos e sempre disponibiliza um editorial com a explicação da resolução dos problemas. O TopCoder é outro exemplo de plataforma de competições relacionadas à computação que também ensina, e ainda paga os melhores competidores. Essas competições fornecem um conjunto de questões, e o participante deve escrever um programa de computador em uma linguagem de sua preferência (geralmente C, C++ ou Java) que resolva esse problema. Enquanto há cerca de 4000 usuários da Rússia e 4500 da China cadastrados no Codeforces, esse número chega a menos de 400 para usuários do Brasil.</p>
-    <p style="text-align:justify;">O Maratonando<sup>BETA</sup> é fruto do trabalho de graduação desenvolvido por mim no Centro de Informática, na Universidade Federal de Pernambuco. A aplicação desenvolvida tem por objetivo prover um meio de sistematizar treinos de programação competitiva no Brasil.</p>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Sobre o Maratonando<span class="pull-right" style="font-style: italic; font-size: 12px;">por Gustavo Stor em 18 de julho de 2015</span></div>
+    <div class="panel-body">
+      <p style="text-align:justify;">No ensino fundamental e médio existem várias olimpíadas que as escolas incentivam o aluno a participar, como: Olimpíada Brasileira de Matemática (OBM), Olimpíada Brasileira de Física (OBF) e Olimpíada Brasileira de Química (OBQ), para citar algumas. Poucos sabem, porém, que existe a Olimpíada Brasileira de Informática (OBI), a Olimpíada Internacional de Informática (IOI, do inglês International Olympiad in Informatics), e a Competição Internacional de Programação para o Colegiado (ICPC, do inglês International Collegiate Programming Contest), entre várias outras competições virtuais.
+      <p style="text-align:justify;">O mundo digital está tão em vigor hoje em dia que não é nada improvável que, muito em breve, jovens aprendam a programar na escola. Mas enquanto esse dia não chega, a Web é repleta de oportunidades de preparação para essas competições. Enquanto que na Rússia e na China os alunos são informados desde cedo sobre várias oportunidades que fogem dos assuntos do ensino fundamental e médio, no Brasil não há incentivo algum para o estudante.
+      <p style="text-align:justify;">Oportunidades de aprendizado na Web não faltam. O Codeforces, plataforma russa, mas com idioma disponível em inglês, promove competições regulares de algoritmos e sempre disponibiliza um editorial com a explicação da resolução dos problemas. O TopCoder é outro exemplo de plataforma de competições relacionadas à computação que também ensina, e ainda paga os melhores competidores. Essas competições fornecem um conjunto de questões, e o participante deve escrever um programa de computador em uma linguagem de sua preferência (geralmente C, C++ ou Java) que resolva esse problema. Enquanto há cerca de 4000 usuários da Rússia e 4500 da China cadastrados no Codeforces, esse número chega a menos de 400 para usuários do Brasil.</p>
+      <p style="text-align:justify;">O Maratonando<sup>BETA</sup> é fruto do trabalho de graduação desenvolvido por mim no Centro de Informática, na Universidade Federal de Pernambuco. A aplicação desenvolvida tem por objetivo prover um meio de sistematizar treinos de programação competitiva no Brasil.</p>
+    </div>
   </div>
-</div>
-</div>
+</section>

@@ -413,8 +413,7 @@ header .dropdown-menu li a{
 /* Call to action for new users */
 
 #new-user-action{
-  background: url("../imgs/action_bg.png") repeat-x;
-  height: 580px;
+  background: url("../imgs/action_bg.png");
   box-shadow: inset 0px -5px 10px rgba(0,0,0,0.05);
 }
 
@@ -530,7 +529,7 @@ header .dropdown-menu li a{
 
 /* News area */
 #news{
-  margin-top: 40px;
+  padding-top: 40px;
 }
 
 /* Loader */
