@@ -3,66 +3,6 @@
   font-weight: 300;
 }
 
-html,
-body {
-  margin:0;
-  padding:0;
-  height:100%;
-}
-#wrapper {
-  min-height:100%;
-  position:relative;
-}
-#content {
-  min-height: 505px; /* Fix a height here */
-  overflow: auto;
-}
-#footer {
-  text-align: center;
-  background: rgba(148, 148, 148, 0.15);
-  width:100%;
-  border-top: 1px solid #999;
-}
-#footer p {
-  margin: 0px;
-  padding: 5px;
-}
-
-th {
-  color: #777;
-}
-
-.mrt-logo {
-  background-image: url("/../imgs/Maratonando-Logo.png");
-  background-size: 178px 50px;
-  width: 180px;
-  height: 50px;
-  background-repeat: no-repeat;
-  display: block;
-  margin: 0 15px 0 6px;
-}
-
-.mrt-logo-beta {
-    color: rgb(255, 255, 255);
-    font-size: 0.56em;
-    padding-left: 3px;
-}
-
-.page-title {
-  margin-top: 0px;
-  color: #777;
-  letter-spacing: 4px;
-  text-shadow: 2px 2px 2px #CCCCCC;
-}
-
-.team-lemma {
-  color: #999;
-  font-style: italic;
-  font-size: 11px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
 .profile-image {
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -528,27 +468,28 @@ header .dropdown-menu li a{
   padding-top: 40px;
 }
 
-#news .news-section-st {
+#news .news-section {
   border-left: thick solid rgba(93, 106, 115, 1);
   border-right: thick solid rgba(93, 106, 115, 1);
-  border-bottom: thin solid rgba(93, 106, 115, 1);
-  border-radius: 20px 20px 0 0;
-  padding: 15px;
   background-color: #f9f9f9;
+  padding: 15px;
 }
 
-#news .news-section-nd {
+#news .news-section.first {
+  border-radius: 20px 20px 0 0;
+  border-bottom: thin solid rgba(93, 106, 115, 1);
+}
+
+#news .news-section:not(.first,.last) {
   margin-top: 10px;
-  border-left: thick solid rgba(93, 106, 115, 1);
-  border-right: thick solid rgba(93, 106, 115, 1);
   border-top: thin solid rgba(93, 106, 115, 1);
   border-bottom: thin solid rgba(93, 106, 115, 1);
-  padding: 15px;
-  background-color: #f9f9f9;
 }
 
-#news .news-section-ft {
-  margin-bottom: 20px;
+#news .news-section.last {
+  margin-top: 10px;
+  border-top: thin solid rgba(93, 106, 115, 1);
+  border-radius: 0 0 20px 20px;
 }
 
 #news .news-header {
@@ -556,15 +497,19 @@ header .dropdown-menu li a{
   color: #807F7F;
 }
 
-#news .news-body {
-  font: 300 16px "Open Sans";
-  color: #605F5F;
-  padding: 0 20px 0 20px;
+#news .news-header:before {
+  content: "_";
 }
 
 #news .news-header-separator {
   margin: 0px 0px 15px 0px;
   border-color: #e2e2e2;
+}
+
+#news .news-body {
+  font: 300 16px "Open Sans";
+  color: #605F5F;
+  padding: 0 20px 0 20px;
 }
 
 /* Loader */
