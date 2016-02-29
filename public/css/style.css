@@ -3,74 +3,6 @@
   font-weight: 300;
 }
 
-html,
-body {
-  margin:0;
-  padding:0;
-  height:100%;
-}
-#wrapper {
-  min-height:100%;
-  position:relative;
-}
-#header {
-  background-color: rgba(245, 245, 245, 1); background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(148, 148, 148, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(148, 148, 148, 0.15)),color-stop(0.75,rgba(148, 148, 148, 0.15)),color-stop(0.75,transparent),to(transparent)));
-  background-image: -webkit-linear-gradient(45deg,rgba(148, 148, 148, 0.15) 25%,transparent 25%,transparent 50%,rgba(148, 148, 148, 0.15) 50%,rgba(148, 148, 148, 0.15) 75%,transparent 75%,transparent);
-  background-image: linear-gradient(45deg,rgba(148, 148, 148, 0.15) 25%,transparent 25%,transparent 50%,rgba(148, 148, 148, 0.15) 50%,rgba(148, 148, 148, 0.15) 75%,transparent 75%,transparent);
-  background-size: 220px 220px;
-  padding:10px;
-  border-bottom: 1px solid #999;
-}
-#content {
-  min-height: 505px; /* Fix a height here */
-  overflow: auto;
-}
-#footer {
-  text-align: center;
-  background: rgba(148, 148, 148, 0.15);
-  width:100%;
-  border-top: 1px solid #999;
-}
-#footer p {
-  margin: 0px;
-  padding: 5px;
-}
-
-th {
-  color: #777;
-}
-
-.mrt-logo {
-  background-image: url("/../imgs/Maratonando-Logo.png");
-  background-size: 178px 50px;
-  width: 180px;
-  height: 50px;
-  background-repeat: no-repeat;
-  display: block;
-  margin: 0 15px 0 6px;
-}
-
-.mrt-logo-beta {
-    color: rgb(255, 255, 255);
-    font-size: 0.56em;
-    padding-left: 3px;
-}
-
-.page-title {
-  margin-top: 0px;
-  color: #777;
-  letter-spacing: 4px;
-  text-shadow: 2px 2px 2px #CCCCCC;
-}
-
-.team-lemma {
-  color: #999;
-  font-style: italic;
-  font-size: 11px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
 .profile-image {
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -165,10 +97,14 @@ button:disabled {
 }
 
 /* Header */
-header{
-  width: 100%;
+header {
   height: 75px;
   background: #374249;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
 }
 
 #logo{
@@ -311,51 +247,63 @@ header .dropdown-menu li a{
   color: #eb9681;
 }
 
-#top-user-area{
+#top-user-area {
   float: right;
 }
 
-#top-user-area form{
+#top-user-area form {
   float: left;
   height: 75px;
-  padding-top: 21px;
   padding-right: 20px;
   font: 600 14px "Open Sans";
   color: #f2f2f2;
 }
 
-#login-email{
-  padding: 6px 7px;
-  background-color: rgba(0,0,0,0.2);
-  border: none;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  float: left;
-  outline: none;
-  border-bottom: solid 2px rgba(0,0,0,0);
+#top-user-area .form-group {
+  display: inline-block;
+  margin-top: 20px;
 }
 
-#login-password{
-  padding: 6px 7px;
+#top-user-area .form-control {
+  padding-left: 10px;
+  color: #CCCCCC;
+}
+
+#top-user-area .form-group label.control-label {
+  margin-left: 6px;
+  font-family: "Open Sans";
+  font-weight: 600;
+}
+
+#top-user-area-email {
   background-color: rgba(0,0,0,0.2);
   border: none;
-  float: left;
+  outline: none;
+  border-top-left-radius: 4px;
+}
+
+#top-user-area-password {
+  background-color: rgba(0,0,0,0.2);
+  border: none;
   outline: none;
   border-left: solid 1px #292D2F;
-  border-bottom: solid 2px rgba(0,0,0,0);
+  color: white;
 }
 
-#login-email:focus, #login-password:focus{
+#top-user-area-email:focus, #top-user-area-password:focus{
   border-bottom: solid 2px #f2f2f2;
+  color: white;
 }
 
-#login-submit{
+#top-user-area-submit {
   background: #6b818f;
   color: #CAD0D4;
+  margin: 0px;
   border: none;
   border-radius: 0px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+  margin-bottom: 7px;
 }
 
 #top-user-info{
@@ -413,8 +361,7 @@ header .dropdown-menu li a{
 /* Call to action for new users */
 
 #new-user-action{
-  background: url("../imgs/action_bg.png") repeat-x;
-  height: 580px;
+  background: url("../imgs/action_bg.png");
   box-shadow: inset 0px -5px 10px rgba(0,0,0,0.05);
 }
 
@@ -529,8 +476,52 @@ header .dropdown-menu li a{
 }
 
 /* News area */
-#news{
-  margin-top: 40px;
+#news {
+  padding-top: 40px;
+}
+
+#news .news-section {
+  border-left: thick solid rgba(93, 106, 115, 1);
+  border-right: thick solid rgba(93, 106, 115, 1);
+  background-color: #f9f9f9;
+  padding: 15px;
+}
+
+#news .news-section.first {
+  border-radius: 20px 20px 0 0;
+  border-bottom: thin solid rgba(93, 106, 115, 1);
+}
+
+#news .news-section:not(.first,.last) {
+  margin-top: 10px;
+  border-top: thin solid rgba(93, 106, 115, 1);
+  border-bottom: thin solid rgba(93, 106, 115, 1);
+}
+
+#news .news-section.last {
+  margin-top: 10px;
+  border-top: thin solid rgba(93, 106, 115, 1);
+  border-radius: 0 0 20px 20px;
+}
+
+#news .news-header {
+  font: 500 36px "Open Sans";
+  color: #807F7F;
+}
+
+#news .news-header:before {
+  content: "_";
+}
+
+#news .news-header-separator {
+  margin: 0px 0px 15px 0px;
+  border-color: #e2e2e2;
+}
+
+#news .news-body {
+  font: 300 16px "Open Sans";
+  color: #605F5F;
+  padding: 0 20px 0 20px;
 }
 
 /* Loader */
@@ -546,6 +537,7 @@ header .dropdown-menu li a{
   color: #747474;
   text-align: center;
   margin-bottom: 0px;
+  margin-top: 90px;
 }
 
 #register-area h3{
@@ -610,7 +602,8 @@ header .dropdown-menu li a{
 }
 
 /* Footer */
-footer{
+footer {
+  margin-top: 40px;
   width: 100%;
   background: url('../imgs/footer_bg.jpg') no-repeat;
   background-size: cover;
@@ -686,7 +679,8 @@ footer ul li a:first-child{
 }
 
 /* Breadcrumbs */
-#breadcrumbs{
+#breadcrumbs {
+  margin-top: 75px;
   background: #f9f9f9;
   border-bottom: solid 1px #F7F7F7;
 }
