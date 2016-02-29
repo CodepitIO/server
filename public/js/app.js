@@ -1,15 +1,15 @@
 var mrtApp = angular.module('mrtApp', [
 	'mrtApp.templates',
 	'angularMoment',
-	'angular-toArrayFilter',
-	'ngRoute',
+	'ui.router',
+	'ui-notification',
+	'ui.bootstrap',
 	'appRoutes',
 	'ngAnimate',
+	'angular-toArrayFilter',
 	'ngResource',
-	'ui.bootstrap',
 	'ui.slider',
 	'ui.sortable',
-	'ui-notification',
 	'btford.socket-io',
 
 	'ContestsCtrl',
@@ -104,7 +104,7 @@ var mrtApp = angular.module('mrtApp', [
 		}
 	};
 }]).run([
-	'$route',
+	//'$route',
 	'$location',
 	'$http',
 	'$window',
@@ -113,7 +113,7 @@ var mrtApp = angular.module('mrtApp', [
 	'Notification',
 	'$templateCache',
 	'amMoment',
-	function($route, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment) {
+	function( /*$route, */ $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment) {
 		amMoment.changeLocale('pt-br');
 		$rootScope.loadingUser = true;
 		$rootScope.intervalPromises = [];
@@ -121,7 +121,7 @@ var mrtApp = angular.module('mrtApp', [
 			$rootScope.user = data;
 			$rootScope.loadingUser = false;
 			var nextPath = $location.path();
-			if ($route.routes[nextPath]) {
+			/*if ($route.routes[nextPath]) {
 				var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged;
 				var mustBeLogged = $route.routes[nextPath].mustBeLogged;
 				var isLogged = !!$rootScope.user;
@@ -132,7 +132,7 @@ var mrtApp = angular.module('mrtApp', [
 					$location.path('/');
 					Notification.info('Você deve estar logado para ver esta página.');
 				}
-			}
+			}*/
 		});
 		$rootScope.$on('$locationChangeStart', function(ev, next, current) {
 			var nextPath = $location.path();
@@ -140,7 +140,7 @@ var mrtApp = angular.module('mrtApp', [
 				$interval.cancel($rootScope.intervalPromises[i]);
 			}
 			$rootScope.intervalPromises = [];
-			if ($route.routes[nextPath]) {
+			/*if ($route.routes[nextPath]) {
 				var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged;
 				var mustBeLogged = $route.routes[nextPath].mustBeLogged;
 				var isLogged = !!$rootScope.user;
@@ -149,7 +149,7 @@ var mrtApp = angular.module('mrtApp', [
 				} else if (mustBeLogged && !isLogged) {
 					$location.path('/');
 				}
-			}
+			}*/
 		});
 		$rootScope.not = function(func) {
 			return function(item) {
