@@ -14,6 +14,12 @@ var CatalogCtrl = require('./controllers/catalog');
 var Util = require('./utils/functions');
 
 module.exports = function(app, passport) {
+
+  var indexFile = './public/index.html';
+  if (app.get('env') === 'development') {
+    indexFile = './public/_index.html';
+  }
+
   // account
   app.post('/api/account/register', isLoggedOff, function(req, res) {
     passport.authenticate('local-signup', function(err, user) {
@@ -95,7 +101,7 @@ module.exports = function(app, passport) {
 
 	// route to handle all angular requests
 	app.get('*', function(req, res) {
-		res.sendfile('./public/index.html');
+		res.sendfile(indexFile);
 	});
 
 };
