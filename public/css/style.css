@@ -303,6 +303,7 @@ header .dropdown-menu li a{
   border-radius: 0px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+  margin-bottom: 7px;
 }
 
 #top-user-info{
@@ -536,6 +537,7 @@ header .dropdown-menu li a{
   color: #747474;
   text-align: center;
   margin-bottom: 0px;
+  margin-top: 90px;
 }
 
 #register-area h3{
