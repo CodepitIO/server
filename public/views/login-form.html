@@ -1,50 +1,57 @@
 <div id="top-user-area">
 
-<div ng-show="$root.loadingUser">
-  <loading-spinner 
-    color="'#45a7b9'" 
-    width="'40px'" 
-    height="'40px'" 
-    style="position: relative; top: 14px; right: 20px;">
-  </loading-spinner>
-</div>
+  <div ng-show="$root.loadingUser">
+    <loading-spinner 
+      color="'#45a7b9'" 
+      width="'40px'" 
+      height="'40px'" 
+      style="position: relative; top: 14px; right: 20px;">
+    </loading-spinner>
+  </div>
 
-<div ng-hide="$root.loadingUser">
+  <div ng-hide="$root.loadingUser">
+    <div ng-hide="$root.user">
 
-  <div ng-hide="$root.user">
+        <form>
+          <div class="form-group label-floating is-empty">
+            <label for="top-user-area-email" class="control-label">Email</label>
+            <input id="top-user-area-email" type="email" ng-model="account.email" class="form-control">
+          </div>
+          <div class="form-group label-floating is-empty">
+          <label for="top-user-area-password" class="control-label">Senha</label>
+            <input id="top-user-area-password" type="password" ng-model="account.password" class="form-control">
+          </div>
+          <div class="form-group">
+            <button id="top-user-area-submit" type="submit" ng-click="login()" class="btn btn-default">
+              <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </form>
 
-      <form>
-          <input id="login-email" type="email" ng-model="account.email" placeholder="Email">
-          <input id="login-password" type="password" ng-model="account.password" placeholder="Senha">
-          <button id="login-submit" type="submit" ng-click="login()" class="btn btn-default">
-            <i class="fa fa-arrow-right"></i>
-          </button>
-      </form>
+        <a id="register-btn" class="btn btn-icon" href="/register">
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+          Registre-se
+        </a>
+        
+    </div>
 
-      <a id="register-btn" class="btn btn-icon" href="/register">
+    <div ng-show="$root.user">
+
+      <a id="logout-btn" class="btn btn-icon" ng-click="logout()">
         <span>
           <i class="fa fa-user"></i>
         </span>
-        Registre-se
+        Sair
       </a>
-      
+
+      <a id="top-user-info" href="/profile">
+        <img ng-src="{{ pictureUrl }}">
+        Perfil
+      </a>
+
+    </div>
   </div>
-
-  <div ng-show="$root.user">
-
-    <a id="logout-btn" class="btn btn-icon" ng-click="logout()">
-      <span>
-        <i class="fa fa-user"></i>
-      </span>
-      Sair
-    </a>
-
-    <a id="top-user-info" href="/profile">
-      <img ng-src="{{ pictureUrl }}">
-      Perfil
-    </a>
-
-  </div>
-</div>
 
 </div>

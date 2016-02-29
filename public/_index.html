@@ -12,12 +12,13 @@
 
   <!-- build:css dist/bootstrap.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" />
 	<!-- endbuild -->
 
 	<!-- build:css dist/general.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<!-- endbuild -->
 
 	<!-- build:css dist/angular.min.css -->
@@ -34,7 +35,7 @@
 </head>
 <body ng-app="mrtApp">
 
-	<header>
+	<header id="header">
 	  <div class="container-fluid">
 	  	<div class="row">
 		  	<div class="col-md-12">
@@ -42,13 +43,6 @@
 		  		<a id="logo" href="/">
 		  			<img src="imgs/logo_new.png" />
 		  		</a>
-
-		  		<a ng-if="$root.user" id="create-contest-btn" class="btn btn-icon" ng-click="/contest/create">
-			      <span>
-			        <i class="fa fa-plus"></i>
-			      </span>
-			      Criar competição
-			    </a>
 
 		  		<ul>
 		  			<li>
@@ -83,26 +77,15 @@
 	  </div>
 	</header>
 
-	<div ng-view></div>
+	<div class="bs-component">
+		<div ng-view></div>
+	</div>
 
 	<ng-include src="'views/footer.html'"></ng-include>
-  <div id="content" class="container" ng-view></div>
-		<footer id="footer">
-			<p></p>
-		  <p>ⓒ 2015 - 2015 Maratonando</p>
-		  <p>
-		  	<a target="_blank" href="//github.com/godely"><i style="color: black" class="fa fa-github-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="//facebook.com/stor"><i style="color: #3b5998" class="fa fa-facebook-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="//br.linkedin.com/pub/gustavo-stor/b4/597/746"><i style="color: #007bb6" class="fa fa-linkedin-square fa-2x"></i></a>&nbsp;
-		  	<a target="_blank" href="mailto:gustavostor@gmail.com"><i style="color: #D9342D" class="fa fa-envelope-square fa-2x"></i></a>
-		  </p>
-		</footer>
-	</div>
 
 	<!-- build:js dist/general.min.js -->
 	<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
 	<script src="bower_components/jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
 	<script src="bower_components/moment/moment.js"></script>
 	<script src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
 	<script src="bower_components/moment/locale/pt-br.js"></script>
@@ -111,6 +94,8 @@
 
 	<!-- build:js dist/bootstrap.min.js -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+	<script src="bower_components/bootstrap-material-design/dist/js/material.min.js" type="text/javascript"></script>
+	<script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js" type="text/javascript"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/angular.min.js -->
@@ -165,7 +150,6 @@
 
 	<script type="text/javascript">
 		$.material.init();
-		$.material.ripples();
 	</script>
 
   <script>
@@ -176,7 +160,6 @@
 
     ga('create', 'UA-65762577-1', 'auto');
     ga('send', 'pageview');
-
   </script>
 </body>
 </html>
