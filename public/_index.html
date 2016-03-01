@@ -48,14 +48,14 @@
 		  			<li>
 			  			<div class="dropdown">
 			  				<a href="#" data-toggle="dropdown" ng-class="{'menu-active': isActive('/contest.*')}">
-			  					Competições 
+			  					Competições
 			  					<span class="caret"></span>
 			  				</a>
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							    <li><a href="/contests/open">Em aberto</a></li>
 			            <li><a href="/contests/past">Passadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a href="/contests/created">Criadas</a></li>
+			            <li ng-show="$root.user"><a href="/contests/owned">Criadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
 			            <li ng-show="$root.user"><a href="/contests/create">Criar competição</a></li>
 							  </ul>
@@ -71,7 +71,7 @@
 		  		</form>-->
 
 		  		<login-form></login-form>
-		  		
+
 		  	</div>
 	  	</div>
 	  </div>
@@ -141,8 +141,10 @@
 	<script src="js/controllers/contests/ContestsCtrl.js"></script>
 	<script src="js/controllers/contests/CreateContestCtrl.js"></script>
 	<script src="js/controllers/contests/EditContestCtrl.js"></script>
-	<script src="js/controllers/contests/OwnedContestsCtrl.js"></script>
 	<script src="js/controllers/contests/SingleContestCtrl.js"></script>
+
+	<script src="js/directives/Contest.js"></script>
+	<script src="js/directives/General.js"></script>
 
 	<script src="js/utils/popovers.js"></script>
 	<script src="dist/templates.js"></script>
@@ -150,6 +152,7 @@
 
 	<script type="text/javascript">
 		$.material.init();
+		//$.material.ripples();
 	</script>
 
   <script>
