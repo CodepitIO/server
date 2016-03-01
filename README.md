@@ -49,13 +49,18 @@ services:
       - ./site:/www
       - problems:/www/public/problems
     ports:
-      - "3000:3000"
+      - "80:3000"
     environment:
       - PORT=3000
       - NODE_ENV=development
     links:
       - mongo:mongo
       - redis:redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "300"
+
   # judger:
   #   container_name: judger
   #   build:
@@ -70,6 +75,17 @@ services:
   #     - mongo:mongo
   #   environment:
   #     - NODE_ENV=development
+  adminui:
+    container_name: mongo-express
+    image: "maratonando/mongo-express"
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_BASICAUTH_USERNAME=maratonando
+      - ME_CONFIG_BASICAUTH_PASSWORD=123456
+    ports:
+      - "28017:8081"
+    links:
+      - mongo:mongo
   redis:
     container_name: redis
     image: "redis:3.0"
@@ -84,17 +100,6 @@ services:
     command: "--smallfiles --logpath=/dev/null"
     volumes:
       - data:/data/db
-  adminui:
-    container_name: mongo-express
-    image: "maratonando/mongo-express"
-    restart: unless-stopped
-    environment:
-      - ME_CONFIG_BASICAUTH_USERNAME=maratonando
-      - ME_CONFIG_BASICAUTH_PASSWORD=123456
-    ports:
-      - "28017:8081"
-    links:
-      - mongo:mongo
 volumes:
   data: {}
   problems: {}
@@ -114,7 +119,7 @@ From **maratonando** folder, run the application (the first time might take some
 docker-compose up
 ```
 
-Wait until the service prints `Listening to port 3000`, then the application will bootstrap when running 
-for the first time, so you have to wait some more minutes to access the website in `localhost:3000`.
+Wait until the service prints `Listening to port 3000`, then the application will bootstrap when running
+for the first time, so you have to wait some more minutes to access the website. Your host name will depend on which OS you're using to develop. If you're a Linux user, you can access the website via `localhost`. Otherwise, you'll have to check the Docker host IP. To do that, run `docker-machine env default`, and look for the IP in `DOCKER_HOST`. It's usually `192.168.99.100`, but it can change.
 
-You can access the database in `localhost:28017` with login `maratonando` and pass `123456`.
+You can access the database in `<host>:28017` with login `maratonando` and pass `123456`.
