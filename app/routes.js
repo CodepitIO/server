@@ -79,7 +79,10 @@ module.exports = function(app, passport) {
   app.post('/api/catalog/get', isLoggedIn, CatalogCtrl.get);
 
   // authentication
-  app.post('/api/login', isLoggedOff, function(req, res) {
+  app.post('/api/login', function(req, res) {
+    if (req.isAuthenticated()) {
+  		req.logout();
+    }
     passport.authenticate('local-login', function(err, user) {
       req.logIn(user, function(err) {
         if (err) return res.json({error: err});

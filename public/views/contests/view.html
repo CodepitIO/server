@@ -17,10 +17,7 @@
       <h4 ng-show="!loadingData && timeLeft <= 0">Tempo: {{timeline.moment | formatDuration}}</h4>
     </div>
 
-    <div class="col-sm-6" id="contest-view-status">
-      <h3 ng-show="!loadingData && timeLeft <= 0">Finalizado</h3>
-      <h3 ng-show="!loadingData && timeLeft > 0">Acontecendo</h3>
-    </div>
+    <div class="col-sm-6" id="contest-view-status"></div>
 
     <div class="col-sm-3" id="contest-view-upsolving">
       <h4 ng-if="timeLeft > 0 && !loadingData && progressBarValue >= 0">restam {{timeLeft | formatTime}}</h4>
@@ -139,7 +136,7 @@
                     </td>
                     <td>{{languages[sub.language]}}</td>
                     <td>{{verdictName[sub.verdict]}}&nbsp;<i ng-if="getSubmissionClass(sub.verdict) == 'pending-submission'" class="fa fa-pulse fa-spinner"></i></td>
-                    <td colspan="5"><a ng-href="/submission/{{sub._id}}"><i class="fa fa-eye"></i></a></td>
+                    <td colspan="5"><a ui-sref="submission({id:sub._id})"><i class="fa fa-eye"></i></a></td>
                   </tr>
                 </tbody>
               </table>
@@ -171,7 +168,7 @@
                     </td>
                     <td><rating class="rating" ng-class="{'rating-unchanged': !p.rate && !p.hovering}" ng-model="p.rate" max="5" ng-change="selectRate(p)" on-hover="p.hovering = true" on-leave="p.hovering=false" rating-states="ratingStates"></rating></td>
                     <td>
-                      <span class="problem-tag" ng-repeat="tag in p.tags">{{tag.name}}&nbsp;<a href="#" ng-click="removeTag(tag,p)"><i class="fa fa-times contest-remove-problem"></i></a></span>
+                      <span class="problem-tag" ng-repeat="tag in p.tags">{{tag.name}}&nbsp;<a class="link" ng-click="removeTag(tag,p)"><i class="fa fa-times contest-remove-problem"></i></a></span>
                     </td>
                     <td><input type="text" ng-keyup="insertTag($event,p)" ng-model="p.tagSelected" typeahead="tag as tag.name for tag in allTags | filter:{name:$viewValue} | filter:notInsertedTags(p) | limitTo:10" ng-change="fixTagInput(p)" typeahead-on-select="onSelectTag($item, $model, $label, p)" class="form-control" placeholder="Adicionar assunto..."></input></td>
                   </tr>

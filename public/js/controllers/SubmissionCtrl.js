@@ -1,13 +1,13 @@
 var app = angular.module('SubmissionCtrl', []);
 app.controller('SubmissionController', [
 	'$scope',
-	'$routeParams',
+	'$stateParams',
 	'SubmissionFactory',
-	function($scope, $routeParams, submission) {
+	function($scope, $stateParams, submission) {
 		$scope.code = '';
 		var getSubmission = function() {
 			submission.get({
-				id: $routeParams.id
+				id: $stateParams.id
 			}).then(function(data) {
 				$scope.code = data.code;
 			});

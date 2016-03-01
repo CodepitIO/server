@@ -2,15 +2,15 @@ var app = angular.module('TeamCtrl', []);
 app.controller('TeamController', [
 	'$rootScope',
 	'$scope',
-	'$routeParams',
+	'$stateParams',
 	'$location',
 	'$timeout',
 	'Notification',
 	'TeamFactory',
 	'UtilFactory',
 	'GlobalFactory',
-	function($rootScope, $scope, $routeParams, $location, $timeout, Notification, team, util, global) {
-		var id = $routeParams.id;
+	function($rootScope, $scope, $stateParams, $location, $timeout, Notification, team, util, global) {
+		var id = $stateParams.id;
 		$scope.team = {};
 		$scope.newInvite = '';
 		$scope.tabSelected = 'invites';

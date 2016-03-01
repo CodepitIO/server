@@ -2,7 +2,7 @@ var app = angular.module('EditContestCtrl', []);
 app.controller('EditContestController', [
 	'$scope',
 	'$rootScope',
-	'$routeParams',
+	'$stateParams',
 	'$timeout',
 	'$interval',
 	'$location',
@@ -10,7 +10,7 @@ app.controller('EditContestController', [
 	'ProblemsFactory',
 	'ContestsFactory',
 	'SingleContestFactory',
-	function($scope, $rootScope, $routeParams, $timeout, $interval, $location, Notification, problems, contests, singleContest) {
+	function($scope, $rootScope, $stateParams, $timeout, $interval, $location, Notification, problems, contests, singleContest) {
 		$scope.name = '';
 		$scope.descr = '';
 		$scope.startDateTime = new Date();
@@ -58,7 +58,7 @@ app.controller('EditContestController', [
 
 		var getContestData = function() {
 			singleContest.getFullData({
-					id: $routeParams.id
+					id: $stateParams.id
 				})
 				.then(function(data) {
 					data = data.contest;
@@ -200,7 +200,7 @@ app.controller('EditContestController', [
 			var password = ($scope.access == 'Privado' && $scope.password) || '';
 			var confirmPassword = ($scope.access == 'Privado' && $scope.confirmPassword) || '';
 			singleContest.edit({
-					id: $routeParams.id,
+					id: $stateParams.id,
 					name: $scope.name,
 					descr: $scope.descr,
 					startDateTime: $scope.startDateTime,

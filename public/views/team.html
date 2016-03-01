@@ -15,7 +15,7 @@
         <div class="row">
           <p class="team-member-username">{{member.username}}
             <span ng-if="team.isLoggedAdmin && member.id != team.admin">
-              &nbsp;<a href="#" confirmed-click="removeFromTeam(member.id)">(remover)</a>
+              &nbsp;<a class="link" confirmed-click="removeFromTeam(member.id)">(remover)</a>
             </span>
           </p>
         </div>
@@ -53,7 +53,7 @@
           <tbody ng-show="tabSelected=='invites'">
             <tr ng-repeat="invitee in team.invites" class="animation">
               <td>{{invitee.email}}</td>
-              <td><a href="#" confirmed-click="removeFromTeam(invitee.id)">Remover</a></td>
+              <td><a class="link" confirmed-click="removeFromTeam(invitee.id)">Remover</a></td>
             </tr>
             <tr ng-form="inviteForm">
               <td><input type="email" class="form-control" ng-model="newInvite" name="newInvite" placeholder="E-mail" required></td>

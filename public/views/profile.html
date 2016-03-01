@@ -77,7 +77,7 @@
                   <span ng-if="team.admin == $root.user._id" class="team-admin">(admin)</span>
                 </td>
                 <td><a ng-href="/team/{{team._id}}">Ver<span ng-if="team.admin == $root.user._id">&nbsp;e Editar</span></a></td>
-                <td><a href="#" confirmed-click="leaveTeam(team._id)">Sair</a></td>
+                <td><a class="link" confirmed-click="leaveTeam(team._id)">Sair</a></td>
               </tr>
               <tr>
                 <td><input type="text" class="form-control" ng-model="newTeamName" name="newTeamName" placeholder="Nome do time" ng-maxlength="30" required></td>
@@ -88,8 +88,8 @@
             <tbody ng-show="tabSelected=='invites'">
               <tr ng-repeat="team in invited" class="animation">
                 <td><a ng-href="/team/{{team._id}}">{{team.name}}</a></td>
-                <td><a href="#" ng-click="acceptTeamInvitation(team._id)">Aceitar</a></td>
-                <td><a href="#" ng-click="declineTeamInvitation(team._id)">Recusar</a></td>
+                <td><a class="link" ng-click="acceptTeamInvitation(team._id)">Aceitar</a></td>
+                <td><a class="link" ng-click="declineTeamInvitation(team._id)">Recusar</a></td>
               </tr>
             </tbody>
           </table>
@@ -129,8 +129,8 @@
             <tbody ng-show="tabSelected=='invites'">
               <tr ng-repeat="team in invited" class="animation">
                 <td><a ng-href="/team/{{team._id}}">{{team.name}}</a></td>
-                <td><a href="#" ng-click="acceptTeamInvitation(team._id)">Aceitar</a></td>
-                <td><a href="#" ng-click="declineTeamInvitation(team._id)">Recusar</a></td>
+                <td><a class="link" ng-click="acceptTeamInvitation(team._id)">Aceitar</a></td>
+                <td><a class="link" ng-click="declineTeamInvitation(team._id)">Recusar</a></td>
               </tr>
             </tbody>
           </table>

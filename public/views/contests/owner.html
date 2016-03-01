@@ -15,9 +15,9 @@
         <table class="table table-striped">
       <thead>
         <tr>
-          <th class="col-md-3"><a href="#" ng-click="order('name')">Nome</a></th>
-          <th class="col-md-2"><a href="#" ng-click="order('date_start')">Início</a></th>
-          <th class="col-md-1"><a href="#" ng-click="order('duration')">Duração</a></th>
+          <th class="col-md-3"><a class="link" ng-click="order('name')">Nome</a></th>
+          <th class="col-md-2"><a class="link" ng-click="order('date_start')">Início</a></th>
+          <th class="col-md-1"><a class="link" ng-click="order('duration')">Duração</a></th>
           <th class="col-md-1" style="text-align: center;">Tipo</th>
           <th class="col-md-1" style="text-align: center;">Acesso</th>
           <th class="col-md-1" style="text-align: center;">Ações</th>
@@ -41,7 +41,7 @@
           </td>
           <td class="contests-view-table-td">
             <a ng-hide="isOldDate(contest.date_end)" ng-href="contest/{{contest._id}}/edit"><i class="fa fa-cog contests-view-table-icon" data-toggle="tooltip" title="Editar." tooltip></i></a>
-            <a href="#" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
+            <a class="link" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
           </td>
         </tr>
       </tbody>

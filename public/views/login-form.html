@@ -1,10 +1,10 @@
 <div id="top-user-area">
 
   <div ng-show="$root.loadingUser">
-    <loading-spinner 
-      color="'#45a7b9'" 
-      width="'40px'" 
-      height="'40px'" 
+    <loading-spinner
+      color="'#45a7b9'"
+      width="'40px'"
+      height="'40px'"
       style="position: relative; top: 14px; right: 20px;">
     </loading-spinner>
   </div>
@@ -28,13 +28,13 @@
           </div>
         </form>
 
-        <a id="register-btn" class="btn btn-icon" href="/register">
+        <a id="register-btn" class="btn btn-icon" ui-sref="register">
           <span>
             <i class="fa fa-user"></i>
           </span>
           Registre-se
         </a>
-        
+
     </div>
 
     <div ng-show="$root.user">
@@ -46,7 +46,7 @@
         Sair
       </a>
 
-      <a id="top-user-info" href="/profile">
+      <a id="top-user-info" ui-sref="profile">
         <img ng-src="{{ pictureUrl }}">
         Perfil
       </a>

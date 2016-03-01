@@ -19,9 +19,7 @@
 	<!-- build:css dist/general.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
-	<!-- endbuild -->
-
-	<!-- build:css dist/angular.min.css -->
+	<link rel="stylesheet" type="text/css" href="bower_components/nouislider/jquery.nouislider.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
 	<!-- endbuild -->
 
@@ -40,24 +38,24 @@
 	  	<div class="row">
 		  	<div class="col-md-12">
 
-		  		<a id="logo" href="/">
+		  		<a id="logo" ui-sref="home">
 		  			<img src="imgs/logo_new.png" />
 		  		</a>
 
 		  		<ul>
 		  			<li>
 			  			<div class="dropdown">
-			  				<a href="#" data-toggle="dropdown" ng-class="{'menu-active': isActive('/contest.*')}">
-			  					Competições 
+			  				<a data-toggle="dropdown" class="link" ng-class="{'menu-active': isActive('/contest.*')}">
+			  					Competições
 			  					<span class="caret"></span>
 			  				</a>
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							    <li><a href="/contests/open">Em aberto</a></li>
-			            <li><a href="/contests/past">Passadas</a></li>
+							    <li><a ui-sref="contests/open">Em aberto</a></li>
+			            <li><a ui-sref="contests/past">Passadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a href="/contests/created">Criadas</a></li>
+			            <li ng-show="$root.user"><a ui-sref="contests/created">Criadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a href="/contests/create">Criar competição</a></li>
+			            <li ng-show="$root.user"><a ui-sref="contests/create">Criar competição</a></li>
 							  </ul>
 							</div>
 		  			</li>
@@ -71,14 +69,14 @@
 		  		</form>-->
 
 		  		<login-form></login-form>
-		  		
+
 		  	</div>
 	  	</div>
 	  </div>
 	</header>
 
 	<div class="bs-component">
-		<div ng-view></div>
+		<div ui-view></div>
 	</div>
 
 	<ng-include src="'views/footer.html'"></ng-include>
@@ -100,7 +98,8 @@
 
 	<!-- build:js dist/angular.min.js -->
 	<script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 	<script src="bower_components/angular-socket-io/socket.js"></script>
 	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>

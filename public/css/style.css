@@ -1,5 +1,5 @@
 .container {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
 
@@ -72,6 +72,11 @@ button:disabled {
 .menu-active::first-line {
   color: black;
   opacity: 1;
+  color: #ddd;
+}
+
+.link {
+  cursor: pointer;
 }
 
 .animation {
@@ -383,7 +388,7 @@ header .dropdown-menu li a{
 
 .form-top-left h3 {
     font: 600 26px "Open Sans";
-    margin-top: 0; color: #fff; 
+    margin-top: 0; color: #fff;
 }
 
 .form-top-left p { opacity: 0.8; color: #fff; }

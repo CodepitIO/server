@@ -2,7 +2,7 @@ var app = angular.module('SingleContestCtrl', []);
 app.controller('SingleContestController', [
 	'$scope',
 	'$rootScope',
-	'$routeParams',
+	'$stateParams',
 	'$interval',
 	'$location',
 	'Notification',
@@ -10,7 +10,7 @@ app.controller('SingleContestController', [
 	'TagFactory',
 	'SubmissionFactory',
 	'SingleContestFactory',
-	function($scope, $rootScope, $routeParams, $interval, $location, Notification, catalog, tag, submission, singleContest) {
+	function($scope, $rootScope, $stateParams, $interval, $location, Notification, catalog, tag, submission, singleContest) {
 		var getTags = function() {
 			tag.getTags().then(function(data) {
 				$scope.allTags = data.tags;
@@ -127,7 +127,7 @@ app.controller('SingleContestController', [
 			stateOff: 'fa fa-star-o fa-2x'
 		}, ];
 
-		$scope.id = $routeParams.id;
+		$scope.id = $stateParams.id;
 		$scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 		$scope.loadingData = true;
 		$scope.submittingProblem = false;

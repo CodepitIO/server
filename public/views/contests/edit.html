@@ -19,7 +19,7 @@
                   <a ng-href="{{problem.url}}" target="_blank" class="balloon-label">{{alphabet[$index]}}</a>
                 </div>
                 {{problem.name}}
-                <a href="#" ng-if="!hasStarted" ng-click="removeProblem(problem.id)" class="contest-remove-problem"><i class="fa fa-times"></i></a>
+                <a class="link" ng-if="!hasStarted" ng-click="removeProblem(problem.id)" class="contest-remove-problem"><i class="fa fa-times"></i></a>
               </td>
             </tr>
           </tbody>
@@ -30,7 +30,7 @@
                   <input type="text" class="form-control dropdown-toggle" id="dropdownProblems2" data-toggle="dropdown" placeholder="Inserir Problema" ng-model="problemRegex" ng-change="fetch()">
                   <ul class="dropdown-menu contest-dropdown-problems" aria-labelledby="dropdownProblems2">
                     <li ng-repeat="p in fetchedProblems">
-                      <a href="#" ng-click="addProblem(p)">{{p.name}}</a>
+                      <a class="link" ng-click="addProblem(p)">{{p.name}}</a>
                     </li>
                   </ul>
                 </div>

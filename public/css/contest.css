@@ -255,7 +255,7 @@ tr.submission-row-parent {
 }
 
 #blue .ui-slider-range {
-  background: rgba(66, 139, 202, 1);
+  background: rgba(16, 159, 252, 1);
   background-image: -webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255, 255, 255, 0.15),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255, 255, 255, 0.15)),color-stop(0.75,rgba(255, 255, 255, 0.15)),color-stop(0.75,transparent),to(transparent)));
   background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent);
   background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.15) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, 0.15) 50%,rgba(255, 255, 255, 0.15) 75%,transparent 75%,transparent);
@@ -263,16 +263,32 @@ tr.submission-row-parent {
 }
 
 #blue .ui-slider-handle {
+  background-image: none;
   border-color: #729fcf;
-  height: 31px;
-  width: 20px;
+  height: 13px;
+  width: 13px;
+  background-color: rgba(16, 129, 222, 1);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  outline: none;
+  cursor: ew-resize;
+}
+
+#blue .ui-slider-handle:active {
+  border-color: #729fcf;
+  width: 25px;
+  height: 25px;
+  top: -10px;
+  -webkit-transition: width 0.3s, height 0.3s, top 0.3s;; /* Safari */
+  transition: width 0.3s, height 0.3s, top 0.3s;
 }
 
 .ui-slider {
   margin-top: 20px;
   margin-bottom: 20px;
   position: relative;
-  height: 20px;
+  height: 4px;
   background: #F7F7F7;
   border: none;
   -webkit-box-shadow: inset 1px 1px 5px -1px rgba(217,217,217,1);
@@ -285,25 +301,25 @@ tr.submission-row-parent {
     -webkit-animation-duration: 1s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
-    
+
     -moz-animation-name: blinker;
     -moz-animation-duration: 1s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
-    
+
     animation-name: blinker;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
-@-moz-keyframes blinker {  
+@-moz-keyframes blinker {
     50% { background-color: #FFF; }
 }
-@-webkit-keyframes blinker {  
+@-webkit-keyframes blinker {
     50% { background-color: #FFF; }
 }
-@keyframes blinker {  
+@keyframes blinker {
     50% { background-color: #FFF; }
 }
 

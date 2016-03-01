@@ -19,7 +19,7 @@
                   <a ng-href="{{problem.url}}" target="_blank" class="balloon-label">{{alphabet[$index]}}</a>
                 </div>
                 {{problem.name}}
-                <a href="#" ng-click="removeProblem(problem.id)" class="contest-remove-problem"><i class="fa fa-times"></i></a>
+                <a class="link" ng-click="removeProblem(problem.id)" class="contest-remove-problem"><i class="fa fa-times"></i></a>
               </td>
             </tr>
           </tbody>
@@ -30,7 +30,7 @@
                   <input type="text" class="form-control dropdown-toggle" id="dropdownProblems2" data-toggle="dropdown" placeholder="Inserir Problema" ng-model="problemRegex" ng-change="fetch()">
                   <ul class="dropdown-menu contest-dropdown-problems" aria-labelledby="dropdownProblems2">
                     <li ng-repeat="p in fetchedProblems">
-                      <a href="#" ng-click="addProblem(p)">{{p.name}}</a>
+                      <a class="link" ng-click="addProblem(p)">{{p.name}}</a>
                     </li>
                   </ul>
                 </div>
@@ -95,7 +95,7 @@
             <tr ng-hide="showDescrField">
               <td></td>
               <td colspan="2" ng-hide="showDescrField">
-                <a href="#" class="create-contest-add-descr pull-right" ng-click="showDescrField = true"><i class="fa fa-plus"></i>&nbsp;opções</a>
+                <a class="link" class="create-contest-add-descr pull-right" ng-click="showDescrField = true"><i class="fa fa-plus"></i>&nbsp;opções</a>
               </td>
             </tr>
             <tr ng-show="showDescrField">

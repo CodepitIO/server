@@ -1,13 +1,14 @@
 var app = angular.module('LoginCtrl', []);
 app.controller('LoginController', [
 	'$scope',
+	'$cookies',
 	'$rootScope',
-	'$location',
+	'$state',
 	'Notification',
 	'UtilFactory',
 	'AuthFactory',
 	'AccountFactory',
-	function($scope, $rootScope, $location, Notification, util, auth, account) {
+	function($scope, $cookies, $rootScope, $state, Notification, util, auth, account) {
 		$scope.account = {
 			email: '',
 			password: ''
@@ -28,11 +29,16 @@ app.controller('LoginController', [
 		}
 
 		$scope.login = function() {
+			$rootScope.user = null;
+			$cookies.remove('user');
 			auth.login($scope.account)
 				.then(function(data) {
 					if (data._id) {
 						$rootScope.user = data;
-						$location.path('/profile');
+						$cookies.put('user', JSON.stringify(data), {
+							expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+						});
+						$state.go('profile');
 					}
 				}, function(error) {
 					Notification.error(error);
@@ -40,12 +46,11 @@ app.controller('LoginController', [
 		};
 
 		$scope.logout = function() {
-			auth.logout()
-				.then(function(data) {
-					$rootScope.user = null;
-					$location.path('/');
-					$scope.loadedPictureUrl = false;
-				});
+			$cookies.remove('user');
+			$rootScope.user = null;
+			$scope.loadedPictureUrl = false;
+			$state.go('home');
+			auth.logout().then(function() {});
 		};
 
 		$scope.$watch(function() {
