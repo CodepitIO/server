@@ -1,0 +1,31 @@
+<div ng-show="loadingData">
+	<i style="" class="fa fa-spin fa-spinner fa-5x"></i>
+</div>
+<table ng-hide="loadingData" class="table">
+	<thead>
+	  <tr>
+	    <th>Rank</th>
+	    <th>Nome</th>
+	    <th ng-repeat="problem in problemsArray">
+	      <div class="balloon balloon-contest">
+	        <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
+	        <span ng-if="progressBarValue < 0" class="balloon-label">{{alphabet[$index]}}</span>
+	        <a ng-if="progressBarValue >= 0" ng-href="{{problem.url}}" target="_blank" class="balloon-label">{{alphabet[$index]}}</a>
+	      </div>
+	    </th>
+	    <th>Tempo</th>
+	    <th>Questões</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="o in ord">
+	    <td>{{$index+1}}</td>
+	    <td>{{contestants[o[2]].name}}</td>
+	    <td ng-repeat="problem in problemsArray" class="scoreboard-submission">
+	      <span ng-class="'{{getScoreClass(problem._id, o[2])}}'">{{getPenalty(problem._id, o[2])}}</span>
+	    </td>
+	    <td>{{o[1]}}</td>
+	    <td>{{o[0]}}</td>
+	  </tr>
+	</tbody>
+</table>

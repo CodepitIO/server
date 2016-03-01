@@ -2,6 +2,7 @@ var app = angular.module('SingleContestCtrl', []);
 app.controller('SingleContestController', [
 	'$scope',
 	'$rootScope',
+	'$state',
 	'$stateParams',
 	'$interval',
 	'$location',
@@ -10,7 +11,10 @@ app.controller('SingleContestController', [
 	'TagFactory',
 	'SubmissionFactory',
 	'SingleContestFactory',
-	function($scope, $rootScope, $stateParams, $interval, $location, Notification, catalog, tag, submission, singleContest) {
+	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, singleContest) {
+		if ($state.is('contest')) {
+			$state.go('.scoreboard');
+		}
 		var getTags = function() {
 			tag.getTags().then(function(data) {
 				$scope.allTags = data.tags;
@@ -56,6 +60,8 @@ app.controller('SingleContestController', [
 		};
 
 		var getCatalog = function() {
+			console.log($scope.contestantId);
+			console.log($scope.id);
 			catalog.get({
 				keys: {
 					contestant: $scope.contestantId,

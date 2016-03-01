@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
-  <!-- build:css dist/bootstrap.min.css -->
+  	<!-- build:css dist/bootstrap.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" />
@@ -49,13 +49,13 @@
 			  					Competições
 			  					<span class="caret"></span>
 			  				</a>
-							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							    <li><a ui-sref="contests/open">Em aberto</a></li>
-			            <li><a ui-sref="contests/past">Passadas</a></li>
+							  <ul class="dropdown-menu">
+							    <li><a ui-sref="contests.open">Em aberto</a></li>
+			            <li><a ui-sref="contests.past">Passadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a ui-sref="contests/created">Criadas</a></li>
+			            <li ng-show="$root.user"><a ui-sref="contests.owned">Criadas</a></li>
 			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a ui-sref="contests/create">Criar competição</a></li>
+			            <li ng-show="$root.user"><a ui-sref="contests.create">Criar competição</a></li>
 							  </ul>
 							</div>
 		  			</li>
@@ -99,7 +99,7 @@
 	<!-- build:js dist/angular.min.js -->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 	<script src="bower_components/angular-socket-io/socket.js"></script>
 	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
@@ -148,7 +148,9 @@
 	<!-- endbuild -->
 
 	<script type="text/javascript">
-		$.material.init();
+		$(function() {
+			$.material.init();
+		});
 	</script>
 
   <script>

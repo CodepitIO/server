@@ -1,0 +1,33 @@
+<div ng-show="loadingData">
+  <i class="fa fa-spin fa-spinner fa-5x"></i>
+</div>
+<div ng-hide="loadingData" class="row">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr class="submission-row submission-row-parent">
+          <th>Tempo</th>
+          <th>Questão</th>
+          <th>Linguagem</th>
+          <th>Status</th>
+          <th colspan="5"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="sub in submissions | orderBy: '-date'" class="submission-row" ng-class="'{{getSubmissionClass(sub.verdict)}}'">
+          <td>{{sub.time}}</td>
+          <td>
+            <div ng-hide="sub.problem" style="padding-left: 13px;">-</div>
+            <div class="balloon">
+              <img ng-src="/imgs/baloes/{{problems[sub.problem].num}}.png" class="balloon-image" />
+              <a ng-href="{{problems[sub.problem].url}}" target="_blank" class="balloon-label">{{problems[sub.problem].letter}}</a>
+            </div>
+          </td>
+          <td>{{languages[sub.language]}}</td>
+          <td>{{verdictName[sub.verdict]}}&nbsp;<i ng-if="getSubmissionClass(sub.verdict) == 'pending-submission'" class="fa fa-pulse fa-spinner"></i></td>
+          <td colspan="5"><a ui-sref="submission({id:sub._id})"><i class="fa fa-eye"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

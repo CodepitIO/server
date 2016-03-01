@@ -1,0 +1,69 @@
+<div class="container-fluid" id="breadcrumbs">
+  <div class="row">
+    <div class="col-md-12">
+      <span>Maratonando / Competições</span>
+      <h2>{{ name }}</h2>
+    </div>
+  </div>
+</div>
+
+<div id="contest-view-container">
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-3" id="contest-view-time">
+      <h4 ng-show="!loadingData && timeLeft > 0">Tempo: {{progressBarValue | formatTime}}</h4>
+      <h4 ng-show="!loadingData && timeLeft <= 0">Tempo: {{timeline.moment | formatDuration}}</h4>
+    </div>
+
+    <div class="col-sm-6" id="contest-view-status"></div>
+
+    <div class="col-sm-3" id="contest-view-upsolving">
+      <h4 ng-if="timeLeft > 0 && !loadingData && progressBarValue >= 0">restam {{timeLeft | formatTime}}</h4>
+      <p ng-if="timeLeft <= 0 && !loadingData && progressBarValue >= 0"><input type="checkbox" ng-click="toggleUpsolving()">mostrar upsolving<span class="question-mark" data-toggle="tooltip" title="Upsolving é uma forma de você poder submeter questões após a competição ter terminado. Porém, não conta para o placar principal." tooltip><i class="fa fa-question-circle"></i></span>&nbsp;</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div>
+      <progressbar ng-hide="loadingData || timeLeft <= 0" style="margin-top: 20px;" ng-hide="loadingData" ng-class="{'active': (timeLeft > 0)}" class="progress-striped" value="progressBarValue" max="totalDuration" type="{{barType}}"></progressbar>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 bs-component">
+      <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+        <li class="active"><a ui-sref=".scoreboard">Placar</a></li>
+        <li><a ui-sref=".submit">Submeter</a></li>
+        <li><a ui-sref=".submissions">Submissões</a></li>
+        <li><a ui-sref=".catalog">Catálogo</a></li>
+      </ul>
+      <div class="tab-content">
+        <div ui-view></div>
+      </div>
+        <!-- <tab heading="Placar">
+          
+        </tab>
+        <tab ng-if="inContest" heading="Submeter" disable="progressBarValue < 0">
+          
+        </tab>
+        <tab ng-if="inContest" heading="Submissões" disable="progressBarValue < 0">
+          
+        </tab>
+        <tab ng-if="inContest" heading="Catálogo" disable="progressBarValue < 0">
+          
+        </tab> -->
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $.material.init();
+  });
+</script>

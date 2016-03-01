@@ -162,7 +162,6 @@ module.exports = function(grunt) {
 		'html2js:dev',
 		'clean:fonts',
 		'copy:fonts',
-		'copy:index',
 		'concurrent:dev',
 	]);
 };

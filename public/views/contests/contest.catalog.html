@@ -1,0 +1,32 @@
+<div ng-show="loadingData">
+  <i class="fa fa-spin fa-spinner fa-5x"></i>
+</div>
+<div ng-hide="loadingData" class="row">
+  <div class="col-md-12" style="margin-bottom: 80px;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-1">Questão</th>
+          <th class="col-md-3">Dificuldade</th>
+          <th class="col-md-5">Assunto</th>
+          <th class="col-md-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="p in problems">
+          <td>
+            <div class="balloon">
+              <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
+              <a ng-href="{{p.url}}" target="_blank" class="balloon-label">{{p.letter}}</a>
+            </div>
+          </td>
+          <td><rating class="rating" ng-class="{'rating-unchanged': !p.rate && !p.hovering}" ng-model="p.rate" max="5" ng-change="selectRate(p)" on-hover="p.hovering = true" on-leave="p.hovering=false" rating-states="ratingStates"></rating></td>
+          <td>
+            <span class="problem-tag" ng-repeat="tag in p.tags">{{tag.name}}&nbsp;<a class="link" ng-click="removeTag(tag,p)"><i class="fa fa-times contest-remove-problem"></i></a></span>
+          </td>
+          <td><input type="text" ng-keyup="insertTag($event,p)" ng-model="p.tagSelected" typeahead="tag as tag.name for tag in allTags | filter:{name:$viewValue} | filter:notInsertedTags(p) | limitTo:10" ng-change="fixTagInput(p)" typeahead-on-select="onSelectTag($item, $model, $label, p)" class="form-control" placeholder="Adicionar assunto..."></input></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
