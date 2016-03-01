@@ -60,7 +60,6 @@ services:
       driver: "json-file"
       options:
         max-size: "300"
-
   # judger:
   #   container_name: judger
   #   build:
