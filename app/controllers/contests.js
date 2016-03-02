@@ -95,7 +95,7 @@ exports.getByFilter = function(req, res) {
       }
       return contest;
     });
-    return res.json({contests: contests});
+    return res.json({contests: contests, serverTime: new Date()});
   }, function(err) {
     return res.json({error: err});
   });
