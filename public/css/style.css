@@ -242,13 +242,6 @@ button:disabled {
   width: 165px;
 }
 
-#top-user-area-email .collapse {
-  background-color: rgba(255,0,0,0.2);
-  border-top-left-radius: 4px;
-  color: white;
-  width: 165px;
-}
-
 #top-user-area-password {
   background-color: rgba(0,0,0,0.2);
   border-left: solid 1px #292D2F;
@@ -281,7 +274,7 @@ button:disabled {
   padding: 0px 20px;
 }
 
-#top-user-info:hover{
+#top-user-info:hover {
   background: rgba(0,0,0,0.2);
 }
 
