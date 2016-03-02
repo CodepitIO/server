@@ -19,6 +19,7 @@ app.directive('mrtBreadcrumbs', function() {
 		restrict: 'E',
 		scope: {
 			title: '=',
+			location: '=',
 		},
 		templateUrl: 'views/breadcrumbs.html',
 	};
