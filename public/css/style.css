@@ -102,7 +102,7 @@ button:disabled {
 }
 
 /* Header */
-header {
+#header .navbar {
   height: 75px;
   background: #374249;
   position: fixed;
@@ -123,12 +123,12 @@ header {
   left: -15px;
 }
 
-#logo img{
+#logo img {
   display: inline-block;
   margin: 10px 8px;
 }
 
-header ul{
+/*header ul{
   float: left;
   padding-left: 0px;
   position: relative;
@@ -189,7 +189,7 @@ header .dropdown-menu{
 header .dropdown-menu li a{
   height: auto;
   padding: 10px;
-}
+}*/
 
 #problem-search{
   float: left;
@@ -739,6 +739,7 @@ footer ul li a:first-child{
 }
 
 /* Contest view */
+
 #contest-view-container{
   padding: 30px;
 }
@@ -794,4 +795,3 @@ footer ul li a:first-child{
 #contest-view-container table td{
   padding: 15px;
 }
-

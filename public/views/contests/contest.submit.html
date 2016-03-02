@@ -6,7 +6,8 @@
 	<div class="col-md-6 col-centered">
 	  <form name="submitProblemForm">
 	    <span>Código</span>
-	    <textarea type="text" style="height: 500px; margin: 10px 0 80px; resize: vertical;" class="form-control" ng-model="submission.code" name="code" ></textarea>
+			<ui-codemirror ui-codemirror-opts="editorOptions" style="text-align: left;"></ui-codemirror>
+	    <!-- <textarea type="text" style="height: 500px; margin: 10px 0 80px; resize: vertical;" class="form-control" ng-model="submission.code" name="code" ></textarea> -->
 	  </form>
 	</div>
 	<div class="col-md-4" style="margin-top: 20px;">

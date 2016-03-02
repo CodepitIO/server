@@ -12,6 +12,7 @@ var mrtApp = angular.module('mrtApp', [
 		'ui.slider',
 		'ui.sortable',
 		'btford.socket-io',
+		'ui.codemirror',
 
 		'ContestsCtrl',
 		'CreateContestCtrl',

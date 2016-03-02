@@ -15,6 +15,13 @@ app.controller('SingleContestController', [
 		if ($state.is('contest')) {
 			$state.go('.scoreboard');
 		}
+
+		$scope.editorOptions = {
+        lineWrapping : true,
+        lineNumbers: true,
+        mode: 'text/x-c++src',
+    };
+
 		var getTags = function() {
 			tag.getTags().then(function(data) {
 				$scope.allTags = data.tags;
