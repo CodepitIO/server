@@ -15,7 +15,7 @@ exports.create = function(req, res, next) {
     description: contest.descr,
 
     author: req.user._id,
- 
+
     date_start: contest.startDateTime,
     date_end: contest.endDateTime,
 
@@ -58,28 +58,28 @@ var isInContest = function(id, contest) {
   return false;
 };
 
-exports.getByFilter = function(req, res, next) {
-  var filter = req.params.filter;
-  var opts = {};
-  var now = new Date();
+var filters = {
+  open: function() {
+    var now = new Date();
+    return { date_end: { $gt: now } };
+  },
+  past: function() {
+    var now = new Date();
+    return { date_end: { $lte: now } };
+  },
+  owned: function(req) {
+    return { author: req.user._id };
+  }
+};
 
-  if (filter == 'open') {
-    opts = {
-      date_end: {
-        $gt: now
-      }
-    };
-  } else if (filter == 'past') {
-    opts = {
-      date_end: {
-        $lte: now
-      }
-    }
-  } else {
+exports.getByFilter = function(req, res) {
+  var opts = filters[req.params.filter];
+
+  if (opts === undefined) {
     return res.json(InvalidOperation);
   }
 
-  Contest.find(opts)
+  Contest.find(opts(req))
   .select('author name description date_created date_start date_end frozen_time blind_time contestants contestantType isPrivate watchPrivate')
   .lean()
   .exec()
@@ -95,7 +95,7 @@ exports.getByFilter = function(req, res, next) {
       }
       return contest;
     });
-    return res.json({contests: contests});
+    return res.json({contests: contests, serverTime: new Date()});
   }, function(err) {
     return res.json({error: err});
   });

@@ -22,9 +22,9 @@ angular.module('appRoutes', []).config([
 			templateUrl: 'views/contests/create.html',
 			controller: 'CreateContestController',
 			mustBeLogged: true
-		}).when('/contests/created', {
+		}).when('/contests/owned', {
 			templateUrl: 'views/contests/owner.html',
-			controller: 'OwnedContestsController',
+			// controller: 'OwnedContestsController',
 			mustBeLogged: true
 		}).when('/contest/:id/edit', {
 			templateUrl: 'views/contests/edit.html',
@@ -35,10 +35,10 @@ angular.module('appRoutes', []).config([
 			controller: 'SingleContestController'
 		}).when('/contests/open', {
 			templateUrl: 'views/contests/open.html',
-			controller: 'ContestsController'
+			// controller: 'ContestsController'
 		}).when('/contests/past', {
 			templateUrl: 'views/contests/past.html',
-			controller: 'ContestsController'
+			// controller: 'ContestsController'
 		}).when('/submission/:id', {
 			templateUrl: 'views/submission.html',
 			controller: 'SubmissionController'

@@ -17,7 +17,6 @@ var mrtApp = angular.module('mrtApp', [
 	'EditContestCtrl',
 	'HomeCtrl',
 	'LoginCtrl',
-	'OwnedContestsCtrl',
 	'ProblemsCtrl',
 	'ProfileCtrl',
 	'RegisterCtrl',
@@ -36,6 +35,9 @@ var mrtApp = angular.module('mrtApp', [
 	'TagService',
 	'TeamService',
 	'UtilService',
+
+	'GeneralDirective',
+	'ContestDirective',
 
 	'SocketService',
 ]).constant('angularMomentConfig', {
@@ -91,19 +93,7 @@ var mrtApp = angular.module('mrtApp', [
 			}
 		};
 	}
-]).directive('confirmedClick', [function() {
-	return {
-		link: function(scope, element, attr) {
-			var msg = attr.ngConfirmClick || 'Você tem certeza?';
-			var clickAction = attr.confirmedClick;
-			element.bind('click', function(event) {
-				if (window.confirm(msg)) {
-					scope.$eval(clickAction);
-				}
-			});
-		}
-	};
-}]).run([
+]).run([
 	'$route',
 	'$location',
 	'$http',

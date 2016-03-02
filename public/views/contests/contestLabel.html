@@ -1,0 +1,4 @@
+<span ng-if="!linkable">{{contest.name}}</span>
+<a ng-if="linkable" ng-href="contest/{{contest._id}}">{{contest.name}}</a>
+<span ng-if="adminFlag" class="team-admin">&nbsp;(admin)</span>
+<sup ng-if="newFlag" style="color: #F55; font-size: 8px;">&nbsp;NOVA</sup>

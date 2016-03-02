@@ -221,7 +221,7 @@ app.controller('CreateContestController', [
 					.then(function(data) {
 						Notification.success('Competição criada com sucesso!');
 						$scope.loadingCreate = false;
-						$location.path('/contests/created');
+						$location.path('/contests/owned');
 					}, function(error) {
 						Notification.error(error);
 						$scope.loadingCreate = false;
