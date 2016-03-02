@@ -87,11 +87,11 @@ app.controller('ContestsController', [
 		fetchData();
 
 		$scope.futureContestFilter = function(value, index, array) {
-			return new Date(value.date_start) > $scope.serverTime;
+			return new Date(value.date_start) > new Date($scope.serverTime);
 		};
 
 		$scope.happeningContestFilter = function(value, index, array) {
-			return new Date(value.date_start) <= $scope.serverTime;
+			return new Date(value.date_start) <= new Date($scope.serverTime);
 		};
 
 		$scope.order = function(predicate) {
@@ -100,15 +100,15 @@ app.controller('ContestsController', [
 		};
 
 		$scope.isInFuture = function(date) {
-			return new Date(date) > $scope.serverTime;
+			return new Date(date) > new Date($scope.serverTime);
 		};
 
 		$scope.isNewContest = function(date) {
-			return ((($scope.serverTime) - (new Date(date))) / 60000) <= 10;
+			return (((new Date($scope.serverTime)) - (new Date(date))) / 60000) <= 10;
 		};
 
 		$scope.isOldDate = function(date) {
-			return (new Date(date)) <= ($scope.serverTime);
+			return (new Date(date)) <= (new Date($scope.serverTime));
 		};
 
 		$scope.remove = function(id) {

@@ -6,14 +6,14 @@
     with-action-col="true"
     sub-title="'Acontecendo agora'"
     empty-message="'Nenhuma competição acontencendo.'"
-    list-filter="happeningContestFilter"
+    list-filter="$parent.happeningContestFilter"
     modal-id="'join-contest-modal-currents'">
   </mrt-contest-list>
   <mrt-contest-list
     with-action-col="true"
     sub-title="'Próximas'"
     empty-message="'Nenhuma competição futura.'"
-    list-filter="futureContestFilter"
+    list-filter="$parent.futureContestFilter"
     modal-id="'join-contest-modal-coming'">
   </mrt-contest-list>
 </mrt-contest-list-wrapper>
