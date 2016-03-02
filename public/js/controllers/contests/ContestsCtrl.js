@@ -16,6 +16,7 @@ app.controller('ContestsController', [
 		$scope.contests = [];
 		$scope.teams = [];
 		$scope.teamsAndSingle = [];
+		$scope.serverTime = undefined;
 
 		$scope.joinContest = {
 			password: '',
@@ -64,6 +65,7 @@ app.controller('ContestsController', [
 
 			contestPromise.then(function(data) {
 				$scope.contests = data.contests;
+				$scope.serverTime = data.serverTime;
 				for (var i = 0; i < $scope.contests.length; i++) {
 					var start = $scope.contests[i].date_start;
 					var end = $scope.contests[i].date_end;
@@ -85,11 +87,11 @@ app.controller('ContestsController', [
 		fetchData();
 
 		$scope.futureContestFilter = function(value, index, array) {
-			return new Date(value.date_start) > new Date();
+			return new Date(value.date_start) > $scope.serverTime;
 		};
 
 		$scope.happeningContestFilter = function(value, index, array) {
-			return new Date(value.date_start) <= new Date();
+			return new Date(value.date_start) <= $scope.serverTime;
 		};
 
 		$scope.order = function(predicate) {
@@ -98,15 +100,15 @@ app.controller('ContestsController', [
 		};
 
 		$scope.isInFuture = function(date) {
-			return new Date(date) > new Date();
+			return new Date(date) > $scope.serverTime;
 		};
 
 		$scope.isNewContest = function(date) {
-			return (((new Date()) - (new Date(date))) / 60000) <= 10;
+			return ((($scope.serverTime) - (new Date(date))) / 60000) <= 10;
 		};
 
 		$scope.isOldDate = function(date) {
-			return (new Date(date)) <= (new Date());
+			return (new Date(date)) <= ($scope.serverTime);
 		};
 
 		$scope.remove = function(id) {
