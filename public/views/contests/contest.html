@@ -7,110 +7,45 @@
   </div>
 </div>
 
-<div id="contest-view-container">
+<div id='contest-view-container'>
+  <mrt-page-wrapper wait-for='!loadingData' align='center'>
+    <div class="row">
+      <div class="col-sm-3" id="contest-view-time">
+        <h4 ng-show="!loadingData && timeLeft > 0">Tempo: {{progressBarValue | formatTime}}</h4>
+        <h4 ng-show="!loadingData && timeLeft <= 0">Tempo: {{timeline.moment | formatDuration}}</h4>
+      </div>
 
-<div class="container-fluid">
+      <div class="col-sm-6" id="contest-view-status"></div>
 
-  <div class="row">
-    <div class="col-sm-3" id="contest-view-time">
-      <h4 ng-show="!loadingData && timeLeft > 0">Tempo: {{progressBarValue | formatTime}}</h4>
-      <h4 ng-show="!loadingData && timeLeft <= 0">Tempo: {{timeline.moment | formatDuration}}</h4>
+      <div class="col-sm-3" id="contest-view-upsolving">
+        <h4 ng-if="timeLeft > 0 && !loadingData && progressBarValue >= 0">restam {{timeLeft | formatTime}}</h4>
+        <p ng-if="timeLeft <= 0 && !loadingData && progressBarValue >= 0"><input type="checkbox" ng-click="toggleUpsolving()">mostrar upsolving<span class="question-mark" data-toggle="tooltip" title="Upsolving é uma forma de você poder submeter questões após a competição ter terminado. Porém, não conta para o placar principal." tooltip><i class="fa fa-question-circle"></i></span>&nbsp;</p>
+      </div>
     </div>
 
-    <div class="col-sm-6" id="contest-view-status"></div>
-
-    <div class="col-sm-3" id="contest-view-upsolving">
-      <h4 ng-if="timeLeft > 0 && !loadingData && progressBarValue >= 0">restam {{timeLeft | formatTime}}</h4>
-      <p ng-if="timeLeft <= 0 && !loadingData && progressBarValue >= 0"><input type="checkbox" ng-click="toggleUpsolving()">mostrar upsolving<span class="question-mark" data-toggle="tooltip" title="Upsolving é uma forma de você poder submeter questões após a competição ter terminado. Porém, não conta para o placar principal." tooltip><i class="fa fa-question-circle"></i></span>&nbsp;</p>
+    <div class="row">
+      <div class="col-sm-12">
+        <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div>
+        <progressbar ng-hide="loadingData || timeLeft <= 0" style="margin-top: 20px;" ng-hide="loadingData" ng-class="{'active': (timeLeft > 0)}" class="progress-striped" value="progressBarValue" max="totalDuration" type="{{barType}}"></progressbar>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div>
-      <progressbar ng-hide="loadingData || timeLeft <= 0" style="margin-top: 20px;" ng-hide="loadingData" ng-class="{'active': (timeLeft > 0)}" class="progress-striped" value="progressBarValue" max="totalDuration" type="{{barType}}"></progressbar>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-12 bs-component">
-      <div class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="javascript:void(0)">Brand</a>
-          </div>
-          <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="javascript:void(0)">Active<div class="ripple-container"></div></a></li>
-              <li><a href="javascript:void(0)">Link<div class="ripple-container"></div></a></li>
-              <li class="dropdown">
-                <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                  <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="javascript:void(0)">Action</a></li>
-                  <li><a href="javascript:void(0)">Another action</a></li>
-                  <li><a href="javascript:void(0)">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Dropdown header</li>
-                  <li><a href="javascript:void(0)">Separated link</a></li>
-                  <li><a href="javascript:void(0)">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form class="navbar-form navbar-left">
-              <div class="form-group is-empty">
-                <input type="text" class="form-control col-md-8" placeholder="Search">
-              <span class="material-input"></span></div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="javascript:void(0)">Link</a></li>
-              <li class="dropdown">
-                <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                  <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="javascript:void(0)">Action</a></li>
-                  <li><a href="javascript:void(0)">Another action</a></li>
-                  <li><a href="javascript:void(0)">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="javascript:void(0)">Separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+    <div class="row">
+      <div class="col-sm-12 bs-component">
+        <ul id="contest-tabs" class="nav nav-tabs" style="margin-bottom: 15px;">
+          <li class="active"><a ui-sref=".scoreboard">Placar</a></li>
+          <li><a ui-sref=".submit">Submeter</a></li>
+          <li><a ui-sref=".submissions">Submissões</a></li>
+          <li><a ui-sref=".catalog">Catálogo</a></li>
+        </ul>
+        <div class="tab-content">
+          <div ui-view></div>
         </div>
       </div>
-      <ul id="contest-tabs" class="nav navbar-nav" style="margin-bottom: 15px;">
-        <li class="active"><a ui-sref=".scoreboard">Placar</a></li>
-        <li><a ui-sref=".submit">Submeter</a></li>
-        <li><a ui-sref=".submissions">Submissões</a></li>
-        <li><a ui-sref=".catalog">Catálogo</a></li>
-      </ul>
-      <div class="tab-content">
-        <div ui-view></div>
-      </div>
-        <!-- <tab heading="Placar">
-
-        </tab>
-        <tab ng-if="inContest" heading="Submeter" disable="progressBarValue < 0">
-
-        </tab>
-        <tab ng-if="inContest" heading="Submissões" disable="progressBarValue < 0">
-
-        </tab>
-        <tab ng-if="inContest" heading="Catálogo" disable="progressBarValue < 0">
-
-        </tab> -->
     </div>
-  </div>
-
+  </mrt-page-wrapper>
 </div>
 
-</div>
 
 <script type="text/javascript">
   $(function() {

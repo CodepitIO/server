@@ -1,54 +1,12 @@
-<div class="container-fluid" id="breadcrumbs">
-  <div class="row">
-    <div class="col-md-12">
-      <span>Maratonando / Competições</span>
-      <h2>Competições passadas</h2>
-    </div>
-  </div>
-</div>
+<mrt-breadcrumbs
+  location="'Maratonando / Competições'"
+  title="'Competições passadas'">
+</mrt-breadcrumbs>
 
-<div class="container-fluid">
-  <div class="row">
-    <div id="contests-list" class="col-md-9">
-
-      <div class="table-container">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="col-md-3"><a class="link" ng-click="order('name')">Nome</a></th>
-              <th class="col-md-2"><a class="link" ng-click="order('date_start')">Início</a></th>
-              <th class="col-md-1"><a class="link" ng-click="order('duration')">Duração</a></th>
-              <th class="col-md-1" style="text-align: center;">Tipo</th>
-              <th class="col-md-1" style="text-align: center;">Acesso</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-if="contests.length == 0"><td colspan="6"><span style="font-style: italic;">Nenhuma competição passada.</span></td></tr>
-            <tr class="animation" ng-repeat="contest in contests | orderBy:predicate:reverse">
-              <td>
-                <span ng-if="!contest.isAdmin && contest.watchPrivate && !contest.isInContest">{{contest.name}}</span>
-                <a ng-if="contest.isAdmin || !contest.watchPrivate || contest.isInContest" ui-sref="contest({id:contest._id})">{{contest.name}}</a>
-                <span ng-if="contest.isAdmin" class="team-admin">&nbsp;(admin)</span>
-              </td>
-              <td>{{contest.date_start | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</td>
-              <td>{{contest.duration | formatTime : false}}</td>
-              <td class="contests-view-table-td">
-                <i class="fa fa-user contests-view-table-icon" ng-if="contest.contestantType != '2'" data-toggle="tooltip" title="Perfis individuais podem participar." tooltip></i>
-                <i class="fa fa-users contests-view-table-icon" ng-if="contest.contestantType != '1'" data-toggle="tooltip" title="Times podem participar." tooltip></i>
-              </td>
-              <td class="contests-view-table-td">
-                <i class="fa fa-lock contests-view-table-icon" ng-if="contest.isPrivate" data-toggle="tooltip" title="Possui senha para se registrar." tooltip></i>
-                <i class="fa fa-unlock contests-view-table-icon" ng-if="!contest.isPrivate" data-toggle="tooltip" title="Não possui senha para se registrar." tooltip></i>
-                <i class="fa fa-user-secret contests-view-table-icon" ng-if="contest.watchPrivate" data-toggle="tooltip" title="Apenas quem está registrado pode entrar no link." tooltip></i>
-                <i class="fa fa-globe contests-view-table-icon" ng-if="!contest.watchPrivate" data-toggle="tooltip" title="Qualquer um pode entrar no link." tooltip></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-    <div id="contests-sidebar" class="col-md-3">
-    </div>
-  </div>
-</div>
+<mrt-page-wrapper wait-for="!loadingData" align-opts='center'>
+  <mrt-contest-list
+    with-action-col="false"
+    empty-message="'Nenhuma competição passada.'"
+    admin-flag="true">
+  </mrt-contest-list>
+</mrt-page-wrapper>

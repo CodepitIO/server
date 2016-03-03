@@ -490,18 +490,14 @@ button:disabled {
 }
 
 /* Register */
-#register-area h2, #register-area h3{
+#register-area h3{
   font: 300 30px "Open Sans";
   color: #747474;
   text-align: center;
   margin-bottom: 0px;
-  margin-top: 90px;
-}
-
-#register-area h3{
   font-size: 18px;
   margin-bottom: 40px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 

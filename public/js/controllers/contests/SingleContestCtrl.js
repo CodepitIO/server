@@ -67,8 +67,6 @@ app.controller('SingleContestController', [
 		};
 
 		var getCatalog = function() {
-			console.log($scope.contestantId);
-			console.log($scope.id);
 			catalog.get({
 				keys: {
 					contestant: $scope.contestantId,

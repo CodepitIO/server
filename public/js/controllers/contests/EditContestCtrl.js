@@ -216,7 +216,7 @@ app.controller('EditContestController', [
 				.then(function(data) {
 					Notification('Competição editada!');
 					$scope.loadingCreate = false;
-					$location.path('/contests/created');
+					$location.path('/contests/owned');
 				}, function(error) {
 					Notification.error(error);
 					$scope.loadingCreate = false;

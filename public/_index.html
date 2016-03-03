@@ -32,54 +32,10 @@
 	<!-- endbuild -->
 </head>
 <body ng-app="mrtApp">
-	<!-- <header id="header">
-	  <div class="container-fluid">
-	  	<div class="row">
-		  	<div class="col-md-12">
-
-		  		<a id="logo" ui-sref="home">
-		  			<img src="imgs/logo_new.png" />
-		  		</a>
-
-		  		<ul>
-		  			<li>
-			  			<div class="dropdown">
-			  				<a data-toggle="dropdown" class="link" ng-class="{'menu-active': isActive('/contest.*')}">
-			  					Competições
-			  					<span class="caret"></span>
-			  				</a>
-							  <ul class="dropdown-menu">
-							    <li><a ui-sref="contests.open">Em aberto</a></li>
-			            <li><a ui-sref="contests.past">Passadas</a></li>
-			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a ui-sref="contests.owned">Criadas</a></li>
-			            <li ng-show="$root.user" class="divider"></li>
-			            <li ng-show="$root.user"><a ui-sref="contests.create">Criar competição</a></li>
-							  </ul>
-							</div>
-		  			</li>
-		  		</ul> -->
-
-		  		<!--<form id="problem-search">
-		  			<label for="problem-search-input">
-		  				<i class="fa fa-search"></i>
-		  			</label>
-		  			<input  id="problem-search-input" type="text" name="problem-search" placeholder="Buscar problemas">
-		  		</form>-->
-
-		  		<!-- <login-form></login-form>
-
-		  	</div>
-	  	</div>
-	  </div>
-	</header> -->
-
 	<ng-include src="'views/header.html'"></ng-include>
-
 	<div class="bs-component">
 		<div ui-view></div>
 	</div>
-
 	<ng-include src="'views/footer.html'"></ng-include>
 
 	<!-- build:js dist/general.min.js -->
@@ -89,7 +45,6 @@
 	<script type="text/javascript" src="bower_components/moment-timezone/builds/moment-timezone-with-data.js"></script>
 	<script type="text/javascript" src="bower_components/moment/locale/pt-br.js"></script>
 	<script type="text/javascript" src="bower_components/socket.io-client/socket.io.js"></script>
-	<!-- <script type="text/javascript" src="bower_components/ace-builds/src-min-noconflict/ace.js"></script> -->
 	<script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="bower_components/codemirror/mode/clike/clike.js"></script>
 	<!-- endbuild -->
@@ -114,14 +69,12 @@
 	<script type="text/javascript" src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
-	<!-- <script type="text/javascript" src="bower_components/angular-ui-ace/ui-ace.js"></script> -->
 	<script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/app.min.js -->
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/appRoutes.js"></script>
-	<script type="text/javascript" src="js/directives.js"></script>
 
 	<script type="text/javascript" src="js/services/AccountService.js"></script>
 	<script type="text/javascript" src="js/services/AuthService.js"></script>
@@ -146,8 +99,10 @@
 	<script type="text/javascript" src="js/controllers/contests/ContestsCtrl.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/CreateContestCtrl.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/EditContestCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/OwnedContestsCtrl.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/SingleContestCtrl.js"></script>
+
+	<script type="text/javascript" src="js/directives/Contest.js"></script>
+	<script type="text/javascript" src="js/directives/General.js"></script>
 
 	<script type="text/javascript" src="js/utils/popovers.js"></script>
 	<script type="text/javascript" src="dist/templates.js"></script>

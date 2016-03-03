@@ -29,8 +29,8 @@ angular.module('appRoutes', []).config([
 			})
 			.state('contests.owned', {
 				url: '/owned',
-				templateUrl: 'views/contests/owner.html',
-				controller: 'OwnedContestsController',
+				templateUrl: 'views/contests/owned.html',
+				controller: 'ContestsController',
 				mustBeLogged: true
 			})
 			.state('contests.create', {
@@ -43,6 +43,12 @@ angular.module('appRoutes', []).config([
 				url: '^/contest/{id}',
 				templateUrl: 'views/contests/contest.html',
 				controller: 'SingleContestController'
+			})
+			.state('contest/edit', {
+				url: '/edit',
+				templateUrl: 'views/contests/edit.html',
+				controller: 'EditContestController',
+				mustBeLogged: true
 			})
 			.state('contest.scoreboard', {
 				templateUrl: 'views/contests/contest.scoreboard.html',
@@ -77,12 +83,6 @@ angular.module('appRoutes', []).config([
 				controller: 'TeamController',
 				mustBeLogged: true
 			})
-			.state('contest/edit', {
-				url: '^/contest/{id}/edit',
-				templateUrl: 'views/contests/edit.html',
-				controller: 'EditContestController',
-				mustBeLogged: true
-			})
 			.state('submission', {
 				url: '^/submission/{id}',
 				templateUrl: 'views/submission.html',
@@ -96,18 +96,3 @@ angular.module('appRoutes', []).config([
 			});
 	}
 ]);
-
-/*angular.module('appRoutes', []).config([
-	'$routeProvider',
-	'$locationProvider',
-	function($routeProvider, $locationProvider) {
-
-		$locationProvider.html5Mode(true);
-	}
-]).config([
-	'$locationProvider',
-	function($locationProvider) {
-		$locationProvider.hashPrefix('!');
-	}
-]);
-*/
