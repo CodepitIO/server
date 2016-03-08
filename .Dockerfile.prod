@@ -33,9 +33,6 @@ RUN cp -a /tmp/node_modules /${WD}/ && \
     grunt prod && \
     g++ /${WD}/cpp/matchProblems.cpp -o /${WD}/cpp/matchProblems --std=c++0x
 
-ARG NODE_INSTANCES="1"
-ENV NODE_INSTANCES ${NODE_INSTANCES}
+VOLUME /${WD}/public
 
-COPY .supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord"]
+CMD ["node server"]
