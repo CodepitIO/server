@@ -32,6 +32,7 @@ public/fonts/*
 public/problems/*
 public/bower_components/*
 .prod/*
+tmp/*
 
 *.DS_STORE
 *.txt

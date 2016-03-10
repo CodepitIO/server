@@ -92,12 +92,12 @@ app.directive('mrtPageWrapper', function() {
 			alignOpts: '=?'
 		},
 		templateUrl: 'views/misc/page-wrapper.html',
-    controller: ['$scope', function($scope) {
-      $scope.color = angular.isDefined($scope.color) ? $scope.color : '#45a7b9';
-      $scope.height = angular.isDefined($scope.height) ? $scope.height : '200px';
-      $scope.width = angular.isDefined($scope.width) ? $scope.width : '200px';
-      $scope.alignOpts = angular.isDefined($scope.alignOpts) ? $scope.alignOpts : 'left';
-      $scope.waitFor = angular.isDefined($scope.waitFor) ? $scope.waitFor : true;
-    }]
+		controller: ['$scope', function($scope) {
+			$scope.color = angular.isDefined($scope.color) ? $scope.color : '#45a7b9';
+			$scope.height = angular.isDefined($scope.height) ? $scope.height : '200px';
+			$scope.width = angular.isDefined($scope.width) ? $scope.width : '200px';
+			$scope.alignOpts = angular.isDefined($scope.alignOpts) ? $scope.alignOpts : 'center';
+			$scope.waitFor = angular.isDefined($scope.waitFor) ? $scope.waitFor : true;
+		}]
 	};
 });

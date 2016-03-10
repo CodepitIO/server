@@ -13,11 +13,9 @@ RUN mkdir -p /var/log/supervisor
 
 RUN npm install -g grunt-cli nodemon bower pm2 node-gyp
 
-ENV WD www
-
 # Define working directory
-RUN mkdir -p /${WD}
-WORKDIR /${WD}
+RUN mkdir -p /www
+WORKDIR /www
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 

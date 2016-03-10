@@ -3,12 +3,19 @@
   title="'Competições abertas'">
 </mrt-breadcrumbs>
 
-<mrt-page-wrapper wait-for="!loadingData" align-opts='center'>
+<mrt-page-wrapper wait-for="!loadingData">
   <mrt-contest-list
     with-action-col="true"
     sub-title="'Acontecendo agora'"
     empty-message="'Nenhuma competição acontencendo.'"
     list-filter="happeningContestFilter"
     modal-id="'join-contest-modal-currents'">
+  </mrt-contest-list>
+  <mrt-contest-list
+    with-action-col="true"
+    sub-title="'Próximas'"
+    empty-message="'Nenhuma competição futura.'"
+    list-filter="futureContestFilter"
+    modal-id="'join-contest-modal-coming'">
   </mrt-contest-list>
 </mrt-page-wrapper>
