@@ -25,6 +25,8 @@ app.controller('ContestsController', [
 		$scope.curContest = {};
 		$scope.isCollapsed = true;
 
+		$scope.loadingData = true;
+
 		$scope.filterType = $location.path().split('/')[2] || 'open';
 
 		if ($scope.filterType == 'open') {
@@ -64,6 +66,7 @@ app.controller('ContestsController', [
 			});
 
 			contestPromise.then(function(data) {
+				$scope.loadingData = false;
 				$scope.contests = data.contests;
 				$scope.serverTime = data.serverTime;
 				for (var i = 0; i < $scope.contests.length; i++) {

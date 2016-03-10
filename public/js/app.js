@@ -1,47 +1,47 @@
 var mrtApp = angular.module('mrtApp', [
-		'mrtApp.templates',
-		'angularMoment',
-		'ui.router',
-		'ui-notification',
-		'ui.bootstrap',
-		'appRoutes',
-		'ngAnimate',
-		'angular-toArrayFilter',
-		'ngResource',
-		'ngCookies',
-		'ui.slider',
-		'ui.sortable',
-		'btford.socket-io',
-		'ui.codemirror',
+	'mrtApp.templates',
+	'angularMoment',
+	'ui.router',
+	'ui-notification',
+	'ui.bootstrap',
+	'appRoutes',
+	'ngAnimate',
+	'angular-toArrayFilter',
+	'ngResource',
+	'ngCookies',
+	'ui.slider',
+	'ui.sortable',
+	'btford.socket-io',
+	'ui.codemirror',
 
-		'ContestsCtrl',
-		'CreateContestCtrl',
-		'EditContestCtrl',
-		'HomeCtrl',
-		'LoginCtrl',
-		'ProblemsCtrl',
-		'ProfileCtrl',
-		'RegisterCtrl',
-		'SingleContestCtrl',
-		'SubmissionCtrl',
-		'TeamCtrl',
+	'ContestsCtrl',
+	'CreateContestCtrl',
+	'EditContestCtrl',
+	'HomeCtrl',
+	'LoginCtrl',
+	'ProblemsCtrl',
+	'ProfileCtrl',
+	'RegisterCtrl',
+	'SingleContestCtrl',
+	'SubmissionCtrl',
+	'TeamCtrl',
 
-		'AccountService',
-		'AuthService',
-		'CatalogService',
-		'ContestsService',
-		'GlobalService',
-		'ProblemsService',
-		'SingleContestService',
-		'SubmissionService',
-		'TagService',
-		'TeamService',
-		'UtilService',
+	'AccountService',
+	'AuthService',
+	'CatalogService',
+	'ContestsService',
+	'GlobalService',
+	'ProblemsService',
+	'SingleContestService',
+	'SubmissionService',
+	'TagService',
+	'TeamService',
+	'UtilService',
 
-		'GeneralDirective',
-		'ContestDirective',
+	'GeneralDirective',
+	'ContestDirective',
 
-		//'SocketService',
+	// 'SocketService',
 ]).constant('angularMomentConfig', {
 	preprocess: 'utc',
 	timezone: 'America/Recife' // optional
@@ -54,7 +54,8 @@ var mrtApp = angular.module('mrtApp', [
 			}
 		};
 	}
-]).config(['NotificationProvider', '$tooltipProvider', function(NotificationProvider, $tooltipProvider) {
+])
+.config(['NotificationProvider', '$tooltipProvider', function(NotificationProvider, $tooltipProvider) {
 	NotificationProvider.setOptions({
 		delay: 5000,
 		startTop: 20,
@@ -67,25 +68,8 @@ var mrtApp = angular.module('mrtApp', [
 	$tooltipProvider.setTriggers({
 		'toggleContestAccessEvent': 'toggleContestAccessEvent'
 	});
-}]).directive('restrict', [
-	'authService',
-	'GlobalFlags',
-	function(authService, gflags) {
-		return {
-			link: function(scope, element, attr) {
-				var msg = attr.ngConfirmClick || 'Você tem certeza?';
-				var clickAction = attr.confirmedClick;
-				element.bind('click', function(event) {
-					if (window.confirm(msg)) {
-						scope.$eval(clickAction);
-					}
-				});
-			}
-		};
-	}
-])
+}])
 .run([
-	//'$route',
 	'$cookies',
 	'$location',
 	'$http',
@@ -95,7 +79,7 @@ var mrtApp = angular.module('mrtApp', [
 	'Notification',
 	'$templateCache',
 	'amMoment',
-	function( /*$route, */ $cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment) {
+	function($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment) {
 		amMoment.changeLocale('pt-br');
 		try {
 			$rootScope.user = JSON.parse($cookies.get('user'));

@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
 		nodemon: {
 			all: {
-				script: 'server.js',
+				script: 'site.js',
 				options: {
 					cwd: __dirname,
 					ignore: ['node_modules/**', 'public/**', '**/*.json', 'Gruntfile.js'],

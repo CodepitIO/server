@@ -1,0 +1,10 @@
+<div class="container-fluid">
+	<div ng-hide="waitFor" align="alignOpts">
+		<loading-spinner 
+	    color="color" 
+	    width="height" 
+	    height="width">
+	  </loading-spinner>
+	</div>
+  <div class="col-md-12" ng-if="waitFor" ng-transclude></div>
+</div>
