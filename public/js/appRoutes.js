@@ -26,6 +26,10 @@ angular.module('appRoutes', []).config([
 			templateUrl: 'views/contests/owner.html',
 			// controller: 'OwnedContestsController',
 			mustBeLogged: true
+		}).when('/contests/participated', {
+			templateUrl: 'views/contests/participated.html',
+			controller: 'ContestsController',
+			mustBeLogged: true
 		}).when('/contest/:id/edit', {
 			templateUrl: 'views/contests/edit.html',
 			controller: 'EditContestController',
