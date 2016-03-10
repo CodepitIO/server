@@ -1,6 +1,7 @@
 {
   "name": "maratonando.site",
   "main": "server.js",
+  "scripts": { "start": "node server.js" },
   "dependencies": {
     "async": "^1.4.0",
     "bcrypt-nodejs": "0.0.3",

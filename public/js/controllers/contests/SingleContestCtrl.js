@@ -17,10 +17,10 @@ app.controller('SingleContestController', [
 		}
 
 		$scope.editorOptions = {
-        lineWrapping : true,
-        lineNumbers: true,
-        mode: 'text/x-c++src',
-    };
+			lineWrapping: true,
+			lineNumbers: true,
+			mode: 'text/x-c++src',
+		};
 
 		var getTags = function() {
 			tag.getTags().then(function(data) {

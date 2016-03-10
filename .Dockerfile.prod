@@ -8,31 +8,30 @@ MAINTAINER Gustavo Stor
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential vim supervisor
-RUN mkdir -p /var/log/supervisor
-
-RUN npm install -g grunt-cli nodemon bower pm2 forever
-
-ENV WD www
+    apt-get -y install nodejs git-all build-essential vim supervisor nginx
 
 # Install node_modules and bower_components
+RUN npm install -g grunt-cli bower
 COPY package.json /tmp/package.json
 RUN cd /tmp && npm install
-
 COPY [".bowerrc", "bower.json", "/tmp/"]
 RUN cd /tmp && bower install --allow-root
 
-# Define working directory
-RUN mkdir -p /${WD}
-WORKDIR /${WD}
-ADD . /${WD}
+# Set up working directory
+RUN mkdir -p /www
+WORKDIR /www
+ADD . /www
 
-RUN cp -a /tmp/node_modules /${WD}/ && \
-    cp -a /tmp/public/bower_components /${WD}/public/ && \
+RUN cp -a /tmp/node_modules /www/ && \
+    cp -a /tmp/public/bower_components /www/public/ && \
     rm -rf /tmp && \
     grunt prod && \
-    g++ /${WD}/cpp/matchProblems.cpp -o /${WD}/cpp/matchProblems --std=c++0x
+    g++ /www/cpp/matchProblems.cpp -o /www/cpp/matchProblems --std=c++0x && \
+    mkdir -p /var/log/supervisor && \
+    rm -rf /etc/nginx/conf.d/*
 
-VOLUME /${WD}/public
+# Set up config files
+COPY .prod/default.conf /etc/nginx/conf.d/
+COPY .prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["node server"]
+CMD ["/usr/bin/supervisord"]
