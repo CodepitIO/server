@@ -16,6 +16,7 @@ app.controller('ContestsController', [
 		$scope.contests = [];
 		$scope.teams = [];
 		$scope.teamsAndSingle = [];
+		$scope.serverTime = undefined;
 
 		$scope.joinContest = {
 			password: '',
@@ -29,6 +30,9 @@ app.controller('ContestsController', [
 		if ($scope.filterType == 'open') {
 			$scope.predicate = 'date_start';
 			$scope.reverse = false;
+		} else if ($scope.filterType == 'owned') {
+			$scope.predicate = 'date_start';
+			$scope.reverse = true;
 		} else {
 			$scope.predicate = 'date_end';
 			$scope.reverse = true;
@@ -55,17 +59,20 @@ app.controller('ContestsController', [
 		};
 
 		var fetchData = function() {
-			contests.getByFilter({
-					filter: $scope.filterType
-				})
-				.then(function(data) {
-					$scope.contests = data.contests;
-					for (var i = 0; i < $scope.contests.length; i++) {
-						var start = $scope.contests[i].date_start;
-						var end = $scope.contests[i].date_end;
-						$scope.contests[i].duration = Math.floor((new Date(end) - new Date(start)) / 1000);
-					}
-				});
+			contestPromise = contests.getByFilter({
+				filter: $scope.filterType
+			});
+
+			contestPromise.then(function(data) {
+				$scope.contests = data.contests;
+				$scope.serverTime = data.serverTime;
+				for (var i = 0; i < $scope.contests.length; i++) {
+					var start = $scope.contests[i].date_start;
+					var end = $scope.contests[i].date_end;
+					$scope.contests[i].duration = Math.floor((new Date(end) - new Date(start)) / 1000);
+				}
+			});
+
 			team.getFromUser({})
 				.then(function(data) {
 					$scope.teams = data.teams.map(function(obj) {
@@ -80,7 +87,11 @@ app.controller('ContestsController', [
 		fetchData();
 
 		$scope.futureContestFilter = function(value, index, array) {
-			return new Date(value.date_start) > new Date();
+			return new Date(value.date_start) > new Date($scope.serverTime);
+		};
+
+		$scope.happeningContestFilter = function(value, index, array) {
+			return new Date(value.date_start) <= new Date($scope.serverTime);
 		};
 
 		$scope.order = function(predicate) {
@@ -89,7 +100,15 @@ app.controller('ContestsController', [
 		};
 
 		$scope.isInFuture = function(date) {
-			return new Date(date) > new Date();
+			return new Date(date) > new Date($scope.serverTime);
+		};
+
+		$scope.isNewContest = function(date) {
+			return (((new Date($scope.serverTime)) - (new Date(date))) / 60000) <= 10;
+		};
+
+		$scope.isOldDate = function(date) {
+			return (new Date(date)) <= (new Date($scope.serverTime));
 		};
 
 		$scope.remove = function(id) {

@@ -1,0 +1,82 @@
+<!-- Had to create own table because of this https://github.com/angular/angular.js/issues/1459#issuecomment-150607446 -->
+<div class="table-container">
+  <h2 ng-if="subTitle" class="orange-text">{{subTitle}}</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-md-3"><a href="#" ng-click="order('name')">Nome</a></th>
+        <th class="col-md-2"><a href="#" ng-click="order('date_start')">Início</a></th>
+        <th class="col-md-1"><a href="#" ng-click="order('duration')">Duração</a></th>
+        <th class="col-md-1" style="text-align: center;">Tipo</th>
+        <th class="col-md-1" style="text-align: center;">Acesso</th>
+        <th ng-if="withActionCol" class="col-md-1" style="text-align: center;">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        ng-if="(currentContests = (contests | filter: (listFilter || ''))) && currentContests.length == 0">
+        <td colspan="6"><span style="font-style: italic;">{{emptyMessage}}</span></td>
+      </tr>
+      <tr class="animation" ng-repeat="contest in contests | filter: (listFilter || '') | orderBy:predicate:reverse">
+        <td>
+          <mrt-contest-label
+            linkable="contest.isAdmin || !contest.watchPrivate || contest.isInContest"
+            contest="contest"
+            admin-flag="contest.isAdmin && adminFlag"
+            new-flag="contest.isAdmin && isNewContest(contest.date_created) && newFlag">
+          </mrt-contest-label>
+        </td>
+        <td>{{contest.date_start | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</td>
+        <td>{{contest.duration | formatTime : false}}</td>
+        <td class="contests-view-table-td">
+          <i class="fa fa-user contests-view-table-icon" ng-if="contest.contestantType != '2'" data-toggle="tooltip" title="Perfis individuais podem participar." tooltip></i>
+          <i class="fa fa-users contests-view-table-icon" ng-if="contest.contestantType != '1'" data-toggle="tooltip" title="Times podem participar." tooltip></i>
+        </td>
+        <td class="contests-view-table-td">
+          <i class="fa fa-lock contests-view-table-icon" ng-if="contest.isPrivate" data-toggle="tooltip" title="Possui senha para se registrar." tooltip></i>
+          <i class="fa fa-unlock contests-view-table-icon" ng-if="!contest.isPrivate" data-toggle="tooltip" title="Não possui senha para se registrar." tooltip></i>
+          <i class="fa fa-user-secret contests-view-table-icon" ng-if="contest.watchPrivate" data-toggle="tooltip" title="Apenas quem está registrado pode entrar no link." tooltip></i>
+          <i class="fa fa-globe contests-view-table-icon" ng-if="!contest.watchPrivate" data-toggle="tooltip" title="Qualquer um pode entrar no link." tooltip></i>
+        </td>
+        <td ng-if="withActionCol" class="contests-view-table-td">
+          <a class="join-contest-button" href="#" data-toggle="modal" data-target="#{{modalId}}" ng-hide="contest.isInContest || modalId === undefined" ng-click="setJoinContestData(contest)" ><i class="fa fa-user-plus contests-view-table-icon join-contest-icon"></i></a>
+          <a ng-show="contest.isInContest && isInFuture(contest.date_start)" href="#" confirmed-click="leave(contest)" style="color: #F66;"><i class="fa fa-user-times contests-view-table-icon" data-toggle="tooltip" title="Sair da competição (só possível enquanto ela não começa)." tooltip></i></a>
+          <a ng-show="contest.isAdmin" ng-hide="isOldDate(contest.date_end)" ng-href="contest/{{contest._id}}/edit"><i class="fa fa-cog contests-view-table-icon" data-toggle="tooltip" title="Editar." tooltip></i></a>
+          <a ng-show="contest.isAdmin" href="#" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div ng-show="modalId" class="modal fade" id="{{modalId}}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">{{curContest.name}}</h4>
+        </div>
+        <div class="modal-body">
+          <form name="joinContestForm">
+            <div class="form-group" style="width: 100%;">
+              <input ng-if="curContest.isPrivate" style="margin-bottom: 6px;" type="password" ng-model="joinContest.password" class="form-control" placeholder="Senha">
+              <div ng-show="curContest.contestantType == '2'">
+                <p>Escolha um time&nbsp;<i class="fa fa-question-circle" tooltip-placement="left" tooltip="Como um perfil pode estar vinculado a times diferentes, você se registrar na competição com um time X não irá automaticamente adicionar os outros membros do time X na competição. Para isso, cada membro deve individualmente se cadastrar informando o time que quer representar (ou se quer competir individualmente). Note que você pode competir sozinho representando o time."></i></p>
+                <select class="form-control" ng-model="joinContest.team" ng-options="team.id as team.name for team in teams"></select>
+              </div>
+              <div ng-show="curContest.contestantType == '3' || !curContest.contestantType">
+                <p>Escolha entre competir individualmente ou em time&nbsp;<i class="fa fa-question-circle" tooltip-placement="left" tooltip="Como um perfil pode estar vinculado a times diferentes, você se registrar na competição com um time X não irá automaticamente adicionar os outros membros do time X na competição. Para isso, cada membro deve individualmente se cadastrar informando o time que quer representar (ou se quer competir individualmente). Note que você pode competir sozinho representando o time."></i></p>
+                <select class="form-control" ng-model="joinContest.team" ng-options="team.id as team.name for team in teamsAndSingle"></select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" ng-click="join()" data-dismiss="modal" >Participar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
