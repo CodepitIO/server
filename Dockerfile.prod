@@ -28,10 +28,13 @@ RUN cp -a /tmp/node_modules /www/ && \
     grunt prod && \
     g++ /www/cpp/matchProblems.cpp -o /www/cpp/matchProblems --std=c++0x && \
     mkdir -p /var/log/supervisor && \
-    rm -rf /etc/nginx/conf.d/*
+    rm -rf /etc/nginx/conf.d/* && \
+    rm -rf /etc/nginx/sites-enabled/*
 
 # Set up config files
+VOLUME /www/public
 COPY .prod/default.conf /etc/nginx/conf.d/
-COPY .prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .prod/supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .prod/ecosystem.json /www/
 
 CMD ["/usr/bin/supervisord"]

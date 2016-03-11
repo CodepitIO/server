@@ -17,6 +17,6 @@ RUN npm install -g grunt-cli nodemon bower pm2 node-gyp
 RUN mkdir -p /www
 WORKDIR /www
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.dev.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]

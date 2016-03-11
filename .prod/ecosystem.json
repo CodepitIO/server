@@ -5,7 +5,6 @@
       "script"      : "site.js",
       "merge_logs"  : true,
       "max_memory_restart": "300M",
-      "instances"   : 1,
       "next_gen_js" : true,
     },
     {
