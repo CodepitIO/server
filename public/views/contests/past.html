@@ -3,10 +3,9 @@
   title="'Competições passadas'">
 </mrt-breadcrumbs>
 
-<mrt-page-wrapper wait-for="!loadingData">
-  <mrt-contest-list
-    with-action-col="false"
-    empty-message="'Nenhuma competição passada.'"
-    admin-flag="true">
-  </mrt-contest-list>
-</mrt-page-wrapper>
+<mrt-contest-list
+  filter-type="past"
+  with-action-col="false"
+  empty-message="'Nenhuma competição passada.'"
+  admin-flag="true">
+</mrt-contest-list>

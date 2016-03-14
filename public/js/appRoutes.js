@@ -17,20 +17,20 @@ angular.module('appRoutes', []).config([
 				url: '^/contests',
 				template: '<ui-view/>'
 			})
+			// Controller is set on the directive
 			.state('contests.open', {
 				url: '/open',
 				templateUrl: 'views/contests/open.html',
-				controller: 'ContestsController'
 			})
+			// Controller is set on the directive
 			.state('contests.past', {
 				url: '/past',
 				templateUrl: 'views/contests/past.html',
-				controller: 'ContestsController'
 			})
+			// Controller is set on the directive
 			.state('contests.owned', {
 				url: '/owned',
 				templateUrl: 'views/contests/owned.html',
-				controller: 'ContestsController',
 				mustBeLogged: true
 			})
 			.state('contests.create', {

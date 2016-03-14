@@ -9,16 +9,9 @@ app.controller('ProfileController', [
 	function($scope, $rootScope, Notification, util, account, team) {
 		$scope.tabSelected = 'teams';
 
-		$scope.account = {
-			name: '',
-			surname: '',
-			email: '',
-			password: '',
-			newPassword: '',
-			confirmNewPassword: '',
-			username: ''
-		};
-		$scope.pictureUrl = '';
+		$scope.account = $rootScope.user.local;
+		$scope.account.password = $scope.account.newPassword =
+		$scope.account.confirmNewPassword = $scope.pictureUrl = '';
 
 		$scope.loadedPictureUrl = false;
 		$scope.loadedEditingProfile = true;
@@ -36,6 +29,7 @@ app.controller('ProfileController', [
 					$scope.invited = data.invited;
 				});
 		};
+		getTeams();
 
 		var removeTeamInvitationFilter = function(id, elem) {
 			return elem._id.toString() != id.toString();
@@ -114,13 +108,5 @@ app.controller('ProfileController', [
 					$scope.invited = $scope.invited.filter(removeTeamInvitationFilter.bind(null, id));
 				});
 		};
-
-		$scope.$watch(function() {
-			return $rootScope.user;
-		}, function() {
-			$scope.account = $rootScope.user.local;
-			$scope.account.password = $scope.account.newPassword = $scope.account.confirmNewPassword = '';
-			getTeams();
-		});
 	}
 ]);

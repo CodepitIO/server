@@ -36,12 +36,13 @@ var app = angular.module('GeneralServices', [])
 			var diff = 0,
 				now;
 			var server = {
-				time: new Date()
+				dynamic: new Date(),
+				static: new Date()
 			};
 
 			$interval(function() {
 				now = (new Date()).getTime();
-				server.time = new Date(now + diff);
+				server.dynamic = new Date(now + diff);
 			}, 5000);
 
 			var GetServerTimeAPI = $resource('/api/server/time', {});
@@ -51,7 +52,7 @@ var app = angular.module('GeneralServices', [])
 
 				diff = Math.max(0, serverDate - clientDate);
 				now = (new Date()).getTime();
-				server.time = new Date(now + diff);
+				server.dynamic = server.static = new Date(now + diff);
 			});
 
 			return {

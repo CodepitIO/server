@@ -33,7 +33,8 @@ app.controller('CreateContestController', [
 		$scope.maxDate.setFullYear($scope.maxDate.getFullYear() + 4);
 		$scope.startDateTime.setSeconds(0);
 		$scope.startDateTime.setMinutes($scope.startDateTime.getMinutes() + 10 - $scope.startDateTime.getMinutes() % 10);
-		$scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+		$scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+		'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 		$scope.privatePopover = {
 			templateUrl: 'private-contest-password.html',

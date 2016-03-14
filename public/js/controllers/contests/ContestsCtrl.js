@@ -4,19 +4,20 @@ app.controller('ContestsController', [
 	'$rootScope',
 	'$location',
 	'Notification',
-	'SingleContestFactory',
 	'ContestsFactory',
 	'SingleContestFactory',
+	'ContestInstanceFunctions',
 	'TeamFactory',
-	function($scope, $rootScope, $location, Notification, singleContest, contests, singleContest, team) {
+	'TimeFactory',
+	function($scope, $rootScope, $location, Notification, contests, singleContest, contestFunctions, team, time) {
 		var dummySingle = {
 			id: '0',
 			name: '(individualmente)'
 		};
+
 		$scope.contests = [];
 		$scope.teams = [];
 		$scope.teamsAndSingle = [];
-		$scope.serverTime = undefined;
 
 		$scope.joinContest = {
 			password: '',
@@ -27,9 +28,9 @@ app.controller('ContestsController', [
 
 		$scope.loadingData = true;
 
-		$scope.filterType = $location.path().split('/')[2] || 'open';
+		$scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open';
 
-		if ($scope.filterType == 'open') {
+		if ($scope.filterType == 'now' || $scope.filterType == 'future') {
 			$scope.predicate = 'date_start';
 			$scope.reverse = false;
 		} else if ($scope.filterType == 'owned') {
@@ -68,11 +69,10 @@ app.controller('ContestsController', [
 			contestPromise.then(function(data) {
 				$scope.loadingData = false;
 				$scope.contests = data.contests;
-				$scope.serverTime = data.serverTime;
 				for (var i = 0; i < $scope.contests.length; i++) {
-					var start = $scope.contests[i].date_start;
-					var end = $scope.contests[i].date_end;
-					$scope.contests[i].duration = Math.floor((new Date(end) - new Date(start)) / 1000);
+					var start = $scope.contests[i].date_start = new Date($scope.contests[i].date_start);
+					var end = $scope.contests[i].date_end = new Date($scope.contests[i].date_end);
+					$scope.contests[i].duration = Math.floor((end - start) / 1000);
 				}
 			});
 
@@ -89,66 +89,21 @@ app.controller('ContestsController', [
 		};
 		fetchData();
 
-		$scope.futureContestFilter = function(value, index, array) {
-			return new Date(value.date_start) > new Date($scope.serverTime);
-		};
-
-		$scope.happeningContestFilter = function(value, index, array) {
-			return new Date(value.date_start) <= new Date($scope.serverTime);
-		};
-
 		$scope.order = function(predicate) {
 			$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
 			$scope.predicate = predicate;
 		};
 
 		$scope.isInFuture = function(date) {
-			return new Date(date) > new Date($scope.serverTime);
+			return new Date(date) > time.server.static;
 		};
 
 		$scope.isNewContest = function(date) {
-			return (((new Date($scope.serverTime)) - (new Date(date))) / 60000) <= 10;
+			return ((time.server.static - new Date(date)) / 60000) <= 10;
 		};
 
 		$scope.isOldDate = function(date) {
-			return (new Date(date)) <= (new Date($scope.serverTime));
-		};
-
-		$scope.remove = function(id) {
-			singleContest.remove({
-					id: id
-				})
-				.then(function(data) {
-					Notification('Competição removida.');
-					$scope.contests = $scope.contests.filter(function(obj) {
-						return obj._id.toString() != id.toString();
-					});
-				});
-		};
-
-		$scope.join = function() {
-			singleContest.join({
-				id: $scope.curContest._id,
-				password: $scope.joinContest.password,
-				team: $scope.joinContest.team
-			}).then(function(data) {
-				Notification.success('Inscrito com sucesso nessa competição!');
-				$scope.curContest.isInContest = true;
-				$scope.isCollapsed = true;
-			}, function(err) {
-				Notification.error(err);
-			});
-		};
-
-		$scope.leave = function(contest) {
-			singleContest.leave({
-				id: contest._id,
-			}).then(function(data) {
-				Notification('Você saiu da competição.');
-				contest.isInContest = false;
-			}, function(err) {
-				Notification.error(err);
-			});
+			return new Date(date) <= time.server.static;
 		};
 	}
 ]);

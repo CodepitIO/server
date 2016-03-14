@@ -69,7 +69,18 @@ var filters = {
   },
   owned: function(req) {
     return { author: req.user._id };
-  }
+  },
+  now: function() {
+    var now = new Date();
+    return {
+      date_start: {$lt: now},
+      date_end: { $gt: now },
+    };
+  },
+  future: function() {
+    var now = new Date();
+    return { date_start: { $gt: now } };
+  },
 };
 
 exports.getByFilter = function(req, res) {
@@ -95,7 +106,7 @@ exports.getByFilter = function(req, res) {
       }
       return contest;
     });
-    return res.json({contests: contests, serverTime: new Date()});
+    return res.json({contests: contests});
   }, function(err) {
     return res.json({error: err});
   });

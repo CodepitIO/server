@@ -8,11 +8,11 @@ app.directive('mrtContestLabel', function() {
 		restrict: 'E',
 		scope: {
 			linkable: '=', // Indicate if want the link to see the contest or just a span
-			// optinal - values = true/false
+			// optional - values = true/false
 			adminFlag: '=', // Span to indicate the user has admin properties over contest
-			// optinal - values = true/false
+			// optional - values = true/false
 			newFlag: '=', // Span to indicate that contest is new (based on function declared on controller)
-			// optinal - values = true/false
+			// optional - values = true/false
 			contest: '=', // A contest instance wich holds the information needed
 			//required - values = contest instance
 		},
@@ -30,21 +30,22 @@ app.directive('mrtContestList', function() {
 		restrict: 'E',
 		required: 'mrtPageWrapper',
 		scope: {
+			filterType: '@', // Select the filter to apply over the list
+			// optional - value = ['past', 'future', 'now', 'owned']
 			withActionCol: '=', // Show the action column on template (see views/contests/contest.list.html)
-			// optinal - values = true/false
-			listFilter: '=', // Select the filter to apply over the list
-			// optional - value = function(value, index, array)
+			// optional - values = true/false
 			emptyMessage: '=', // Message to display when list is empty
-			// optinal - String
+			// optional - String
 			adminFlag: '=', // Span to indicate the user has admin properties over contest
-			// optinal - values = true/false
+			// optional - values = true/false
 			newFlag: '=', // Span to indicate that contest is new (based on function declared on controller)
-			// optinal - values = true/false
+			// optional - values = true/false
 			subTitle: '=', // Table's title
-			// optinal - String
+			// optional - String
 			modalId: '=', //Id of the model used on action to join contest
 			// required only if action to join contentes is wanted - String`
 		},
 		templateUrl: 'views/contests/contests.list.html',
+		controller: 'ContestsController',
 	};
 });
