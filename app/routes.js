@@ -36,6 +36,7 @@ module.exports = function(app, passport) {
 
   // util
   app.get('/api/picture/:email/:size', Util.getProfilePicByEmailAndSize);
+  app.get('/api/server/time', Util.getTime);
 
   // problems
   app.post('/api/problems/fetch', ProblemsCtrl.fetchProblems);

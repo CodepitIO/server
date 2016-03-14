@@ -13,6 +13,10 @@ exports.getProfilePicByEmailAndSize = function(req, res, next) {
   return res.json({url: getProfilePicURL(req.params.email, req.params.size)});
 }
 
+exports.getTime = function(req, res, next) {
+  return res.json({date: new Date()});
+}
+
 exports.validateDate = function (datestr) {
   if (typeof datestr !== "string")
     return false;

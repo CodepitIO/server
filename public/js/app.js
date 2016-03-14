@@ -30,7 +30,7 @@ var mrtApp = angular.module('mrtApp', [
 		'AuthService',
 		'CatalogService',
 		'ContestsService',
-		'GlobalService',
+		'GeneralServices',
 		'ProblemsService',
 		'SingleContestService',
 		'SubmissionService',
@@ -41,11 +41,11 @@ var mrtApp = angular.module('mrtApp', [
 		'GeneralDirective',
 		'ContestDirective',
 
+		'ContestInstance',
+
 		// 'SocketService',
-	]).constant('angularMomentConfig', {
-		preprocess: 'utc',
-		timezone: 'America/Recife' // optional
-	}).service('authService', [
+	])
+	.service('authService', [
 		'$rootScope',
 		function($rootScope) {
 			return {
