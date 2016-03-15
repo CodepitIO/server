@@ -34,7 +34,8 @@ app.controller('CreateContestController', [
 		$scope.startDateTime.setSeconds(0);
 		$scope.startDateTime.setMinutes($scope.startDateTime.getMinutes() + 10 - $scope.startDateTime.getMinutes() % 10);
 		$scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-		'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+			'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+		];
 
 		$scope.privatePopover = {
 			templateUrl: 'private-contest-password.html',

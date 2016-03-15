@@ -13,9 +13,10 @@ var CatalogCtrl = require('./controllers/catalog');
 
 var Util = require('./utils/functions');
 
+var indexFile = './public/index.html';
+
 module.exports = function(app, passport) {
 
-  var indexFile = './public/index.html';
   if (app.get('env') === 'development') {
     indexFile = './public/_index.html';
   }
@@ -85,6 +86,8 @@ module.exports = function(app, passport) {
   		req.logout();
     }
     passport.authenticate('local-login', function(err, user) {
+      if (err) return res.json(err);
+      if (!user) return res.json({error: 'E-mail ou senha inválidos.'});
       req.logIn(user, function(err) {
         if (err) return res.json({error: err});
         return res.json(req.user);
