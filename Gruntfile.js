@@ -162,6 +162,7 @@ module.exports = function(grunt) {
 		'html2js:dev',
 		'clean:fonts',
 		'copy:fonts',
-		'concurrent:dev',
+		//'concurrent:dev',
+		'nodemon',
 	]);
 };
