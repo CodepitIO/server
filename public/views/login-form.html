@@ -1,14 +1,15 @@
 <div id="top-user-area" class="nav navbar-nav navbar-right">
   <div ng-hide="$root.user">
     <form>
-      <div class="form-group label-floating is-empty">
-        <label for="top-user-area-email" class="control-label">Email</label>
-        <input id="top-user-area-email" type="email" ng-model="account.email" class="form-control">
-      </div>
-      <div class="form-group label-floating is-empty">
-      <label for="top-user-area-password" class="control-label">Senha</label>
-        <input id="top-user-area-password" type="password" ng-model="account.password" class="form-control">
-      </div>
+      <md-input-container class="form-group md-default-theme" flex>
+        <label class="control-label">Email</label>
+        <input id="top-user-area-email" type="email" name="email" ng-model="account.email" class="form-control md-default-theme"/>
+      </md-input-container>
+
+      <md-input-container class="form-group md-default-theme" flex>
+        <label class="control-label">Senha</label>
+        <input id="top-user-area-password" type="password" class="form-control md-default-theme"/>
+      </md-input-container>
       <div class="form-group">
         <button id="top-user-area-submit" type="submit" ng-click="login()" class="btn btn-default">
           <i class="fa fa-arrow-right"></i>

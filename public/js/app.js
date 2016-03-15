@@ -1,18 +1,19 @@
 var mrtApp = angular.module('mrtApp', [
 		'mrtApp.templates',
 		'angularMoment',
+		'ngAnimate',
+		'ngMaterial',
+		'ngResource',
+		'ngCookies',
 		'ui.router',
 		'ui-notification',
 		'ui.bootstrap',
-		'appRoutes',
-		'ngAnimate',
-		'angular-toArrayFilter',
-		'ngResource',
-		'ngCookies',
 		'ui.slider',
 		'ui.sortable',
-		'btford.socket-io',
 		'ui.codemirror',
+		'appRoutes',
+		'angular-toArrayFilter',
+		'btford.socket-io',
 
 		'ContestsCtrl',
 		'CreateContestCtrl',
@@ -45,30 +46,30 @@ var mrtApp = angular.module('mrtApp', [
 
 		// 'SocketService',
 	])
-	.service('authService', [
-		'$rootScope',
-		function($rootScope) {
-			return {
-				getUserFlags: function() {
-					return $rootScope.user ? $rootScope.user.flags : 0;
-				}
-			};
+	.config([
+		'NotificationProvider',
+		'$tooltipProvider',
+		'$mdThemingProvider',
+		function(NotificationProvider, $tooltipProvider, $mdThemingProvider) {
+			NotificationProvider.setOptions({
+				delay: 5000,
+				startTop: 20,
+				startRight: 10,
+				verticalSpacing: 20,
+				horizontalSpacing: 20,
+				positionX: 'right',
+				positionY: 'bottom'
+			});
+			$tooltipProvider.setTriggers({
+				'toggleContestAccessEvent': 'toggleContestAccessEvent'
+			});
+			$mdThemingProvider.theme('default')
+		    .primaryPalette('cyan')
+		    .accentPalette('purple', {
+		      'default': '200' // use shade 200 for default, and keep all other shades the same
+		    });
 		}
 	])
-	.config(['NotificationProvider', '$tooltipProvider', function(NotificationProvider, $tooltipProvider) {
-		NotificationProvider.setOptions({
-			delay: 5000,
-			startTop: 20,
-			startRight: 10,
-			verticalSpacing: 20,
-			horizontalSpacing: 20,
-			positionX: 'right',
-			positionY: 'bottom'
-		});
-		$tooltipProvider.setTriggers({
-			'toggleContestAccessEvent': 'toggleContestAccessEvent'
-		});
-	}])
 	.run([
 		'$cookies',
 		'$location',

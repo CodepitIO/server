@@ -1,0 +1,11 @@
+md-input-container.md-default-theme:not(.md-input-focused) label {
+  color:#aaa !important;
+}
+
+md-input-container.md-default-theme input.md-default-theme {
+  border-bottom: 1px solid #aaa;
+}
+
+md-input-container.md-default-theme input.md-default-theme:focus {
+  color: white;
+}
