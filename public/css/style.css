@@ -442,9 +442,12 @@ button:disabled {
   border-bottom: thin solid rgba(93, 106, 115, 1);
 }
 
-#news .news-section:not(.first,.last) {
+#news .news-section:not(.first) {
   margin-top: 10px;
   border-top: thin solid rgba(93, 106, 115, 1);
+}
+
+#news .news-section:not(.last) {
   border-bottom: thin solid rgba(93, 106, 115, 1);
 }
 
@@ -555,7 +558,7 @@ footer {
   background-size: cover;
 }
 
-#footer-arrow{
+#footer-arrow {
   width: 50px;
   height: 22px;
   background: url('../imgs/footer_arrow.png') no-repeat;
