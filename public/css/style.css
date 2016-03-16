@@ -110,6 +110,7 @@ button:disabled {
   left: 0;
   background: #374249;
   min-height: 75px;
+  border: none;
 }
 
 #header .navbar-brand {
@@ -777,4 +778,11 @@ footer ul li a:first-child{
   .collapsing {
     overflow: hidden!important;
   }
+}
+
+#join-contest-id md-sidenav,
+#join-contest-id .md-sidenav-backdrop {
+  height: 100%;
+  position:fixed;
+  top: 75px;
 }

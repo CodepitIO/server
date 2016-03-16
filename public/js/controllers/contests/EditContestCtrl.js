@@ -9,8 +9,8 @@ app.controller('EditContestController', [
 	'Notification',
 	'ProblemsFactory',
 	'ContestsFactory',
-	'SingleContestFactory',
-	function($scope, $rootScope, $stateParams, $timeout, $interval, $location, Notification, problems, contests, singleContest) {
+	'ContestInstanceFactory',
+	function($scope, $rootScope, $stateParams, $timeout, $interval, $location, Notification, problems, contests, contestInstance) {
 		$scope.name = '';
 		$scope.descr = '';
 		$scope.startDateTime = new Date();
@@ -57,7 +57,7 @@ app.controller('EditContestController', [
 		}
 
 		var getContestData = function() {
-			singleContest.getFullData({
+			contestInstance.getFullData({
 					id: $stateParams.id
 				})
 				.then(function(data) {
@@ -199,7 +199,7 @@ app.controller('EditContestController', [
 			$scope.loadingEdit = true;
 			var password = ($scope.access == 'Privado' && $scope.password) || '';
 			var confirmPassword = ($scope.access == 'Privado' && $scope.confirmPassword) || '';
-			singleContest.edit({
+			contestInstance.edit({
 					id: $stateParams.id,
 					name: $scope.name,
 					descr: $scope.descr,

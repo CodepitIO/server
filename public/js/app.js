@@ -16,6 +16,7 @@ var mrtApp = angular.module('mrtApp', [
 		'btford.socket-io',
 
 		'ContestsCtrl',
+		'JoinContestCtrl',
 		'CreateContestCtrl',
 		'EditContestCtrl',
 		'HomeCtrl',
@@ -23,7 +24,7 @@ var mrtApp = angular.module('mrtApp', [
 		'ProblemsCtrl',
 		'ProfileCtrl',
 		'RegisterCtrl',
-		'SingleContestCtrl',
+		'ContestInstanceCtrl',
 		'SubmissionCtrl',
 		'TeamCtrl',
 
@@ -33,7 +34,7 @@ var mrtApp = angular.module('mrtApp', [
 		'ContestsService',
 		'GeneralServices',
 		'ProblemsService',
-		'SingleContestService',
+		'ContestInstanceService',
 		'SubmissionService',
 		'TagService',
 		'TeamService',
@@ -64,10 +65,14 @@ var mrtApp = angular.module('mrtApp', [
 				'toggleContestAccessEvent': 'toggleContestAccessEvent'
 			});
 			$mdThemingProvider.theme('default')
-		    .primaryPalette('cyan')
-		    .accentPalette('purple', {
-		      'default': '200' // use shade 200 for default, and keep all other shades the same
-		    });
+				.primaryPalette('cyan')
+				.accentPalette('blue-grey', {
+		      'default': '400',
+		      'hue-1': '100',
+		      'hue-2': '600',
+		      'hue-3': '900'
+		    })
+				.warnPalette('red');
 		}
 	])
 	.run([

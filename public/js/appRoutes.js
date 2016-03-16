@@ -42,7 +42,7 @@ angular.module('appRoutes', []).config([
 			.state('contest', {
 				url: '^/contest/{id}',
 				templateUrl: 'views/contests/contest.html',
-				controller: 'SingleContestController'
+				controller: 'ContestInstanceController'
 			})
 			.state('contest/edit', {
 				url: '/edit',

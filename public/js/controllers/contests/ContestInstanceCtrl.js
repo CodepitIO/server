@@ -1,5 +1,5 @@
-var app = angular.module('SingleContestCtrl', []);
-app.controller('SingleContestController', [
+var app = angular.module('ContestInstanceCtrl', []);
+app.controller('ContestInstanceController', [
 	'$scope',
 	'$rootScope',
 	'$state',
@@ -10,8 +10,8 @@ app.controller('SingleContestController', [
 	'CatalogFactory',
 	'TagFactory',
 	'SubmissionFactory',
-	'SingleContestFactory',
-	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, singleContest) {
+	'ContestInstanceFactory',
+	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, contestInstance) {
 		if ($state.is('contest')) {
 			$state.go('.scoreboard');
 		}
@@ -202,8 +202,8 @@ app.controller('SingleContestController', [
 
 		$scope.refreshScoreboard = function() {
 			if ($scope.allSubmissions && $scope.timeLeft === 0 && $scope.timeline.moment <= $scope.timeline.options.max) {
-				$scope.scores = singleContest.getScoreMap($scope.allSubmissions, $scope.timeline.moment);
-				$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+				$scope.scores = contestInstance.getScoreMap($scope.allSubmissions, $scope.timeline.moment);
+				$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 				if (!$scope.$$phase) {
 					$scope.$digest();
 				}
@@ -221,7 +221,7 @@ app.controller('SingleContestController', [
 		};
 
 		var getDynamicScoreboard = function() {
-			singleContest.getDynamicScoreboard({
+			contestInstance.getDynamicScoreboard({
 					id: $scope.id
 				})
 				.then(function(data) {
@@ -271,7 +271,7 @@ app.controller('SingleContestController', [
 		};
 
 		var updateScoreboard = function() {
-			singleContest.getScoreboard({
+			contestInstance.getScoreboard({
 				id: $scope.id
 			}).then(function(data) {
 				$scope.scores = data.scores;
@@ -292,7 +292,7 @@ app.controller('SingleContestController', [
 						$scope.pendingSubmissions[id] = true;
 					}
 				}
-				$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+				$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 				if (!$scope.$$phase) {
 					$scope.$digest();
 				}
@@ -303,7 +303,7 @@ app.controller('SingleContestController', [
 		};
 
 		var getScoreboard = function() {
-			singleContest.getScoreboard({
+			contestInstance.getScoreboard({
 					id: $scope.id
 				})
 				.then(function(data) {
@@ -327,7 +327,7 @@ app.controller('SingleContestController', [
 					$scope.inContest = data.inContest;
 					$scope.contestants = data.contestants;
 					$scope.scores = data.scores;
-					$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+					$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 					$scope.submissions2 = data.submissions;
 					$scope.submissions = data.submissions.filter(function(obj) {
 						return obj.time * 60 < $scope.totalDuration;
@@ -349,7 +349,7 @@ app.controller('SingleContestController', [
 
 					if ($scope.timeLeft === 0) {
 						$scope.scores2 = data.upsolvingScores;
-						$scope.ord2 = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
+						$scope.ord2 = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
 					}
 
 					if ($scope.timeLeft > 0) {

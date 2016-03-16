@@ -3,6 +3,60 @@
   title="'Competições abertas'">
 </mrt-breadcrumbs>
 
+<div id="join-contest-id">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <div ng-controller="JoinContestController">
+      <md-toolbar class="md-hue-2">
+        <h1 class="md-toolbar-tools">
+          {{contest.name}}
+        </h1>
+      </md-toolbar>
+      <md-content layout-padding>
+        <form>
+          <md-input-container ng-if="contest.isPrivate">
+            <label for="contest-password">Senha</label>
+            <input id="contest-password" type="password" ng-model="password" class="form-control">
+          </md-input-container>
+          <md-radio-group ng-model="role" ng-show="contest.contestantType === 3">
+            <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
+            <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
+          </md-radio-group>
+          <div ng-show="role === 'team'" layout-fill>
+            <p>
+              <i>Escolha um time</i>&nbsp;
+              <i class="fa fa-question-circle" style="width: 50px;">
+                <md-tooltip md-direction="bottom">
+                  Como um perfil pode estar vinculado a times diferentes, se<br>
+                  registrar na competição com um time X não irá automaticamente<br>
+                  adicionar os outros membros do time X na competição. Para isso,<br>
+                  cada membro do time também deve se cadastrar na competição.<br>
+                </md-tooltip>
+              </i>
+            </p>
+            <br>
+            <md-input-container layout-fill>
+              <label>Time</label>
+              <md-select ng-model="team">
+                <md-option ng-repeat="team in teams" value="{{team.id}}">
+                  {{team.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </form>
+        <div layout="row">
+          <md-button class="md-fab md-mini md-primary" ng-click="join()">
+            <md-icon class="material-icons" style="color:white;">person_add</md-icon>
+          </md-button>
+          <md-button class="md-fab md-mini md-warn md-hue-3" ng-click="close()">
+            <md-icon class="material-icons" style="color:white;">clear</md-icon>
+          </md-button>
+        </div>
+      </md-content>
+    </div>
+  </md-sidenav>
+</div>
+
 <div style="padding-top: 30px;">
   <mrt-contest-list
     filter-type="now"

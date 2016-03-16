@@ -1,4 +1,4 @@
-angular.module('SingleContestService', []).factory('SingleContestFactory', [
+angular.module('ContestInstanceService', []).factory('ContestInstanceFactory', [
 	'$http',
 	'$q',
 	'$resource',

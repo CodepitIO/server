@@ -5,28 +5,15 @@ app.controller('ContestsController', [
 	'$location',
 	'Notification',
 	'ContestsFactory',
-	'SingleContestFactory',
+	'ContestInstanceFactory',
 	'ContestInstanceFunctions',
-	'TeamFactory',
 	'TimeFactory',
-	function($scope, $rootScope, $location, Notification, contests, singleContest, contestFunctions, team, time) {
-		var dummySingle = {
-			id: '0',
-			name: '(individualmente)'
-		};
+	'JoinContestService',
+	'$mdSidenav',
+	function($scope, $rootScope, $location, Notification, contests, contestInstance, contestFunctions, time, joinContest, $mdSidenav) {
+		$scope.loadingData = true;
 
 		$scope.contests = [];
-		$scope.teams = [];
-		$scope.teamsAndSingle = [];
-
-		$scope.joinContest = {
-			password: '',
-			team: {}
-		};
-		$scope.curContest = {};
-		$scope.isCollapsed = true;
-
-		$scope.loadingData = true;
 
 		$scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open';
 
@@ -40,26 +27,6 @@ app.controller('ContestsController', [
 			$scope.predicate = 'date_end';
 			$scope.reverse = true;
 		}
-
-		$scope.setJoinContestData = function(contest) {
-			if ($scope.isCollapsed || $scope.curContest._id != contest._id) {
-				if (contest.contestantType == '2') {
-					if ($scope.teams.length === 0) {
-						Notification.error('Esta competição só permite times, e você não está em nenhum.');
-						return;
-					} else {
-						$scope.joinContest.team = $scope.teams[0].id;
-					}
-				} else {
-					$scope.joinContest.team = $scope.teamsAndSingle[0].id;
-				}
-				$scope.joinContest.password = '';
-				$scope.curContest = contest;
-				$scope.isCollapsed = false;
-			} else {
-				$scope.isCollapsed = true;
-			}
-		};
 
 		var fetchData = function() {
 			contestPromise = contests.getByFilter({
@@ -75,17 +42,6 @@ app.controller('ContestsController', [
 					$scope.contests[i].duration = Math.floor((end - start) / 1000);
 				}
 			});
-
-			team.getFromUser({})
-				.then(function(data) {
-					$scope.teams = data.teams.map(function(obj) {
-						return {
-							id: obj._id,
-							name: obj.name
-						};
-					});
-					$scope.teamsAndSingle = [dummySingle].concat($scope.teams);
-				});
 		};
 		fetchData();
 
@@ -104,6 +60,14 @@ app.controller('ContestsController', [
 
 		$scope.isOldDate = function(date) {
 			return new Date(date) <= time.server.static;
+		};
+
+		$scope.toggleRight = function(contest) {
+			joinContest.update(contest);
+			$mdSidenav('right').toggle();
+		}
+		$scope.isOpenRight = function() {
+			return $mdSidenav('right').isOpen();
 		};
 	}
 ]);
