@@ -65,28 +65,28 @@ exports.join = function(req, res, next) {
       if (contest.isPrivate && contest.password != data.password) {
         return res.json({error: "Senha inválida."});
       }
-      if ((data.team == '0' && contest.contestantType == 2) ||
-        (data.team != '0' && contest.contestantType == 1)) {
+      if ((data.team === '0' && contest.contestantType === 2) ||
+        (data.team !== '0' && contest.contestantType === 1)) {
         return res.json(InvalidOperation);
       }
       if (contest.inContest(req.user._id)) {
         return res.json(InvalidOperation);
       }
-      if (data.team != '0' && !ObjectId.isValid(data.team)) {
+      if (data.team !== '0' && !ObjectId.isValid(data.team)) {
         return res.json(InvalidOperation);
       }
       var props = {
         id: req.user._id,
-        isIndividual: (data.team == '0')
+        isIndividual: (data.team === '0')
       };
-      if (data.team != '0') {
+      if (data.team !== '0') {
         props.team = new ObjectId(data.team);
       }
     } catch(err) {
       console.log(err);
       return res.json({error: err});
     }
-    
+
     contest.contestants.push(props);
     contest.save(function(err) {
       if (err) {
@@ -226,7 +226,7 @@ exports.edit = function(req, res, next) {
           }
         }
       }
-      
+
       contest.name = editContest.name;
       contest.description = editContest.descr;
       contest.date_start = editContest.startDateTime;
@@ -350,7 +350,7 @@ exports.getDynamicScoreboard = function(req, res, next) {
       else return [obj.id._id, {type: 'user', name: obj.id.local.username}];
     });
     contestants = _.object(contestants);
-    
+
     var userToContestant =
     _.map(contest.contestants, function(obj) {
       var toId = null;

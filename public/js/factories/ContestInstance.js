@@ -1,4 +1,4 @@
-angular.module('ContestInstance')
+angular.module('Contests')
 .factory('ContestInstanceAPI', [
 	'$http',
 	'$q',
@@ -44,7 +44,7 @@ angular.module('ContestInstance')
 .factory('ContestInstanceFunctions', [
 	'Notification',
 	'ContestInstanceAPI',
-	function(Notification, contest) {
+	function(Notification, contestAPI) {
 		return {
 			getScoreMap: function(submissions, moment) {
 				var scores = {};
@@ -99,44 +99,55 @@ angular.module('ContestInstance')
 			},
 
 			// Leave a contest
-			leave: function(contest) {
-				contest.leave({
-					id: contest._id,
+			leave: function(id, callback) {
+				contestAPI.leave({
+					id: id,
 				}).then(function(data) {
 					Notification('Você saiu da competição.');
-					contest.isInContest = false;
+					callback(null, true);
 				}, function(err) {
 					Notification.error(err);
+					callback(err);
 				});
 			},
 
 			// Join a contest
-			join: function(contest, password, team) {
-				contest.join({
+			join: function(contest, data, callback) {
+				if (contest.isPrivate && data.password.length === 0) {
+					return Notification.error('Você deve inserir uma senha.');
+				}
+				if (data.role === '') {
+					return Notification.error('Você deve informar se deseja participar em time ou individualmente.');
+				}
+				if (data.role === 'team' && typeof(data.team) !== 'string') {
+					return Notification.error('Você deve informar um time.');
+				}
+				if (data.role !== 'team' || typeof(data.team) !== 'string') {
+					data.team = '0';
+				}
+				contestAPI.join({
 					id: contest._id,
-					password: password,
-					team: team,
+					password: data.password,
+					team: data.team,
 				}).then(function(data) {
 					Notification.success('Inscrito com sucesso nessa competição!');
-					contest.isInContest = true;
-					//$scope.isCollapsed = true;
+					callback(null, true);
 				}, function(err) {
 					Notification.error(err);
+					callback(err);
 				});
 			},
 
 			// Remove a contest
-			/*remove: function(id) {
-				contest.remove({
-					id: id
-				})
+			remove: function(id, callback) {
+				contestAPI.remove({id: id})
 				.then(function(data) {
 					Notification('Competição removida.');
-					$scope.contests = $scope.contests.filter(function(obj) {
-						return obj._id.toString() != id.toString();
-					});
+					callback(null, true);
+				}, function(err) {
+					callback(err);
 				});
-			},*/
+			},
 		};
 	}
 ]);

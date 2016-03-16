@@ -1,4 +1,4 @@
-var app = angular.module('EditContest');
+var app = angular.module('Contests');
 app.controller('EditContestController', [
 	'$scope',
 	'$rootScope',

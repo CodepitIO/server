@@ -1,4 +1,4 @@
-var app = angular.module('ContestInstance');
+var app = angular.module('Contests');
 app.controller('ContestInstanceController', [
 	'$scope',
 	'$rootScope',

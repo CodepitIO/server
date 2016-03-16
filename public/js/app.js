@@ -2,13 +2,9 @@
 angular.module('Account', []);
 angular.module('Auth', []);
 angular.module('Catalog', []);
-angular.module('ContestInstance', []);
 angular.module('Contests', []);
-angular.module('CreateContest', []);
-angular.module('EditContest', []);
 angular.module('General', []);
 angular.module('Home', []);
-angular.module('JoinContest', []);
 angular.module('Login', []);
 angular.module('Problems', []);
 angular.module('Profile', []);
@@ -40,12 +36,8 @@ var mrtApp = angular.module('mrtApp', [
 		'Auth',
 		'Catalog',
 		'Contests',
-		'ContestInstance',
-		'CreateContest',
-		'EditContest',
 		'General',
 		'Home',
-		'JoinContest',
 		'Login',
 		'Problems',
 		'Profile',

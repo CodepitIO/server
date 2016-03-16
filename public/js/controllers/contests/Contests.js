@@ -3,18 +3,13 @@ app.controller('ContestsController', [
 	'$scope',
 	'$rootScope',
 	'$location',
-	'Notification',
 	'ContestsFactory',
-	'ContestInstanceAPI',
 	'ContestInstanceFunctions',
 	'TimeFactory',
 	'JoinContestService',
-	'$mdSidenav',
-	function($scope, $rootScope, $location, Notification, contests, contestInstance, contestFunctions, time, joinContest, $mdSidenav) {
+	function($scope, $rootScope, $location, contests, contestFunctions, time, joinContest) {
 		$scope.loadingData = true;
-
 		$scope.contests = [];
-
 		$scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open';
 
 		if ($scope.filterType == 'now' || $scope.filterType == 'future') {
@@ -54,20 +49,34 @@ app.controller('ContestsController', [
 			return new Date(date) > time.server.static;
 		};
 
+		$scope.isInPast = function(date) {
+			return new Date(date) <= time.server.static;
+		};
+
 		$scope.isNewContest = function(date) {
 			return ((time.server.static - new Date(date)) / 60000) <= 10;
 		};
 
-		$scope.isOldDate = function(date) {
-			return new Date(date) <= time.server.static;
-		};
-
 		$scope.toggleRight = function(contest) {
 			joinContest.update(contest);
-			$mdSidenav('right').toggle();
-		}
-		$scope.isOpenRight = function() {
-			return $mdSidenav('right').isOpen();
+		};
+
+		$scope.leave = function(contest) {
+      contestFunctions.leave(contest._id, function(err, ok) {
+        if (ok) {
+					contest.isInContest = false;
+        }
+      });
+    };
+
+		$scope.remove = function(id) {
+			contestFunctions.remove(id, function(err, ok) {
+				if (ok) {
+					$scope.contests = $scope.contests.filter(function(obj) {
+						return obj._id.toString() != id.toString();
+					});
+				}
+			});
 		};
 	}
 ]);
