@@ -1,4 +1,4 @@
-angular.module('UtilService', []).factory('UtilFactory', [
+angular.module('Util').factory('UtilFactory', [
 	'$http',
 	'$q',
 	'$resource',

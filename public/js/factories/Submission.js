@@ -1,4 +1,4 @@
-angular.module('SubmissionService', []).factory('SubmissionFactory', [
+angular.module('Submission').factory('SubmissionFactory', [
 	'$http',
 	'$q',
 	'$resource',

@@ -1,11 +1,11 @@
-var app = angular.module('ContestsCtrl', []);
+var app = angular.module('Contests');
 app.controller('ContestsController', [
 	'$scope',
 	'$rootScope',
 	'$location',
 	'Notification',
 	'ContestsFactory',
-	'ContestInstanceFactory',
+	'ContestInstanceAPI',
 	'ContestInstanceFunctions',
 	'TimeFactory',
 	'JoinContestService',

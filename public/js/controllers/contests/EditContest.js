@@ -1,4 +1,4 @@
-var app = angular.module('EditContestCtrl', []);
+var app = angular.module('EditContest');
 app.controller('EditContestController', [
 	'$scope',
 	'$rootScope',
@@ -9,7 +9,7 @@ app.controller('EditContestController', [
 	'Notification',
 	'ProblemsFactory',
 	'ContestsFactory',
-	'ContestInstanceFactory',
+	'ContestInstanceAPI',
 	function($scope, $rootScope, $stateParams, $timeout, $interval, $location, Notification, problems, contests, contestInstance) {
 		$scope.name = '';
 		$scope.descr = '';

@@ -1,4 +1,4 @@
-var app = angular.module('GeneralDirective', []);
+var app = angular.module('General');
 
 app.directive('confirmedClick', [function() {
 	return {

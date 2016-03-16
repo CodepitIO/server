@@ -1,4 +1,4 @@
-var app = angular.module('GeneralServices', [])
+var app = angular.module('General')
 	.factory('GlobalFactory', [
 		'$q',
 		function($q) {

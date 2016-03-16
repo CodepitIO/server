@@ -1,4 +1,4 @@
-var app = angular.module('RegisterCtrl', []);
+var app = angular.module('Register');
 app.controller('RegisterController', [
 	'$scope',
 	'$location',

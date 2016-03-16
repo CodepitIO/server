@@ -1,3 +1,24 @@
+// Declare all app modules
+angular.module('Account', []);
+angular.module('Auth', []);
+angular.module('Catalog', []);
+angular.module('ContestInstance', []);
+angular.module('Contests', []);
+angular.module('CreateContest', []);
+angular.module('EditContest', []);
+angular.module('General', []);
+angular.module('Home', []);
+angular.module('JoinContest', []);
+angular.module('Login', []);
+angular.module('Problems', []);
+angular.module('Profile', []);
+angular.module('Register', []);
+angular.module('Submission', []);
+angular.module('Team', []);
+angular.module('Socket', []);
+angular.module('Tag', []);
+angular.module('Util', []);
+
 var mrtApp = angular.module('mrtApp', [
 		'mrtApp.templates',
 		'angularMoment',
@@ -15,37 +36,24 @@ var mrtApp = angular.module('mrtApp', [
 		'angular-toArrayFilter',
 		'btford.socket-io',
 
-		'ContestsCtrl',
-		'JoinContestCtrl',
-		'CreateContestCtrl',
-		'EditContestCtrl',
-		'HomeCtrl',
-		'LoginCtrl',
-		'ProblemsCtrl',
-		'ProfileCtrl',
-		'RegisterCtrl',
-		'ContestInstanceCtrl',
-		'SubmissionCtrl',
-		'TeamCtrl',
-
-		'AccountService',
-		'AuthService',
-		'CatalogService',
-		'ContestsService',
-		'GeneralServices',
-		'ProblemsService',
-		'ContestInstanceService',
-		'SubmissionService',
-		'TagService',
-		'TeamService',
-		'UtilService',
-
-		'GeneralDirective',
-		'ContestDirective',
-
+		'Account',
+		'Auth',
+		'Catalog',
+		'Contests',
 		'ContestInstance',
-
-		// 'SocketService',
+		'CreateContest',
+		'EditContest',
+		'General',
+		'Home',
+		'JoinContest',
+		'Login',
+		'Problems',
+		'Profile',
+		'Register',
+		'Submission',
+		'Tag',
+		'Team',
+		'Util',
 	])
 	.config([
 		'NotificationProvider',

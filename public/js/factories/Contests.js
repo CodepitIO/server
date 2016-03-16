@@ -1,4 +1,4 @@
-angular.module('ContestsService', [])
+angular.module('Contests')
 	.factory('ContestsFactory', [
 		'$resource',
 		'GlobalFactory',

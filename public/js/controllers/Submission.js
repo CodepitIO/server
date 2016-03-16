@@ -1,4 +1,4 @@
-var app = angular.module('SubmissionCtrl', []);
+var app = angular.module('Submission');
 app.controller('SubmissionController', [
 	'$scope',
 	'$stateParams',

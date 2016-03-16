@@ -1,4 +1,4 @@
-var app = angular.module('LoginCtrl', []);
+var app = angular.module('Login');
 app.controller('LoginController', [
 	'$scope',
 	'$cookies',

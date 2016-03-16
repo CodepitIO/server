@@ -1,4 +1,4 @@
-angular.module('AuthService', []).factory('AuthFactory', [
+angular.module('Auth').factory('AuthFactory', [
 	'$http',
 	'$q',
 	'$resource',

@@ -1,4 +1,4 @@
-angular.module('ProblemsService', []).factory('ProblemsFactory', [
+angular.module('Problems').factory('ProblemsFactory', [
 	'$http',
 	'$resource',
 	'$q',

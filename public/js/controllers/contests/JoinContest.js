@@ -1,4 +1,4 @@
-var app = angular.module('JoinContestCtrl', []);
+var app = angular.module('JoinContest');
 app.controller('JoinContestController', [
   '$scope',
   '$mdSidenav',

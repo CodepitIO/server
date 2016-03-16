@@ -1,4 +1,4 @@
-var app = angular.module('ContestDirective', []);
+var app = angular.module('Contests');
 
 /*
  * mrtContestLabel is a directive only to wrap spans responsable to show the contest name and other structures

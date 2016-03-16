@@ -1,4 +1,4 @@
-var app = angular.module('ProblemsCtrl', []);
+var app = angular.module('Problems');
 app.controller('ProblemsController', [
 	'$scope',
 	'$timeout',

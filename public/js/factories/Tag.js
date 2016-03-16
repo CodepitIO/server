@@ -1,4 +1,4 @@
-angular.module('TagService', []).factory('TagFactory', [
+angular.module('Tag').factory('TagFactory', [
 	'$resource',
 	'GlobalFactory',
 	function($resource, global) {

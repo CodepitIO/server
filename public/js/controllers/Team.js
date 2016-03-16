@@ -1,4 +1,4 @@
-var app = angular.module('TeamCtrl', []);
+var app = angular.module('Team');
 app.controller('TeamController', [
 	'$rootScope',
 	'$scope',

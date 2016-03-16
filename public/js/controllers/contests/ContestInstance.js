@@ -1,4 +1,4 @@
-var app = angular.module('ContestInstanceCtrl', []);
+var app = angular.module('ContestInstance');
 app.controller('ContestInstanceController', [
 	'$scope',
 	'$rootScope',
@@ -10,7 +10,7 @@ app.controller('ContestInstanceController', [
 	'CatalogFactory',
 	'TagFactory',
 	'SubmissionFactory',
-	'ContestInstanceFactory',
+	'ContestInstanceAPI',
 	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, contestInstance) {
 		if ($state.is('contest')) {
 			$state.go('.scoreboard');

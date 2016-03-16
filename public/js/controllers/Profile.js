@@ -1,4 +1,4 @@
-var app = angular.module('ProfileCtrl', []);
+var app = angular.module('Profile');
 app.controller('ProfileController', [
 	'$scope',
 	'$rootScope',

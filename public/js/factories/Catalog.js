@@ -1,4 +1,4 @@
-angular.module('CatalogService', []).factory('CatalogFactory', [
+angular.module('Catalog').factory('CatalogFactory', [
 	'$resource',
 	'GlobalFactory',
 	function($resource, global) {

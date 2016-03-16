@@ -1,4 +1,4 @@
-angular.module('AccountService', []).factory('AccountFactory', [
+angular.module('Account').factory('AccountFactory', [
 	'$http',
 	'$q',
 	'$resource',

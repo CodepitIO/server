@@ -1,4 +1,4 @@
-angular.module('TeamService', []).factory('TeamFactory', [
+angular.module('Team').factory('TeamFactory', [
 	'$http',
 	'$q',
 	'$resource',
