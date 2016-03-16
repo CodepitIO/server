@@ -33,10 +33,10 @@
     <div class="row">
       <div class="col-sm-12 bs-component">
         <ul id="contest-tabs" class="nav nav-tabs" style="margin-bottom: 15px;">
-          <li class="active"><a ui-sref=".scoreboard">Placar</a></li>
-          <li><a ui-sref=".submit">Submeter</a></li>
-          <li><a ui-sref=".submissions">Submissões</a></li>
-          <li><a ui-sref=".catalog">Catálogo</a></li>
+          <li ng-class="{active: state.current.name === 'contest.scoreboard'}"><a ui-sref=".scoreboard">Placar</a></li>
+          <li ng-class="{active: state.current.name === 'contest.submit'}"><a ui-sref=".submit">Submeter</a></li>
+          <li ng-class="{active: state.current.name === 'contest.submissions'}"><a ui-sref=".submissions">Submissões</a></li>
+          <li ng-class="{active: state.current.name === 'contest.catalog'}"><a ui-sref=".catalog">Catálogo</a></li>
         </ul>
         <div class="tab-content">
           <div ui-view></div>

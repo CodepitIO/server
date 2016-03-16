@@ -11,10 +11,12 @@ app.controller('ContestInstanceController', [
 	'TagFactory',
 	'SubmissionFactory',
 	'ContestInstanceAPI',
-	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, contestInstance) {
+	'ContestInstanceFunctions',
+	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, contestAPI, contestFunctions) {
 		if ($state.is('contest')) {
 			$state.go('.scoreboard');
 		}
+		$scope.state = $state;
 
 		$scope.editorOptions = {
 			lineWrapping: true,
@@ -202,8 +204,8 @@ app.controller('ContestInstanceController', [
 
 		$scope.refreshScoreboard = function() {
 			if ($scope.allSubmissions && $scope.timeLeft === 0 && $scope.timeline.moment <= $scope.timeline.options.max) {
-				$scope.scores = contestInstance.getScoreMap($scope.allSubmissions, $scope.timeline.moment);
-				$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+				$scope.scores = contestFunctions.getScoreMap($scope.allSubmissions, $scope.timeline.moment);
+				$scope.ord = contestFunctions.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 				if (!$scope.$$phase) {
 					$scope.$digest();
 				}
@@ -221,7 +223,7 @@ app.controller('ContestInstanceController', [
 		};
 
 		var getDynamicScoreboard = function() {
-			contestInstance.getDynamicScoreboard({
+			contestAPI.getDynamicScoreboard({
 					id: $scope.id
 				})
 				.then(function(data) {
@@ -271,7 +273,7 @@ app.controller('ContestInstanceController', [
 		};
 
 		var updateScoreboard = function() {
-			contestInstance.getScoreboard({
+			contestAPI.getScoreboard({
 				id: $scope.id
 			}).then(function(data) {
 				$scope.scores = data.scores;
@@ -292,7 +294,7 @@ app.controller('ContestInstanceController', [
 						$scope.pendingSubmissions[id] = true;
 					}
 				}
-				$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+				$scope.ord = contestFunctions.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 				if (!$scope.$$phase) {
 					$scope.$digest();
 				}
@@ -303,7 +305,7 @@ app.controller('ContestInstanceController', [
 		};
 
 		var getScoreboard = function() {
-			contestInstance.getScoreboard({
+			contestAPI.getScoreboard({
 					id: $scope.id
 				})
 				.then(function(data) {
@@ -327,7 +329,7 @@ app.controller('ContestInstanceController', [
 					$scope.inContest = data.inContest;
 					$scope.contestants = data.contestants;
 					$scope.scores = data.scores;
-					$scope.ord = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+					$scope.ord = contestFunctions.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
 					$scope.submissions2 = data.submissions;
 					$scope.submissions = data.submissions.filter(function(obj) {
 						return obj.time * 60 < $scope.totalDuration;
@@ -349,7 +351,7 @@ app.controller('ContestInstanceController', [
 
 					if ($scope.timeLeft === 0) {
 						$scope.scores2 = data.upsolvingScores;
-						$scope.ord2 = contestInstance.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
+						$scope.ord2 = contestFunctions.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
 					}
 
 					if ($scope.timeLeft > 0) {

@@ -39,16 +39,16 @@ angular.module('appRoutes', []).config([
 				controller: 'CreateContestController',
 				mustBeLogged: true
 			})
-			.state('contest', {
-				url: '^/contest/{id}',
-				templateUrl: 'views/contests/contest.html',
-				controller: 'ContestInstanceController'
-			})
-			.state('contest/edit', {
+			.state('contests.edit', {
 				url: '/edit',
 				templateUrl: 'views/contests/edit.html',
 				controller: 'EditContestController',
 				mustBeLogged: true
+			})
+			.state('contest', {
+				url: '^/contest/{id}',
+				templateUrl: 'views/contests/contest.html',
+				controller: 'ContestInstanceController'
 			})
 			.state('contest.scoreboard', {
 				templateUrl: 'views/contests/contest.scoreboard.html',
