@@ -16,6 +16,7 @@ var mrtApp = angular.module('mrtApp', [
 	'EditContestCtrl',
 	'HomeCtrl',
 	'LoginCtrl',
+	'InfoContestCtrl',
 	'OwnedContestsCtrl',
 	'ProblemsCtrl',
 	'ProfileCtrl',

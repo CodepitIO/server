@@ -30,6 +30,10 @@ angular.module('appRoutes', []).config([
 			templateUrl: 'views/contests/edit.html',
 			controller: 'EditContestController',
 			mustBeLogged: true
+		}).when('/contest/:id/info', {
+			templateUrl: 'views/contests/info.html',
+			controller: 'InfoContestController',
+			mustBeLogged: true
 		}).when('/contest/:id', {
 			templateUrl: 'views/contests/view.html',
 			controller: 'SingleContestController'

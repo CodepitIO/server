@@ -55,6 +55,8 @@ module.exports = function(app, passport) {
   app.get('/api/contests/get/filter/:filter', ContestsCtrl.getByFilter);
 
   // specific contest
+  app.get('/api/contest/:id/participants', isLoggedIn, SingleContestCtrl.getParticipants);
+  app.get('/api/contest/:id/submissions/:pid', isLoggedIn, SingleContestCtrl.getParticipantSubmissions);
   app.post('/api/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit);
   app.get('/api/contest/:id/remove', isLoggedIn, SingleContestCtrl.remove);
   app.get('/api/contest/:id/get/full', isLoggedIn, SingleContestCtrl.getFullData);

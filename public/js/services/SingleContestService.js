@@ -29,6 +29,8 @@ angular.module('SingleContestService', []).factory('SingleContestFactory', [
 		});
 		var GetScoreboardAPI = $resource('/api/contest/:id/scoreboard', {});
 		var GetDynamicScoreboardAPI = $resource('/api/contest/:id/scoreboard/dynamic', {});
+		var GetParticipantsAPI = $resource('/api/contest/:id/participants', {});
+		var GetParticipantSubmissionsAPI = $resource('/api/contest/:id/submissions/:pid', {});
 		return {
 			// REST
 			remove: global.get.bind(null, RemoveContestAPI),
@@ -38,6 +40,8 @@ angular.module('SingleContestService', []).factory('SingleContestFactory', [
 			edit: global.post.bind(null, EditAPI),
 			getScoreboard: global.get.bind(null, GetScoreboardAPI),
 			getDynamicScoreboard: global.get.bind(null, GetDynamicScoreboardAPI),
+			getParticipants: global.get.bind(null, GetParticipantsAPI),
+			getParticipantSubmissions: global.get.bind(null, GetParticipantSubmissionsAPI),
 
 			// Functions
 			getScoreMap: function(submissions, moment) {

@@ -30,6 +30,7 @@
           <td class="contests-view-table-td">
             <a ng-hide="isOldDate(contest.date_end)" ng-href="contest/{{contest._id}}/edit"><i class="fa fa-cog contests-view-table-icon" data-toggle="tooltip" title="Editar." tooltip></i></a>
             <a href="#" confirmed-click="remove(contest._id)"><i class="fa fa-times contests-view-table-icon" data-toggle="tooltip" title="Excluir." tooltip></i></a>
+            <a ng-href="contest/{{contest._id}}/info"><i class="fa fa-laptop contests-view-table-icon" data-toggle="tooltip" title="Analisar participantes e submissões." tooltip></i></a>
           </td>
         </tr>
       </tbody>

@@ -1,3 +1,4 @@
+var Submission = require('../models/submission');
 var ProblemsCtrl = require('./problems');
 var SubmissionCtrl = require('./submission');
 
@@ -86,7 +87,7 @@ exports.join = function(req, res, next) {
       console.log(err);
       return res.json({error: err});
     }
-    
+
     contest.contestants.push(props);
     contest.save(function(err) {
       if (err) {
@@ -226,7 +227,7 @@ exports.edit = function(req, res, next) {
           }
         }
       }
-      
+
       contest.name = editContest.name;
       contest.description = editContest.descr;
       contest.date_start = editContest.startDateTime;
@@ -351,7 +352,7 @@ exports.getDynamicScoreboard = function(req, res, next) {
       else return [obj.id._id, {type: 'user', name: obj.id.local.username}];
     });
     contestants = _.object(contestants);
-    
+
     var userToContestant =
     _.map(contest.contestants, function(obj) {
       var toId = null;
@@ -363,6 +364,57 @@ exports.getDynamicScoreboard = function(req, res, next) {
 
     SubmissionCtrl.getAllContestSubmissions(contest, userToContestant, function(data) {
       return res.json({submissions: data.submissions});
+    });
+  });
+}
+
+exports.getParticipants = function(req, res, next) {
+  var id = req.params.id;
+  Contest.findById(id)
+  .populate({
+    path: 'contestants.team',
+    select: '_id name'
+  })
+  .populate({
+    path: 'contestants.id',
+    select: '_id local.username local.email local.name local.surname'
+  })
+  .lean()
+  .exec()
+  .then(function(contest) {
+    if (req.user._id.toString() !== contest.author.toString()) {
+      return res.json(InvalidOperation);
+    } else {
+      return res.json({
+        start: contest.date_start,
+        participants: contest.contestants,
+        problems: contest.problems,
+      });
+    }
+  });
+}
+
+exports.getParticipantSubmissions = function(req, res, next) {
+  var id = req.params.id;
+  var participantId = req.params.pid;
+  Contest.findById(id)
+  .exec()
+  .then(function(contest) {
+    if (req.user._id.toString() !== contest.author.toString()) {
+      return res.json(InvalidOperation);
+    }
+    Submission
+    .find({
+      contest: contest._id,
+      contestant: new ObjectId(participantId),
+    })
+    .select('_id contestant problem date verdict language')
+    .lean()
+    .exec()
+    .then(function(submissions) {
+      return res.json({
+        submissions: submissions
+      })
     });
   });
 }
