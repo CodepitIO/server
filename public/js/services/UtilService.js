@@ -8,8 +8,10 @@ angular.module('UtilService', []).factory('UtilFactory', [
 			email: '@email',
 			size: '@size'
 		});
+		var ServerTimeAPI = $resource('/api/server/time', {});
 		return {
-			getProfilePicByEmail: global.get.bind(null, ProfilePicAPI)
+			getProfilePicByEmail: global.get.bind(null, ProfilePicAPI),
+			getServerTime: global.get.bind(null, ServerTimeAPI)
 		};
 	}
 ]);

@@ -246,7 +246,7 @@ app.controller('SingleContestController', [
 		};
 
 		var getVerdictFunction = function(verdict) {
-			if (!verdict || verdict < 0 || verdict > 10) {
+			if (!verdict || verdict < 0 || verdict > 8) {
 				return 'info';
 			}
 			if (verdict == 1) {
@@ -270,14 +270,14 @@ app.controller('SingleContestController', [
 				for (var i = 0; i < $scope.submissions.length; i++) {
 					var id = $scope.submissions[i]._id;
 					var verdict = $scope.submissions[i].verdict;
-					if ($scope.pendingSubmissions[id] && verdict >= 1 && verdict <= 10) {
+					if ($scope.pendingSubmissions[id] && verdict >= 1 && verdict <= 8) {
 						var msg = "Problema " + $scope.problems[$scope.submissions[i].problem].letter + ": " + $scope.verdictName[verdict];
 						Notification[getVerdictFunction(verdict)]({
 							message: msg,
 							delay: 20000
 						});
 						delete $scope.pendingSubmissions[id];
-					} else if (!$scope.pendingSubmissions[id] && (verdict < 1 || verdict > 10)) {
+					} else if (!$scope.pendingSubmissions[id] && (verdict < 1)) {
 						$scope.pendingSubmissions[id] = true;
 					}
 				}
@@ -303,8 +303,8 @@ app.controller('SingleContestController', [
 					$scope.timeline.moment = $scope.timeline.options.max;
 
 					$scope.problems = {};
-					$scope.problemsArray = data.problems;
 					for (var k in data.problems) {
+						if ($scope.id === '56cd0c5e9e05494546fb7c8d') data.problems[k].url = 'https://www.maratonando.com.br/contest/56cd0c5e9e05494546fb7c8d';
 						$scope.problems[data.problems[k]._id] = {
 							num: k,
 							letter: $scope.alphabet[k],
@@ -313,6 +313,7 @@ app.controller('SingleContestController', [
 						};
 					}
 
+					$scope.problemsArray = data.problems;
 					$scope.inContest = data.inContest;
 					$scope.contestants = data.contestants;
 					$scope.scores = data.scores;
@@ -325,12 +326,12 @@ app.controller('SingleContestController', [
 					for (var i = 0; i < $scope.submissions.length; i++) {
 						var id = $scope.submissions[i]._id;
 						var verdict = $scope.submissions[i].verdict;
-						if (verdict < 1 || verdict > 10) {
+						if (verdict < 1) {
 							$scope.pendingSubmissions[id] = true;
 						}
 					}
 
-					$scope.timeLeft = Math.max($scope.getSecondsBetweenDates(new Date(), data.end), 0);
+					$scope.timeLeft = Math.max($scope.getSecondsBetweenDates(data.now, data.end), 0);
 					$scope.timeToFrozen = $scope.getSecondsBetweenDates(data.frozen, data.end);
 					$scope.timeToBlind = $scope.getSecondsBetweenDates(data.blind, data.end);
 					$scope.progressBarValue = $scope.totalDuration - $scope.timeLeft;
@@ -405,10 +406,10 @@ app.controller('SingleContestController', [
 		};
 
 		$scope.getSubmissionClass = function(verdict) {
-			if (verdict > 10) {
+			if (verdict > 8) {
 				return 'draft-submission';
 			}
-			if (!verdict || verdict < 0 || verdict > 10) {
+			if (!verdict || verdict < 0) {
 				return 'pending-submission';
 			}
 			if (verdict == 1) {

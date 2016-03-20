@@ -4,15 +4,17 @@ require('pmx').init({http: true});
 var express        = require('express');
 var app            = express();
 var bodyParser     = require('body-parser');
+var fs = require('fs');
 var methodOverride = require('method-override');
 var passport	   = require('passport');
 var mongoose = require('mongoose');
+var https          = require('https');
+var http = require('http');
 var cookieParser   = require('cookie-parser');
 var connect		   = require('connect');
 var compression	   = require('compression');
 var favicon 	   = require('serve-favicon');
 var _ = require('underscore');
-
 
 // configuration ===========================================
 // set locale
@@ -35,7 +37,7 @@ mongoose.connect(db.url); // connect to our database
 // passport authentication
 app.use(cookieParser());
 require('./config/passport')(passport); // pass passport for configuration
-app.use(connect.cookieSession({ secret: 'dDADW!#%@!davDgDOSAdsaweA2$kdasda@$!ads', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
+app.use(connect.cookieSession({ secret: 'dDZDW!$%@!d2vDg4OSAbsadeA2$k%ozdc@$!qdz', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
@@ -55,6 +57,13 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 require('./app/routes')(app, passport); // pass our application into our routes
 
 // start app ===============================================
-app.listen(port);
+var privateKey  = fs.readFileSync('/etc/ssl/cert.key', 'utf8');
+var certificate = fs.readFileSync('/etc/ssl/cert_chain.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(port);
+//var httpServer = http.createServer(app);
+//httpServer.listen(port);
 console.log('Listening to port ' + port); 			// shoutout to the user
 exports = module.exports = app; 						// expose app

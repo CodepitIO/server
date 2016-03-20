@@ -313,7 +313,8 @@ exports.getScoreboard = function(req, res, next) {
         frozen: contest.frozen_time,
         name: contest.name,
         inContest: isInContest(userId, contest),
-        contestantId: (userId && userToContestant[userId]) || null
+        contestantId: (userId && userToContestant[userId]) || null,
+        now: new Date()
       });
     });
   });

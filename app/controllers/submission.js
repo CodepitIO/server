@@ -13,7 +13,7 @@ var InvalidOperation = require('../utils/exception').InvalidOperation;
 var getSubmissionStatus = function(verdict) {
   if (verdict <= 0) return 0;
   else if (verdict == 1) return 1;
-  else if (verdict > 10) return 3;
+  else if (verdict > 8) return 3;
   else return 2;
 }
 
@@ -27,7 +27,7 @@ var populateScoreboardData = function(contest, submissions, upsolving) {
     if (!sub.contestant) {
       continue;
     }
-    if (sub.verdict > 10) continue;
+    if (sub.verdict > 8) continue;
     if (sub.date >= contest.date_end && !upsolving) {
       break;
     }
@@ -116,7 +116,7 @@ exports.getAllContestSubmissions = function(contest, userToContestant, callback)
         return obj.date;
       });
       submissions = _.filter(submissions, function(obj) {
-        return obj.date <= contest.date_end && obj.verdict <= 10;
+        return obj.date <= contest.date_end && obj.verdict <= 8;
       });
       submissions = _.map(submissions, function(obj) {
         obj.contestant = userToContestant[obj.contestant.toString()];

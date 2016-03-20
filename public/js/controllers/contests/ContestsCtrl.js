@@ -8,7 +8,8 @@ app.controller('ContestsController', [
 	'ContestsFactory',
 	'SingleContestFactory',
 	'TeamFactory',
-	function($scope, $rootScope, $location, Notification, singleContest, contests, singleContest, team) {
+	'UtilFactory',
+	function($scope, $rootScope, $location, Notification, singleContest, contests, singleContest, team, util) {
 		var dummySingle = {
 			id: '0',
 			name: '(individualmente)'
@@ -16,6 +17,7 @@ app.controller('ContestsController', [
 		$scope.contests = [];
 		$scope.teams = [];
 		$scope.teamsAndSingle = [];
+		$scope.now = new Date();
 
 		$scope.joinContest = {
 			password: '',
@@ -54,6 +56,13 @@ app.controller('ContestsController', [
 			}
 		};
 
+		var getServerTime = function() {
+			util.getServerTime({}).then(function(data) {
+				$scope.now = new Date(data.date);
+			});
+		};
+		getServerTime();
+
 		var fetchData = function() {
 			contests.getByFilter({
 					filter: $scope.filterType
@@ -80,7 +89,7 @@ app.controller('ContestsController', [
 		fetchData();
 
 		$scope.futureContestFilter = function(value, index, array) {
-			return new Date(value.date_start) > new Date();
+			return new Date(value.date_start) > $scope.now;
 		};
 
 		$scope.order = function(predicate) {
@@ -89,7 +98,7 @@ app.controller('ContestsController', [
 		};
 
 		$scope.isInFuture = function(date) {
-			return new Date(date) > new Date();
+			return new Date(date) > $scope.now;
 		};
 
 		$scope.remove = function(id) {

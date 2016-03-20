@@ -3,7 +3,7 @@ var mongoose 			= require('mongoose');
 
 var getProfilePicURL = function(email, size) {
   var hash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
-  var url = 'http://www.gravatar.com/avatar/' + hash + '?d=identicon&s=' + (size || 50);
+  var url = 'https://www.gravatar.com/avatar/' + hash + '?d=identicon&s=' + (size || 50);
   return url;
 }
 
