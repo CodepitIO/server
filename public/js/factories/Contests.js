@@ -1,7 +1,7 @@
 angular.module('Contests')
 	.factory('ContestsFactory', [
 		'$resource',
-		'GlobalFactory',
+		'RequestAPI',
 		function($resource, global) {
 			var CreateAPI = $resource('/api/contests/create', {
 				name: '@name',

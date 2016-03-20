@@ -87,7 +87,7 @@ exports.getByFilter = function(req, res) {
   var opts = filters[req.params.filter];
 
   if (opts === undefined) {
-    return res.json(InvalidOperation);
+    return res.status(400).send();
   }
 
   Contest.find(opts(req))

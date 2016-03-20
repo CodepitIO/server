@@ -11,7 +11,7 @@ app.controller('ProfileController', [
 
 		$scope.account = $rootScope.user.local;
 		$scope.account.password = $scope.account.newPassword =
-		$scope.account.confirmNewPassword = $scope.pictureUrl = '';
+			$scope.account.confirmNewPassword = $scope.pictureUrl = '';
 
 		$scope.loadedPictureUrl = false;
 		$scope.loadedEditingProfile = true;

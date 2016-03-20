@@ -62,12 +62,12 @@ app.controller('ContestsController', [
 		};
 
 		$scope.leave = function(contest) {
-      contestFunctions.leave(contest._id, function(err, ok) {
-        if (ok) {
+			contestFunctions.leave(contest._id, function(err, ok) {
+				if (ok) {
 					contest.isInContest = false;
-        }
-      });
-    };
+				}
+			});
+		};
 
 		$scope.remove = function(id) {
 			contestFunctions.remove(id, function(err, ok) {

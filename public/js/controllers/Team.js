@@ -8,7 +8,7 @@ app.controller('TeamController', [
 	'Notification',
 	'TeamFactory',
 	'UtilFactory',
-	'GlobalFactory',
+	'RequestAPI',
 	function($rootScope, $scope, $stateParams, $location, $timeout, Notification, team, util, global) {
 		var id = $stateParams.id;
 		$scope.team = {};

@@ -15,13 +15,13 @@ exports.getFullData = function(req, res, next) {
   .then(function(contest) {
     try {
       if (!contest) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.date_end <= new Date()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.author.toString() !== req.user._id.toString()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       contest.problems = _.map(contest.problems, ProblemsCtrl.remapProblem);
       return res.json({contest: contest});
@@ -38,10 +38,10 @@ exports.remove = function(req, res, next) {
   Contest.findById(id).exec()
   .then(function(contest) {
     if (!contest) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.author.toString() != req.user._id.toString()) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     contest.remove(function(err) {
       if (err) {
@@ -60,20 +60,20 @@ exports.join = function(req, res, next) {
   .then(function(contest) {
     try {
       if (new Date(contest.date_end) <= new Date()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.isPrivate && contest.password != data.password) {
         return res.json({error: "Senha inválida."});
       }
       if ((data.team === '0' && contest.contestantType === 2) ||
         (data.team !== '0' && contest.contestantType === 1)) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
-      if (contest.inContest(req.user._id)) {
-        return res.json(InvalidOperation);
+      if (contest.userInContest(req.user._id)) {
+        return res.status(400).send();
       }
       if (data.team !== '0' && !ObjectId.isValid(data.team)) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       var props = {
         id: req.user._id,
@@ -103,10 +103,10 @@ exports.leave = function(req, res, next) {
   .then(function(contest) {
     try {
       if (new Date(contest.date_start) <= new Date()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
-      if (!contest.inContest(req.user._id)) {
-        return res.json(InvalidOperation);
+      if (!contest.userInContest(req.user._id)) {
+        return res.status(400).send();
       }
       contest.contestants = _.filter(contest.contestants, function(obj) {
         return obj.id && obj.id.toString() != req.user._id.toString();
@@ -142,57 +142,57 @@ exports.prevalidation = function(req, res, next) {
     contest.blindDateTime = new Date(contest.blindDateTime);
     if (!contest.startDateTime || !contest.endDateTime || !contest.frozenDateTime || !contest.blindDateTime) {
       throw new Error('Formato inválido de data.');
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     contest.duration = getMinutesBetweenDates(contest.startDateTime, contest.endDateTime);
     contest.frozenDuration = getMinutesBetweenDates(contest.frozenDateTime, contest.endDateTime);
     contest.blindDuration = getMinutesBetweenDates(contest.blindDateTime, contest.endDateTime);
     if (!contest.name || contest.name.length === 0) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.name.length > 30) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.descr && contest.descr.length > 500) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (!contest.startDateTime || !contest.endDateTime) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.duration < 10) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.duration > 365 * 24 * 60) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.frozenDuration > contest.duration) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.blindDuration > contest.frozenDuration) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (!contest.problems || !contest.problems.length) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (contest.problems.length > 26) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     // TODO check if problems are valid
     if (contest.password != contest.confirmPassword) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     contest.contestantType = Number(contest.contestantType);
     if (!contest.contestantType || contest.contestantType < 1 || contest.contestantType > 3) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     contest.watchPrivate = Number(contest.watchPrivate);
     if (contest.watchPrivate != 0 && contest.watchPrivate != 1) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     return next();
   } catch (err) {
     console.log(err);
-    return res.json(InvalidOperation);
+    return res.status(400).send();
   }
 }
 
@@ -202,27 +202,27 @@ exports.edit = function(req, res, next) {
   Contest.findById(editContest.id).exec().then(function(contest) {
     try {
       if (!contest) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.date_end <= new Date()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.author.toString() !== req.user._id.toString()) {
-        return res.json(InvalidOperation);
+        return res.status(400).send();
       }
       if (contest.date_start - editContest.startDateTime !== 0 && editContest.startDateTime <= new Date()) {
         return res.json({error: 'A nova data de início deve ocorrer no futuro (o horário do servidor é ' + new Date() + ')'});
       }
       if (contest.date_start <= new Date()) {
         if (contest.date_start - editContest.startDateTime !== 0) {
-          return res.json(InvalidOperation);
+          return res.status(400).send();
         }
         if (contest.problems.length != editContest.problems.length) {
-          return res.json(InvalidOperation);
+          return res.status(400).send();
         }
         for (var i = 0; i < contest.problems.length; i++) {
           if (contest.problems[i].toString() !== editContest.problems[i].toString()) {
-            return res.json(InvalidOperation);
+            return res.status(400).send();
           }
         }
       }
@@ -280,7 +280,7 @@ exports.getScoreboard = function(req, res, next) {
   .exec()
   .then(function(contest) {
     if (contest.watchPrivate && (!req.user || (contest.author.toString() !== req.user._id.toString() && !isInContest(req.user._id, contest)))) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     var nonNullContestants = _.filter(contest.contestants, function (obj) {
       return obj.id;
@@ -339,10 +339,10 @@ exports.getDynamicScoreboard = function(req, res, next) {
   .exec()
   .then(function(contest) {
     if (contest.watchPrivate && (!req.user || (contest.author.toString() !== req.user._id.toString() && !isInContest(req.user._id, contest)))) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     if (new Date(contest.date_end) > new Date()) {
-      return res.json(InvalidOperation);
+      return res.status(400).send();
     }
     var contestants =
     _.map(contest.contestants, function (obj) {

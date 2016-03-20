@@ -2,7 +2,7 @@ angular.module('Account').factory('AccountFactory', [
 	'$http',
 	'$q',
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($http, $q, $resource, global) {
 		var RegisterAPI = $resource('/api/account/register', {
 			name: '@name',

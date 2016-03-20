@@ -1,6 +1,6 @@
 angular.module('Catalog').factory('CatalogFactory', [
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($resource, global) {
 		var UpdateAPI = $resource('/api/catalog/update', {
 			keys: '@keys',

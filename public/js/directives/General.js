@@ -98,18 +98,6 @@ app.directive('mrtPageWrapper', function() {
 	};
 });
 
-
-app.filter('mrtTimezoneStrap', function() {
-	var regex = /^(Z|[+-])(2[0-3]|[01][0-9]):([0-5][0-9])$/;
-	return function(text) {
-		if (typeof(text) !== 'string' || text.length === 0) {
-			return '';
-		}
-		var arr = text.match(regex);
-		return arr[1] + parseInt(arr[2], 10) + (arr[3] == '00' ? '' : arr[3]);
-	};
-});
-
 app.directive('mrtDisplayTime', function() {
 	return {
 		restrict: 'E',

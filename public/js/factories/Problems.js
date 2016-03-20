@@ -2,7 +2,7 @@ angular.module('Problems').factory('ProblemsFactory', [
 	'$http',
 	'$resource',
 	'$q',
-	'GlobalFactory',
+	'RequestAPI',
 	function($http, $resource, $q, global) {
 		var FetchProblemsAPI = $resource('/api/problems/fetch', {
 			regex: '@regex',

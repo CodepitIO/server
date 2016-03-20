@@ -1,28 +1,29 @@
-//var recaptchaKeys 	 = require('../config/recaptcha');
-//var Recaptcha = require('recaptcha').Recaptcha;
-//var blog 			= require('../config/tumblr');
+'use strict';
 
-var UserCtrl = require('./controllers/user');
-var TeamCtrl = require('./controllers/team');
-var ContestsCtrl = require('./controllers/contests');
-var SingleContestCtrl = require('./controllers/single_contest');
-var ProblemsCtrl = require('./controllers/problems');
-var SubmissionCtrl = require('./controllers/submission');
-var TagCtrl = require('./controllers/tag');
-var CatalogCtrl = require('./controllers/catalog');
+const UserCtrl = require('./controllers/user'),
+      TeamCtrl = require('./controllers/team'),
+      ContestsCtrl = require('./controllers/contests'),
+      SingleContestCtrl = require('./controllers/single_contest'),
+      ProblemsCtrl = require('./controllers/problems'),
+      SubmissionCtrl = require('./controllers/submission'),
+      TagCtrl = require('./controllers/tag'),
+      CatalogCtrl = require('./controllers/catalog');
 
-var Util = require('./utils/functions');
+const Util = require('./utils/functions');
 
-var indexFile = './public/index.html';
+const validators = require('./utils/validators'),
+      IsValidId = validators.isValidId,
+      IsLoggedIn = validators.isLoggedIn,
+      IsLoggedOff = validators.isLoggedOff;
 
 module.exports = function(app, passport) {
-
+  var indexFile = './public/index.html';
   if (app.get('env') === 'development') {
     indexFile = './public/_index.html';
   }
 
   // account
-  app.post('/api/account/register', isLoggedOff, function(req, res) {
+  app.post('/api/account/register', IsLoggedOff, function(req, res) {
     passport.authenticate('local-signup', function(err, user) {
       req.logIn(user, function(err) {
         if (err) return res.json({error: err});
@@ -33,7 +34,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.post('/api/account/edit', isLoggedIn, UserCtrl.edit);
+  app.post('/api/account/edit', IsLoggedIn, UserCtrl.edit);
 
   // util
   app.get('/api/picture/:email/:size', Util.getProfilePicByEmailAndSize);
@@ -43,42 +44,43 @@ module.exports = function(app, passport) {
   app.post('/api/problems/fetch', ProblemsCtrl.fetchProblems);
 
   // team
-  app.post('/api/team/create', isLoggedIn, TeamCtrl.createNew);
-  app.get('/api/team/user/:id', TeamCtrl.getFromUser);
+  app.post('/api/team/create', IsLoggedIn, TeamCtrl.createNew);
+  app.get('/api/team/user/:id', IsValidId, TeamCtrl.getFromUser);
   app.get('/api/team/user', TeamCtrl.getFromUser);
-  app.post('/api/team/leave', isLoggedIn, TeamCtrl.leave);
-  app.get('/api/team/get/:id', TeamCtrl.getById);
-  app.post('/api/team/invite', isLoggedIn, TeamCtrl.invite);
-  app.post('/api/team/remove', isLoggedIn, TeamCtrl.remove);
-  app.get('/api/team/accept/:id', isLoggedIn, TeamCtrl.accept);
-  app.get('/api/team/decline/:id', isLoggedIn, TeamCtrl.decline);
-  app.post('/api/team/edit', isLoggedIn, TeamCtrl.edit);
+  app.post('/api/team/leave', IsLoggedIn, TeamCtrl.leave);
+  app.get('/api/team/get/:id', IsValidId, TeamCtrl.getById);
+  app.post('/api/team/invite', IsLoggedIn, TeamCtrl.invite);
+  app.post('/api/team/remove', IsLoggedIn, TeamCtrl.remove);
+  app.get('/api/team/accept/:id', IsLoggedIn, IsValidId, TeamCtrl.accept);
+  app.get('/api/team/decline/:id', IsLoggedIn, IsValidId, TeamCtrl.decline);
+  app.post('/api/team/edit', IsLoggedIn, TeamCtrl.edit);
 
   // contests
-  app.post('/api/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create);
-  app.get('/api/contests/get/owner', isLoggedIn, ContestsCtrl.getAllByLoggedUser);
+  app.post('/api/contests/create', IsLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create);
+  app.get('/api/contests/get/owner', IsLoggedIn, ContestsCtrl.getAllByLoggedUser);
   app.get('/api/contests/get/filter/:filter', ContestsCtrl.getByFilter);
 
   // specific contest
-  app.post('/api/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit);
-  app.get('/api/contest/:id/remove', isLoggedIn, SingleContestCtrl.remove);
-  app.get('/api/contest/:id/get/full', isLoggedIn, SingleContestCtrl.getFullData);
-  app.post('/api/contest/:id/join', isLoggedIn, SingleContestCtrl.join);
-  app.post('/api/contest/:id/leave', isLoggedIn, SingleContestCtrl.leave);
-  app.get('/api/contest/:id/scoreboard/dynamic', SingleContestCtrl.getDynamicScoreboard);
-  app.get('/api/contest/:id/scoreboard', SingleContestCtrl.getScoreboard);
+  app.post('/api/contest/:id/edit', IsLoggedIn, IsValidId, SingleContestCtrl.prevalidation, SingleContestCtrl.edit);
+  app.get('/api/contest/:id/remove', IsLoggedIn, IsValidId, SingleContestCtrl.remove);
+  app.get('/api/contest/:id/get/full', IsLoggedIn, IsValidId, SingleContestCtrl.getFullData);
+  app.post('/api/contest/:id/join', IsLoggedIn, IsValidId, SingleContestCtrl.join);
+  app.post('/api/contest/:id/leave', IsLoggedIn, IsValidId, SingleContestCtrl.leave);
+  app.get('/api/contest/:id/scoreboard/dynamic', IsValidId, SingleContestCtrl.getDynamicScoreboard);
+  app.get('/api/contest/:id/scoreboard', IsValidId, SingleContestCtrl.getScoreboard);
 
   // submissions
-  app.post('/api/submission/send', isLoggedIn, SubmissionCtrl.send);
-  app.get('/api/submission/get/:id', SubmissionCtrl.get);
+  app.post('/api/submission/send', IsLoggedIn, SubmissionCtrl.send);
+  app.post('/api/submission/sendfile', IsLoggedIn, SubmissionCtrl.extractFile, SubmissionCtrl.send);
+  app.get('/api/submission/getById/:id', IsValidId, SubmissionCtrl.getById);
 
   // tags
   app.get('/api/tags', TagCtrl.getTags);
-  app.get('/api/tags/create/:name', isLoggedIn, TagCtrl.createTag);
+  app.get('/api/tags/create/:name', IsLoggedIn, TagCtrl.createTag);
 
   // catalog
-  app.post('/api/catalog/update', isLoggedIn, CatalogCtrl.update);
-  app.post('/api/catalog/get', isLoggedIn, CatalogCtrl.get);
+  app.post('/api/catalog/update', IsLoggedIn, CatalogCtrl.update);
+  app.post('/api/catalog/get', IsLoggedIn, CatalogCtrl.get);
 
   // authentication
   app.post('/api/login', function(req, res) {
@@ -97,7 +99,7 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/api/logout', isLoggedIn, function(req, res) {
+  app.get('/api/logout', IsLoggedIn, function(req, res) {
     req.logout();
     return res.json({});
   });
@@ -112,19 +114,3 @@ module.exports = function(app, passport) {
 	});
 
 };
-
-// route middleware to make sure a user is logged in
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated())
-		return next();
-
-	res.sendfile(indexFile);
-}
-
-// route middleware to make sure a user is logged off
-function isLoggedOff(req, res, next) {
-  if (!req.isAuthenticated())
-    return next();
-
-  res.sendfile(indexFile);
-}

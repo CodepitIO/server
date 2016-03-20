@@ -2,7 +2,7 @@ angular.module('Team').factory('TeamFactory', [
 	'$http',
 	'$q',
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($http, $q, $resource, global) {
 		var CreateTeamAPI = $resource('/api/team/create', {
 			name: '@name'

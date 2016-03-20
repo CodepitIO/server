@@ -1,14 +1,24 @@
-var Submission = require('../models/submission');
-var PendingSubmission = require('../models/pending_submission');
-var Contest = require('../models/contest');
-var Problem = require('../models/problem');
-var async = require('async');
+'use strict';
 
-var _ = require('underscore');
-var _s = require('underscore.string');
-var ObjectId = require('mongoose').Types.ObjectId;
+const Submission = require('../models/submission'),
+      Contest = require('../models/contest'),
+      Problem = require('../models/problem'),
+      Redis = require('../../config/redis').defaultClient;
 
-var InvalidOperation = require('../utils/exception').InvalidOperation;
+const async = require('async'),
+      fs = require('fs'),
+      multiparty = require('multiparty'),
+      _ = require('underscore'),
+      _s = require('underscore.string');
+
+const ObjectId = require('mongoose').Types.ObjectId,
+      InvalidOperation = require('../utils/exception').InvalidOperation;
+
+const validators = require('../utils/validators'),
+      ValidateSubmission = validators.submission,
+      ValidateFutureContest = validators.futureContest,
+      ValidateUserInContest = validators.userInContest,
+      ValidateProblemInContest = validators.problemInContest;
 
 var getSubmissionStatus = function(verdict) {
   if (verdict <= 0) return 0;
@@ -75,7 +85,7 @@ exports.getScoresAndSubmissions = function(contest, userId, userToContestant, ca
 
       var scores = populateScoreboardData(contest, submissions, false);
       var upsolvingScores = populateScoreboardData(contest, submissions, true);
-      
+
       if (!userId) {
         submissions = [];
       } else {
@@ -129,73 +139,115 @@ exports.getAllContestSubmissions = function(contest, userToContestant, callback)
   });
 }
 
-exports.send = function(req, res, next) {
-  var submission = req.body;
-  Contest.findById(submission.contestId).exec().then(function(contest) {
-    if (new Date() < new Date(contest.date_start)) {
-      return res.json({error: "Esta competição ainda não começou."});
+exports.extractFile = function(req, res, next) {
+  var form = new multiparty.Form();
+  // TODO(stor): erase the tmp file
+  async.waterfall([
+    // First we parse the form to extract the file
+    (callback) => {
+      form.parse(req, callback);
+    },
+    // Then we try to get all the fields and read the code file
+    (fields, files, callback) => {
+      try {
+        var fpath = files.file[0].path;
+        req.body = {};
+        req.body.contestId = fields.contestId[0];
+        req.body.problem = fields.problem[0];
+        req.body.language = fields.language[0];
+      } catch (err) {
+        return callback(err);
+      }
+      fs.readFile(fpath, 'utf8', callback);
+    },
+    // Finally, we call the normal send function
+    (code, callback) => {
+      req.body.code = code;
+      callback();
     }
-    if (!contest.inContest(req.user._id)) {
-      return res.json(InvalidOperation);
+  ], (err) => {
+    if (err) {
+      return res.status(400).send();
     }
-
-    try {
-      var problemId = (submission.problem === '0' ? null : new ObjectId(submission.problem));
-      async.waterfall([
-        function(callback) {
-          var sub = new Submission({
-            contest: contest._id,
-            contestant: req.user._id,
-
-            problem: problemId,
-            language: submission.language,
-            code: submission.code,
-            verdict: (problemId? 0 : 15)
-          });
-          sub.save(callback);
-        },
-        function(sub, _useless, callback) {
-          if (!problemId) {
-            return callback(null, sub);
-          }
-          Problem.findById(problemId).exec().then(
-            function(problem) {
-              if (!problem) {
-                return res.json(InvalidOperation);
-              }
-              var pendingSub = new PendingSubmission({
-                problemId: problem.id,
-                problemOj: problem.oj,
-                language: submission.language,
-                code: submission.code,
-                originalId: sub._id
-              });
-              pendingSub.save(function(err, psub) {
-                return callback(null, sub);
-              });
-            });
-        }
-      ], function(err, submission) {
-        if (err) return res.json({error: err});
-        return res.json({submission: {
-          _id: submission._id,
-          contestant: submission.contestant,
-          date: submission.date,
-          problem: submission.problem,
-          language: submission.language,
-          time: Math.floor((submission.date - contest.date_start) / 60000),
-          verdict: submission.verdict
-        }});
-      });
-    } catch (err) {
-      return res.json({error: err});
-    }
+    return next();
   });
 }
 
-exports.get = function(req, res, next) {
-  Submission.findById(req.params.id).exec().then(function(submission) {
-    var code = submission.code;//_s.escapeHTML(submission.code);
-    return res.json({code: code});
+var createSubmission = function(submission, userId, callback) {
+  var sub = new Submission({
+    contest: submission.contestId,
+    contestant: userId,
+    problem: submission.problem,
+    language: submission.language,
+    code: submission.code,
+    verdict: 0,
+  });
+  sub.save(callback);
+}
+
+var insertSubmissionOnRedis = function(submission, problem, callback) {
+  Redis.rpush("_submissions", JSON.stringify({
+    problemId: problem.id,
+    problemOj: problem.oj,
+    language: submission.language,
+    code: submission.code,
+    originalId: submission._id
+  }), callback);
+}
+
+exports.send = function(req, res, next) {
+  var userId = req.user._id;
+  var submission = req.body;
+  if (!ValidateSubmission(submission)) {
+    return res.status(400).send();
+  }
+
+  var contest, problem;
+  var nSubmission;
+  async.waterfall([
+    // First we fetch both contest and problem objects by their object ids
+    (callback) => {
+      async.parallel({
+        contest: (subCallback) => {
+          Contest.findById(submission.contestId, subCallback);
+        },
+        problem: (subCallback) => {
+          Problem.findById(submission.problem, subCallback);
+        },
+      }, callback);
+    },
+    // Then we validate the returned objects and create the submissions
+    (data, callback) => {
+      contest = data.contest;
+      problem = data.problem;
+      // The contest must exist, must not be on the future and the user must be in it
+      if (!contest || ValidateFutureContest(contest) || !ValidateUserInContest(contest, userId)) {
+        return callback(InvalidOperation);
+      }
+      // The problem must exist and should be in the contest
+      if (!problem || !ValidateProblemInContest(contest, submission.problem)) {
+        return callback(InvalidOperation);
+      }
+      createSubmission(submission, userId, callback);
+    },
+    (_nSubmission, nIns, callback) => {
+      nSubmission = _nSubmission;
+      // Insert pending submission in redis
+      insertSubmissionOnRedis(nSubmission, problem, callback);
+    },
+  ], (err) => {
+    if (err) {
+      return res.status(400).send();
+    }
+    return res.json({data: nSubmission});
+  });
+}
+
+exports.getById = function(req, res, next) {
+  Submission.findById(req.params.id, (err, submission) => {
+    if (err || !submission) {
+      return res.status(400).send();
+    }
+    return res.json({data: submission.code});
   });
 }

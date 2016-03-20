@@ -2,7 +2,7 @@ angular.module('Util').factory('UtilFactory', [
 	'$http',
 	'$q',
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($http, $q, $resource, global) {
 		var ProfilePicAPI = $resource('/api/picture/:email/:size', {
 			email: '@email',

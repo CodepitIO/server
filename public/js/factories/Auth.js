@@ -2,7 +2,7 @@ angular.module('Auth').factory('AuthFactory', [
 	'$http',
 	'$q',
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($http, $q, $resource, global) {
 		var LoginAPI = $resource('/api/login', {
 			email: '@email',

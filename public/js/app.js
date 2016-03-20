@@ -22,6 +22,7 @@ var mrtApp = angular.module('mrtApp', [
 		'ngMaterial',
 		'ngResource',
 		'ngCookies',
+		'ngFileUpload',
 		'ui.router',
 		'ui-notification',
 		'ui.bootstrap',
@@ -67,11 +68,16 @@ var mrtApp = angular.module('mrtApp', [
 			$mdThemingProvider.theme('default')
 				.primaryPalette('cyan')
 				.accentPalette('blue-grey', {
-		      'default': '400',
-		      'hue-1': '100',
-		      'hue-2': '600',
-		      'hue-3': '900'
-		    })
+					'default': '400',
+					'hue-1': '100',
+					'hue-2': '600',
+					'hue-3': '900'
+				})
+				.warnPalette('red');
+
+			$mdThemingProvider.theme('progressBarTheme')
+				.primaryPalette('blue')
+				.accentPalette('orange')
 				.warnPalette('red');
 		}
 	])

@@ -41,39 +41,17 @@ version: '2'
 services:
   web:
     container_name: web
-    build:
-      context: ./site
-      dockerfile: .Dockerfile.dev
+    build: ./site
     restart: unless-stopped
     volumes:
       - ./site:/www
-      - problems:/www/public/problems
     ports:
       - "80:3000"
     environment:
-      - PORT=3000
       - NODE_ENV=development
     links:
       - mongo:mongo
       - redis:redis
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "300"
-  # judger:
-  #   container_name: judger
-  #   build:
-  #     context: ./judger
-  #     dockerfile: .Dockerfile.dev
-  #   restart: unless-stopped
-  #   command: nodemon judger -L
-  #   volumes:
-  #     - ./judger:/judger
-  #     - problems:/judger/problems
-  #   links:
-  #     - mongo:mongo
-  #   environment:
-  #     - NODE_ENV=development
   adminui:
     container_name: mongo-express
     image: "maratonando/mongo-express"
@@ -90,18 +68,11 @@ services:
     image: "redis:3.0"
     restart: unless-stopped
     command: "redis-server --appendonly yes --dbfilename redis"
-    volumes:
-      - data:/data
   mongo:
     container_name: mongo
     image: "mongo:3.2"
     restart: unless-stopped
     command: "--smallfiles --logpath=/dev/null"
-    volumes:
-      - data:/data/db
-volumes:
-  data: {}
-  problems: {}
 ```
 
 From **maratonando** folder, build the application (this will download images and can take some time):

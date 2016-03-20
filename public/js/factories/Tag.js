@@ -1,6 +1,6 @@
 angular.module('Tag').factory('TagFactory', [
 	'$resource',
-	'GlobalFactory',
+	'RequestAPI',
 	function($resource, global) {
 		var GetTagsAPI = $resource('/api/tags');
 		var CreateTagAPI = $resource('/api/tags/create/:name', {

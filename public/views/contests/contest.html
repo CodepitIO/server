@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <span>Maratonando / Competições</span>
-      <h2>{{ name }}</h2>
+      <h2>{{ contest.name }}</h2>
     </div>
   </div>
 </div>
@@ -23,10 +23,10 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px;">
       <div class="col-sm-12">
-        <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div>
-        <progressbar ng-hide="loadingData || timeLeft <= 0" style="margin-top: 20px;" ng-hide="loadingData" ng-class="{'active': (timeLeft > 0)}" class="progress-striped" value="progressBarValue" max="totalDuration" type="{{barType}}"></progressbar>
+        <!-- <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div> -->
+        <md-progress-linear md-theme="progressBarTheme" ng-class="getProgressBarClass()" md-mode="determinate" ng-value="test"></md-progress-linear>
       </div>
     </div>
 

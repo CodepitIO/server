@@ -1,39 +1,57 @@
 <div ng-if="timeLeft === 0" class="alert alert-info alert-dismissible" role="alert" style="margin-top:10px;">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<strong>A competição acabou!</strong> Qualquer submissão feita a partir de agora contará como upsolving - competição que continua rolando após o término da competição principal, mas não conta no placar oficial.
-	</div>
-	<div class="row" style="margin-top: 20px;">
-	<div class="col-md-6 col-centered">
-	  <form name="submitProblemForm">
+</div>
+
+<div layout="row" layout-margin>
+	<div flex="10"></div>
+	<div layout="column" flex="55">
+		<form name="submitCodeForm">
 	    <span>Código</span>
-			<ui-codemirror ui-codemirror-opts="editorOptions" style="text-align: left;"></ui-codemirror>
-	    <!-- <textarea type="text" style="height: 500px; margin: 10px 0 80px; resize: vertical;" class="form-control" ng-model="submission.code" name="code" ></textarea> -->
-	  </form>
+			<ui-codemirror style="text-align: left; cursor: text;" ui-codemirror-opts="editorOptions" style="text-align: left;" ui-refresh="editorOptions.mode" ng-model="submission.code"></ui-codemirror>
+			<div layout="row" layout-align="center center" layout-margin>
+				<div flex="30">
+					<b>OU</b> selecione o arquivo
+				</div>
+				<md-button class="md-raised md-accent" flex="30" type="file" ngf-select
+				ngf-drop ng-model="submission.codefile" ngf-max-files="1" ngf-max-size="'64KB'"
+				ngf-drag-over-class="'md-primary md-hue-1'" ngf-model-invalid="submission.errorfile"
+				name="file">
+					&nbsp;&nbsp;Arquivo<md-icon class="material-icons">attach_file</md-icon>
+				</md-button>
+				<div flex="40" layout-align="left center">
+					<i class="md-body-1">{{submission.codefile.name}}</i>
+					<i ng-show="submitCodeForm.file.$error.maxSize">
+						<span>Arquivo muito grande {{submission.errorfile.size / 1000|number:1}}KB: max 64KB</p>
+					</i>
+				</div>
+				<div ngf-src="submission.file" ngf-background="submission.file"></div>
+			</form>
+		</div>
 	</div>
-	<div class="col-md-4" style="margin-top: 20px;">
-	  <table class="create-contest-table">
-	    <tbody>
-	      <tr>
-	        <td colspan="1" class="col-md-1" style="padding: 0;">Problema</td>
-	        <td colspan="2" class="col-md-2" style="padding: 0 10px 0 0;">
-	          <select class="form-control" ng-model="submission.problem">
-	            <option ng-value="0">(rascunho)</option>
-	            <option ng-repeat="problem in problemsArray" ng-value="problem._id">{{problem | problemSubmitName : $index}}</option>
-	          </select>
-	        </td>
-	      </tr>
-	      <tr>
-	        <td colspan="1" class="col-md-1" style="padding: 0;">Linguagem</td>
-	        <td colspan="2" class="col-md-2" style="padding: 0 10px 0 0;">
-	          <select class="form-control" ng-model="submission.language">
-	            <option ng-repeat="(id,name) in languages" ng-value="id">{{name}}</option>
-	          </select>
-	        </td>
-	      </tr>
-	      <tr>
-	        <td colspan="3"><button type="button" ng-click="submit()" class="btn btn-default btn-block" ng-class="{'disabled': submittingProblem}" style="margin-top:15px;">Submeter&nbsp;<i class="fa fa-paper-plane-o"></i></button></td>
-	      </tr>
-	    </tbody>
-	  </table>
+	<div layout="column" flex="25" layout-padding>
+		<md-input-container>
+			<label>Problema</label>
+			<md-select ng-model="submission.problem">
+				<md-option ng-value="0">(rascunho)</md-option>
+				<md-option ng-repeat="problem in contest.data.problems" ng-value="problem._id">
+					{{problem | mrtProblemSubmitName : $index}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container>
+      <label>Linguagem</label>
+      <md-select ng-model="submission.language" ng-change="updateTextMode()">
+        <md-option ng-repeat="(id,name) in languages" ng-value="id">
+          {{name}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+		<div flex>
+			<md-button class="md-fab md-primary md-hue-2" ng-click="submit()">
+			  <md-icon class="material-icons block">send</md-icon>
+			</md-button>
+		</div>
 	</div>
-	</div>
+	<div flex="10"></div>
+</div>

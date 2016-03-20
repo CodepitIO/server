@@ -1,28 +1,39 @@
 var app = angular.module('General')
-	.factory('GlobalFactory', [
+	.factory('RequestAPI', [
 		'$q',
-		function($q) {
+		'Notification',
+		function($q, Notification) {
+			var resolveOrReject = function(deferred, result) {
+				if (result.error) {
+					Notification.error(result.error);
+					deferred.reject(result.error);
+				} else {
+					deferred.resolve(result);
+				}
+			}
+
+			var reject = function(deferred, result) {
+				Notification.error(result.statusText);
+				deferred.reject(result.statusText);
+			}
+
 			return {
 				post: function(API, params) {
 					var deferred = $q.defer();
-					API.save(params, function(result) {
-						if (result.error) {
-							deferred.reject(result.error);
-						} else {
-							deferred.resolve(result);
-						}
-					});
+					API.save(
+						params,
+						resolveOrReject.bind(null, deferred),
+						reject.bind(null, deferred)
+					);
 					return deferred.promise;
 				},
 				get: function(API, params) {
 					var deferred = $q.defer();
-					API.get(params, function(result) {
-						if (result.error) {
-							deferred.reject(result.error);
-						} else {
-							deferred.resolve(result);
-						}
-					});
+					API.get(
+						params,
+						resolveOrReject.bind(null, deferred),
+						reject.bind(null, deferred)
+					);
 					return deferred.promise;
 				}
 			};
@@ -31,7 +42,7 @@ var app = angular.module('General')
 	.factory('TimeFactory', [
 		'$interval',
 		'$resource',
-		'GlobalFactory',
+		'RequestAPI',
 		function($interval, $resource, global) {
 			var diff = 0,
 				now;
@@ -57,6 +68,19 @@ var app = angular.module('General')
 
 			return {
 				server: server
+			};
+		}
+	])
+	.factory('GeneralFunctions', [
+		function() {
+			return {
+				getMinutesBetweenDates: function(startDate, endDate) {
+					return Math.floor(((new Date(endDate)) - (new Date(startDate))) / 60000);
+				},
+
+				getSecondsBetweenDates: function(startDate, endDate) {
+					return Math.floor(((new Date(endDate)) - (new Date(startDate))) / 1000);
+				}
 			};
 		}
 	]);

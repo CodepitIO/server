@@ -44,13 +44,20 @@ var contestSchema = mongoose.Schema({
 
 
 // methods ======================
-contestSchema.methods.inContest = function(id) {
+contestSchema.methods.userInContest = function(id) {
   if (!id) return false;
   var index = _.findIndex(this.contestants, function(obj) {
-    return obj.id && obj.id.toString() == id.toString();
+    return obj.id && obj.id.toString() === id.toString();
   });
-  if (index != -1) return true;
-  return false;
+  return index !== -1;
+}
+
+contestSchema.methods.problemInContest = function(id) {
+  if (!id) return false;
+  var index = _.findIndex(this.problems, function(obj) {
+    return obj.toString() === id.toString();
+  });
+  return index !== -1;
 }
 
 // create the model for users and expose it to our app
