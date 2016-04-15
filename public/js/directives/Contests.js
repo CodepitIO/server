@@ -32,8 +32,6 @@ app.directive('mrtContestList', function() {
 		scope: {
 			filterType: '@', // Select the filter to apply over the list
 			// optional - value = ['past', 'future', 'now', 'owned']
-			withActionCol: '=', // Show the action column on template (see views/contests/contest.list.html)
-			// optional - values = true/false
 			emptyMessage: '=', // Message to display when list is empty
 			// optional - String
 			adminFlag: '=', // Span to indicate the user has admin properties over contest
@@ -42,8 +40,6 @@ app.directive('mrtContestList', function() {
 			// optional - values = true/false
 			subTitle: '=', // Table's title
 			// optional - String
-			modalId: '=', //Id of the model used on action to join contest
-			// required only if action to join contentes is wanted - String`
 		},
 		templateUrl: 'views/contests/contests.list.html',
 		controller: 'ContestsController',

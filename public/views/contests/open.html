@@ -3,23 +3,19 @@
   title="'Competições abertas'">
 </mrt-breadcrumbs>
 
-<ng-include src="'views/contests/contest-join-sidenav.html'"></ng-include>
+<!-- <ng-include src="'views/contests/contest-join-sidenav.html'"></ng-include> -->
 
 <div style="padding-top: 30px;">
   <mrt-contest-list
     filter-type="now"
-    with-action-col="true"
     sub-title="'Acontecendo agora'"
     empty-message="'Nenhuma competição acontencendo.'"
-    modal-id="'join-contest-modal-currents'"
     admin-flag="true">
   </mrt-contest-list>
   <mrt-contest-list
     filter-type="future"
-    with-action-col="true"
     sub-title="'Próximas'"
     empty-message="'Nenhuma competição futura.'"
-    modal-id="'join-contest-modal-coming'"
     admin-flag="true">
   </mrt-contest-list>
 </div>

@@ -1,8 +1,10 @@
-var Contest = require('../models/contest');
-var mongoose = require('mongoose');
-var _ = require('underscore');
+'use strict';
 
-var InvalidOperation = require('../utils/exception').InvalidOperation;
+const Contest = require('../models/contest'),
+      mongoose = require('mongoose'),
+      _ = require('underscore');
+
+const InvalidOperation = require('../utils/exception').InvalidOperation;
 
 exports.create = function(req, res, next) {
   var contest = req.body;
@@ -36,22 +38,8 @@ exports.create = function(req, res, next) {
   });
 }
 
-exports.getAllByLoggedUser = function(req, res, next) {
-  Contest.find({
-    author: req.user._id
-  })
-  .select('name description date_created date_start date_end frozen_time blind_time contestantType isPrivate watchPrivate')
-  .lean()
-  .exec()
-  .then(function(contests) {
-    return res.json({contests: contests});
-  }, function(err) {
-    return res.json({error: err});
-  });
-}
-
 var isInContest = function(id, contest) {
-  var index = _.findIndex(contest.contestants, function(obj) {
+  var index = _.findIndex(contest.contestants, (obj) => {
     return obj.id && obj.id.toString() == id.toString();
   });
   if (index != -1) return true;
@@ -59,55 +47,87 @@ var isInContest = function(id, contest) {
 };
 
 var filters = {
-  open: function() {
-    var now = new Date();
-    return { date_end: { $gt: now } };
+  open: {
+    opts: function() {
+      var now = new Date();
+      return { date_end: { $gt: now } };
+    },
+    sort: 'date_start',
+    limit: 0,
   },
-  past: function() {
-    var now = new Date();
-    return { date_end: { $lte: now } };
+  past: {
+    opts: function(req) {
+      var last = req.body.lastQueryDate || new Date();
+      return { date_end: { $lt: last } };
+    },
+    sort: '-date_end',
+    limit: 20,
   },
-  owned: function(req) {
-    return { author: req.user._id };
+  owned: {
+    opts: function(req) {
+      return { author: req.user._id };
+    },
+    sort: 'date_start',
+    limit: 0,
   },
-  now: function() {
-    var now = new Date();
-    return {
-      date_start: {$lt: now},
-      date_end: { $gt: now },
-    };
+  now: {
+    opts: function() {
+      var now = new Date();
+      return {
+        date_start: { $lt: now },
+        date_end: { $gt: now },
+      };
+    },
+    sort: 'date_start',
+    limit: 0,
   },
-  future: function() {
-    var now = new Date();
-    return { date_start: { $gt: now } };
+  future: {
+    opts: function() {
+      var now = new Date();
+      return { date_start: { $gt: now } };
+    },
+    sort: 'date_start',
+    limit: 0,
+  },
+  joined: {
+    opts: function(req) {
+        return { 'contestants.id': req.user.id };
+    },
+    sort: 'date_start',
+    limit: 0,
   },
 };
 
 exports.getByFilter = function(req, res) {
-  var opts = filters[req.params.filter];
+  var filter = filters[req.body.filter];
 
-  if (opts === undefined) {
+  if (filter === undefined) {
     return res.status(400).send();
   }
 
-  Contest.find(opts(req))
-  .select('author name description date_created date_start date_end frozen_time blind_time contestants contestantType isPrivate watchPrivate')
-  .lean()
-  .exec()
-  .then(function(contests) {
-    _.map(contests, function(contest) {
-      contest.isInContest = false;
-      contest.isAdmin = false;
-      if (req.user && req.user._id) {
-        contest.isInContest = isInContest(req.user._id, contest);
-        if (contest.author) {
-          contest.isAdmin = req.user._id.toString() == contest.author.toString();
-        }
+  Contest
+    .find(filter.opts(req))
+    .select('-problems -contestants -password')
+    .setOptions({
+      sort: filter.sort,
+      limit: filter.limit,
+      lean: true,
+    })
+    .exec(function(err, contests) {
+      if (err) {
+        return res.json({error: err});
       }
-      return contest;
+      _.map(contests, function(contest) {
+        contest.isInContest = false;
+        contest.isAdmin = false;
+        if (req.user && req.user._id) {
+          contest.isInContest = isInContest(req.user._id, contest);
+          if (contest.author) {
+            contest.isAdmin = req.user._id.toString() == contest.author.toString();
+          }
+        }
+        return contest;
+      });
+      return res.json({contests: contests});
     });
-    return res.json({contests: contests});
-  }, function(err) {
-    return res.json({error: err});
-  });
 }

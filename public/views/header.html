@@ -25,16 +25,12 @@
                 <li><a ui-sref="contests.past">Passadas</a></li>
                 <li ng-show="$root.user" class="divider"></li>
                 <li ng-show="$root.user"><a ui-sref="contests.owned">Criadas</a></li>
+                <li ng-show="$root.user"><a ui-sref="contests.joined">Participadas</a></li>
                 <li ng-show="$root.user" class="divider"></li>
                 <li ng-show="$root.user"><a ui-sref="contests.create">Criar competição</a></li>
               </ul>
             </li>
           </ul>
-<!--          <form class="navbar-form navbar-left">
-            <div class="form-group is-empty">
-              <input type="text" class="form-control col-md-8" placeholder="Search">
-            <span class="material-input"></span></div>
-          </form> -->
           <login-form></login-form>
         </div>
       </div>

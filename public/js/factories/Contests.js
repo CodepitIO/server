@@ -17,12 +17,13 @@ angular.module('Contests')
 			});
 			var GetAllFromLoggedUserAPI = $resource('/api/contests/get/owner', {});
 			var GetByFilterAPI = $resource('/api/contests/get/filter/:filter', {
-				filter: '@filter'
+				filter: '@filter',
+				lastQueryDate: '@lastQueryDate',
 			});
 			return {
 				create: global.post.bind(null, CreateAPI),
 				getAllFromLoggedUser: global.get.bind(null, GetAllFromLoggedUserAPI),
-				getByFilter: global.get.bind(null, GetByFilterAPI),
+				getByFilter: global.post.bind(null, GetByFilterAPI),
 			};
 		}
 	]);

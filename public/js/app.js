@@ -32,6 +32,7 @@ var mrtApp = angular.module('mrtApp', [
 		'appRoutes',
 		'angular-toArrayFilter',
 		'btford.socket-io',
+		'infinite-scroll',
 
 		'Account',
 		'Auth',

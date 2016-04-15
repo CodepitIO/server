@@ -16,7 +16,6 @@ var Mixed = mongoose.Schema.Types.Mixed;
 var contestSchema = mongoose.Schema({
   name: String,
   description: String,
-  date_created: {type: Date, default: Date.now},
 
   author: {type: ObjectId, ref: 'User'},
 
@@ -28,8 +27,6 @@ var contestSchema = mongoose.Schema({
 
   problems: [{type: ObjectId, ref: 'Problem'}],
 
-  individualContestants: [{type: ObjectId, ref: 'User'}],
-  teamContestants: [{type: ObjectId, ref: 'Team'}],
   contestants: [{
     id: {type: ObjectId, ref: 'User'},
     isIndividual: {type: Boolean, default: true},
@@ -40,8 +37,17 @@ var contestSchema = mongoose.Schema({
   password: {type: String, default: ""},
   isPrivate: {type: Boolean, default: false},
   watchPrivate: {type: Boolean, default: false}
+}, {
+  timestamps: {
+    createdAt: 'date_created',
+    updatedAt: 'date_updated',
+  }
 });
 
+// TODO(stor): ensure this only gets called once in production
+contestSchema.index({date_start: -1});
+contestSchema.index({date_end: -1});
+contestSchema.index({author: 1, date_created: -1});
 
 // methods ======================
 contestSchema.methods.userInContest = function(id) {

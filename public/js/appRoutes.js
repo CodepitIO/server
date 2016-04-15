@@ -33,6 +33,12 @@ angular.module('appRoutes', []).config([
 				templateUrl: 'views/contests/owned.html',
 				mustBeLogged: true
 			})
+			// Controller is set on the directive
+			.state('contests.joined', {
+				url: '/joined',
+				templateUrl: 'views/contests/joined.html',
+				mustBeLogged: true
+			})
 			.state('contests.create', {
 				url: '/create',
 				templateUrl: 'views/contests/create.html',

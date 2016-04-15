@@ -12,33 +12,53 @@ app.controller('ContestsController', [
 		$scope.contests = [];
 		$scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open';
 
-		if ($scope.filterType == 'now' || $scope.filterType == 'future') {
-			$scope.predicate = 'date_start';
-			$scope.reverse = false;
-		} else if ($scope.filterType == 'owned') {
-			$scope.predicate = 'date_start';
-			$scope.reverse = true;
-		} else {
-			$scope.predicate = 'date_end';
-			$scope.reverse = true;
+		switch ($scope.filterType) {
+			case 'now':
+			case 'future':
+			case 'joined':
+				$scope.predicate = 'date_start';
+				$scope.reverse = false;
+				break;
+
+			case 'owned':
+				$scope.predicate = 'date_start';
+				$scope.reverse = true;
+				break;
+
+			case 'past':
+			default:
+				$scope.predicate = 'date_end';
+				$scope.reverse = true;
+				break;
 		}
 
-		var fetchData = function() {
+		var lastQueryDate;
+		$scope.fetchData = function() {
+			// skip it if we're already loading
+			if ($scope.loadingNewPage) return;
+			// skip if it it's not the first load and this is not a past filter
+			if (!$scope.loadingData && $scope.filterType !== 'past') return;
+
+			$scope.loadingNewPage = true;
 			contestPromise = contests.getByFilter({
-				filter: $scope.filterType
+				filter: $scope.filterType,
+				lastQueryDate: lastQueryDate,
 			});
 
 			contestPromise.then(function(data) {
-				$scope.loadingData = false;
-				$scope.contests = data.contests;
-				for (var i = 0; i < $scope.contests.length; i++) {
-					var start = $scope.contests[i].date_start = new Date($scope.contests[i].date_start);
-					var end = $scope.contests[i].date_end = new Date($scope.contests[i].date_end);
-					$scope.contests[i].duration = Math.floor((end - start) / 1000);
+				if (data.contests.length > 0) {
+					lastQueryDate = data.contests[data.contests.length - 1].date_end;
 				}
+				for (var i = 0; i < data.contests.length; i++) {
+					var start = data.contests[i].date_start = new Date(data.contests[i].date_start);
+					var end = data.contests[i].date_end = new Date(data.contests[i].date_end);
+					data.contests[i].duration = Math.floor((end - start) / 1000);
+					$scope.contests.push(data.contests[i]);
+				}
+				$scope.loadingData = $scope.loadingNewPage = false;
 			});
 		};
-		fetchData();
+		$scope.fetchData();
 
 		$scope.order = function(predicate) {
 			$scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
@@ -65,16 +85,6 @@ app.controller('ContestsController', [
 			contestFunctions.leave(contest._id, function(err, ok) {
 				if (ok) {
 					contest.isInContest = false;
-				}
-			});
-		};
-
-		$scope.remove = function(id) {
-			contestFunctions.remove(id, function(err, ok) {
-				if (ok) {
-					$scope.contests = $scope.contests.filter(function(obj) {
-						return obj._id.toString() != id.toString();
-					});
 				}
 			});
 		};

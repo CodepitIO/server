@@ -57,8 +57,7 @@ module.exports = function(app, passport) {
 
   // contests
   app.post('/api/contests/create', IsLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create);
-  app.get('/api/contests/get/owner', IsLoggedIn, ContestsCtrl.getAllByLoggedUser);
-  app.get('/api/contests/get/filter/:filter', ContestsCtrl.getByFilter);
+  app.post('/api/contests/get/filter/:filter', ContestsCtrl.getByFilter);
 
   // specific contest
   app.post('/api/contest/:id/edit', IsLoggedIn, IsValidId, SingleContestCtrl.prevalidation, SingleContestCtrl.edit);
