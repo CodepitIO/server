@@ -14,7 +14,8 @@ const bodyParser     = require('body-parser'),
       http           = require('http'),
       mongoose       = require('mongoose'),
       db             = require('./config/db'),
-      redis          = require('./config/redis').defaultClient;
+      redis          = require('./config/redis').defaultClient,
+      setup          = require('./app/setup');
 
 // configuration ===========================================
 var server = http.createServer(app);
@@ -24,11 +25,12 @@ app.locals.moment = require('moment-timezone');
 app.locals.moment.locale('pt');
 app.locals.moment.tz('America/Recife');
 
-// connect to db and redis
+// connect to db and redis and setup server
 mongoose.connect(db.url); // connect to our database
 redis.on('error', (err) => {
   console.log(err);
 });
+setup();
 
 // general config (cookies, compression, etc.)
 app.use(cookieParser());

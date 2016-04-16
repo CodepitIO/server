@@ -1,17 +1,19 @@
 'use strict';
 
-const globals = require('../../config/globals').GLOBAL_SET,
-      channels = require('../../config/globals').CHANNELS,
-      redis = require('../../config/redis').createClient(),
-      async = require('async'),
-      _ = require('underscore'),
-      spawn = require('child_process').spawn,
-      exec = require('child_process').exec,
-      readline = require('readline'),
-      fs = require('fs'),
-      path = require('path'),
-      Problem = require('../models/problem'),
-      ObjectId = require('mongoose').Types.ObjectId;
+const async     = require('async'),
+      _         = require('underscore'),
+      spawn     = require('child_process').spawn,
+      exec      = require('child_process').exec,
+      readline  = require('readline'),
+      fs        = require('fs'),
+      path      = require('path'),
+      pindexer  = require('pindexer');
+
+const globals   = require('../config/globals').GLOBAL_SET,
+      channels  = require('../config/globals').CHANNELS,
+      redis     = require('../config/redis').createClient(),
+      Problem   = require('./models/problem'),
+      ObjectId  = require('mongoose').Types.ObjectId;
 
 function untar(file, folder, callback) {
   var flags;
@@ -65,7 +67,7 @@ function extractProblemsHtml(file, folder, callback) {
       fs.readdir.bind(null, folder),
       function(files, cb) {
         if (_.filter(files, isHtml).length !== 0) return cb(new Error(`${folder} is not pure.`));
-        else return untar(file, folder, cb);        
+        else return untar(file, folder, cb);
       }
     ], function(err) {
       if (err) console.log(err);
@@ -74,7 +76,7 @@ function extractProblemsHtml(file, folder, callback) {
   });
 }
 
-module.exports = function(callback) {
+function populate(callback) {
   const seedFile = path.join(__dirname, '.seed.tar.bz2');
   const tmpSeedFolder = path.join(__dirname, 'tmp');
   redis.sismember(globals._name, globals.SEEDED, (err, seeded) => {
@@ -96,5 +98,26 @@ module.exports = function(callback) {
         return exec(`rm -rf ${tmpSeedFolder}`, callback);
       });
     });
+  });
+}
+
+module.exports = function() {
+  async.waterfall([
+    populate,
+    (callback) => { Problem.find({}, callback); },
+    (problems, callback) => {
+      for (var i = 0; i < problems.length; i++) {
+        if (problems[i].fullName && problems[i].id && problems[i].url && problems[i].fullName.substring(0,1) === '[' && problems[i].oj !== 'uri') {
+          pindexer.addProblem(
+            problems[i].fullName,
+            problems[i]._id,
+            problems[i].url
+          );
+        }
+      }
+      callback();
+    }
+  ], () => {
+    console.log('Finished adding problems to index.');
   });
 }
