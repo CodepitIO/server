@@ -9,10 +9,7 @@ app.controller('CatalogController', [
 	'Notification',
 	'CatalogFactory',
 	'TagFactory',
-	'SubmissionFactory',
-	'ContestInstanceAPI',
-	'ContestInstanceFunctions',
-	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag, submission, contestAPI, contestFunctions) {
+	function($scope, $rootScope, $state, $stateParams, $interval, $location, Notification, catalog, tag) {
 		var getTags = function() {
 			tag.getTags().then(function(data) {
 				$scope.allTags = data.tags;

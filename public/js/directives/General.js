@@ -21,7 +21,7 @@ app.directive('mrtBreadcrumbs', function() {
 			title: '=',
 			location: '=',
 		},
-		templateUrl: 'views/breadcrumbs.html',
+		templateUrl: 'views/misc/breadcrumbs.html',
 	};
 });
 
@@ -112,3 +112,11 @@ app.directive('mrtDisplayTime', function() {
 			"<sup>UTC{{date | amDateFormat:'Z' | mrtTimezoneStrap}}</sup></a>",
 	};
 });
+
+app.directive('mrtLoginForm', [function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/login-form.html',
+		controller: 'LoginController'
+	};
+}]);

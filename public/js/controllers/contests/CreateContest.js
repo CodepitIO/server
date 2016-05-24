@@ -5,9 +5,9 @@ app.controller('CreateContestController', [
 	'$timeout',
 	'$location',
 	'Notification',
-	'ProblemsFactory',
-	'ContestsFactory',
-	function($scope, $rootScope, $timeout, $location, Notification, problems, contests) {
+	'ProblemsAPI',
+	'ContestAPI',
+	function($scope, $rootScope, $timeout, $location, Notification, problems, contest) {
 		$scope.name = '';
 		$scope.descr = '';
 		$scope.startDateTime = new Date();
@@ -207,7 +207,7 @@ app.controller('CreateContestController', [
 
 			if (canCreate) {
 				$scope.loadingCreate = true;
-				contests.create({
+				contest.create({
 						name: $scope.name,
 						descr: $scope.descr,
 						startDateTime: $scope.startDateTime,

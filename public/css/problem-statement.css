@@ -1,6 +1,5 @@
-.problem-statement {
+.problem-statement, .timus-problem {
     margin: 0.5em;
-    /*font-family: verdana,arial,sans-serif;*/
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.5em;
     font-size: 1.4rem;
@@ -9,9 +8,6 @@
 .problem-statement .epigraph {
     margin-left: 67%;
     width: 33%;
-}
-
-.problem-statement .epigraph-text {
 }
 
 .problem-statement .epigraph-source {
@@ -24,8 +20,19 @@
 }
 
 .problem-statement .header {
-    margin-bottom: 1em;
-    text-align: center;
+  border-bottom: #DDD solid 1px;
+  margin-top: -10px;
+  margin-bottom: 1em;
+  padding-bottom: 0.8em;
+  display: flex;
+  justify-content: center;
+}
+
+.problem-statement .header span {
+    color: #777;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0 60px 0 60px;
 }
 
 .problem-statement .header .title {
@@ -97,9 +104,6 @@
     margin-bottom: 1em;
 }
 
-.problem-statement .sample-tests .sample-test {
-}
-
 .problem-statement .sample-tests .input, .problem-statement .sample-tests .output {
     border: 1px solid #888;
 }
@@ -115,9 +119,11 @@
     padding: 0.25em;
     margin: 0;
     background-color: #efefef;
+    border: none;
+    border-radius: 0px;
 }
 
-.problem-statement .sample-tests {
+.problem-statement .sample-tests, .timus-problem .sample pre {
     font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
     font-size: 0.9em;
 }
@@ -172,6 +178,16 @@ div .problem-statement-overlay {
     left: 49%;
 }
 
+.problem-statement h1{
+    font-size: 28px;
+}
+
+.problem-statement h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
 .problem-statement input[type="radio"] {
     margin-right: 0.5em;
 }
@@ -190,12 +206,30 @@ div .problem-statement-overlay {
     height: 7em;
 }
 
+.problem-statement sup, sub{
+    vertical-align: inherit;
+    font-size: 10px;
+    position: relative;
+}
+
+.problem-statement sup{
+    top: -3px;
+}
+
+.problem-statement sub{
+    bottom: -3px;
+}
+
 .problem-statement .test-form {
     line-height: 1.75em;
 }
 
 .problem-statement .test-form {
     line-height: 1.75em;
+}
+
+.problem-statement .both{
+    clear: both;
 }
 
 .tex-formula {
@@ -295,3 +329,83 @@ div .problem-statement-overlay {
 .tex-graphics {
     display: block;
 }
+
+/* URI stuff */
+.problem-statement .problem {
+    line-height: 20px;
+}
+.problem-statement .description p, .input p, .output p {
+    margin: 0 0 10px 0;
+}
+.problem-statement .problem table{
+    border-bottom: #BBB solid 1px;
+    border-collapse: collapse;
+    border-top: #BBB solid 1px;
+    margin: 15px 0;
+    width: 100%;
+}
+.problem-statement .problem table p {
+    margin: 0 !important;
+}
+.problem-statement .problem table thead{
+    font-weight: bold;
+    text-align: center;
+}
+.problem-statement .problem table tbody{
+    font-family: "Courier New", Courier, "Nimbus Mono L", monospace;
+    background: #EFEFEF;
+}
+.problem-statement .problem table tbody td{
+    border-bottom: #BBB solid 1px;
+    border-top: #BBB solid 1px;
+    padding: 5px;
+    vertical-align: text-top;
+    width: 50%;
+}
+.problem-statement .division{
+    border-right: #BBB solid 1px;
+}
+.problem-statement .problem b{
+    font-weight: bold;
+}
+.problem-statement .problem i{
+    font-style: italic;
+}
+.problem-statement .problem u{
+    text-decoration: underline;
+}
+.problem-statement .problem .center{
+    text-align: center;
+}
+.problem-statement .code{
+    font-family: "Courier New", Courier, "Nimbus Mono L", monospace;
+}
+.problem-statement .footer{
+    color: #545454;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.timus-problem TABLE.sample {border:solid 1px #000; border-collapse:collapse;}
+.timus-problem TABLE.sample TR TD, .timus-problem TABLE.sample TR TH {border:solid 1px #000; padding:3px; vertical-align:top;}
+.timus-problem DIV.problem_limits {line-height:1.4em; margin:0 0 14px 0; text-align:center;}
+.timus-problem DIV.problem_source {line-height:1.4em; margin:10px 0 0 0;}
+.timus-problem DIV.problem_links {font-size:1.15em; margin:14px 0 6px 0; line-height:1.4em;}
+.timus-problem DIV.problem_centered_picture {margin:12px 0 12px 0; text-align:center;}
+.timus-problem IMG.problem_laimage {margin:4px 15px 6px 0;}
+.timus-problem IMG.problem_raimage {margin:4px 0 6px 15px;}
+.timus-problem DIV.problem_par, .timus-problem DIV.problem_par_pre {margin:0 0 10px 0;}
+.timus-problem DIV.problem_par {line-height:1.4em;}
+.timus-problem DIV.problem_par_normal {text-align:justify;}
+.timus-problem DIV.problem_par_center {text-align:center;}
+.timus-problem DIV.problem_par_right {text-align:right;}
+.timus-problem DIV.problem_par_epigraph {font-style:italic; padding-left:50%; text-align:left;}
+.timus-problem DIV.problem_par UL, .timus-problem DIV.problem_par OL {margin-bottom:10px; margin-top:4px;}
+.timus-problem DIV.problem_par TABLE {border:solid 1px Black; border-collapse:collapse;}
+.timus-problem DIV.problem_par TABLE TR TH, .timus-problem DIV.problem_par TABLE TR TD {border:solid 1px Black; padding:4px;}
+.timus-problem SPAN.problem_tags_toggle, .timus-problem SPAN.problem_tags_toggle A {color:Gray;}
+.timus-problem TABLE.sample, .timus-problem TABLE.sample TR TD, .timus-problem TABLE.sample TR TH {border-color:Black;}
+.timus-problem TABLE.sample TR TH, .timus-problem H2.problem_title, .timus-problem H3.problem_subtitle {color:Black;}
+.timus-problem H3.problem_subtitle { font-size: 18px; font-weight: bold; margin: 20px 0 10px; }
+.timus-problem pre { background-color: #fff; border: none; margin: 0px; }
+.timus-problem A, .timus-problem A:visited, .timus-problem A:hover {color:Black;}

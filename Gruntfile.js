@@ -12,7 +12,6 @@ module.exports = function(grunt) {
 				options: {
 					cwd: __dirname,
 					ignore: ['node_modules/**', 'public/**', '**/*.json', 'Gruntfile.js'],
-					legacyWatch: true,
 				},
 			}
 		},
@@ -162,7 +161,6 @@ module.exports = function(grunt) {
 		'html2js:dev',
 		'clean:fonts',
 		'copy:fonts',
-		//'concurrent:dev',
 		'nodemon',
 	]);
 };

@@ -23,8 +23,6 @@ app.controller('RegisterController', [
 						$location.path('/profile');
 						Notification.success("Bem-vindo, " + data.local.name + ".");
 					}
-				}, function(error) {
-					Notification.error(error);
 				});
 		};
 	}

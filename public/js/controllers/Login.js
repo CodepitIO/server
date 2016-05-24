@@ -6,9 +6,8 @@ app.controller('LoginController', [
 	'$state',
 	'Notification',
 	'UtilFactory',
-	'AuthFactory',
 	'AccountFactory',
-	function($scope, $cookies, $rootScope, $state, Notification, util, auth, account) {
+	function($scope, $cookies, $rootScope, $state, Notification, util, account) {
 		$scope.account = {
 			email: '',
 			password: ''
@@ -25,13 +24,14 @@ app.controller('LoginController', [
 				.then(function(data) {
 					$scope.pictureUrl = data.url;
 					$scope.loadedPictureUrl = true;
+					console.log($scope.pictureUrl);
 				});
 		}
 
 		$scope.login = function() {
 			$rootScope.user = null;
 			$cookies.remove('user');
-			auth.login($scope.account)
+			account.login($scope.account)
 				.then(function(data) {
 					if (data._id) {
 						$rootScope.user = data;
@@ -40,8 +40,6 @@ app.controller('LoginController', [
 						});
 						$state.go('profile');
 					}
-				}, function(error) {
-					Notification.error(error);
 				});
 		};
 
@@ -50,7 +48,7 @@ app.controller('LoginController', [
 			$rootScope.user = null;
 			$scope.loadedPictureUrl = false;
 			$state.go('home');
-			auth.logout().then(function() {});
+			account.logout().then(function() {});
 		};
 
 		$scope.$watch(function() {
@@ -63,11 +61,3 @@ app.controller('LoginController', [
 
 	}
 ]);
-
-app.directive('loginForm', [function() {
-	return {
-		restrict: 'E',
-		templateUrl: 'views/login-form.html',
-		controller: 'LoginController'
-	};
-}]);

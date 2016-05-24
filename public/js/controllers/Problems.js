@@ -3,13 +3,15 @@ app.controller('ProblemsController', [
 	'$scope',
 	'$timeout',
 	'Notification',
-	'ProblemsFactory',
-	function($scope, $timeout, Notification, problems) {
+	'ProblemsFunctions',
+	function($scope, $timeout, Notification, Problems) {
 
+
+
+		/*
 		$scope.regex = '';
 		$scope.problems = [];
 		var lastTime = 0;
-
 		$scope.fetch = function() {
 			var now = Date.now();
 			lastTime = now;
@@ -31,7 +33,7 @@ app.controller('ProblemsController', [
 			} else {
 				$scope.problems = [];
 			}
-		};
+		};//*/
 
 	}
 ]);

@@ -8,9 +8,7 @@ lib-cov
 *.gz
 *.DS_Store
 *.swp
-*.bower.json.md5
-*.package.json.md5
-app/utils/tmp/
+src/utils/tmp/
 
 pids
 logs
@@ -19,18 +17,19 @@ results
 npm-debug.log
 /node_modules/*
 
-/problems/*
+/problems
 /cpp/matchProblems
 /cpp/problems.txt
-/public/imgs/site/*
-/public/dist/*
-/public/fonts/*
-/public/problems/*
-/public/bower_components/*
+/public/imgs/site
+/public/dist
+/public/fonts
+/public/problems
+/public/bower_components
 /public/index.html
-/tmp/*
+/tmp
 
 *.DS_STORE
 *.txt
 .tmp
+*.md5
 nohup.out

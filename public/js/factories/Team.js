@@ -3,48 +3,48 @@ angular.module('Team').factory('TeamFactory', [
 	'$q',
 	'$resource',
 	'RequestAPI',
-	function($http, $q, $resource, global) {
-		var CreateTeamAPI = $resource('/api/team/create', {
+	function($http, $q, $resource, request) {
+		var CreateTeamAPI = $resource('/api/v1/team/create', {
 			name: '@name'
 		});
-		var GetUserTeamsAPI = $resource('/api/team/user/:id', {
+		var GetUserTeamsAPI = $resource('/api/v1/team/user/:id', {
 			id: '@id'
 		});
-		var LeaveTeamAPI = $resource('/api/team/leave', {
+		var LeaveTeamAPI = $resource('/api/v1/team/leave', {
 			id: '@id'
 		});
-		var GetTeamAPI = $resource('/api/team/get/:id', {
+		var GetTeamAPI = $resource('/api/v1/team/get/:id', {
 			id: '@id'
 		});
-		var InviteAPI = $resource('/api/team/invite', {
+		var InviteAPI = $resource('/api/v1/team/invite', {
 			id: '@id',
 			invitee: '@invitee'
 		});
-		var RemoveFromTeamAPI = $resource('/api/team/remove', {
+		var RemoveFromTeamAPI = $resource('/api/v1/team/remove', {
 			id: '@id',
 			removee: '@removee'
 		});
-		var AcceptInviteAPI = $resource('/api/team/accept/:id', {
+		var AcceptInviteAPI = $resource('/api/v1/team/accept/:id', {
 			id: '@id',
 		});
-		var DeclineInviteAPI = $resource('/api/team/decline/:id', {
+		var DeclineInviteAPI = $resource('/api/v1/team/decline/:id', {
 			id: '@id',
 		});
-		var EditAPI = $resource('/api/team/edit', {
+		var EditAPI = $resource('/api/v1/team/edit', {
 			id: '@id',
 			name: '@name',
 			descr: '@descr'
 		});
 		return {
-			create: global.post.bind(null, CreateTeamAPI),
-			getFromUser: global.get.bind(null, GetUserTeamsAPI),
-			leave: global.post.bind(null, LeaveTeamAPI),
-			get: global.get.bind(null, GetTeamAPI),
-			invite: global.post.bind(null, InviteAPI),
-			remove: global.post.bind(null, RemoveFromTeamAPI),
-			accept: global.get.bind(null, AcceptInviteAPI),
-			decline: global.get.bind(null, DeclineInviteAPI),
-			edit: global.post.bind(null, EditAPI)
+			create: request.send('save', CreateTeamAPI),
+			getFromUser: request.send('get', GetUserTeamsAPI),
+			leave: request.send('save', LeaveTeamAPI),
+			get: request.send('get', GetTeamAPI),
+			invite: request.send('save', InviteAPI),
+			remove: request.send('save', RemoveFromTeamAPI),
+			accept: request.send('get', AcceptInviteAPI),
+			decline: request.send('get', DeclineInviteAPI),
+			edit: request.send('save', EditAPI)
 		};
 	}
 ]);

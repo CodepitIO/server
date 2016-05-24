@@ -99,7 +99,13 @@ angular.module('appRoutes', []).config([
 				controller: 'SubmissionController'
 			})
 			.state('problems', {
+				abstract: true,
 				url: '^/problems/{id}',
+				templateUrl: 'views/problem-view.html',
+				controller: 'ProblemController',
+			})
+			.state('problems.view', {
+				url: '/view',
 				templateUrl: function($stateParams) {
 					return 'problems/' + $stateParams.id + '.html';
 				}

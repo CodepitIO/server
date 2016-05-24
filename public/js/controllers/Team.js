@@ -6,10 +6,8 @@ app.controller('TeamController', [
 	'$location',
 	'$timeout',
 	'Notification',
-	'TeamFactory',
-	'UtilFactory',
-	'RequestAPI',
-	function($rootScope, $scope, $stateParams, $location, $timeout, Notification, team, util, global) {
+	'TeamAPI',
+	function($rootScope, $scope, $stateParams, $location, $timeout, Notification, team) {
 		var id = $stateParams.id;
 		$scope.team = {};
 		$scope.newInvite = '';

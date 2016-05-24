@@ -19,9 +19,6 @@ do
   shift
 done
 
-# Compiling matchProblems.cpp
-bash -c "g++ cpp/matchProblems.cpp -o cpp/matchProblems --std=c++0x"
-
 function shouldInstall {
   local FILENAME=$PWD/$1
   local HASHFILENAME=$PWD/.$1.md5
@@ -39,10 +36,10 @@ function shouldInstall {
   fi
 }
 
-shouldInstall "package.json" "npm install --no-bin-links"
+# TODO(stor): Temporarily not working on Windows for dev, as it needs --no-bin-links
+shouldInstall "package.json" "npm install --loglevel info"
 shouldInstall "bower.json" "bower install --allow-root"
 
 if $START; then
   grunt dev
 fi
-

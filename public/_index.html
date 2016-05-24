@@ -31,6 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/ttypography.css">
 	<link rel="stylesheet" type="text/css" href="css/angular-material.css">
+	<link rel="stylesheet" type="text/css" href="css/pdf_viewer.css">
 	<!-- endbuild -->
 </head>
 <body ng-app="mrtApp">
@@ -49,6 +50,7 @@
 	<script type="text/javascript" src="bower_components/socket.io-client/socket.io.js"></script>
 	<script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="bower_components/codemirror/mode/clike/clike.js"></script>
+	<script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/bootstrap.min.js -->
@@ -82,7 +84,6 @@
 	<script type="text/javascript" src="js/appRoutes.js"></script>
 
 	<script type="text/javascript" src="js/factories/Account.js"></script>
-	<script type="text/javascript" src="js/factories/Auth.js"></script>
 	<script type="text/javascript" src="js/factories/Catalog.js"></script>
 	<script type="text/javascript" src="js/factories/Contests.js"></script>
 	<script type="text/javascript" src="js/factories/General.js"></script>
@@ -96,7 +97,7 @@
 
 	<script type="text/javascript" src="js/controllers/Home.js"></script>
 	<script type="text/javascript" src="js/controllers/Login.js"></script>
-	<script type="text/javascript" src="js/controllers/Problems.js"></script>
+	<script type="text/javascript" src="js/controllers/Problem.js"></script>
 	<script type="text/javascript" src="js/controllers/Profile.js"></script>
 	<script type="text/javascript" src="js/controllers/Register.js"></script>
 	<script type="text/javascript" src="js/controllers/Submission.js"></script>
@@ -113,10 +114,14 @@
 
 	<script type="text/javascript" src="js/directives/Contests.js"></script>
 	<script type="text/javascript" src="js/directives/General.js"></script>
+	<script type="text/javascript" src="js/directives/Pdf.js"></script>
 
-	<script type="text/javascript" src="js/utils/popovers.js"></script>
+	<script type="text/javascript" src="js/utils/general.js"></script>
 	<script type="text/javascript" src="js/utils/filters.js"></script>
 	<script type="text/javascript" src="js/utils/values.js"></script>
+	<script type="text/javascript" src="js/utils/pdf/pdf.js"></script>
+	<script type="text/javascript" src="js/utils/pdf/pdf_viewer.js"></script>
+	<script type="text/javascript" src="js/utils/pdf/compatibility.js"></script>
 
 	<script type="text/javascript" src="dist/templates.js"></script>
 	<!-- endbuild -->

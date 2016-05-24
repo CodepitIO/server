@@ -786,3 +786,12 @@ footer ul li a:first-child{
   position:fixed;
   top: 75px;
 }
+
+.problem-pdf-wrapper {
+  padding: 0 50px 0 50px;
+}
+
+/*.problem-pdf-wrapper #pageContainer {
+  width: 100% !important;
+  margin: 0 auto !important;
+}*/

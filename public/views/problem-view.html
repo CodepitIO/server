@@ -1,0 +1,17 @@
+<mrt-breadcrumbs
+  location="'Maratonando / Problemas / ' + problem.oj"
+  title="problem.name">
+</mrt-breadcrumbs>
+
+<mrt-page-wrapper wait-for="!loadingData">
+  <div class="problem-statement" ng-if="problem.timelimit || problem.memorylimit">
+    <div class="header">
+      <span ng-if="problem.timelimit">Time limit: {{problem.timelimit}}s</span>
+      <span ng-if="problem.memorylimit">Memory limit: {{problem.memorylimit}}</span>
+    </div>
+  </div>
+  <ui-view/>
+  <div class="problem-statement" ng-if="problem.source">
+    <p class="footer" ng-bind-html="problem.source"></p>
+  </div>
+</mrt-page-wrapper>

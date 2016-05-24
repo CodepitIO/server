@@ -26,12 +26,12 @@ node_modules/*
 problems/*
 cpp/matchProblems
 cpp/problems.txt
-public/imgs/site/*
-public/dist/*
-public/fonts/*
-public/problems/*
-public/bower_components/*
-tmp/*
+public/imgs/site
+public/dist
+public/fonts
+public/problems
+public/bower_components
+tmp
 
 *.DS_STORE
 *.txt

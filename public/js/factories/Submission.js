@@ -3,17 +3,17 @@ angular.module('Submission')
 		'$q',
 		'$resource',
 		'RequestAPI',
-		function($q, $resource, global) {
-			var SendAPI = $resource('/api/submission/send', {
+		function($q, $resource, request) {
+			var SendAPI = $resource('/api/v1/submission/send', {
 				contestId: '@contestId',
 				code: '@code',
 				problem: '@problem',
 				language: '@language'
 			});
-			var GetAPI = $resource('/api/submission/get/:id', {});
+			var GetAPI = $resource('/api/v1/submission/:id', {});
 			return {
-				send: global.post.bind(null, SendAPI),
-				get: global.get.bind(null, GetAPI),
+				send: request.send('save', SendAPI),
+				get: request.send('get', GetAPI),
 			};
 		}
 	])
@@ -48,7 +48,7 @@ angular.module('Submission')
 					var promise;
 					if (submission.codefile) {
 						promise = Upload.upload({
-							url: '/api/submission/sendfile',
+							url: '/api/v1/submission/sendfile',
 							data: {
 								file: submission.codefile,
 								contestId: contestId,

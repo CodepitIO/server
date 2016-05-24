@@ -4,18 +4,18 @@ angular.module('Contests')
 		'$q',
 		'$resource',
 		'RequestAPI',
-		function($http, $q, $resource, global) {
-			var RemoveContestAPI = $resource('/api/contest/:id/remove', {});
-			var GetFullDataByIDAPI = $resource('/api/contest/:id/get/full', {});
-			var JoinAPI = $resource('/api/contest/:id/join', {
+		function($http, $q, $resource, request) {
+			var RemoveContestAPI = $resource('/api/v1/contest/:id/remove', {});
+			var GetFullDataByIDAPI = $resource('/api/v1/contest/:id/get/full', {});
+			var JoinAPI = $resource('/api/v1/contest/:id/join', {
 				id: '@id',
 				password: '@password',
 				team: '@team'
 			});
-			var LeaveAPI = $resource('/api/contest/:id/leave', {
+			var LeaveAPI = $resource('/api/v1/contest/:id/leave', {
 				id: '@id'
 			});
-			var EditAPI = $resource('/api/contest/:id/edit', {
+			var EditAPI = $resource('/api/v1/contest/:id/edit', {
 				id: '@id',
 				name: '@name',
 				descr: '@descr',
@@ -28,16 +28,16 @@ angular.module('Contests')
 				confirmPassword: '@confirmPassword',
 				problems: '@problems'
 			});
-			var GetScoreboardAPI = $resource('/api/contest/:id/scoreboard', {});
-			var GetDynamicScoreboardAPI = $resource('/api/contest/:id/scoreboard/dynamic', {});
+			var GetScoreboardAPI = $resource('/api/v1/contest/:id/scoreboard', {});
+			var GetDynamicScoreboardAPI = $resource('/api/v1/contest/:id/scoreboard/dynamic', {});
 			return {
-				remove: global.get.bind(null, RemoveContestAPI),
-				getFullData: global.get.bind(null, GetFullDataByIDAPI),
-				join: global.post.bind(null, JoinAPI),
-				leave: global.post.bind(null, LeaveAPI),
-				edit: global.post.bind(null, EditAPI),
-				getScoreboard: global.get.bind(null, GetScoreboardAPI),
-				getDynamicScoreboard: global.get.bind(null, GetDynamicScoreboardAPI),
+				remove: request.send('get', RemoveContestAPI),
+				getFullData: request.send('get', GetFullDataByIDAPI),
+				join: request.send('save', JoinAPI),
+				leave: request.send('save', LeaveAPI),
+				edit: request.send('save', EditAPI),
+				getScoreboard: request.send('get', GetScoreboardAPI),
+				getDynamicScoreboard: request.send('get', GetDynamicScoreboardAPI),
 			};
 		}
 	])

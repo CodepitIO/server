@@ -1,6 +1,5 @@
 // Declare all app modules
 angular.module('Account', []);
-angular.module('Auth', []);
 angular.module('Catalog', []);
 angular.module('Contests', []);
 angular.module('General', []);
@@ -35,7 +34,6 @@ var mrtApp = angular.module('mrtApp', [
 		'infinite-scroll',
 
 		'Account',
-		'Auth',
 		'Catalog',
 		'Contests',
 		'General',
@@ -47,7 +45,7 @@ var mrtApp = angular.module('mrtApp', [
 		'Submission',
 		'Tag',
 		'Team',
-		'Util',
+		'Util'
 	])
 	.config([
 		'NotificationProvider',

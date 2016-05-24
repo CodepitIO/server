@@ -7,12 +7,13 @@ MAINTAINER Gustavo Stor
 # Install Node.js and other dependencies
 RUN apt-get update && \
     apt-get -y install curl && \
-    curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash - && \
+    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
     apt-get -y install nodejs git-all build-essential vim supervisor nginx
 
 # Install node_modules and bower_components
-RUN npm install -g grunt-cli bower
-COPY package.json /tmp/package.json
+RUN npm install -g grunt-cli bower node-gyp
+COPY package.json /tmp/
+COPY local_modules/ /tmp/local_modules/
 RUN cd /tmp && npm install
 COPY [".bowerrc", "bower.json", "/tmp/"]
 RUN cd /tmp && bower install --allow-root
@@ -24,17 +25,16 @@ ADD . /www
 
 RUN cp -a /tmp/node_modules /www/ && \
     cp -a /tmp/public/bower_components /www/public/ && \
+    mkdir /www/public/problems && \
     rm -rf /tmp && \
     grunt prod && \
-    g++ /www/cpp/matchProblems.cpp -o /www/cpp/matchProblems --std=c++0x && \
     mkdir -p /var/log/supervisor && \
     rm -rf /etc/nginx/conf.d/* && \
     rm -rf /etc/nginx/sites-enabled/*
 
 # Set up config files
-VOLUME /www/public
+VOLUME /www/public/problems
 COPY .prod/default.conf /etc/nginx/conf.d/
 COPY .prod/supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
-COPY .prod/ecosystem.json /www/
 
 CMD ["/usr/bin/supervisord"]

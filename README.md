@@ -39,6 +39,17 @@ Create a file named **docker-compose.yml** inside the folder **maratonando**
 ```yml
 version: '2'
 services:
+  judger:
+    container_name: judger
+    build: ./judger
+    restart: unless-stopped
+    volumes:
+      - ./judger:/judger
+    environment:
+      - NODE_ENV=development
+    links:
+      - mongo:mongo
+      - redis:redis
   web:
     container_name: web
     build: ./site
@@ -68,11 +79,15 @@ services:
     image: "redis:3.0"
     restart: unless-stopped
     command: "redis-server --appendonly yes --dbfilename redis"
+    ports:
+        - "6379:6379"
   mongo:
     container_name: mongo
     image: "mongo:3.2"
     restart: unless-stopped
     command: "--smallfiles --logpath=/dev/null"
+    ports:
+      - "27017:27017"
 ```
 
 From **maratonando** folder, build the application (this will download images and can take some time):

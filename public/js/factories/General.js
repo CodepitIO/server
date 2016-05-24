@@ -18,23 +18,16 @@ var app = angular.module('General')
 			}
 
 			return {
-				post: function(API, params) {
-					var deferred = $q.defer();
-					API.save(
-						params,
-						resolveOrReject.bind(null, deferred),
-						reject.bind(null, deferred)
-					);
-					return deferred.promise;
-				},
-				get: function(API, params) {
-					var deferred = $q.defer();
-					API.get(
-						params,
-						resolveOrReject.bind(null, deferred),
-						reject.bind(null, deferred)
-					);
-					return deferred.promise;
+				send: function(method, API) {
+					return function(params) {
+						var deferred = $q.defer();
+						API[method](
+							params,
+							resolveOrReject.bind(null, deferred),
+							reject.bind(null, deferred)
+						);
+						return deferred.promise;
+					}
 				}
 			};
 		}
@@ -43,7 +36,7 @@ var app = angular.module('General')
 		'$interval',
 		'$resource',
 		'RequestAPI',
-		function($interval, $resource, global) {
+		function($interval, $resource, request) {
 			var diff = 0,
 				now;
 			var server = {
@@ -56,7 +49,7 @@ var app = angular.module('General')
 				server.dynamic = new Date(now + diff);
 			}, 5000);
 
-			var GetServerTimeAPI = $resource('/api/server/time', {});
+			var GetServerTimeAPI = $resource('/api/v1/server/time', {});
 			global.get(GetServerTimeAPI, {}).then(function(data) {
 				var serverDate = new Date(data.date);
 				var clientDate = new Date();

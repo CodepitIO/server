@@ -3,13 +3,13 @@ angular.module('Util').factory('UtilFactory', [
 	'$q',
 	'$resource',
 	'RequestAPI',
-	function($http, $q, $resource, global) {
-		var ProfilePicAPI = $resource('/api/picture/:email/:size', {
+	function($http, $q, $resource, request) {
+		var ProfilePicAPI = $resource('/api/v1/picture/:email/:size', {
 			email: '@email',
 			size: '@size'
 		});
 		return {
-			getProfilePicByEmail: global.get.bind(null, ProfilePicAPI)
+			getProfilePicByEmail: request.send('get', ProfilePicAPI)
 		};
 	}
 ]);

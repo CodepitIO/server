@@ -176,12 +176,12 @@ div.ttypography pre {
     line-height: 1.5em;
     margin: 1.5em 0 0 0;
     white-space: pre;
-    white-space: pre-wrap;
+    white-space: pre-line;
     word-wrap: break-word;
 }
 
 div.ttypography pre, div.ttypography code {
-    color: #800;
+    color: #000;
 }
 
 div.ttypography kbd,
@@ -279,8 +279,6 @@ div.ttypography table {
     border-collapse: collapse;
     margin: 1.3571em 0 0 0;
     color: #222;
-    border-top: 1px #ccc solid;
-    border-bottom: 1px #ccc solid;
 }
 
 div.ttypography table.narrow {
@@ -350,17 +348,10 @@ div.ttypography .bordertable tbody th {
 
 div.ttypography tbody td {
     text-align: left;
-    border-top: 1px solid #ccc;
 }
 
 div.ttypography .bordertable tbody td {
     border-right: 1px solid #ccc;
-}
-
-/* highlight row on mouse over */
-div.ttypography tbody tr:hover th,
-div.ttypography tbody tr:hover td {
-    background: #f8f8f8;
 }
 
 div.ttypography pre code {
