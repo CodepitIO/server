@@ -103,7 +103,7 @@ button:disabled {
 
 /* Header */
 #header .navbar {
-  z-index: 999;
+  z-index: 50;
   position: fixed;
   width: 100%;
   top: 0;
@@ -427,52 +427,52 @@ button:disabled {
 }
 
 /* News area */
-#news {
+.blog-container {
   padding-top: 40px;
 }
 
-#news .news-section {
+.blog-container .blog-section {
   border-left: thick solid rgba(93, 106, 115, 1);
   border-right: thick solid rgba(93, 106, 115, 1);
   background-color: #f9f9f9;
   padding: 15px;
 }
 
-#news .news-section.first {
+.blog-container .blog-section.first {
   border-radius: 20px 20px 0 0;
   border-bottom: thin solid rgba(93, 106, 115, 1);
 }
 
-#news .news-section:not(.first) {
+.blog-container .blog-section:not(.first) {
   margin-top: 10px;
   border-top: thin solid rgba(93, 106, 115, 1);
 }
 
-#news .news-section:not(.last) {
+.blog-container .blog-section:not(.last) {
   border-bottom: thin solid rgba(93, 106, 115, 1);
 }
 
-#news .news-section.last {
+.blog-container .blog-section.last {
   margin-top: 10px;
   border-top: thin solid rgba(93, 106, 115, 1);
   border-radius: 0 0 20px 20px;
 }
 
-#news .news-header {
+.blog-container .blog-header {
   font: 500 36px "Open Sans";
   color: #807F7F;
 }
 
-#news .news-header:before {
+.blog-container .blog-header:before {
   content: "_";
 }
 
-#news .news-header-separator {
+.blog-container .blog-header-separator {
   margin: 0px 0px 15px 0px;
   border-color: #e2e2e2;
 }
 
-#news .news-body {
+.blog-container .blog-body {
   font: 300 16px "Open Sans";
   color: #605F5F;
   padding: 0 20px 0 20px;
@@ -791,7 +791,18 @@ footer ul li a:first-child{
   padding: 0 50px 0 50px;
 }
 
-/*.problem-pdf-wrapper #pageContainer {
-  width: 100% !important;
-  margin: 0 auto !important;
-}*/
+.unrated-handle {
+  font-weight: 600;
+  color: #888;
+  font-style: normal;
+}
+
+.unrated-handle:hover {
+  text-decoration: none;
+}
+
+.unrated-label {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: #aaa;
+}

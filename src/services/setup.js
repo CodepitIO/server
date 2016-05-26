@@ -9,8 +9,8 @@ const async     = require('async'),
       path      = require('path'),
       pindexer  = require('pindexer');
 
-const globals   = require('../config/globals').GLOBAL_SET,
-      channels  = require('../config/globals').CHANNELS,
+const globals   = require('../config/constants').GLOBAL_SET,
+      channels  = require('../config/constants').CHANNELS,
       Problem   = require('../models/problem'),
       ObjectId  = require('mongoose').Types.ObjectId,
       dbs       = require('./dbs'),
@@ -99,8 +99,9 @@ function populateAndIndexProblems() {
   });
 }
 
-module.exports = function() {
+module.exports = function(callback) {
   if (process.env.NODE_ENV === 'development') {
     //populateAndIndexProblems();
   }
+  return callback();
 }

@@ -110,13 +110,107 @@ app.directive('mrtDisplayTime', function() {
 			"hour={{date.getUTCHours()}}&min={{date.getUTCMinutes()}}&sec={{date.getUTCSeconds()}}\">" +
 			"<span>{{date | amUtc | amLocal | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</span>" +
 			"<sup>UTC{{date | amDateFormat:'Z' | mrtTimezoneStrap}}</sup></a>",
+		controller: [
+			'$scope',
+			function($scope) {
+				$scope.date = new Date($scope.date);
+			}
+		]
 	};
 });
 
 app.directive('mrtLoginForm', [function() {
 	return {
 		restrict: 'E',
-		templateUrl: 'views/login-form.html',
+		templateUrl: 'views/account/login-form.html',
 		controller: 'LoginController'
+	};
+}]);
+
+app.directive('mrtBlogPosts', [function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/misc/blog-posts.html',
+		scope: {
+			user: '=?',
+			home: '=?',
+		},
+		controller: [
+			'$scope',
+			'$state',
+			'$stateParams',
+			'$mdDialog',
+			'$mdMedia',
+			'AccountSharedState',
+			'BlogFacade',
+			function($scope, $state, $stateParams, $mdDialog, $mdMedia, accountState, blog) {
+				$scope.accountState = accountState;
+
+				$scope.loading = true;
+
+				$scope.page = {
+					current: $stateParams.page || 1,
+					maxDisplay: 10,
+					total: 0,
+					posts: [],
+				};
+
+				var filter = {};
+				if ($scope.user) {
+					filter = {
+						author: $scope.user
+					};
+				} else if ($scope.home) {
+					filter = {
+						home: true
+					};
+				}
+
+				function fetchPosts() {
+					$scope.loading = true;
+					blog.getByFilter(filter, $scope.page.current, function(err, posts) {
+						$scope.page.posts = posts;
+						$scope.loading = false;
+					});
+				}
+
+				blog.getCountByFilter(filter, function(err, count) {
+					$scope.page.total = count;
+					fetchPosts();
+				});
+
+				$scope.changePage = function() {
+					$state.go('.', {
+						page: $scope.page.current
+					}, {
+						notify: false
+					});
+					fetchPosts();
+				}
+
+				$scope.editPost = function(post) {
+					$mdDialog.show({
+						controller: 'ProfilePostsDialogController',
+						locals: {
+							Post: post
+						},
+						templateUrl: 'views/account/profile.posts.dialog.html',
+						clickOutsideToClose: true,
+						fullscreen: ($mdMedia('sm') || $mdMedia('xs'))
+					});
+				}
+			}
+		]
+	};
+}]);
+
+app.directive('mrtGoBack', ['$window', function($window) {
+	return {
+		restrict: 'A',
+		link: function(scope, elem, attrs) {
+			elem.bind('click', function() {
+				$window.history.back();
+			});
+		}
 	};
 }]);

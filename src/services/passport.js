@@ -13,24 +13,17 @@ module.exports = (passport) => {
     User.findById(id, done);
   });
 
-  // =========================================================================
-  // LOCAL SIGNUP ============================================================
-  // =========================================================================
   passport.use('local-signup', new LocalStrategy({
     usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true
   }, (req, email, password, done) => {
     User.findOne({ 'local.email' :  email }, (err, user) => {
-      if (err) {
-        return done({error: err});
-      }
-      if (user) {
-        return done({error: "Um usuário com este email já existe."});
-      }
+      if (err) return done({error: err});
+      if (user) return done({error: "Um usuário com este email já existe."});
 
-      var newUser = new User();
-      var account = req.body;
+      let newUser = new User();
+      let account = req.body;
 
       newUser.local.name = account.name;
       newUser.local.surname = account.surname;
@@ -38,18 +31,12 @@ module.exports = (passport) => {
       newUser.local.username    = account.username;
       newUser.local.password = newUser.generateHash(account.password);
 
-      newUser.save(function(err) {
-        if (err) {
-          throw err;
-        }
-        return done(null, newUser);
+      newUser.save((err) => {
+        if (err) return done({error: err});
+        return done(null, newUser.toObject({virtuals: true}));
       });
     });
   }));
-
-  // =========================================================================
-  // LOCAL LOGIN =============================================================
-  // =========================================================================
 
   passport.use('local-login', new LocalStrategy({
     usernameField : 'email',
@@ -57,13 +44,11 @@ module.exports = (passport) => {
     passReqToCallback : true
   }, (req, email, password, done) => {
     User.findOne({ 'local.email' :  email }, function(err, user) {
-      if (err) {
-        return done({error: err});
-      }
+      if (err) return done({error: err});
       if (!user || !user.validPassword(password)) {
         return done({error: "Email ou senha inválida."});
       }
-      return done(null, user);
+      return done(null, user.toObject({virtuals: true}));
     });
   }));
 

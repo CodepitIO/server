@@ -4,16 +4,6 @@ const async     = require('async'),
       mongoose  = require('mongoose'),
       request   = require('request');
 
-exports.getProfilePicURL = function(email, size) {
-  var hash = crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
-  var url = '//www.gravatar.com/avatar/' + hash + '?d=identicon&s=' + (size || 50);
-  return url;
-}
-
-exports.getProfilePicByEmailAndSize = function(req, res, next) {
-  return res.json({url: exports.getProfilePicURL(req.params.email, req.params.size)});
-}
-
 exports.getTime = function(req, res, next) {
   return res.json({date: new Date()});
 }

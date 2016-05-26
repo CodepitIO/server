@@ -41,7 +41,7 @@ app.directive('mrtContestList', function() {
 			subTitle: '=', // Table's title
 			// optional - String
 		},
-		templateUrl: 'views/contests/contests.list.html',
+		templateUrl: 'views/contests/contest-list.html',
 		controller: 'ContestsController',
 	};
 });

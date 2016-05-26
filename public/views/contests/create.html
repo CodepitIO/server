@@ -11,7 +11,7 @@
           <thead>
             <tr>
               <th>
-                Problemas&nbsp;<i class="fa fa-question-circle" tooltip-placement="right" tooltip="Exemplos: 'UVa 100', 'ZAK GALOU', 'A+B Problem'. Online Judges disponíveis: UVa, LiveArchive, Spoj, SpojBR e Timus."></i>
+                Problemas&nbsp;<i class="fa fa-question-circle" tooltip-placement="right" uib-tooltip="Exemplos: 'UVa 100', 'ZAK GALOU', 'A+B Problem'. Online Judges disponíveis: UVa, LiveArchive, Spoj, SpojBR e Timus."></i>
               </th>
             </tr>
           </thead>
@@ -55,10 +55,10 @@
             <tr>
               <td>Início</td>
               <td class="calendar-area">
-                <input name="startDate" class="calendar-text form-control" type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="startDateTime" min-date="minDate" max-date="maxDate" is-open="opened" show-weeks="false" current-text="Hoje" clear-text="Limpar" close-text="Fechar" ng-required="true" readOnly />
+                <input name="startDate" class="calendar-text form-control" type="text" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="startDateTime" min-date="minDate" max-date="maxDate" is-open="opened" show-weeks="false" current-text="Hoje" clear-text="Limpar" close-text="Fechar" ng-required="true" readOnly />
                 <button class="calendar-icon" ng-click="open()"><i class="fa fa-lg fa-calendar"></i></button>
               </td>
-              <td><timepicker name="startTime" ng-model="startDateTime" minute-step="5" show-meridian="ismeridian" show-spinners="false" gt-date="{{startDateTime}}"></timepicker></td>
+              <td><uib-timepicker name="startTime" ng-model="startDateTime" minute-step="5" show-meridian="ismeridian" show-spinners="false" gt-date="{{startDateTime}}"></uib-timepicker></td>
             </tr>
             <tr>
               <td>Duração</td>
@@ -105,7 +105,7 @@
             <tr ng-show="showDescrField">
               <td colspan="1" class="col-md-1" style="padding: 0;">Acesso&nbsp;<span class="question-mark" data-toggle="tooltip" title="Diz respeito a forma de se registrar na competição. Público: não exige senha. Privado: exige senha." tooltip><sup><i class="fa fa-question-circle"></i></sup></span></td>
               <td colspan="4" class="col-md-4" style="padding: 0 10px 0 0;">
-                <button popover-template="privatePopover.templateUrl" popover-title="{{privatePopover.title}}" popover-placement="right" class="btn btn-default btn-block btn-access popover-trigger-button" ng-click="toggleAccess($event)">{{access}}&nbsp;<i class="fa" ng-class="access == 'Privado' ? 'fa-lock' : 'fa-unlock'"></i></button>
+                <button uib-popover-template="privatePopover.templateUrl" popover-title="{{privatePopover.title}}" popover-placement="right" class="btn btn-default btn-block btn-access popover-trigger-button" ng-click="toggleAccess($event)">{{access}}&nbsp;<i class="fa" ng-class="access == 'Privado' ? 'fa-lock' : 'fa-unlock'"></i></button>
               </td>
             </tr>
             <tr ng-show="showDescrField">

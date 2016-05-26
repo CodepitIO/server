@@ -6,4 +6,5 @@ module.exports = {
   CHANNELS: {
   	LOAD_PROBLEMS: 'LOAD_PROBLEMS_CHANNEL',
   },
+  COOKIE_SECRET_KEY: 'COOKIE_SECRET_KEY',
 };

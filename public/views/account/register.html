@@ -16,16 +16,16 @@
           <br style="clear: both" />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Nome de usuário*" tooltip="Este nome aparecerá no placar das competições, quando você competir individualmente." ng-model="account.username" name="username" maxlength="30" required
+          <input type="text" placeholder="Nome de usuário*" uib-tooltip="Este nome será seu handle oficial nas competições e não poderá ser modificado." ng-model="account.username" name="username" maxlength="30" required
           ng-class="{'error': registerProfileForm.username.$dirty && registerProfileForm.username.$error.required }" />
-          <small class="error" 
+          <small class="error"
             ng-show="registerProfileForm.username.$dirty && registerProfileForm.username.$error.required">* você deve inserir um nome de usuário.</small>
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Email*" 
-            ng-class="{'error': registerProfileForm.email.$dirty && (registerProfileForm.email.$error.required || registerProfileForm.email.$error.email) }" 
+          <input type="email" placeholder="Email*"
+            ng-class="{'error': registerProfileForm.email.$dirty && (registerProfileForm.email.$error.required || registerProfileForm.email.$error.email) }"
             ng-model="account.email" name="email" required />
-          <small class="error" 
+          <small class="error"
           ng-show="registerProfileForm.email.$dirty && (registerProfileForm.email.$error.required || registerProfileForm.email.$error.email)">* você deve inserir um email válido.</small>
         </div>
         <div class="form-group register-area-split">

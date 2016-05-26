@@ -2,51 +2,40 @@
 
 const passport = require('passport');
 
-const User = require('../models/user'),
-      Util = require('../utils/functions');
+const User = require('../models/user');
 
-function remapUser(elem) {
-  if (!elem) return null;
-  var fullName = elem.local.name + ' ' + elem.local.surname;
-  var obj = {
-    id: elem._id,
-    username: elem.local.username,
-    email: elem.local.email,
-    name: fullName,
-    url: Util.getProfilePicURL(elem.local.email, 140)
+exports.remapUser = (user) => {
+  if (!user) return null;
+  return {
+    id: user._id,
+    username: user.local.username,
+    email: user.local.email,
+    emailHash: user.local.emailHash,
+    name: user.local.fullName
   };
-  //console.log(obj);
-  return obj;
 }
 
-exports.remapUser = remapUser;
-
 exports.getUserDataByEmail = function(email, callback) {
-  User.findOne({
-    'local.email': email
-  })
-  .lean()
-  .exec()
-  .then(function(user) {
-    return callback(remapUser(user));
+  User.findOne({ 'local.email': email }, (user) => {
+    return callback(exports.remapUser(user));
   });
 }
 
 exports.edit = function(req, res, next) {
   var account = req.body;
   if (account.newPassword.length > 0) {
-      if (account.newPassword.length > 50) {
-          return res.json({error: "Sua senha nova deve ter no máximo 50 caracteres."});
-      }
-      if (account.newPassword != account.confirmNewPassword) {
-          return res.json({error: "Sua senha nova não foi confirmada corretamente."});
-      }
+    if (account.newPassword.length > 50) {
+      return res.json({error: "Sua senha nova deve ter no máximo 50 caracteres."});
+    }
+    if (account.newPassword != account.confirmNewPassword) {
+      return res.json({error: "Sua senha nova não foi confirmada corretamente."});
+    }
   }
   if (account.username.length < 1 || account.username.length > 30) {
-      return res.json({error: "Seu nome de perfil deve ter entre 1 e 30 caracteres."});
+    return res.json({error: "Seu nome de perfil deve ter entre 1 e 30 caracteres."});
   }
   if (account.surname.length > 100 || account.name.length > 100) {
-      return res.json({error: "Seu nome e sobrenome não podem ultrapassar 100 caracteres."});
+    return res.json({error: "Seu nome e sobrenome não podem ultrapassar 100 caracteres."});
   }
   User.findOne({ 'local.email' :  account.email }, function(err, user) {
     if (!user.validPassword(account.password)) {
@@ -59,9 +48,7 @@ exports.edit = function(req, res, next) {
     user.local.name = account.name;
     user.local.surname = account.surname;
     user.save(function(err, user) {
-      if (err) {
-        return res.json({error: "Erro desconhecido."});
-      }
+      if (err) res.status(500).send();
       return res.json(user);
     });
   });
@@ -69,28 +56,26 @@ exports.edit = function(req, res, next) {
 
 exports.register = (req, res) => {
   passport.authenticate('local-signup', (err, user) => {
-    req.logIn(user, function(err) {
-      if (err) return res.json({error: err});
+    if (err) return res.json(err);
+    req.logIn(user, (err) => {
+      if (err) return res.status(500).send();
       return res.json(req.user);
     });
   })(req, res, (err) => {
-    res.json(err);
+    res.status(500).send();
   });
 }
 
 exports.login = (req, res) => {
-  if (req.isAuthenticated()) {
-    req.logout();
-  }
+  if (req.isAuthenticated()) req.logout();
   passport.authenticate('local-login', function(err, user) {
     if (err) return res.json(err);
-    if (!user) return res.json({error: 'E-mail ou senha inválidos.'});
-    req.logIn(user, function(err) {
-      if (err) return res.json({error: err});
+    req.logIn(user, (err) => {
+      if (err) return res.status(500).send();
       return res.json(req.user);
     });
-  })(req, res, function(err) {
-    res.json(err);
+  })(req, res, (err) => {
+    res.status(500).send();
   });
 }
 

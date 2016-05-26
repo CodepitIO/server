@@ -1,4 +1,4 @@
-var app = angular.module('Home');
+var app = angular.module('Blog');
 app.controller('HomeController', [
 	function() {
 

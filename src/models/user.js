@@ -1,51 +1,46 @@
-// load the things we need
-var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
-var Team   = require('./team');
+'use strict';
+
+const mongoose  = require('mongoose'),
+      bcrypt    = require('bcrypt'),
+      crypto    = require('crypto');
+
+const Team   = require('./team');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    local            : {
-        name         : String,
-        surname      : String,
-        email        : String,
-        password     : String,
-        username     : String
-    },
-    facebook         : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    },
-    flags: {type: Number, default: 0}
+  local            : {
+    name         : String,
+    surname      : String,
+    email        : String,
+    password     : String,
+    username     : String
+  },
+  flags: {type: Number, default: 0}
 });
 
 // methods ======================
-// generating a hash
 userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
 
-// checking if password is valid
 userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+  return bcrypt.compareSync(password, this.local.password);
 };
 
-// checking how many teams with 1 member it owns
 userSchema.methods.countEmptyTeam = function() {
-    return Team.count({
-        admin: this,
-        members: {$size: 1},
-        invites: {$size: 0}
-    });
+  return Team.count({
+    admin: this,
+    members: {$size: 1},
+    invites: {$size: 0}
+  });
 }
 
-// create the model for users and expose it to our app
+userSchema.virtual('local.fullName').get(function() {
+  return `${this.local.name} ${this.local.surname}`;
+});
+
+userSchema.virtual('local.emailHash').get(function() {
+  return crypto.createHash('md5').update(this.local.email.toLowerCase()).digest('hex');
+});
+
 module.exports = mongoose.model('User', userSchema);

@@ -1,7 +1,6 @@
 // load the things we need
 var mongoose = require('mongoose');
 var functions = require('../utils/functions');
-var moment = require('moment');
 
 var _ = require('underscore');
 
@@ -37,16 +36,13 @@ var contestSchema = mongoose.Schema({
   isPrivate: {type: Boolean, default: false},
   watchPrivate: {type: Boolean, default: false}
 }, {
-  timestamps: {
-    createdAt: 'date_created',
-    updatedAt: 'date_updated',
-  }
+  timestamps: true
 });
 
 // TODO(stor): ensure this only gets called once in production
 contestSchema.index({date_start: -1});
 contestSchema.index({date_end: -1});
-contestSchema.index({author: 1, date_created: -1});
+contestSchema.index({author: 1, createdAt: -1});
 
 // methods ======================
 contestSchema.methods.userInContest = function(id) {

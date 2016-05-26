@@ -1,0 +1,18 @@
+<mrt-page-wrapper wait-for="!loading">
+  <div class="blog-container">
+    <div ng-repeat="post in page.posts">
+      <div class="blog-section" ng-class="{'first': $index == 0}">
+        <div class="blog-header">{{post.title}}
+          <p class="pull-right" style="font-style: italic; font-size: 12px; margin: 0px;"><mrt-display-time date="post.createdAt"></mrt-display-time></p>
+          <p class="pull-right" style="font-style: italic; font-size: 12px; clear:right; margin: 0px;"><a class="unrated-handle" ui-sref="profile({id: post.author._id})">{{post.author.local.username}}</a></p>
+        </div>
+        <hr class="blog-header-separator">
+        <div class="blog-body" ng-bind-html="post.body"></div>
+        <a ng-if="post.author._id == accountState.id" style="cursor: pointer;" ng-click="editPost(post)"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="blog-section last" style="text-align: center;">
+      <uib-pagination total-items="page.total" ng-model="page.current" items-per-page="page.maxDisplay" class="pagination-md" boundary-link-numbers="true" rotate="false" ng-change="changePage()" max-size="5" previous-text="<" next-text=">"></uib-pagination>
+    </div>
+  </div>
+</mrt-page-wrapper>

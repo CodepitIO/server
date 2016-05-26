@@ -22,6 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/theme/blackboard.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.min.css">
+	<link rel='stylesheet' type="text/css" href="bower_components/textAngular/dist/textAngular.css">
 	<!-- endbuild -->
 
 	<!-- build:css dist/app.min.css -->
@@ -47,7 +48,6 @@
 	<script type="text/javascript" src="bower_components/jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
 	<script type="text/javascript" src="bower_components/moment/moment.js"></script>
 	<script type="text/javascript" src="bower_components/moment/locale/pt-br.js"></script>
-	<script type="text/javascript" src="bower_components/socket.io-client/socket.io.js"></script>
 	<script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
 	<script type="text/javascript" src="bower_components/codemirror/mode/clike/clike.js"></script>
 	<script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
@@ -63,7 +63,6 @@
 	<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-socket-io/socket.js"></script>
 	<script type="text/javascript" src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 	<script type="text/javascript" src="bower_components/angular-moment/angular-moment.js"></script>
 	<script type="text/javascript" src="bower_components/angular-ui-slider/src/slider.js"></script>
@@ -71,12 +70,14 @@
 	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
 	<script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
   <script type="text/javascript" src="bower_components/angular-aria/angular-aria.min.js"></script>
   <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
 	<script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
 	<script type="text/javascript" src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
+	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular.min.js"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/app.min.js -->
@@ -84,29 +85,29 @@
 	<script type="text/javascript" src="js/appRoutes.js"></script>
 
 	<script type="text/javascript" src="js/factories/Account.js"></script>
+	<script type="text/javascript" src="js/factories/Blog.js"></script>
 	<script type="text/javascript" src="js/factories/Catalog.js"></script>
-	<script type="text/javascript" src="js/factories/Contests.js"></script>
+	<script type="text/javascript" src="js/factories/Contest.js"></script>
+	<script type="text/javascript" src="js/factories/ContestList.js"></script>
 	<script type="text/javascript" src="js/factories/General.js"></script>
 	<script type="text/javascript" src="js/factories/Problems.js"></script>
-	<script type="text/javascript" src="js/factories/ContestInstance.js"></script>
-	<script type="text/javascript" src="js/factories/Socket.js"></script>
 	<script type="text/javascript" src="js/factories/Submission.js"></script>
 	<script type="text/javascript" src="js/factories/Tag.js"></script>
 	<script type="text/javascript" src="js/factories/Team.js"></script>
 	<script type="text/javascript" src="js/factories/Util.js"></script>
 
+	<script type="text/javascript" src="js/controllers/account/Login.js"></script>
+	<script type="text/javascript" src="js/controllers/account/Profile.js"></script>
+	<script type="text/javascript" src="js/controllers/account/Profile.Posts.js"></script>
+	<script type="text/javascript" src="js/controllers/account/Register.js"></script>
 	<script type="text/javascript" src="js/controllers/Home.js"></script>
-	<script type="text/javascript" src="js/controllers/Login.js"></script>
-	<script type="text/javascript" src="js/controllers/Problem.js"></script>
-	<script type="text/javascript" src="js/controllers/Profile.js"></script>
-	<script type="text/javascript" src="js/controllers/Register.js"></script>
 	<script type="text/javascript" src="js/controllers/Submission.js"></script>
+	<script type="text/javascript" src="js/controllers/Problem.js"></script>
 	<script type="text/javascript" src="js/controllers/Team.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/Contests.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/JoinContest.js"></script>
+	<script type="text/javascript" src="js/controllers/contests/Contest.js"></script>
+	<script type="text/javascript" src="js/controllers/contests/ContestList.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/CreateContest.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/EditContest.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestInstance.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Scoreboard.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Catalog.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Submissions.js"></script>

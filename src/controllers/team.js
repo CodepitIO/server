@@ -36,7 +36,7 @@ exports.createNew = function(req, res, next) {
   });
 }
 
-exports.getFromUser = function(req, res, next) {
+exports.getByUser = function(req, res, next) {
   /*Submission.find({verdict: 4, contest: new ObjectId('55b2cf66fbb7236c0182aea5')}).exec().then(function(subs) {
     for (var i = 0; i < subs.length; i++) {
       subs[i].code = _s.unescapeHTML(subs[i].code);

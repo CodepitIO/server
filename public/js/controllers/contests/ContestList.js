@@ -3,9 +3,8 @@ angular.module('Contests')
 		'$scope',
 		'$rootScope',
 		'$location',
-		'ContestListFacade',
 		'TimeFactory',
-		function($scope, $rootScope, $location, contestList, time) {
+		function($scope, $rootScope, $location, time) {
 			$scope.loadingData = true;
 			$scope.contests = [];
 			$scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open';

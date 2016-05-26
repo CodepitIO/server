@@ -1,23 +1,19 @@
 // Declare all app modules
 angular.module('Account', []);
+angular.module('Blog', []);
 angular.module('Catalog', []);
 angular.module('Contests', []);
 angular.module('General', []);
-angular.module('Home', []);
 angular.module('Login', []);
 angular.module('Problems', []);
-angular.module('Profile', []);
-angular.module('Register', []);
 angular.module('Submission', []);
 angular.module('Team', []);
-angular.module('Socket', []);
 angular.module('Tag', []);
 angular.module('Util', []);
 
 var mrtApp = angular.module('mrtApp', [
 		'mrtApp.templates',
 		'angularMoment',
-		'ngAnimate',
 		'ngMaterial',
 		'ngResource',
 		'ngCookies',
@@ -29,19 +25,16 @@ var mrtApp = angular.module('mrtApp', [
 		'ui.sortable',
 		'ui.codemirror',
 		'appRoutes',
-		'angular-toArrayFilter',
-		'btford.socket-io',
 		'infinite-scroll',
+		'textAngular',
 
 		'Account',
+		'Blog',
 		'Catalog',
 		'Contests',
 		'General',
-		'Home',
 		'Login',
 		'Problems',
-		'Profile',
-		'Register',
 		'Submission',
 		'Tag',
 		'Team',
@@ -49,9 +42,9 @@ var mrtApp = angular.module('mrtApp', [
 	])
 	.config([
 		'NotificationProvider',
-		'$tooltipProvider',
+		'$uibTooltipProvider',
 		'$mdThemingProvider',
-		function(NotificationProvider, $tooltipProvider, $mdThemingProvider) {
+		function(NotificationProvider, $uibTooltipProvider, $mdThemingProvider) {
 			NotificationProvider.setOptions({
 				delay: 5000,
 				startTop: 20,
@@ -61,7 +54,7 @@ var mrtApp = angular.module('mrtApp', [
 				positionX: 'right',
 				positionY: 'bottom'
 			});
-			$tooltipProvider.setTriggers({
+			$uibTooltipProvider.setTriggers({
 				'toggleContestAccessEvent': 'toggleContestAccessEvent'
 			});
 			$mdThemingProvider.theme('default')
@@ -90,14 +83,18 @@ var mrtApp = angular.module('mrtApp', [
 		'Notification',
 		'$templateCache',
 		'amMoment',
-		function($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment) {
+		'AccountSharedState',
+		function($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment, accountState) {
 			amMoment.changeLocale('pt-br');
 			try {
 				$rootScope.user = JSON.parse($cookies.get('user'));
+				$rootScope.emailHash = $rootScope.user.local.emailHash;
 			} catch (err) {
 				$rootScope.user = null;
+				$rootScope.emailHash = '';
 			}
 			$rootScope.intervalPromises = [];
+			accountState.reset();
 			var nextPath = $location.path();
 			/*if ($route.routes[nextPath]) {
 				var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged;
