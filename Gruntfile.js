@@ -51,22 +51,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		jshint: {
-			all: ['Gruntfile.js', 'public/js/**/*.js']
-		},
-
-		watch: {
-			jshint: {
-				files: ['public/js/**/*.js'],
-				tasks: [
-					'jshint',
-				],
-				options: {
-					atbegin: false
-				},
-			},
-		},
-
 		jsbeautifier: {
 			files: ["public/js/**/*.js", "src/**/*.js", "Gruntfile.js"],
 			options: {
@@ -120,12 +104,10 @@ module.exports = function(grunt) {
 		},
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks("grunt-jsbeautifier");
 	grunt.loadNpmTasks('grunt-usemin');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
