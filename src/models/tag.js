@@ -5,8 +5,11 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // define the schema for our user model
 var tagSchema = mongoose.Schema({
-  author: {type: ObjectId, ref: 'User'},
-  name: String,
+	author: {
+		type: ObjectId,
+		ref: 'User'
+	},
+	name: String,
 });
 
 // methods ======================

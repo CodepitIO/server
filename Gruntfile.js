@@ -55,16 +55,6 @@ module.exports = function(grunt) {
 			all: ['Gruntfile.js', 'public/js/**/*.js']
 		},
 
-		concurrent: {
-			dev: {
-				tasks: ['nodemon', 'watch:jshint'],
-				options: {
-					limit: 3,
-					logConcurrentOutput: true,
-				},
-			},
-		},
-
 		watch: {
 			jshint: {
 				files: ['public/js/**/*.js'],
@@ -78,7 +68,7 @@ module.exports = function(grunt) {
 		},
 
 		jsbeautifier: {
-			files: ["public/js/**/*.js", "Gruntfile.js"],
+			files: ["public/js/**/*.js", "src/**/*.js", "Gruntfile.js"],
 			options: {
 				js: {
 					braceStyle: "collapse",
@@ -141,7 +131,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-nodemon');
-	grunt.loadNpmTasks('grunt-concurrent');
 
 	grunt.registerTask('prod', [
 		'clean:dist',

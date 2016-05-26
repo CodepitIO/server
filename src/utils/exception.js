@@ -1,2 +1,6 @@
-exports.InvalidOperation = {error: "Operação inválida."};
-exports.UnexpectedError = {error: "Erro Inesperado."};
+exports.InvalidOperation = {
+	error: "Operação inválida."
+};
+exports.UnexpectedError = {
+	error: "Erro Inesperado."
+};

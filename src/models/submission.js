@@ -5,16 +5,35 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // define the schema for our user model
 var submissionSchema = mongoose.Schema({
-  contest: {type: ObjectId, ref: 'Contest', index: true},
-  contestant: {type: ObjectId, ref: 'User'},
+	contest: {
+		type: ObjectId,
+		ref: 'Contest',
+		index: true
+	},
+	contestant: {
+		type: ObjectId,
+		ref: 'User'
+	},
 
-  problem: {type: ObjectId, ref: 'Problem'},
-  code: String,
-  language: String,
+	problem: {
+		type: ObjectId,
+		ref: 'Problem'
+	},
+	code: String,
+	language: String,
 
-  date: {type: Date, default: Date.now},
-  verdict: {type: Number, default: 0},
-  oj_id: {type: Number, default: -1}
+	date: {
+		type: Date,
+		default: Date.now
+	},
+	verdict: {
+		type: Number,
+		default: 0
+	},
+	oj_id: {
+		type: Number,
+		default: -1
+	}
 });
 submissionSchema.set('autoIndex', false);
 
