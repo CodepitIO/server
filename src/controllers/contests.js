@@ -2,9 +2,7 @@
 
 const Contest = require('../models/contest'),
 	mongoose = require('mongoose'),
-	_ = require('underscore');
-
-const InvalidOperation = require('../utils/exception').InvalidOperation;
+	_ = require('lodash');
 
 exports.create = function(req, res, next) {
 	var contest = req.body;
@@ -46,7 +44,7 @@ var isInContest = function(id, contest) {
 	var index = _.findIndex(contest.contestants, (obj) => {
 		return obj.id && obj.id.toString() == id.toString();
 	});
-	if (index != -1) return true;
+	if (index !== -1) return true;
 	return false;
 };
 

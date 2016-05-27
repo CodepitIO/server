@@ -1,8 +1,7 @@
 // load the things we need
 var mongoose = require('mongoose');
-var functions = require('../utils/functions');
 
-var _ = require('underscore');
+var _ = require('lodash');
 
 var Submission = require('./submission');
 

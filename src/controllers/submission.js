@@ -8,11 +8,9 @@ const Submission = require('../models/submission'),
 const async = require('async'),
 	fs = require('fs'),
 	multiparty = require('multiparty'),
-	_ = require('underscore'),
-	_s = require('underscore.string');
+	_ = require('lodash');
 
-const ObjectId = require('mongoose').Types.ObjectId,
-	InvalidOperation = require('../utils/exception').InvalidOperation;
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const validators = require('../utils/validators'),
 	ValidateSubmission = validators.submission,
@@ -228,11 +226,11 @@ exports.send = function(req, res, next) {
 			problem = data.problem;
 			// The contest must exist, must not be on the future and the user must be in it
 			if (!contest || ValidateFutureContest(contest) || !ValidateUserInContest(contest, userId)) {
-				return callback(InvalidOperation);
+				return res.status(400).send();
 			}
 			// The problem must exist and should be in the contest
 			if (!problem || !ValidateProblemInContest(contest, submission.problem)) {
-				return callback(InvalidOperation);
+				return res.status(400).send();
 			}
 			createSubmission(submission, userId, callback);
 		},

@@ -14,7 +14,7 @@ const AccountCtrl = require('./controllers/account'),
 	TagCtrl = require('./controllers/tag'),
 	TeamCtrl = require('./controllers/team');
 
-const Util = require('./utils/functions');
+const Utils = require('./utils/utils');
 
 const Validators = require('./utils/validators');
 const IsAdmin = Validators.isAdmin,
@@ -27,11 +27,11 @@ function APIRoutes() {
 
 	router.param('id', IsValidId);
 
-	// util
-	router.get('/server/time', Util.getTime);
+	// utils
+	router.get('/server/time', Utils.getTime);
 
 	// account
-	router.post('/account/register', IsLoggedOff, AccountCtrl.register);
+	router.post('/account/register', AccountCtrl.register);
 	router.post('/account/edit', IsLoggedIn, AccountCtrl.edit);
 	router.post('/account/login', AccountCtrl.login);
 	router.get('/account/logout', IsLoggedIn, AccountCtrl.logout);

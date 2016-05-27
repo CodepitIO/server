@@ -3,7 +3,6 @@ var AccountCtrl = require('./account');
 
 var ObjectId = require('mongoose').Types.ObjectId;
 var Submission = require('../models/submission');
-var _s = require('underscore.string');
 
 var config = {
 	MAX_MEMBERS: 5

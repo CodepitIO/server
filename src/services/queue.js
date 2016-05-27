@@ -6,8 +6,8 @@ const async = require('async'),
 	path = require('path'),
 	util = require('util');
 
-const DownloadFile = require('../utils/functions').downloadFile,
-	Exception = require('../utils/exception'),
+const DownloadFile = require('../utils/utils').downloadFile,
+	Errors = require('../utils/errors'),
 	Problem = require('../models/problem');
 
 // --- SUBMISSION QUEUE ---
@@ -52,9 +52,9 @@ let ImportQueue = async.queue((filePath, callback) => {
 			return Problem.findById(id, next);
 		},
 		(problem, next) => {
-			if (!problem) return next(Exception.InvalidOperation);
+			if (!problem) return next(Errors.InvalidOperation);
 			if (problem.isPdf) return importPdf(filePath, problem, next);
-			if (!problem.imported) return next(Exception.InvalidOperation);
+			if (!problem.imported) return next(Errors.InvalidOperation);
 			return importHtml(filePath, problem.html, next);
 		},
 	], callback);

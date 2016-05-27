@@ -4,10 +4,9 @@ const async = require('async'),
 	fs = require('fs'),
 	path = require('path'),
 	pindexer = require('pindexer'),
-	_ = require('underscore');
+	_ = require('lodash');
 
 const ImportQueue = require('../services/queue').ImportQueue,
-	Exception = require('../utils/exception'),
 	Problem = require('../models/problem');
 
 const PROBLEMS_PATH = path.join(__dirname, '..', '..', 'public', 'problems');

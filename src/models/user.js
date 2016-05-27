@@ -13,16 +13,11 @@ var userSchema = mongoose.Schema({
 		surname: String,
 		email: String,
 		password: String,
-		username: String
+		username: String,
 	},
-	flags: {
-		type: Number,
-		default: 0
-	}
 });
 
-// methods ======================
-userSchema.methods.generateHash = function(password) {
+userSchema.statics.generateHash = function(password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };
 

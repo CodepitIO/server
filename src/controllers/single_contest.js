@@ -2,10 +2,8 @@ var ProblemsCtrl = require('./problems');
 var SubmissionCtrl = require('./submission');
 
 var Contest = require('../models/contest');
-var _ = require('underscore');
+var _ = require('lodash');
 var ObjectId = require('mongoose').Types.ObjectId;
-
-var InvalidOperation = require('../utils/exception').InvalidOperation;
 
 exports.getFullData = function(req, res, next) {
 	Contest.findById(req.params.id)
@@ -324,7 +322,9 @@ exports.getScoreboard = function(req, res, next) {
 						name: obj.id.local.username
 					}];
 				});
-			contestants = _.object(contestants);
+			contestants = _.reduce(contestants, (obj, elem) => {
+				obj[elem[0]] = elem[1];
+			}, {});
 			var userToContestant =
 				_.map(nonNullContestants, function(obj) {
 					var toId = null;
@@ -332,7 +332,9 @@ exports.getScoreboard = function(req, res, next) {
 					else toId = obj.id._id;
 					return [obj.id._id, toId];
 				});
-			userToContestant = _.object(userToContestant);
+			userToContestant = _.reduce(userToContestant, (obj, elem) => {
+				obj[elem[0]] = elem[1];
+			}, {});
 			var userId = (req.user && req.user._id) || null;
 			SubmissionCtrl.getScoresAndSubmissions(contest, userId, userToContestant, function(data) {
 				return res.json({
@@ -389,7 +391,9 @@ exports.getDynamicScoreboard = function(req, res, next) {
 						name: obj.id.local.username
 					}];
 				});
-			contestants = _.object(contestants);
+			contestants = _.reduce(contestants, (obj, elem) => {
+				obj[elem[0]] = elem[1];
+			}, {});
 
 			var userToContestant =
 				_.map(contest.contestants, function(obj) {
@@ -398,7 +402,9 @@ exports.getDynamicScoreboard = function(req, res, next) {
 					else toId = obj.id._id;
 					return [obj.id._id, toId];
 				});
-			userToContestant = _.object(userToContestant);
+			userToContestant = _.reduce(userToContestant, (obj, elem) => {
+				obj[elem[0]] = elem[1];
+			}, {});
 
 			SubmissionCtrl.getAllContestSubmissions(contest, userToContestant, function(data) {
 				return res.json({

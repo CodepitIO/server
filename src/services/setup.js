@@ -1,7 +1,6 @@
 'use strict';
 
 const async = require('async'),
-	_ = require('underscore'),
 	spawn = require('child_process').spawn,
 	exec = require('child_process').exec,
 	readline = require('readline'),
@@ -10,7 +9,6 @@ const async = require('async'),
 	pindexer = require('pindexer');
 
 const globals = require('../config/constants').GLOBAL_SET,
-	channels = require('../config/constants').CHANNELS,
 	Problem = require('../models/problem'),
 	ObjectId = require('mongoose').Types.ObjectId,
 	dbs = require('./dbs'),

@@ -1,7 +1,7 @@
 'use strict';
 
 const validator = require('validator'),
-	constants = require('./constants').SubmissionConstants;
+	constants = require('../config/constants');
 
 // Route validators
 exports.isLoggedIn = function(req, res, next) {
@@ -25,10 +25,9 @@ exports.isLoggedOff = function(req, res, next) {
 }
 
 exports.isValidId = function(req, res, next) {
-	var id = req.params.id || req.body.id || '';
-	if (validator.isMongoId(id))
-		return next();
-	res.status(400).send();
+	req.check('id').isMongoId();
+	if (req.validationErrors()) return res.status(400).send();
+	return next();
 }
 
 // General validators
@@ -51,4 +50,45 @@ exports.userInContest = (contest, userId) => {
 
 exports.problemInContest = (contest, problemId) => {
 	return contest.problemInContest(problemId);
+}
+
+exports.express = {
+	customValidators: {
+
+	},
+}
+
+exports.models = {
+	user: {
+		'name': {
+			notEmpty: true,
+			isLength: {
+				options: [{
+					min: 1,
+					max: 50
+				}],
+			}
+		},
+		'surname': {
+			notEmpty: true,
+			isLength: {
+				options: [{
+					min: 1,
+					max: 50
+				}],
+			}
+		},
+		'email': {
+			notEmpty: true,
+			isLength: {
+				options: [{
+					min: 1,
+					max: 50
+				}],
+			},
+			isEmail: {
+				errorMessage: 'Invalid Email'
+			}
+		}
+	}
 }

@@ -1,12 +1,14 @@
 'use strict';
 
-const LocalStrategy = require('passport-local').Strategy,
-	User = require('../models/user');
+const LocalStrategy = require('passport-local').Strategy;
+
+const User = require('../models/user'),
+	Errors = require('../utils/errors');
 
 module.exports = (passport) => {
 
 	passport.serializeUser((user, done) => {
-		done(null, user.id);
+		done(null, user._id);
 	});
 
 	passport.deserializeUser((id, done) => {
@@ -21,27 +23,23 @@ module.exports = (passport) => {
 		User.findOne({
 			'local.email': email
 		}, (err, user) => {
-			if (err) return done({
-				error: err
-			});
-			if (user) return done({
-				error: "Um usuário com este email já existe."
-			});
+			if (err) return done();
+			if (user) return done(Errors.EmailAlreadyExists);
 
-			let newUser = new User();
 			let account = req.body;
+			user = new User({
+				local: {
+					name: account.name,
+					surname: account.surname,
+					email: account.email,
+					username: account.username,
+					password: User.generateHash(account.password)
+				}
+			});
 
-			newUser.local.name = account.name;
-			newUser.local.surname = account.surname;
-			newUser.local.email = account.email;
-			newUser.local.username = account.username;
-			newUser.local.password = newUser.generateHash(account.password);
-
-			newUser.save((err) => {
-				if (err) return done({
-					error: err
-				});
-				return done(null, newUser.toObject({
+			user.save((err) => {
+				if (err) return done();
+				return done(null, user.toObject({
 					virtuals: true
 				}));
 			});
@@ -55,19 +53,14 @@ module.exports = (passport) => {
 	}, (req, email, password, done) => {
 		User.findOne({
 			'local.email': email
-		}, function(err, user) {
-			if (err) return done({
-				error: err
-			});
+		}, (err, user) => {
+			if (err) return done();
 			if (!user || !user.validPassword(password)) {
-				return done({
-					error: "Email ou senha inválida."
-				});
+				return done(Errors.InvalidEmailOrPassword);
 			}
 			return done(null, user.toObject({
 				virtuals: true
 			}));
 		});
 	}));
-
 };
