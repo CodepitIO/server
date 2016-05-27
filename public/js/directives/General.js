@@ -122,7 +122,7 @@ app.directive('mrtDisplayTime', function () {
 app.directive('mrtLoginForm', [function () {
   return {
     restrict: 'E',
-    templateUrl: 'views/account/login-form.html',
+    templateUrl: 'views/user/login-form.html',
     controller: 'LoginController'
   }
 }])
@@ -141,10 +141,10 @@ app.directive('mrtBlogPosts', [function () {
       '$stateParams',
       '$mdDialog',
       '$mdMedia',
-      'AccountSharedState',
+      'UserSharedState',
       'BlogFacade',
-      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, accountState, blog) {
-        $scope.accountState = accountState
+      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, userState, blog) {
+        $scope.userState = userState
 
         $scope.loading = true
 
@@ -194,7 +194,7 @@ app.directive('mrtBlogPosts', [function () {
             locals: {
               Post: post
             },
-            templateUrl: 'views/account/profile.posts.dialog.html',
+            templateUrl: 'views/user/profile.posts.dialog.html',
             clickOutsideToClose: true,
             fullscreen: ($mdMedia('sm') || $mdMedia('xs'))
           })

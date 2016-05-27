@@ -2,9 +2,9 @@
   <md-content layout-padding layout-gt-sm="row">
     <div>
       <div style="padding: 10px;">
-        <a href="//br.gravatar.com/" target="_blank"><img class="profile-image" ng-src="//www.gravatar.com/avatar/{{accountState.emailHash}}?d=identicon&s=170"></a>
+        <a href="//br.gravatar.com/" target="_blank"><img class="profile-image" ng-src="//www.gravatar.com/avatar/{{userState.emailHash}}?d=identicon&s=170"></a>
       </div>
-      <div class="unrated-handle">{{account.username}}</div>
+      <div class="unrated-handle">{{user.username}}</div>
       <div class="unrated-label">unrated</div>
     </div>
     <div>
@@ -12,17 +12,17 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Nome</label>
-            <input ng-model="account.name">
+            <input ng-model="user.name">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Sobrenome</label>
-            <input ng-model="account.surname">
+            <input ng-model="user.surname">
           </md-input-container>
         </div>
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex-gt-xs>
             <label>E-mail</label>
-            <input ng-model="account.email" disabled>
+            <input ng-model="user.email" disabled>
           </md-input-container>
         </div>
         <md-input-container class="md-block">

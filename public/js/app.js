@@ -1,5 +1,4 @@
 // Declare all app modules
-angular.module('Account', [])
 angular.module('Blog', [])
 angular.module('Catalog', [])
 angular.module('Contests', [])
@@ -9,6 +8,7 @@ angular.module('Problems', [])
 angular.module('Submission', [])
 angular.module('Team', [])
 angular.module('Tag', [])
+angular.module('User', [])
 angular.module('Util', [])
 
 var mrtApp = angular.module('mrtApp', [
@@ -28,7 +28,6 @@ var mrtApp = angular.module('mrtApp', [
   'infinite-scroll',
   'textAngular',
 
-  'Account',
   'Blog',
   'Catalog',
   'Contests',
@@ -38,6 +37,7 @@ var mrtApp = angular.module('mrtApp', [
   'Submission',
   'Tag',
   'Team',
+  'User',
   'Util'
 ])
   .config([
@@ -83,8 +83,8 @@ var mrtApp = angular.module('mrtApp', [
     'Notification',
     '$templateCache',
     'amMoment',
-    'AccountSharedState',
-    function ($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment, accountState) {
+    'UserSharedState',
+    function ($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment, userState) {
       amMoment.changeLocale('pt-br')
       try {
         $rootScope.user = JSON.parse($cookies.get('user'))
@@ -94,7 +94,7 @@ var mrtApp = angular.module('mrtApp', [
         $rootScope.emailHash = ''
       }
       $rootScope.intervalPromises = []
-      accountState.reset()
+      userState.reset()
       var nextPath = $location.path()
       /*if ($route.routes[nextPath]) {
       	var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged

@@ -3,12 +3,12 @@
     <form>
       <md-input-container class="form-group md-default-theme" flex>
         <label class="control-label">Email</label>
-        <input id="top-user-area-email" type="email" name="email" ng-model="account.email" class="form-control md-default-theme"/>
+        <input id="top-user-area-email" type="email" name="email" ng-model="user.email" class="form-control md-default-theme"/>
       </md-input-container>
 
       <md-input-container class="form-group md-default-theme" flex>
         <label class="control-label">Senha</label>
-        <input id="top-user-area-password" type="password" ng-model="account.password" class="form-control md-default-theme"/>
+        <input id="top-user-area-password" type="password" ng-model="user.password" class="form-control md-default-theme"/>
       </md-input-container>
 
       <div class="form-group">
@@ -33,7 +33,7 @@
       Sair
     </a>
     <a id="top-user-info" ui-sref="profile">
-      <img ng-src="//www.gravatar.com/avatar/{{accountState.emailHash}}?d=identicon&s=50">
+      <img ng-src="//www.gravatar.com/avatar/{{userState.emailHash}}?d=identicon&s=50">
       Perfil
     </a>
   </div>

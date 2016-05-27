@@ -1,9 +1,9 @@
-angular.module('Account')
-  .factory('AccountAPI', [
+angular.module('User')
+  .factory('UserAPI', [
     '$resource',
     'RequestAPI',
     function ($resource, request) {
-      var RegisterAPI = $resource('/api/v1/account/register', {
+      var RegisterAPI = $resource('/api/v1/user/register', {
         name: '@name',
         surname: '@surname',
         email: '@email',
@@ -11,7 +11,7 @@ angular.module('Account')
         confirmPassword: '@confirmPassword',
         username: '@username'
       })
-      var EditAPI = $resource('/api/v1/account/edit', {
+      var EditAPI = $resource('/api/v1/user/edit', {
         name: '@name',
         surname: '@surname',
         email: '@email',
@@ -20,11 +20,11 @@ angular.module('Account')
         confirmNewPassword: '@confirmNewPassword',
         username: '@username'
       })
-      var LoginAPI = $resource('/api/v1/account/login', {
+      var LoginAPI = $resource('/api/v1/user/login', {
         email: '@email',
         password: '@password'
       })
-      var LogoutAPI = $resource('/api/v1/account/logout', {})
+      var LogoutAPI = $resource('/api/v1/user/logout', {})
       return {
         register: request.send('save', RegisterAPI),
         edit: request.send('save', EditAPI),
@@ -33,19 +33,19 @@ angular.module('Account')
       }
     }
   ])
-  .factory('AccountFacade', [
+  .factory('UserFacade', [
     '$rootScope',
     '$cookies',
     '$state',
     'Notification',
-    'AccountAPI',
-    function ($rootScope, $cookies, $state, Notification, accountAPI) {
+    'UserAPI',
+    function ($rootScope, $cookies, $state, Notification, userAPI) {
       return {
-        login: function (account, callback) {
+        login: function (user, callback) {
           $rootScope.user = null
           $rootScope.emailHash = ''
           $cookies.remove('user')
-          accountAPI.login(account).then(function (data) {
+          userAPI.login(user).then(function (data) {
             if (data._id) {
               $rootScope.user = data
               $rootScope.emailHash = data.local.emailHash
@@ -65,11 +65,11 @@ angular.module('Account')
           $rootScope.user = null
           $rootScope.emailHash = ''
           $state.go('home')
-          accountAPI.logout().then(callback)
+          userAPI.logout().then(callback)
         },
 
-        register: function (account, callback) {
-          accountAPI.register(account).then(function (data) {
+        register: function (user, callback) {
+          userAPI.register(user).then(function (data) {
             if (data._id) {
               $rootScope.user = data
               $rootScope.emailHash = data.local.emailHash
@@ -80,8 +80,8 @@ angular.module('Account')
           })
         },
 
-        edit: function (account, callback) {
-          accountAPI.edit(account).then(function (data) {
+        edit: function (user, callback) {
+          userAPI.edit(user).then(function (data) {
             Notification.info('Dados atualizados!')
             if (callback) return callback(null, true)
           })
@@ -89,13 +89,13 @@ angular.module('Account')
       }
     }
   ])
-  .service('AccountSharedState', [
+  .service('UserSharedState', [
     '$rootScope',
     '$stateParams',
     'Notification',
-    'AccountFacade',
+    'UserFacade',
     'BlogFacade',
-    function ($rootScope, $stateParams, Notification, account, blog) {
+    function ($rootScope, $stateParams, Notification, user, blog) {
       var $scope = this
 
       $scope.reset = function () {

@@ -1,12 +1,12 @@
-angular.module('Account')
+angular.module('User')
   .controller('RegisterController', [
     '$scope',
     '$location',
     '$rootScope',
     'Notification',
-    'AccountFacade',
-    function ($scope, $location, $rootScope, Notification, account) {
-      $scope.account = {
+    'UserFacade',
+    function ($scope, $location, $rootScope, Notification, user) {
+      $scope.user = {
         name: '',
         surname: '',
         email: '',
@@ -16,7 +16,7 @@ angular.module('Account')
       }
 
       $scope.register = function () {
-        account.register($scope.account)
+        user.register($scope.user)
       }
     }
   ])

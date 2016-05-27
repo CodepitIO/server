@@ -77,26 +77,26 @@ angular.module('appRoutes', []).config([
       })
       .state('register', {
         url: '^/register',
-        templateUrl: 'views/account/register.html',
+        templateUrl: 'views/user/register.html',
         controller: 'RegisterController',
         mustNotBeLogged: true
       })
       .state('profile', {
         url: '^/profile/{id}',
-        templateUrl: 'views/account/profile.html',
+        templateUrl: 'views/user/profile.html',
         controller: 'ProfileController'
       })
       .state('profile.data', {
         url: '/data',
-        templateUrl: 'views/account/profile.data.html'
+        templateUrl: 'views/user/profile.data.html'
       })
       .state('profile.teams', {
         url: '/teams',
-        templateUrl: 'views/account/profile.teams.html'
+        templateUrl: 'views/user/profile.teams.html'
       })
       .state('profile.posts', {
         url: '/posts?page',
-        templateUrl: 'views/account/profile.posts.html',
+        templateUrl: 'views/user/profile.posts.html',
         controller: 'ProfilePostsController'
       })
       .state('team', {

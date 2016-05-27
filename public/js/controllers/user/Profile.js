@@ -1,13 +1,13 @@
-angular.module('Account')
+angular.module('User')
   .controller('ProfileController', [
     '$scope',
     '$state',
     '$stateParams',
-    'AccountSharedState',
-    function ($scope, $state, $stateParams, accountState) {
+    'UserSharedState',
+    function ($scope, $state, $stateParams, userState) {
       if (!$stateParams.id) {
         $state.go('.data', {
-          id: accountState.id
+          id: userState.id
         }, {
           notify: false
         })

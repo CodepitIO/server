@@ -1,4 +1,4 @@
-angular.module('Account')
+angular.module('User')
   .controller('ProfilePostsController', [
     '$scope',
     '$mdDialog',
@@ -13,7 +13,7 @@ angular.module('Account')
               create: true
             }
           },
-          templateUrl: 'views/account/profile.posts.dialog.html',
+          templateUrl: 'views/user/profile.posts.dialog.html',
           clickOutsideToClose: true,
           fullscreen: ($mdMedia('sm') || $mdMedia('xs')),
           closeTo: {
