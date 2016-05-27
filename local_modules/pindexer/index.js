@@ -1,3 +1,3 @@
-'use strict';
+'use strict'
 
-module.exports = require('bindings')('pindexer');
+module.exports = require('bindings')('pindexer')
