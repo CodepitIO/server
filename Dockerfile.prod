@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get -y install nodejs git-all build-essential vim supervisor nginx
 
 # Install node_modules and bower_components
-RUN npm install -g grunt-cli bower node-gyp
+RUN npm install -g grunt-cli bower node-gyp migrate
 COPY package.json /tmp/
 COPY local_modules/ /tmp/local_modules/
 RUN cd /tmp && npm install

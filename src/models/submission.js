@@ -3,6 +3,9 @@ var mongoose = require('mongoose')
 
 var ObjectId = mongoose.Schema.Types.ObjectId
 
+const LANGUAGES = ['c', 'cpp', 'cpp11', 'java']
+
+
 // define the schema for our user model
 var submissionSchema = mongoose.Schema({
   contest: {
@@ -35,7 +38,6 @@ var submissionSchema = mongoose.Schema({
     default: -1
   }
 })
-submissionSchema.set('autoIndex', false)
 
 // methods ======================
 

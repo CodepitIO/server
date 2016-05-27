@@ -4,28 +4,50 @@ const mongoose = require('mongoose'),
   bcrypt = require('bcrypt'),
   crypto = require('crypto')
 
-const Team = require('./team')
+const Team = require('./team'),
+  ValidateChain = require('../utils/utils').validateChain
 
 // define the schema for our user model
-var userSchema = mongoose.Schema({
+let schema = mongoose.Schema({
   local: {
+    username: String,
     name: String,
     surname: String,
     email: String,
-    password: String,
-    username: String
+    password: String
   }
 })
 
-userSchema.statics.generateHash = function (password) {
+schema.index({ username: 1 }, { unique: true })
+schema.index({ email: 1 }, { unique: true })
+
+schema.statics.validateChain = ValidateChain({
+  name: function() {
+    this.notEmpty().isLength({min: 1, max:100})
+  },
+  surname: function() {
+    this.notEmpty().isLength({min: 1, max:100})
+  },
+  username: function() {
+    this.notEmpty().isLength({min: 1, max:100})
+  },
+  email: function() {
+    this.notEmpty().isLength({min: 1, max:100})
+  },
+  password: function() {
+    this.notEmpty().isLength({min: 1, max:100})
+  }
+})
+
+schema.statics.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
 }
 
-userSchema.methods.validPassword = function (password) {
+schema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password)
 }
 
-userSchema.methods.countEmptyTeam = function () {
+schema.methods.countEmptyTeam = function() {
   return Team.count({
     admin: this,
     members: {
@@ -37,12 +59,12 @@ userSchema.methods.countEmptyTeam = function () {
   })
 }
 
-userSchema.virtual('local.fullName').get(function () {
+schema.virtual('local.fullName').get(function() {
   return `${this.local.name} ${this.local.surname}`
 })
 
-userSchema.virtual('local.emailHash').get(function () {
+schema.virtual('local.emailHash').get(function() {
   return crypto.createHash('md5').update(this.local.email.toLowerCase()).digest('hex')
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', schema)

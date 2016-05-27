@@ -19,13 +19,13 @@
     "mongo-express": "^0.30.59",
     "mongoose": "^4.4.19",
     "multiparty": "^4.1.2",
+    "mustbe": "^0.4.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pindexer": "file:./local_modules/pindexer/",
     "redis": "^2.6.0-2",
     "request": "^2.72.0",
-    "serve-favicon": "^2.3.0",
-    "validator": "^5.1.0"
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

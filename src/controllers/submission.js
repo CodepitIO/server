@@ -12,7 +12,7 @@ const async = require('async'),
 
 const ObjectId = require('mongoose').Types.ObjectId
 
-const validators = require('../utils/validators'),
+const validators = require('../utils/utils'),
   ValidateSubmission = validators.submission,
   ValidateFutureContest = validators.futureContest,
   ValidateUserInContest = validators.userInContest,

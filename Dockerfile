@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get -y install nodejs git-all build-essential vim supervisor
 RUN mkdir -p /var/log/supervisor
 
-RUN npm install -g grunt-cli nodemon bower pm2 node-gyp
+RUN npm install -g grunt-cli nodemon bower node-gyp migrate
 
 # Define working directory
 RUN mkdir -p /www

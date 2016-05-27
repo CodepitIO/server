@@ -5,9 +5,9 @@ const redis = require('redis'),
 
 const mongoUrl = `mongodb://mongo:27017/maratonando`
 
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, { config: { autoIndex: true } });
 
-var redisClient = redis.createClient({
+let redisClient = redis.createClient({
   host: 'redis',
   prefix: process.env.NODE_ENV
 })

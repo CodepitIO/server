@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
-const ObjectId = mongoose.Schema.Types.ObjectId
 
-var postSchema = mongoose.Schema({
+const ValidateChain = require('../utils/utils').validateChain
+
+const ObjectId = mongoose.Schema.Types.ObjectId,
+
+let schema = mongoose.Schema({
   author: {
     type: ObjectId,
     ref: 'User'
@@ -17,9 +20,22 @@ var postSchema = mongoose.Schema({
   timestamps: true
 })
 
-postSchema.index({
-  author: 1,
-  createdAt: -1
+schema.index({ author: 1, createdAt: -1 })
+schema.index({ home: 1}, { partialFilterExpression: { home: true } })
+
+schema.statics.validateChain = ValidateChain({
+  author: function() {
+    this.isMongoId()
+  },
+  title: function() {
+    this.notEmpty().isLength({min: 1, max:50})
+  },
+  body: function() {
+    this.notEmpty().isByteLength({min: 1, max: 30 * 1000 })
+  },
+  home: function() {
+    this.optional().isBoolean()
+  },
 })
 
-module.exports = mongoose.model('Post', postSchema)
+module.exports = mongoose.model('Post', schema)

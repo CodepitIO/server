@@ -1,6 +1,9 @@
 const async = require('async'),
   fs = require('fs'),
-  request = require('request')
+  request = require('request'),
+  _ = require('lodash')
+
+const constants = require('../config/constants')
 
 exports.getTime = function (req, res, next) {
   return res.json({
@@ -16,4 +19,33 @@ exports.downloadFile = function (uri, filename, callback) {
       request(uri).pipe(fs.createWriteStream(filename)).on('close', next)
     }
   ], callback)
+}
+
+// Validate related functions
+exports.isValidId = function (req, res, next) {
+  req.check('id').isMongoId()
+  if (req.validationErrors()) return res.status(400).send()
+  return next()
+}
+
+function ValidatorCtor(fields) {
+  _.each(fields, (fn, key) => {
+    this[_.camelCase(['check', key])] = function() {
+      fn.call(this.check(key))
+      return this
+    }
+  })
+  this.ok = function() {
+    return !this.validationErrors()
+  }
+  this.notOk = function() {
+    return !!this.validationErrors()
+  }
+}
+
+exports.validateChain = (fields) => {
+  let chain = new ValidatorCtor(fields)
+  return (req) => {
+    return _.assign(chain, req)
+  }
 }

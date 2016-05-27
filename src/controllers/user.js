@@ -26,21 +26,22 @@ exports.getUserDataByEmail = (email, callback) => {
 
 exports.edit = (req, res, next) => {
   let account = req.body
-  User.findOne({
-    'local.email': account.email
-  }, (err, user) => {
-    if (!user.validPassword(account.password)) {
-      return res.json(Errors.InvalidPassword)
+  async.waterfall([
+    async.apply(User.findOne, {'local.email': account.email}),
+    (user, next) => {
+      if (!user.validPassword(account.password)) {
+        return res.json(Errors.InvalidPassword)
+      }
+      if (account.newPassword.length > 0) {
+        user.local.password = user.generateHash(account.newPassword)
+      }
+      user.local.name = account.name
+      user.local.surname = account.surname
+      return user.save(next)
     }
-    if (account.newPassword.length > 0) {
-      user.local.password = user.generateHash(account.newPassword)
-    }
-    user.local.name = account.name
-    user.local.surname = account.surname
-    user.save((err, user) => {
-      if (err) return res.status(500).send()
-      return res.json(user)
-    })
+  ], (err, user) => {
+    if (err) return res.status(500).send()
+    return res.json(user)
   })
 }
 
@@ -60,6 +61,9 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   if (req.isAuthenticated()) req.logout()
+  if (User.validateChain(req).checkEmail().checkPassword().notOk()) {
+    return res.status(400).send()
+  }
   passport.authenticate('local-login', (err, user) => {
     if (err) return res.json(err)
     if (!user) return res.status(500).send()

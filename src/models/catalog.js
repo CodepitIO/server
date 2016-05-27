@@ -16,7 +16,6 @@ var catalogSchema = mongoose.Schema({
     type: mongoose.Schema.Types.Mixed
   }
 })
-catalogSchema.set('autoIndex', false)
 
 // methods ======================
 

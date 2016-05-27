@@ -1,5 +1,5 @@
 var Team = require('../models/team')
-var AccountCtrl = require('./account')
+var UserCtrl = require('./user')
 
 var ObjectId = require('mongoose').Types.ObjectId
 var Submission = require('../models/submission')
@@ -32,7 +32,7 @@ exports.createNew = function (req, res, next) {
         .lean()
         .exec()
         .then(function (data) {
-          data.members = data.members.map(AccountCtrl.remapUser)
+          data.members = data.members.map(UserCtrl.remapUser)
           return res.json(data)
         })
     })
@@ -95,8 +95,8 @@ exports.getById = function (req, res, next) {
           error: 'Time não encontrado.'
         })
       }
-      team.members = team.members.map(AccountCtrl.remapUser)
-      team.invites = team.invites.map(AccountCtrl.remapUser)
+      team.members = team.members.map(UserCtrl.remapUser)
+      team.invites = team.invites.map(UserCtrl.remapUser)
       team.isLoggedAdmin = (req.isAuthenticated() && team.admin.toString() == req.user._id.toString())
       return res.json(team)
     }, function error () {
@@ -151,7 +151,7 @@ exports.invite = function (req, res, next) {
       })
     }
 
-    AccountCtrl.getUserDataByEmail(invitee, function (userData) {
+    UserCtrl.getUserDataByEmail(invitee, function (userData) {
       if (!userData) {
         return res.json({
           error: 'Não existe usuário com este email.'
