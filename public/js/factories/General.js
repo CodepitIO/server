@@ -5,7 +5,7 @@ var app = angular.module('General')
 		function($q, Notification) {
 			var resolveOrReject = function(deferred, result) {
 				if (result.error) {
-					Notification.error(result.error);
+					Notification.error(result.error.pt || result.error);
 					deferred.reject(result.error);
 				} else {
 					deferred.resolve(result);

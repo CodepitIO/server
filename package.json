@@ -12,6 +12,7 @@
     "cookie-parser": "^1.4.2",
     "cookie-session": "^2.0.0-alpha.1",
     "express": "~4.5.1",
+    "express-validator": "^2.20.5",
     "kue": "^0.10.5",
     "lodash": "^4.13.1",
     "method-override": "^2.3.6",
