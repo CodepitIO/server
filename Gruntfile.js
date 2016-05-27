@@ -50,32 +50,6 @@ module.exports = function (grunt) {
       }
     },
 
-    jsbeautifier: {
-      files: ['public/js/**/*.js', 'src/**/*.js', 'Gruntfile.js'],
-      options: {
-        js: {
-          braceStyle: 'collapse',
-          breakChainedMethods: false,
-          e4x: false,
-          evalCode: false,
-          indentChar: ' ',
-          indentLevel: 0,
-          indentSize: 2,
-          indentWithTabs: true,
-          jslintHappy: false,
-          keepArrayIndentation: false,
-          keepFunctionIndentation: false,
-          maxPreserveNewlines: 10,
-          preserveNewlines: true,
-          spaceBeforeConditional: true,
-          spaceInParen: false,
-          unescapeStrings: false,
-          wrapLineLength: 0,
-          endWithNewline: true
-        }
-      }
-    },
-
     useminPrepare: {
       html: 'public/index.html',
       options: {
@@ -107,7 +81,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
-  grunt.loadNpmTasks('grunt-jsbeautifier')
   grunt.loadNpmTasks('grunt-usemin')
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-copy')
@@ -126,7 +99,6 @@ module.exports = function (grunt) {
     'usemin'
   ])
   grunt.registerTask('dev', [
-    'jsbeautifier',
     'clean:dist',
     'html2js:dev',
     'clean:fonts',

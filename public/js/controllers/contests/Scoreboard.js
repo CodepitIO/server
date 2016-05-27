@@ -1,7 +1,5 @@
 angular.module('Contests')
-	.controller('ScoreboardController', [
-		'$scope',
-		function($scope) {
-
-		}
-	]);
+  .controller('ScoreboardController', [
+    '$scope',
+    function ($scope) {}
+  ])
