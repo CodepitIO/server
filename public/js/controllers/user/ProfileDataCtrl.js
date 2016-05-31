@@ -1,7 +1,7 @@
 angular.module('User')
   .controller('ProfileDataController', [
     '$scope',
-    'UserSharedState',
+    'UserState',
     function ($scope, userState) {
       $scope.userState = userState
     }

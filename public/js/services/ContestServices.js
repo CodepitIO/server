@@ -1,5 +1,5 @@
 angular.module('Contests')
-  .service('ContestSharedState', [
+  .service('ContestState', [
     function () {
       var $scope = this
       $scope.submission = {}

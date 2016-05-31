@@ -3,7 +3,7 @@ angular.module('User')
     '$scope',
     '$state',
     '$stateParams',
-    'UserSharedState',
+    'UserState',
     function ($scope, $state, $stateParams, userState) {
       if (!$stateParams.id) {
         $state.go('.data', {

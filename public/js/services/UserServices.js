@@ -1,5 +1,5 @@
 angular.module('User')
-  .service('UserSharedState', [
+  .service('UserState', [
     '$rootScope',
     function ($rootScope) {
       var $scope = this

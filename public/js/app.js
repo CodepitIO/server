@@ -60,7 +60,7 @@ angular.module('mrtApp', [
   '$rootScope',
   '$cookies',
   'amMoment',
-  'UserSharedState',
+  'UserState',
   function ($rootScope, $cookies, amMoment, userState) {
     amMoment.changeLocale('pt-br')
     try {

@@ -3,9 +3,9 @@ angular.module('Contests')
     '$scope',
     '$rootScope',
     '$location',
-    'TimeSharedState',
+    'TimeState',
     'ContestFacade',
-    'UserSharedState',
+    'UserState',
     function ($scope, $rootScope, $location, timeState, contest, userState) {
       $scope.loadingData = true
       $scope.contests = []

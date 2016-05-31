@@ -3,7 +3,7 @@ angular.module('Contests')
     '$scope',
     '$state',
     '$stateParams',
-    'ContestSharedState',
+    'ContestState',
     function ($scope, $state, $stateParams, contestState) {
       // Redirect to scoreboard when in path /contest
       if ($state.is('contest')) {

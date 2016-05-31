@@ -4,9 +4,9 @@ angular.module('General')
     '$resource',
     'RequestAPI',
     function ($interval, $resource, request) {
-      var diff = 0,
-        now
-      var server = {
+      var diff = 0, now
+      
+      this.server = {
         dynamic: new Date(),
         static: new Date()
       }
@@ -25,9 +25,5 @@ angular.module('General')
         now = (new Date()).getTime()
         server.dynamic = server.static = new Date(now + diff)
       })
-
-      return {
-        server: server
-      }
     }
   ])

@@ -2,7 +2,7 @@ angular.module('User')
   .controller('LoginController', [
     '$scope',
     'UserFacade',
-    'UserSharedState',
+    'UserState',
     function ($scope, user, userState) {
       $scope.userState = userState
       $scope.data = {}
