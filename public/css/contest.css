@@ -349,3 +349,120 @@ tr.submission-row-parent {
     background-color: rgba(0,0,0,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
+
+/* Contest view */
+
+#contest-view-container{
+  padding: 30px;
+}
+
+#contest-view-time h4, #contest-view-upsolving h4{
+  margin-top: 13px;
+}
+
+#contest-view-status h3{
+  font: 300 26px "Open Sans";
+  text-align: center;
+  margin: 0px;
+}
+
+#contest-view-upsolving{
+  text-align: right;
+}
+
+#contest-view-upsolving p{
+  margin-top: 7px;
+}
+
+#contest-view-upsolving p input{
+  transform: scale(1.5);
+  margin-right: 8px;
+  position: relative;
+  top: 2px;
+}
+
+#contest-view-upsolving p span{
+  margin-left: 5px;
+}
+
+#contest-view-container .nav-tabs{
+  text-align: center;
+}
+
+#contest-view-container .nav-tabs>li{
+  float: none;
+  display: inline-block;
+  border-radius: 0px;
+}
+
+#contest-view-container .nav-tabs > li.active a{
+  padding: 15px 30px;
+  border-top: solid 3px #45A7B9;
+}
+
+#contest-view-container .tab-pane{
+  padding: 30px;
+}
+
+#contest-view-container table td{
+  padding: 15px;
+}
+
+#join-contest-id md-sidenav,
+#join-contest-id .md-sidenav-backdrop {
+  height: 100%;
+  position:fixed;
+  top: 75px;
+}
+
+/* Contests */
+.contests-list-wrapper {
+  margin-top: 30px;
+}
+
+#contests-list{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#contests-list .table-container{
+  border-radius: 4px;
+  border: solid 1px #f1f0f0;
+}
+
+#contests-list .table-container h2{
+  font: 600 20px "Open Sans";
+  margin: 20px;
+  color: #747474;
+}
+
+#contests-list .table-container h2.orange-text{
+  color: #F3643C;
+}
+
+#contests-list .table-container table{
+  border-top: solid 1px #f1f0f0;
+  margin-bottom: 0px;
+}
+
+#contests-list .table-container table tr td, .table-container table tr th{
+  padding: 15px;
+}
+
+#contests-list .orange-text{
+  color: #F3643C;
+}
+
+#create-contest-btn{
+  background-color: #45A7B9;
+  font: 600 14px "Open Sans";
+  margin: 20px 20px 0px 20px;
+  color: #fff;
+  float: left;
+  position: relative;
+  left: -15px;
+}
+
+#create-contest-btn span{
+  background-color: #3C93A2;
+}

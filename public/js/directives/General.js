@@ -25,21 +25,21 @@ app.directive('mrtBreadcrumbs', function () {
   }
 })
 
-app.directive('matchField', [function () {
+app.directive('mrtMatchField', [function () {
   return {
     require: 'ngModel',
     link: function ($scope, $elem, $attrs, ngModel) {
       var validate = function (value) {
-        var comparisonModel = $attrs.matchField
+        var comparisonModel = $attrs.mrtMatchField
         if (comparisonModel != value) {
-          ngModel.$setValidity('matchField', false)
+          ngModel.$setValidity('mrtMatchField', false)
           return value
         }
-        ngModel.$setValidity('matchField', true)
+        ngModel.$setValidity('mrtMatchField', true)
         return value
       }
 
-      $attrs.$observe('matchField', function (comparisonModel) {
+      $attrs.$observe('mrtMatchField', function (comparisonModel) {
         return validate(ngModel.$viewValue)
       })
 
@@ -84,6 +84,7 @@ app.directive('mrtPageWrapper', function () {
     transclude: true,
     scope: {
       waitFor: '=?',
+      waitWhile: '=?',
       color: '=?',
       diameter: '=?',
       alignOpts: '=?'
@@ -94,6 +95,7 @@ app.directive('mrtPageWrapper', function () {
       $scope.diameter = angular.isDefined($scope.diameter) ? $scope.diameter : '280'
       $scope.alignOpts = angular.isDefined($scope.alignOpts) ? $scope.alignOpts : 'center'
       $scope.waitFor = angular.isDefined($scope.waitFor) ? $scope.waitFor : true
+      $scope.waitWhile = angular.isDefined($scope.waitWhile) ? $scope.waitWhile : false
     }]
   }
 })
@@ -133,7 +135,8 @@ app.directive('mrtBlogPosts', [function () {
     templateUrl: 'views/misc/blog-posts.html',
     scope: {
       user: '=?',
-      home: '=?'
+      pagePath: '=?',
+      isInfo: '=?'
     },
     controller: [
       '$scope',
@@ -141,12 +144,9 @@ app.directive('mrtBlogPosts', [function () {
       '$stateParams',
       '$mdDialog',
       '$mdMedia',
-      'UserSharedState',
-      'BlogFacade',
-      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, userState, blog) {
-        $scope.userState = userState
-
-        $scope.loading = true
+      'PostFacade',
+      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, post) {
+        $scope.user = $scope.user
 
         $scope.page = {
           current: $stateParams.page || 1,
@@ -155,45 +155,29 @@ app.directive('mrtBlogPosts', [function () {
           posts: []
         }
 
-        var filter = {}
-        if ($scope.user) {
-          filter = {
-            author: $scope.user
-          }
-        } else if ($scope.home) {
-          filter = {
-            home: true
-          }
-        }
-
+        $scope.loading = true
         function fetchPosts () {
           $scope.loading = true
-          blog.getByFilter(filter, $scope.page.current, function (err, posts) {
+          post.get($scope.user, $scope.pagePath, function (err, posts) {
             $scope.page.posts = posts
             $scope.loading = false
           })
         }
 
-        blog.getCountByFilter(filter, function (err, count) {
+        post.count($scope.user, $scope.pagePath, function (err, count) {
           $scope.page.total = count
           fetchPosts()
         })
 
         $scope.changePage = function () {
-          $state.go('.', {
-            page: $scope.page.current
-          }, {
-            notify: false
-          })
+          $state.go('.', { page: $scope.page.current}, { notify: false })
           fetchPosts()
         }
 
-        $scope.editPost = function (post) {
+        $scope.editPost = function (data) {
           $mdDialog.show({
             controller: 'ProfilePostsDialogController',
-            locals: {
-              Post: post
-            },
+            locals: { ScopeData: data },
             templateUrl: 'views/user/profile.posts.dialog.html',
             clickOutsideToClose: true,
             fullscreen: ($mdMedia('sm') || $mdMedia('xs'))
@@ -204,12 +188,14 @@ app.directive('mrtBlogPosts', [function () {
   }
 }])
 
-app.directive('mrtGoBack', ['$window', function ($window) {
+app.directive('mrtGoBack', ['$window', '$document', function ($window, $document) {
   return {
     restrict: 'A',
     link: function (scope, elem, attrs) {
       elem.bind('click', function () {
-        $window.history.back()
+        // console.log(document.referrer)
+        // $window.history.back()
+        // if ($window.location.host !== 'localhost') $window.history.forward()
       })
     }
   }

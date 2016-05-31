@@ -1,8 +1,10 @@
-var app = angular.module('General')
+angular.module('General')
   .factory('RequestAPI', [
     '$q',
+    '$timeout',
     'Notification',
-    function ($q, Notification) {
+    'Config',
+    function ($q, $timeout, Notification, Config) {
       var resolveOrReject = function (deferred, result) {
         if (result.error) {
           Notification.error(result.error.pt || result.error)
@@ -13,13 +15,18 @@ var app = angular.module('General')
       }
 
       var reject = function (deferred, result) {
-        Notification.error(result.statusText)
-        deferred.reject(result.statusText)
+        result && result.statusText && Notification.error(result.statusText)
+        deferred.reject(result && result.statusText)
       }
 
       return {
-        send: function (method, API) {
-          return function (params) {
+        send: function (method, API, opts) {
+          if (method === 'post') method = 'save'
+          opts = opts || {}
+          var lastCall = 0, timer
+          function deferAPI(params) {
+            lastCall = new Date()
+            timer = null
             var deferred = $q.defer()
             API[method](
               params,
@@ -28,51 +35,16 @@ var app = angular.module('General')
             )
             return deferred.promise
           }
-        }
-      }
-    }
-  ])
-  .factory('TimeFactory', [
-    '$interval',
-    '$resource',
-    'RequestAPI',
-    function ($interval, $resource, request) {
-      var diff = 0,
-        now
-      var server = {
-        dynamic: new Date(),
-        static: new Date()
-      }
 
-      $interval(function () {
-        now = (new Date()).getTime()
-        server.dynamic = new Date(now + diff)
-      }, 5000)
-
-      var GetServerTimeAPI = $resource('/api/v1/server/time', {})
-      global.get(GetServerTimeAPI, {}).then(function (data) {
-        var serverDate = new Date(data.date)
-        var clientDate = new Date()
-
-        diff = Math.max(0, serverDate - clientDate)
-        now = (new Date()).getTime()
-        server.dynamic = server.static = new Date(now + diff)
-      })
-
-      return {
-        server: server
-      }
-    }
-  ])
-  .factory('GeneralFunctions', [
-    function () {
-      return {
-        getMinutesBetweenDates: function (startDate, endDate) {
-          return Math.floor(((new Date(endDate)) - (new Date(startDate))) / 60000)
-        },
-
-        getSecondsBetweenDates: function (startDate, endDate) {
-          return Math.floor(((new Date(endDate)) - (new Date(startDate))) / 1000)
+          return function(params) {
+            if (opts.ignoreThrottle) return deferAPI(params)
+            if (timer) $timeout.cancel(timer)
+            var ellapsed = new Date() - lastCall
+            timer = $timeout(function() {
+              return deferAPI(params)
+            }, Math.max(Config.ThrottleTime - ellapsed, 0))
+            return timer
+          }
         }
       }
     }

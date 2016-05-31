@@ -2,11 +2,10 @@
 
 const express = require('express'),
   passport = require('passport'),
-  mongo_express = require('mongo-express/lib/middleware'),
-  mustbe = require('mustbe').routeHelpers()
+  mongo_express = require('mongo-express/lib/middleware')
 
 const UserCtrl = require('./controllers/user'),
-  BlogCtrl = require('./controllers/blog'),
+  PostCtrl = require('./controllers/post'),
   CatalogCtrl = require('./controllers/catalog'),
   ContestsCtrl = require('./controllers/contests'),
   ProblemsCtrl = require('./controllers/problems'),
@@ -15,33 +14,32 @@ const UserCtrl = require('./controllers/user'),
   TagCtrl = require('./controllers/tag'),
   TeamCtrl = require('./controllers/team')
 
-const Utils = require('./utils/utils')
-
-// Route validators
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next()
-  return res.status(400).send()
-}
+const User = require('./services/authorization'),
+  Utils = require('./utils/utils'),
+  Recaptcha = require('./utils/recaptcha')
 
 function APIRoutes () {
   let router = express.Router()
 
-  router.param('id', Utils.isValidId)
+  router.use(Recaptcha.middleware())
 
   // utils
   router.get('/server/time', Utils.getTime)
 
   // user
   router.post('/user/register', UserCtrl.register)
-  router.post('/user/edit', isLoggedIn, UserCtrl.edit)
+  router.post('/user/edit', User.is('logged'), UserCtrl.edit)
   router.post('/user/login', UserCtrl.login)
-  router.get('/user/logout', isLoggedIn, UserCtrl.logout)
+  router.get('/user/logout', User.is('logged'), UserCtrl.logout)
+  router.get('/user/check/username/:username', UserCtrl.checkUsername)
+  router.get('/user/check/email/:email', UserCtrl.checkEmail)
 
-  // blog
-  router.post('/blog/post', isLoggedIn, BlogCtrl.post)
-  router.post('/blog/filter', BlogCtrl.getByFilter)
-  router.post('/blog/count', BlogCtrl.getCountByFilter)
+  // post
+  router.post('/post/', User.is('logged'), PostCtrl.post)
+  router.get('/post/user/get/:id', PostCtrl.getByUser)
+  router.get('/post/user/count/:id', PostCtrl.getCountByUser)
+  router.get('/post/page/get/:name', PostCtrl.getByPage)
+  router.get('/post/page/count/:name', PostCtrl.getCountByPage)
 
   // team
   // router.post('/team/create', isLoggedIn, TeamCtrl.createNew)
@@ -55,7 +53,7 @@ function APIRoutes () {
   // router.get('/team/get/:id', TeamCtrl.getById)
 
   // contests
-  // router.post('/contests/get/filter/:filter', ContestsCtrl.getByFilter)
+  router.get('/contest/list/:type/last/:last', ContestsCtrl.getList)
   // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
   // router.post('/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit)
   // router.post('/contest/:id/join', isLoggedIn, SingleContestCtrl.join)
@@ -66,8 +64,8 @@ function APIRoutes () {
   // router.get('/contest/:id/scoreboard', SingleContestCtrl.getScoreboard)
 
   // problems
-  // router.post('/problems/fetch', ProblemsCtrl.fetchProblems)
-  // router.get('/problems/:id', ProblemsCtrl.getProblemMetadata)
+  router.post('/problems/filter', ProblemsCtrl.fetchProblems)
+  router.get('/problems/:id', ProblemsCtrl.getProblemMetadata)
 
   // submissions
   // router.post('/submission/send', isLoggedIn, SubmissionCtrl.send)
@@ -85,18 +83,6 @@ function APIRoutes () {
   return router
 }
 
-function AdminRoutes () {
-  const kue = require('kue')
-
-  let router = express.Router()
-
-  // router.use(isLoggedIn)
-  // router.use(IsAdmin)
-  router.use('/queue', kue.app)
-
-  return router
-}
-
 function OpenRoutes () {
   let indexFile = './public/index.html'
   if (process.env.NODE_ENV === 'development') {
@@ -107,17 +93,33 @@ function OpenRoutes () {
 
   router.get('/problems/:id', ProblemsCtrl.getProblemContent)
 
-  router.get('*', function (req, res) {
-    res.sendfile(indexFile)
+  router.get('/', (req, res) => {
+    return res.sendfile(indexFile)
+  })
+
+  router.get('*', (req, res) => {
+    res.redirect('/')
   })
 
   return router
 }
 
-exports.configure = function (app) {
+function AdminRoutes () {
+  const kue = require('kue')
+
+  let router = express.Router()
+  router.use(User.is('admin'))
+  router.use('/queue', kue.app)
+  return router
+}
+
+exports.configure = (app) => {
   require('./services/passport')(passport) // pass passport for configuration
   app.use(passport.initialize())
   app.use(passport.session())
+  app.use(User.middleware())
+
+  app.param('id', Utils.isValidId)
 
   app.use('/admin', AdminRoutes())
   app.use('/admin/mongo', mongo_express(require('./config/mongo_express')))

@@ -1,4 +1,4 @@
-# Maratonando
+# Codepit
 
 ## How to contribute
 

@@ -47,6 +47,14 @@ exports.edit = (req, res, next) => {
 
 exports.register = (req, res) => {
   if (req.isAuthenticated()) req.logout()
+  let valid = User.validateChain(req)
+    .seeName()
+    .seeSurname()
+    .seeUsername()
+    .seeEmail()
+    .seePassword()
+    .ok()
+  if (!valid) return res.status(400).send()
   passport.authenticate('local-signup', (err, user) => {
     if (err) return res.json(err)
     if (!user) return res.status(500).send()
@@ -61,7 +69,7 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   if (req.isAuthenticated()) req.logout()
-  if (User.validateChain(req).checkEmail().checkPassword().notOk()) {
+  if (User.validateChain(req).seeEmail().seePassword().notOk()) {
     return res.status(400).send()
   }
   passport.authenticate('local-login', (err, user) => {
@@ -79,4 +87,24 @@ exports.login = (req, res) => {
 exports.logout = (req, res) => {
   req.logout()
   return res.json({})
+}
+
+exports.checkUsername = (req, res) => {
+  if (User.validateChain(req).seeUsername().notOk()) {
+    return res.status(400).send()
+  }
+  let username = req.params.username || ''
+  User.findOne({ 'local.username': username }, (err, user) => {
+    return res.json({ available: !user })
+  })
+}
+
+exports.checkEmail = (req, res) => {
+  if (User.validateChain(req).seeEmail().notOk()) {
+    return res.status(400).send()
+  }
+  let email = req.params.email || ''
+  User.findOne({ 'local.email': email }, (err, user) => {
+    return res.json({ available: !user })
+  })
 }

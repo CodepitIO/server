@@ -3,12 +3,14 @@
 const redis = require('redis'),
   mongoose = require('mongoose')
 
-const mongoUrl = `mongodb://mongo:27017/maratonando`
+const MONGO = require('../config/constants').MONGO,
+  REDIS = require('../config/constants').REDIS
 
-mongoose.connect(mongoUrl, { config: { autoIndex: true } });
+mongoose.connect(`mongodb://${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`)
 
 let redisClient = redis.createClient({
-  host: 'redis',
+  host: REDIS.HOST,
+  port: REDIS.PORT,
   prefix: process.env.NODE_ENV
 })
 
@@ -20,7 +22,8 @@ exports.redisClient = redisClient
 
 exports.createRedisClient = () => {
   return redis.createClient({
-    host: 'redis',
+    host: REDIS.HOST,
+    port: REDIS.PORT,
     prefix: process.env.NODE_ENV
   })
 }

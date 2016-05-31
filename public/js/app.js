@@ -1,5 +1,4 @@
-// Declare all app modules
-angular.module('Blog', [])
+angular.module('Post', [])
 angular.module('Catalog', [])
 angular.module('Contests', [])
 angular.module('General', [])
@@ -9,9 +8,8 @@ angular.module('Submission', [])
 angular.module('Team', [])
 angular.module('Tag', [])
 angular.module('User', [])
-angular.module('Util', [])
 
-var mrtApp = angular.module('mrtApp', [
+angular.module('mrtApp', [
   'mrtApp.templates',
   'angularMoment',
   'ngMaterial',
@@ -24,11 +22,12 @@ var mrtApp = angular.module('mrtApp', [
   'ui.slider',
   'ui.sortable',
   'ui.codemirror',
-  'appRoutes',
   'infinite-scroll',
   'textAngular',
+  'vcRecaptcha',
+  'appRoutes',
 
-  'Blog',
+  'Post',
   'Catalog',
   'Contests',
   'General',
@@ -37,103 +36,43 @@ var mrtApp = angular.module('mrtApp', [
   'Submission',
   'Tag',
   'Team',
-  'User',
-  'Util'
+  'User'
 ])
-  .config([
-    'NotificationProvider',
-    '$uibTooltipProvider',
-    '$mdThemingProvider',
-    function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider) {
-      NotificationProvider.setOptions({
-        delay: 5000,
-        startTop: 20,
-        startRight: 10,
-        verticalSpacing: 20,
-        horizontalSpacing: 20,
-        positionX: 'right',
-        positionY: 'bottom'
-      })
-      $uibTooltipProvider.setTriggers({
-        'toggleContestAccessEvent': 'toggleContestAccessEvent'
-      })
-      $mdThemingProvider.theme('default')
-        .primaryPalette('cyan')
-        .accentPalette('blue-grey', {
-          'default': '400',
-          'hue-1': '100',
-          'hue-2': '600',
-          'hue-3': '900'
-        })
-        .warnPalette('red')
-
-      $mdThemingProvider.theme('progressBarTheme')
-        .primaryPalette('blue')
-        .accentPalette('orange')
-        .warnPalette('red')
+.config([
+  'NotificationProvider',
+  '$uibTooltipProvider',
+  '$mdThemingProvider',
+  'vcRecaptchaServiceProvider',
+  'Config',
+  function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider, vcRecaptchaServiceProvider, Config) {
+    vcRecaptchaServiceProvider.setSiteKey(Config.RecaptchaKey)
+    NotificationProvider.setOptions(Config.NotificationOptions)
+    $uibTooltipProvider.setTriggers(Config.TooltipOptions)
+    _.each(Config.Themes, function(val, key) {
+      $mdThemingProvider.theme(key)
+        .primaryPalette(val.PrimaryPalette.color, val.PrimaryPalette.opts)
+        .accentPalette(val.AccentPalette.color, val.AccentPalette.opts)
+        .warnPalette(val.WarnPalette.color, val.WarnPalette.opts)
+    })
+  }
+])
+.run([
+  '$rootScope',
+  '$cookies',
+  'amMoment',
+  'UserSharedState',
+  function ($rootScope, $cookies, amMoment, userState) {
+    amMoment.changeLocale('pt-br')
+    try {
+      $rootScope.user = JSON.parse($cookies.get('user'))
+    } catch (err) {
+      $rootScope.user = null
     }
-  ])
-  .run([
-    '$cookies',
-    '$location',
-    '$http',
-    '$window',
-    '$rootScope',
-    '$interval',
-    'Notification',
-    '$templateCache',
-    'amMoment',
-    'UserSharedState',
-    function ($cookies, $location, $http, $window, $rootScope, $interval, Notification, tc, amMoment, userState) {
-      amMoment.changeLocale('pt-br')
-      try {
-        $rootScope.user = JSON.parse($cookies.get('user'))
-        $rootScope.emailHash = $rootScope.user.local.emailHash
-      } catch (err) {
-        $rootScope.user = null
-        $rootScope.emailHash = ''
-      }
-      $rootScope.intervalPromises = []
-      userState.reset()
-      var nextPath = $location.path()
-      /*if ($route.routes[nextPath]) {
-      	var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged
-      	var mustBeLogged = $route.routes[nextPath].mustBeLogged
-      	var isLogged = !!$rootScope.user
-      	if (mustNotBeLogged && isLogged) {
-      		$location.path('/')
-      		Notification.info('Você não pode estar logado para ver esta página.')
-      	} else if (mustBeLogged && !isLogged) {
-      		$location.path('/')
-      		Notification.info('Você deve estar logado para ver esta página.')
-      	}
-      }*/
+    userState.reset()
 
-      $rootScope.$on('$locationChangeStart', function (ev, next, current) {
-        var nextPath = $location.path()
-        for (var i = 0; i < $rootScope.intervalPromises.length; i++) {
-          $interval.cancel($rootScope.intervalPromises[i])
-        }
-        $rootScope.intervalPromises = []
-      /*if ($route.routes[nextPath]) {
-      	var mustNotBeLogged = $route.routes[nextPath].mustNotBeLogged
-      	var mustBeLogged = $route.routes[nextPath].mustBeLogged
-      	var isLogged = !!$rootScope.user
-      	if (mustNotBeLogged && isLogged) {
-      		$location.path('/')
-      	} else if (mustBeLogged && !isLogged) {
-      		$location.path('/')
-      	}
-      }*/
-      })
-      $rootScope.not = function (func) {
-        return function (item) {
-          return !func(item)
-        }
-      }
-      $rootScope.isActive = function (viewLocation) {
-        viewLocation = '^' + viewLocation.replace('\/', '\\\/') + '$'
-        return (new RegExp(viewLocation)).test($location.path())
-      }
-    }
-  ])
+    $rootScope.history = []
+    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+      $rootScope.history.push({state: from.name, params: fromParams})
+    })
+  }
+])

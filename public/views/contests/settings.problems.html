@@ -1,0 +1,45 @@
+<div ng-controller="SettingsProblemsController">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Problemas&nbsp;<i class="fa fa-question-circle" tooltip-placement="right" uib-tooltip="Exemplos: 'UVa 100', 'ZAK GALOU', 'A+B Problem'. Online Judges disponíveis: UVa, LiveArchive, Spoj, SpojBR, Timus, Huxley, Codeforces, URI."></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody ui-sortable ng-model="problems">
+      <tr class="contest-draggable-problem" ng-repeat="problem in problems">
+        <td>
+          <div class="balloon">
+            <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
+            <a ui-sref="problems.view({id:problem._id})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
+          </div>
+          {{problem.name}}
+          <a class="link" ng-click="removeProblem(problem.id)" class="contest-remove-problem"><i class="fa fa-times"></i></a>
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr ng-form="fetchProblemsForm" style="display: block; margin-bottom: 70px;">
+        <td>
+          <div class="dropdown">
+            <md-autocomplete
+              md-input-name="autocomplete"
+              md-search-text="searchText"
+              md-selected-item="selectedProblem"
+              md-selected-item-change="select()"
+              md-items="problem in getProblems()"
+              md-item-text="problem.name"
+              md-min-length="3"
+              md-input-maxlength="30"
+              md-floating-label="Buscar">
+              <md-item-template>
+                <span>{{problem.fullName}}</span>
+              </md-item-template>
+            </md-autocomplete>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

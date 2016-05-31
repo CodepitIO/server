@@ -16,7 +16,6 @@
           <tr class="animation" ng-repeat="contest in contests | orderBy:predicate:reverse">
             <td>
               <mrt-contest-label
-                linkable="contest.isAdmin || !contest.watchPrivate || contest.isInContest"
                 contest="contest"
                 admin-flag="contest.isAdmin && adminFlag"
                 new-flag="contest.isAdmin && isNewContest(contest.date_created) && newFlag">

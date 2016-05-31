@@ -4,22 +4,15 @@ angular.module('User')
     'UserFacade',
     'UserSharedState',
     function ($scope, user, userState) {
-      $scope.user = {
-        email: '',
-        password: ''
-      }
       $scope.userState = userState
+      $scope.data = {}
 
       $scope.login = function () {
-        user.login($scope.user, function () {
-          userState.reset()
-        })
+        user.login($scope.data)
       }
 
       $scope.logout = function () {
-        user.logout(function () {
-          userState.reset()
-        })
+        user.logout()
       }
     }
   ])

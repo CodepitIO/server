@@ -9,7 +9,7 @@ angular.module('User')
         $mdDialog.show({
           controller: 'ProfilePostsDialogController',
           locals: {
-            Post: {
+            ScopeData: {
               create: true
             }
           },
@@ -27,19 +27,19 @@ angular.module('User')
   .controller('ProfilePostsDialogController', [
     '$scope',
     '$mdDialog',
-    'BlogFacade',
-    'Post',
-    function ($scope, $mdDialog, blog, post) {
+    'PostFacade',
+    'ScopeData',
+    function ($scope, $mdDialog, post, scopeData) {
       $scope.post = {
-        title: post && post.title || '',
-        body: post && post.body || ''
+        title: scopeData && post.title || '',
+        body: scopeData && post.body || ''
       }
       $scope.create = (post.create === true)
       $scope.cancel = function () {
         $mdDialog.cancel()
       }
       $scope.submit = function () {
-        blog.post($scope.post)
+        post.post($scope.post)
       }
     }
   ])

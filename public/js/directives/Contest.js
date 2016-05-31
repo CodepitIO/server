@@ -7,14 +7,9 @@ app.directive('mrtContestLabel', function () {
   return {
     restrict: 'E',
     scope: {
-      linkable: '=', // Indicate if want the link to see the contest or just a span
-      // optional - values = true/false
-      adminFlag: '=', // Span to indicate the user has admin properties over contest
-      // optional - values = true/false
-      newFlag: '=', // Span to indicate that contest is new (based on function declared on controller)
-      // optional - values = true/false
-      contest: '=', // A contest instance wich holds the information needed
-    // required - values = contest instance
+      adminFlag: '=',
+      newFlag: '=',
+      contest: '=',
     },
     templateUrl: 'views/contests/contest.label.html'
   }
@@ -42,6 +37,6 @@ app.directive('mrtContestList', function () {
     // optional - String
     },
     templateUrl: 'views/contests/contest-list.html',
-    controller: 'ContestsController'
+    controller: 'ContestListController'
   }
 })

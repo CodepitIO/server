@@ -7,7 +7,7 @@ angular.module('User')
     function ($scope, $state, $stateParams, userState) {
       if (!$stateParams.id) {
         $state.go('.data', {
-          id: userState.id
+          id: userState.user._id
         }, {
           notify: false
         })

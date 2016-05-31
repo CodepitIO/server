@@ -1,8 +1,10 @@
+'use strict';
+
 const mongoose = require('mongoose')
 
 const ValidateChain = require('../utils/utils').validateChain
 
-const ObjectId = mongoose.Schema.Types.ObjectId,
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 let schema = mongoose.Schema({
   author: {
@@ -12,26 +14,23 @@ let schema = mongoose.Schema({
   title: String,
   body: String,
   tags: [String],
-  home: {
-    type: Boolean,
-    default: false
-  }
+  page: String,
 }, {
   timestamps: true
 })
 
 schema.index({ author: 1, createdAt: -1 })
-schema.index({ home: 1}, { partialFilterExpression: { home: true } })
+schema.index({ page: 1 })
 
 schema.statics.validateChain = ValidateChain({
   author: function() {
     this.isMongoId()
   },
   title: function() {
-    this.notEmpty().isLength({min: 1, max:50})
+    this.notEmpty().isLength({min: 1, max: 50})
   },
   body: function() {
-    this.notEmpty().isByteLength({min: 1, max: 30 * 1000 })
+    this.notEmpty().isByteLength({min: 1, max: 30 * 1000})
   },
   home: function() {
     this.optional().isBoolean()

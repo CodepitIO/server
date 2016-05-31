@@ -12,11 +12,16 @@ angular.module('User')
         email: '',
         password: '',
         confirmPassword: '',
-        username: ''
+        username: '',
+        recaptcha: null
       }
 
+      $scope.loading = false
       $scope.register = function () {
-        user.register($scope.user)
+        $scope.loading = true
+        user.register($scope.user, function() {
+          $scope.loading = false
+        })
       }
     }
   ])

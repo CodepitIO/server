@@ -30,7 +30,7 @@ exports.isValidId = function (req, res, next) {
 
 function ValidatorCtor(fields) {
   _.each(fields, (fn, key) => {
-    this[_.camelCase(['check', key])] = function() {
+    this[_.camelCase(['see', key])] = function() {
       fn.call(this.check(key))
       return this
     }

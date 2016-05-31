@@ -12,6 +12,10 @@ angular.module('appRoutes', []).config([
         url: '^/home',
         templateUrl: 'views/home.html'
       })
+      .state('about', {
+        url: '^/about',
+        templateUrl: 'views/about.html'
+      })
       .state('contests', {
         abstract: true,
         url: '^/contests',
@@ -52,7 +56,7 @@ angular.module('appRoutes', []).config([
         mustBeLogged: true
       })
       .state('contest', {
-        url: '^/contest/{id}',
+        url: '^/contest/:id',
         templateUrl: 'views/contests/contest.html',
         controller: 'ContestInstanceController'
       })
@@ -82,13 +86,14 @@ angular.module('appRoutes', []).config([
         mustNotBeLogged: true
       })
       .state('profile', {
-        url: '^/profile/{id}',
+        url: '^/profile/:id',
         templateUrl: 'views/user/profile.html',
         controller: 'ProfileController'
       })
       .state('profile.data', {
         url: '/data',
-        templateUrl: 'views/user/profile.data.html'
+        templateUrl: 'views/user/profile.data.html',
+        controller: 'ProfileDataController'
       })
       .state('profile.teams', {
         url: '/teams',
@@ -100,20 +105,20 @@ angular.module('appRoutes', []).config([
         controller: 'ProfilePostsController'
       })
       .state('team', {
-        url: '^/team/{id}',
+        url: '^/team/:id',
         templateUrl: 'views/team.html',
         controller: 'TeamController',
         mustBeLogged: true
       })
       .state('submission', {
-        url: '^/submission/{id}',
+        url: '^/submission/:id',
         templateUrl: 'views/submission.html',
         controller: 'SubmissionController'
       })
       .state('problems', {
         abstract: true,
-        url: '^/problems/{id}',
-        templateUrl: 'views/problem-view.html',
+        url: '^/problems/:id',
+        templateUrl: 'views/problems/problem-view.html',
         controller: 'ProblemController'
       })
       .state('problems.view', {

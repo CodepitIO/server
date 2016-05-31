@@ -5,17 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<base href="/">
 
-	<title>Maratonando</title>
+	<title>Codepit</title>
 
 	<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600italic,700italic,600,700'>
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
   	<!-- build:css dist/bootstrap.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
 	<!-- endbuild -->
 
-	<!-- build:css dist/general.min.css -->
+	<!-- build:css dist/thirdparty.min.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
@@ -26,14 +25,17 @@
 	<!-- endbuild -->
 
 	<!-- build:css dist/app.min.css -->
+	<link rel="stylesheet" type="text/css" href="css/blog.css">
 	<link rel="stylesheet" type="text/css" href="css/contest.css">
 	<link rel="stylesheet" type="text/css" href="css/problem-statement.css">
-	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/ttypography.css">
 	<link rel="stylesheet" type="text/css" href="css/angular-material.css">
 	<link rel="stylesheet" type="text/css" href="css/pdf_viewer.css">
 	<!-- endbuild -->
+
+	<script type="text/javascript" src="//www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
 </head>
 <body ng-app="mrtApp">
 
@@ -43,7 +45,7 @@
 	</div>
 	<ng-include src="'views/footer.html'"></ng-include>
 
-	<!-- build:js dist/general.min.js -->
+	<!-- build:js dist/thirdparty.min.js -->
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
 	<script type="text/javascript" src="bower_components/jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
 	<script type="text/javascript" src="bower_components/moment/moment.js"></script>
@@ -78,6 +80,7 @@
 	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
 	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
 	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
 	<!-- endbuild -->
 
 	<!-- build:js dist/app.min.js -->
@@ -85,20 +88,23 @@
 	<script type="text/javascript" src="js/appRoutes.js"></script>
 
 	<script type="text/javascript" src="js/factories/User.js"></script>
-	<script type="text/javascript" src="js/factories/Blog.js"></script>
+	<script type="text/javascript" src="js/factories/Post.js"></script>
 	<script type="text/javascript" src="js/factories/Catalog.js"></script>
 	<script type="text/javascript" src="js/factories/Contest.js"></script>
-	<script type="text/javascript" src="js/factories/ContestList.js"></script>
 	<script type="text/javascript" src="js/factories/General.js"></script>
 	<script type="text/javascript" src="js/factories/Problems.js"></script>
 	<script type="text/javascript" src="js/factories/Submission.js"></script>
 	<script type="text/javascript" src="js/factories/Tag.js"></script>
 	<script type="text/javascript" src="js/factories/Team.js"></script>
-	<script type="text/javascript" src="js/factories/Util.js"></script>
+
+	<script type="text/javascript" src="js/services/Contest.js"></script>
+	<script type="text/javascript" src="js/services/General.js"></script>
+	<script type="text/javascript" src="js/services/User.js"></script>
 
 	<script type="text/javascript" src="js/controllers/user/Login.js"></script>
 	<script type="text/javascript" src="js/controllers/user/Profile.js"></script>
-	<script type="text/javascript" src="js/controllers/user/Profile.Posts.js"></script>
+	<script type="text/javascript" src="js/controllers/user/ProfileData.js"></script>
+	<script type="text/javascript" src="js/controllers/user/ProfilePosts.js"></script>
 	<script type="text/javascript" src="js/controllers/user/Register.js"></script>
 	<script type="text/javascript" src="js/controllers/Home.js"></script>
 	<script type="text/javascript" src="js/controllers/Submission.js"></script>
@@ -108,17 +114,20 @@
 	<script type="text/javascript" src="js/controllers/contests/ContestList.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/CreateContest.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/EditContest.js"></script>
+	<script type="text/javascript" src="js/controllers/contests/SettingsProblems.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Scoreboard.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Catalog.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Submissions.js"></script>
 	<script type="text/javascript" src="js/controllers/contests/Submit.js"></script>
 
-	<script type="text/javascript" src="js/directives/Contests.js"></script>
+	<script type="text/javascript" src="js/directives/Contest.js"></script>
 	<script type="text/javascript" src="js/directives/General.js"></script>
 	<script type="text/javascript" src="js/directives/Pdf.js"></script>
+	<script type="text/javascript" src="js/directives/User.js"></script>
 
-	<script type="text/javascript" src="js/utils/general.js"></script>
+	<script type="text/javascript" src="js/utils/config.js"></script>
 	<script type="text/javascript" src="js/utils/filters.js"></script>
+	<script type="text/javascript" src="js/utils/general.js"></script>
 	<script type="text/javascript" src="js/utils/values.js"></script>
 	<script type="text/javascript" src="js/utils/pdf/pdf.js"></script>
 	<script type="text/javascript" src="js/utils/pdf/pdf_viewer.js"></script>

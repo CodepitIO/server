@@ -85,11 +85,7 @@ function populateAndIndexProblems () {
     (problems, next) => {
       async.eachSeries(problems, (item, callback) => {
         if (item.id && item.url && item.fullName && item.fullName.substring(0, 1) === '[') {
-          pindexer.addProblem(
-            item.fullName,
-            item._id,
-            item.url
-          )
+          pindexer.addProblem(item)
         }
         return async.setImmediate(callback)
       }, next)
@@ -101,7 +97,7 @@ function populateAndIndexProblems () {
 
 module.exports = function (callback) {
   if (process.env.NODE_ENV === 'development') {
-    // populateAndIndexProblems()
+    populateAndIndexProblems()
   }
-  return callback()
+  callback && callback()
 }

@@ -1,18 +1,25 @@
-<mrt-page-wrapper wait-for="!loading">
+<mrt-page-wrapper wait-while="loading">
   <div class="blog-container">
-    <div ng-repeat="post in page.posts">
-      <div class="blog-section" ng-class="{'first': $index == 0}">
-        <div class="blog-header">{{post.title}}
-          <p class="pull-right" style="font-style: italic; font-size: 12px; margin: 0px;"><mrt-display-time date="post.createdAt"></mrt-display-time></p>
-          <p class="pull-right" style="font-style: italic; font-size: 12px; clear:right; margin: 0px;"><a class="unrated-handle" ui-sref="profile({id: post.author._id})">{{post.author.local.username}}</a></p>
+    <div ng-if="!!page.posts.length">
+      <div ng-repeat="post in page.posts">
+        <div class="blog-section" ng-class="{'first': $index == 0, 'single': isInfo}">
+          <div ng-if="!isInfo" class="blog-header">{{post.title}}
+            <p class="pull-right" style="font-style: italic; font-size: 12px; margin: 0px;"><mrt-display-time date="post.createdAt"></mrt-display-time></p>
+            <p class="pull-right" style="font-style: italic; font-size: 12px; clear:right; margin: 0px;"><a class="unrated-handle" ui-sref="profile({id: post.author._id})">{{post.author.local.username}}</a></p>
+          </div>
+          <hr ng-if="!isInfo" class="blog-header-separator">
+          <div class="blog-body" ng-bind-html="post.body"></div>
+          <a ng-if="post.author._id == userState.user._id" style="cursor: pointer;" ng-click="editPost(post)"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
         </div>
-        <hr class="blog-header-separator">
-        <div class="blog-body" ng-bind-html="post.body"></div>
-        <a ng-if="post.author._id == userState.id" style="cursor: pointer;" ng-click="editPost(post)"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
+      </div>
+      <div ng-if="!isInfo" class="blog-section last" style="text-align: center;">
+        <uib-pagination total-items="page.total" ng-model="page.current" items-per-page="page.maxDisplay" class="pagination-md" boundary-link-numbers="true" rotate="false" ng-change="changePage()" max-size="5" previous-text="<" next-text=">"></uib-pagination>
       </div>
     </div>
-    <div class="blog-section last" style="text-align: center;">
-      <uib-pagination total-items="page.total" ng-model="page.current" items-per-page="page.maxDisplay" class="pagination-md" boundary-link-numbers="true" rotate="false" ng-change="changePage()" max-size="5" previous-text="<" next-text=">"></uib-pagination>
+    <div ng-if="!page.posts.length">
+      <div class="blog-section single" style="text-align: center;">
+        <span class="empty-blog">Não há nenhum post&nbsp;&nbsp;&nbsp;<div class="rotate90">:(</div></span>
+      </div>
     </div>
   </div>
 </mrt-page-wrapper>

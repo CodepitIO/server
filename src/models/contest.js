@@ -1,16 +1,11 @@
-// load the things we need
-var mongoose = require('mongoose')
+const mongoose = require('mongoose'),
+  _ = require('lodash')
 
-var _ = require('lodash')
+const Submission = require('./submission')
 
-var Submission = require('./submission')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
-var ObjectId = mongoose.Schema.Types.ObjectId
-var Mixed = mongoose.Schema.Types.Mixed
-
-// define the schema for our user model
-// TODO endureIndex on Date
-var contestSchema = mongoose.Schema({
+var schema = mongoose.Schema({
   name: String,
   description: String,
 
@@ -34,10 +29,6 @@ var contestSchema = mongoose.Schema({
     id: {
       type: ObjectId,
       ref: 'User'
-    },
-    isIndividual: {
-      type: Boolean,
-      default: true
     },
     team: {
       type: ObjectId,
@@ -65,20 +56,18 @@ var contestSchema = mongoose.Schema({
   timestamps: true
 })
 
-// TODO(stor): ensure this only gets called once in production
-contestSchema.index({
+schema.index({
   date_start: -1
 })
-contestSchema.index({
+schema.index({
   date_end: -1
 })
-contestSchema.index({
+schema.index({
   author: 1,
   createdAt: -1
 })
 
-// methods ======================
-contestSchema.methods.userInContest = function (id) {
+schema.methods.userInContest = function (id) {
   if (!id) return false
   var index = _.findIndex(this.contestants, function (obj) {
     return obj.id && obj.id.toString() === id.toString()
@@ -86,7 +75,7 @@ contestSchema.methods.userInContest = function (id) {
   return index !== -1
 }
 
-contestSchema.methods.problemInContest = function (id) {
+schema.methods.problemInContest = function (id) {
   if (!id) return false
   var index = _.findIndex(this.problems, function (obj) {
     return obj.toString() === id.toString()
@@ -94,5 +83,4 @@ contestSchema.methods.problemInContest = function (id) {
   return index !== -1
 }
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model('Contest', contestSchema)
+module.exports = mongoose.model('Contest', schema)

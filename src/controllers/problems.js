@@ -16,19 +16,27 @@ fs.stat(PROBLEMS_PATH, (err) => {
 })
 
 exports.fetchProblems = (req, res, next) => {
-  let substr = req.body.regex
+  let substr = req.body.text
   let insertedProblems = req.body.problems || []
-  insertedProblems = _.map(insertedProblems, (obj) => {
-    return obj.id
-  })
+  if (!_.isString(substr) || !_.isArray(insertedProblems)) return res.status(400).send()
+  if (substr.length < 3 || substr.length > 30 || insertedProblems.length > 26) return res.status(400).send()
+  insertedProblems = _.chain(insertedProblems)
+    .filter((obj) => {
+      if (!obj.id) return false
+      return _.isString(obj.id) && obj.id.length < 50
+    })
+    .map(insertedProblems, (obj) => {
+      return obj.id
+    })
+    .value()
   return res.json({
-    problems: pindexer.match(substr, insertedProblems)
+    list: pindexer.match(substr, insertedProblems)
   })
 }
 
 exports.getProblemMetadata = (req, res, next) => {
   let id = req.params.id
-  Problem.findById(id).select('name oj id originalUrl source timelimit memorylimit inputFile outputFile')
+  Problem.findById(id).select('name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf')
     .exec((err, problem) => {
       if (err || !problem) return res.status(404).send()
       return res.json(problem)
@@ -40,7 +48,7 @@ exports.getProblemContent = (req, res, next) => {
   if (ext !== '.html') return res.status(404).send()
   let problemPath = path.join(PROBLEMS_PATH, req.params.id)
   ImportQueue.push(problemPath, (err) => {
-    if (err) return res.status(400).send()
+    if (err) return res.sendfile('./public/views/problems/not-imported.html')
     return res.sendfile(problemPath)
   })
 }

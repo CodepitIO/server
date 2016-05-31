@@ -1,5 +1,5 @@
 <mrt-breadcrumbs
-  location="'Maratonando / Problemas / ' + problem.oj"
+  location="'Codepit / Problemas / ' + problem.oj"
   title="problem.name">
 </mrt-breadcrumbs>
 
@@ -13,5 +13,8 @@
   <ui-view/>
   <div class="problem-statement" ng-if="problem.source">
     <p class="footer" ng-bind-html="problem.source"></p>
+  </div>
+  <div style="margin-top: 20px; float: right;">
+    <a class="small" ng-href="{{problem.originalUrl || problem.url}}" target="_blank">[link original]</a>
   </div>
 </mrt-page-wrapper>

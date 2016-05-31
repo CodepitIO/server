@@ -3,9 +3,10 @@ app.controller('ProblemController', [
   '$scope',
   '$stateParams',
   '$sce',
-  'Problems',
+  '$window',
+  'ProblemsFacade',
   'OJName',
-  function ($scope, $stateParams, $sce, Problems, OJName) {
+  function ($scope, $stateParams, $sce, $window, Problems, OJName) {
     $scope.problem = {}
     $scope.loadingData = true
     Problems.get($stateParams.id, function (err, data) {
@@ -14,6 +15,9 @@ app.controller('ProblemController', [
       $scope.loadingData = false
       if (data.source) {
         $scope.problem.source = $sce.trustAsHtml(data.source)
+      }
+      if (!data.imported && !data.isPdf) {
+        $window.open(data.originalUrl || data.url)
       }
     })
   }

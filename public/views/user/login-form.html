@@ -1,39 +1,39 @@
-<div id="top-user-area" class="nav navbar-nav navbar-right">
+<div id="user-nav" class="nav navbar-nav navbar-right">
   <div ng-hide="$root.user">
     <form>
       <md-input-container class="form-group md-default-theme" flex>
         <label class="control-label">Email</label>
-        <input id="top-user-area-email" type="email" name="email" ng-model="user.email" class="form-control md-default-theme"/>
+        <input class="user-email" type="email" name="email" ng-model="data.email" class="form-control md-default-theme"/>
       </md-input-container>
 
       <md-input-container class="form-group md-default-theme" flex>
         <label class="control-label">Senha</label>
-        <input id="top-user-area-password" type="password" ng-model="user.password" class="form-control md-default-theme"/>
+        <input class="user-password" type="password" ng-model="data.password" class="form-control md-default-theme"/>
       </md-input-container>
 
       <div class="form-group">
-        <button id="top-user-area-submit" type="submit" ng-click="login()" class="btn btn-default">
+        <button class="user-submit" type="submit" ng-click="login()" class="btn btn-default">
           <i class="fa fa-arrow-right"></i>
         </button>
       </div>
     </form>
 
-    <a id="register-btn" class="btn btn-icon" ui-sref="register">
+    <a class="btn btn-icon user-register" ui-sref="register">
       <span>
         <i class="fa fa-user"></i>
       </span>
       Registre-se
     </a>
   </div>
-  <div ng-show="$root.user">
-    <a id="logout-btn" class="btn btn-icon" ng-click="logout()">
+  <div ng-show="userState.user._id">
+    <a class="btn btn-icon user-logout" ng-click="logout()">
       <span>
         <i class="fa fa-user"></i>
       </span>
       Sair
     </a>
-    <a id="top-user-info" ui-sref="profile">
-      <img ng-src="//www.gravatar.com/avatar/{{userState.emailHash}}?d=identicon&s=50">
+    <a class="profile-link" ui-sref="profile.data({id:userState.user._id})">
+      <img ng-src="//www.gravatar.com/avatar/{{userState.user.local.emailHash}}?d=identicon&s=50">
       Perfil
     </a>
   </div>

@@ -14,8 +14,9 @@ let schema = mongoose.Schema({
     name: String,
     surname: String,
     email: String,
-    password: String
-  }
+    password: String,
+  },
+  access: {type: Number, default: 0}
 })
 
 schema.index({ username: 1 }, { unique: true })
@@ -29,7 +30,7 @@ schema.statics.validateChain = ValidateChain({
     this.notEmpty().isLength({min: 1, max:100})
   },
   username: function() {
-    this.notEmpty().isLength({min: 1, max:100})
+    this.notEmpty().isLength({min: 1, max:30})
   },
   email: function() {
     this.notEmpty().isLength({min: 1, max:100})

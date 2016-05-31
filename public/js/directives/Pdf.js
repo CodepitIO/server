@@ -1,4 +1,4 @@
-var app = angular.module('Util')
+var app = angular.module('General')
 
 app.directive('mrtPdf', ['$window', function ($window) {
   PDFJS.disableWorker = true

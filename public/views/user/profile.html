@@ -1,10 +1,10 @@
 <mrt-breadcrumbs
-  location="'Maratonando / Usuários'"
+  location="'Codepit / Usuários'"
   title="'Seu perfil'">
 </mrt-breadcrumbs>
 
 <mrt-page-wrapper wait-for='!loadingData'>
-  <div ng-cloak>
+  <div ng-cloak id="profile-container">
     <md-content>
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab ui-sref=".data" label="dados" md-active="state.current.name === 'profile.data'"></md-tab>
@@ -15,119 +15,3 @@
     </md-content>
   </div>
 </mrt-page-wrapper>
-
-<!-- <div class="container-fluid" style="margin-bottom: 50px">
-  <div ng-cloak>
-    <md-content>
-      <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="dados">
-          <md-content class="md-padding">
-            <div style="padding: 10px;">
-              <a href="//br.gravatar.com/" target="_blank"><img class="profile-image" ng-src="//www.gravatar.com/avatar/{{emailHash}}?d=identicon&s=170"></a>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <table class="profile-table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <input type="text" class="form-control" ng-model="user.name" name="name" placeholder="Nome" ng-maxlength="100">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control" ng-model="user.surname" name="surname" placeholder="Sobrenome" ng-maxlength="100">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><input type="email" class="form-control" ng-model="user.email" placeholder="Email" disabled></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><input id="usernameInput" type="text" data-toggle="tooltip" title="Este nome aparecerá no placar das competições, quando você competir individualmente." class="form-control" ng-model="user.username" name="username" placeholder="Nome de perfil" ng-maxlength="30" tooltip required></td>
-                    </tr>
-                    <tr>
-                      <td><input type="password" class="form-control" ng-model="user.newPassword" placeholder="Nova senha" data-toggle="tooltip" title="Se você deixar em branco, sua senha não será alterada." name="pass" ng-maxlength="50" tooltip></td>
-                      <td><input type="password" class="form-control" ng-model="user.confirmNewPassword" placeholder="Repita nova senha" name="confirmPass" match-field="{{user.newPassword}}" ng-maxlength="50"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-md-3" style="margin-top: 5px;">
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.name.$error.maxlength">* seu nome pode ter no máximo 100 caracteres.</small>
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.surname.$error.maxlength">* seu sobrenome pode ter no máximo 100 caracteres.</small>
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.username.$error.maxlength">* seu nome de perfil pode ter no máximo 30 caracteres.</small>
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.username.$error.required">* você deve inserir um nome de perfil.</small>
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.pass.$error.maxlength || editProfileForm.confirmPass.$error.maxlength">* sua nova senha deve ter no máximo 50 caracteres.</small>
-                <small style="display: block;" class="error ng-hide" ng-show="editProfileForm.confirmPass.$error.matchField">* você deve confirmar a senha nova corretamente.</small>
-                <div ng-hide="loadedEditingProfile">
-                  <i style="margin-left: -28px; margin-top: 170px; position: absolute;" class="fa fa-spinner fa-spin fa-2x"></i>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 col-md-offset-3">
-                <div class="input-group">
-                  <input type="password" class="form-control" ng-model="user.password" style="margin-left: 5px;" placeholder="Senha atual" required>
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" ng-click="edit()" style="margin-right: 5px;" type="button" ng-disabled="editProfileForm.$invalid || !loadedEditingProfile">Editar Perfil</button>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </md-content>
-        </md-tab>
-        <md-tab label="times">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Times</h1>
-            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="blog">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Times</h1>
-            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-          </md-content>
-        </md-tab>
-      </md-tabs>
-    </md-content>
-  </div>
-  <form name="editProfileForm" novalidate>
-
-    <div class="row" style="margin-top: 20px">
-      <form name="createTeamForm">
-        <div class="col-md-offset-1 col-md-4">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th colspan="3">
-                  <a ng-class="tabSelected=='teams' ? 'team-tabs-selected' : 'team-tabs-unselected'" ng-click="changeTab('teams')">Times</a>
-                  &nbsp;/&nbsp;
-                  <a ng-class="tabSelected=='invites' ? 'team-tabs-selected' : 'team-tabs-unselected'" ng-click="changeTab('invites')">Convites ({{invited.length}})</a>
-                </th>
-              </tr>
-            </thead>
-            <tbody ng-show="tabSelected=='teams'">
-              <tr ng-repeat="team in teams" class="animation">
-                <td>{{team.name}}
-                  <span ng-if="team.admin == $root.user._id" class="team-admin">(admin)</span>
-                </td>
-                <td><a ng-href="/team/{{team._id}}">Ver<span ng-if="team.admin == $root.user._id">&nbsp;e Editar</span></a></td>
-                <td><a class="link" confirmed-click="leaveTeam(team._id)">Sair</a></td>
-              </tr>
-              <tr>
-                <td><input type="text" class="form-control" ng-model="newTeamName" name="newTeamName" placeholder="Nome do time" ng-maxlength="30" required></td>
-                <td><button ng-click="createTeam()" class="form-control" ng-disabled="createTeamForm.$invalid">Criar</button></td>
-                <td></td>
-              </tr>
-            </tbody>
-            <tbody ng-show="tabSelected=='invites'">
-              <tr ng-repeat="team in invited" class="animation">
-                <td><a ng-href="/team/{{team._id}}">{{team.name}}</a></td>
-                <td><a class="link" ng-click="acceptTeamInvitation(team._id)">Aceitar</a></td>
-                <td><a class="link" ng-click="declineTeamInvitation(team._id)">Recusar</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </form>
-    </div>
-
-</div> -->

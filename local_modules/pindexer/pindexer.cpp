@@ -45,26 +45,20 @@ NAN_METHOD(SetReturnSize) {
 }
 
 NAN_METHOD(AddProblem) {
-  if (info.Length() != 3) {
+  if (info.Length() != 1) {
     Nan::ThrowError("Wrong number of arguments");
     return;
   }
 
-  Nan::MaybeLocal<v8::String> maybeFullName = Nan::To<v8::String>(info[0]);
-  Nan::MaybeLocal<v8::String> maybeId = Nan::To<v8::String>(info[1]);
-  Nan::MaybeLocal<v8::String> maybeUrl = Nan::To<v8::String>(info[2]);
+  Nan::MaybeLocal<v8::Object> maybeObj = Nan::To<v8::Object>(info[0]);
 
-  v8::Local<v8::String> fullName, id, url;
-  if (!maybeFullName.ToLocal(&fullName) || !maybeId.ToLocal(&id) || !maybeUrl.ToLocal(&url)) {
-    Nan::ThrowError("Error converting parameters to string");
+  v8::Local<v8::Object> obj;
+  if (!maybeObj.ToLocal(&obj)) {
+    Nan::ThrowError("Error converting parameter to local object");
     return;
   }
 
-  pool->AddProblem(
-    *v8::String::Utf8Value(fullName),
-    *v8::String::Utf8Value(id),
-    *v8::String::Utf8Value(url)
-  );
+  pool->AddProblem(obj);
 }
 
 NAN_MODULE_INIT(Init) {

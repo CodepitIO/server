@@ -1,7 +1,7 @@
 {
   "name": "pindexer",
   "version": "1.0.0",
-  "description": "Maratonando Problems Indexer",
+  "description": "Codepit Problems Indexer",
   "main": "index.js",
   "scripts": {
     "install": "node-gyp rebuild"

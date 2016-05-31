@@ -409,3 +409,7 @@ div .problem-statement-overlay {
 .timus-problem H3.problem_subtitle { font-size: 18px; font-weight: bold; margin: 20px 0 10px; }
 .timus-problem pre { background-color: #fff; border: none; margin: 0px; }
 .timus-problem A, .timus-problem A:visited, .timus-problem A:hover {color:Black;}
+
+.problem-pdf-wrapper {
+  padding: 0 50px 0 50px;
+}

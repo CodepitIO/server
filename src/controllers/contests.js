@@ -63,7 +63,9 @@ var filters = {
   },
   past: {
     opts: function (req) {
-      var last = req.body.lastQueryDate || new Date()
+      var last
+      if (req.params.last === '0') last = new Date()
+      else last = new Date(parseInt(req.params.last) || 0)
       return {
         date_end: {
           $lt: last
@@ -120,8 +122,8 @@ var filters = {
   }
 }
 
-exports.getByFilter = function (req, res) {
-  var filter = filters[req.body.filter]
+exports.getList = function (req, res) {
+  var filter = filters[req.params.type || '']
 
   if (filter === undefined) {
     return res.status(400).send()
@@ -135,23 +137,8 @@ exports.getByFilter = function (req, res) {
       limit: filter.limit,
       lean: true
     })
-    .exec(function (err, contests) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
-      _.map(contests, function (contest) {
-        contest.isInContest = false
-        contest.isAdmin = false
-        if (req.user && req.user._id) {
-          contest.isInContest = isInContest(req.user._id, contest)
-          if (contest.author) {
-            contest.isAdmin = req.user._id.toString() == contest.author.toString()
-          }
-        }
-        return contest
-      })
+    .exec((err, contests) => {
+      if (err) return res.status(500).send()
       return res.json({
         contests: contests
       })

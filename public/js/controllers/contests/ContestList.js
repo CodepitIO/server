@@ -3,8 +3,10 @@ angular.module('Contests')
     '$scope',
     '$rootScope',
     '$location',
-    'TimeFactory',
-    function ($scope, $rootScope, $location, time) {
+    'TimeSharedState',
+    'ContestFacade',
+    'UserSharedState',
+    function ($scope, $rootScope, $location, timeState, contest, userState) {
       $scope.loadingData = true
       $scope.contests = []
       $scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open'
@@ -16,12 +18,10 @@ angular.module('Contests')
           $scope.predicate = 'date_start'
           $scope.reverse = false
           break
-
         case 'owned':
           $scope.predicate = 'date_start'
           $scope.reverse = true
           break
-
         case 'past':
         default:
           $scope.predicate = 'date_end'
@@ -29,7 +29,7 @@ angular.module('Contests')
           break
       }
 
-      var lastQueryDate
+      var lastQueryDate = 0
       $scope.fetchData = function () {
         // skip it if we're already loading
         if ($scope.loadingNewPage) return
@@ -37,20 +37,16 @@ angular.module('Contests')
         if (!$scope.loadingData && $scope.filterType !== 'past') return
 
         $scope.loadingNewPage = true
-        contestPromise = contests.getByFilter({
-          filter: $scope.filterType,
-          lastQueryDate: lastQueryDate
-        })
-
-        contestPromise.then(function (data) {
-          if (data.contests.length > 0) {
-            lastQueryDate = data.contests[data.contests.length - 1].date_end
+        contest.getList($scope.filterType, lastQueryDate, function (err, contests) {
+          if (contests.length > 0) {
+            lastQueryDate = new Date(_.last(contests).date_end).getTime()
           }
-          for (var i = 0; i < data.contests.length; i++) {
-            var start = data.contests[i].date_start = new Date(data.contests[i].date_start)
-            var end = data.contests[i].date_end = new Date(data.contests[i].date_end)
-            data.contests[i].duration = Math.floor((end - start) / 1000)
-            $scope.contests.push(data.contests[i])
+          for (var i = 0; i < contests.length; i++) {
+            var start = contests[i].date_start = new Date(contests[i].date_start)
+            var end = contests[i].date_end = new Date(contests[i].date_end)
+            contests[i].duration = Math.floor((end - start) / 1000)
+            contests[i].isAdmin = (userState.user && contests[i].author === userState.user._id)
+            $scope.contests.push(contests[i])
           }
           $scope.loadingData = $scope.loadingNewPage = false
         })
@@ -63,15 +59,15 @@ angular.module('Contests')
       }
 
       $scope.isInFuture = function (date) {
-        return new Date(date) > time.server.static
+        return new Date(date) > timeState.server.static
       }
 
       $scope.isInPast = function (date) {
-        return new Date(date) <= time.server.static
+        return new Date(date) <= timeState.server.static
       }
 
       $scope.isNewContest = function (date) {
-        return ((time.server.static - new Date(date)) / 60000) <= 10
+        return ((timeState.server.static - new Date(date)) / 60000) <= 10
       }
     }
   ])

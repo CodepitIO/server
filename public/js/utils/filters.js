@@ -51,3 +51,13 @@ angular.module('General')
       return arr[1] + parseInt(arr[2], 10) + (arr[3] == '00' ? '' : arr[3])
     }
   })
+  .filter('mrtHasError', function () {
+    return function (obj) {
+      return obj.$dirty && !_.isEmpty(obj.$error)
+    }
+  })
+  .filter('mrtAlphabetize', function () {
+    return function (index) {
+      return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]
+    }
+  })
