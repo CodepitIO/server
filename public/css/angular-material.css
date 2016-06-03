@@ -14,6 +14,10 @@ md-tooltip .md-content {
     height: auto;
 }
 
+md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
+  min-height: 60px !important;
+}
+
 md-icon.material-icons.block {
   display: block !important;
 }

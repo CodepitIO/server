@@ -19,16 +19,7 @@ exports.fetchProblems = (req, res, next) => {
   let substr = req.body.text
   let insertedProblems = req.body.problems || []
   if (!_.isString(substr) || !_.isArray(insertedProblems)) return res.status(400).send()
-  if (substr.length < 3 || substr.length > 30 || insertedProblems.length > 26) return res.status(400).send()
-  insertedProblems = _.chain(insertedProblems)
-    .filter((obj) => {
-      if (!obj.id) return false
-      return _.isString(obj.id) && obj.id.length < 50
-    })
-    .map(insertedProblems, (obj) => {
-      return obj.id
-    })
-    .value()
+  if (substr.length < 3 || substr.length > 50 || insertedProblems.length > 26) return res.status(400).send()
   return res.json({
     list: pindexer.match(substr, insertedProblems)
   })

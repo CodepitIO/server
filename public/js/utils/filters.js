@@ -61,3 +61,8 @@ angular.module('General')
       return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index]
     }
   })
+  .filter('mrtOjName', ['OJName', function (OJName) {
+    return function (oj) {
+      return OJName[oj]
+    }
+  }])

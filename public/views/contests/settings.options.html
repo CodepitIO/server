@@ -1,0 +1,128 @@
+<div ng-controller="SettingsOptionsController" class="contest-settings-container">
+  <div layout="column" flex="60" class="settings-options">
+    <form name="form" novalidate>
+      <md-subheader>Frozen&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <small>O <b>frozen</b> define o momento da competição em que o placar<br>congela, e o competidor só tem acesso ao resultado de suas<br>próprias submissões. Nas competições clássicas, o frozen<br>começa na última hora da competição.</small>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div layout="row">
+        <div class="settings-switch" layout="row" layout-align="center center" flex>
+          <div><span>não</span></div>
+          <div>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasFrozen" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end"></md-switch>
+          </div>
+          <div><span>sim</span></div>
+        </div>
+        <div flex>
+          <uib-timepicker
+            class="time-input"
+            show-spinners="false"
+            ng-model="settingsState.contest.date_start"
+            ng-change="validateTimeRange()"
+            hour-step="1"
+            minute-step="5"
+            show-meridian="false"
+            required ng-disabled="true">
+          </uib-timepicker>
+        </div>
+      </div>
+      <small class="error" ng-show="!settingsState.contest.date_start || !settingsState.contest.date_end">* você deve configurar o início e o fim da competição para poder definir esta opção</small>
+      <md-divider></md-divider>
+
+
+      <md-subheader>Blind&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <small>O <b>blind</b> define o momento da competição em que tudo<br>congela, e o competidor não tem mais acesso a nenhum<br>resultado. Nas competições clássicas, o blind começa<br>nos últimos 15 minutos de competição.</small>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div layout="row">
+        <div class="settings-switch" layout="row" layout-align="center center" flex>
+          <div><span>não</span></div>
+          <div>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasBlind" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end"></md-switch>
+          </div>
+          <div><span>sim</span></div>
+        </div>
+        <div flex>
+          <uib-timepicker
+            class="time-input"
+            show-spinners="false"
+            ng-model="settingsState.contest.date_start"
+            ng-change="validateTimeRange()"
+            hour-step="1"
+            minute-step="5"
+            show-meridian="false"
+            required ng-disabled="true">
+          </uib-timepicker>
+        </div>
+      </div>
+      <small class="error" ng-show="!settingsState.contest.date_start || !settingsState.contest.date_end">* você deve configurar o início e o fim da competição para poder definir esta opção</small>
+      <md-divider></md-divider>
+
+
+      <md-subheader>Participação&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <small>Competições públicas não exigem senha, enquanto competições privadas exigem.</small>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div layout="row">
+        <div class="settings-switch" layout="row" layout-align="center center" flex>
+          <div><span>público</span></div>
+          <div>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.isPrivate"></md-switch>
+          </div>
+          <div><span>privado</span></div>
+        </div>
+        <div flex>
+          <input type="password" class="data-input" style="max-width: 160px;" placeholder="Senha" ng-disabled="!settingsState.contest.options.isPrivate"></input>
+        </div>
+      </div>
+      <md-divider></md-divider>
+
+
+      <md-subheader>Visualização&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <small>Visualização pública permite que todos possam acessar<br>os problemas e o placar da competição, enquanto que<br>visualização para inscritos permite que apenas os que<br>estão participando tenham acesso.</small>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div layout="row">
+        <div class="settings-switch" layout="row" layout-align="center center" flex>
+          <div><span>público</span></div>
+          <div>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.watchPrivate"></md-switch>
+          </div>
+          <div><span>inscritos</span></div>
+        </div>
+        <div flex/>
+      </div>
+      <md-divider></md-divider>
+
+
+      <md-subheader>Penalidade&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <small>Quantos minutos de penalidade para cada erro de um<br>dado problema. Esses minutos só são contabilizados<br>quando o problema é aceito.</small>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div layout="row">
+        <div layout="row" layout-align="center center" flex>
+          <input type="number" ng-model="settingsState.contest.options.penalty" name="penalty" class="data-input" style="max-width: 100px; text-align: right;" min="0" max="10000" required></input>
+          <small style="margin-left: 8px;"><span>minutos</span></small>
+        </div>
+        <div flex/>
+      </div>
+      <small class="error" ng-show="form.penalty | mrtHasError">* a penalidade deve ser entre 0 e 10000 minutos</small>
+
+    </form>
+  </div>
+</div>

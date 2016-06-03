@@ -1,9 +1,11 @@
-<div class="container-fluid" id="breadcrumbs">
-  <div class="row">
-    <div class="col-md-12">
-      <span>{{location}}</span>
-      <h2>{{title}}</h2>
-      <a href="#" style="float: right;" mrt-go-back>Voltar</a>
-    </div>
+<div id="breadcrumbs" layout="row">
+  <div flex>
+    <span>{{location}}</span>
+    <h2>{{title}}</h2>
+  </div>
+  <div layout="row" layout-align="center center" flex="5">
+    <md-button class="md-icon-button" ng-click="close()" style="margin-top: 5px;" mrt-go-back>
+      <md-icon class="material-icons" style="color:grey;">keyboard_return</md-icon>
+    </md-button>
   </div>
 </div>

@@ -58,17 +58,15 @@ app.directive('tooltip', function () {
     restrict: 'A',
     link: function (scope, element, attrs) {
       $(element).hover(function () {
-        // on mouseenter
         $(element).tooltip('show')
       }, function () {
-        // on mouseleave
         $(element).tooltip('hide')
       })
     }
   }
 })
 
-app.directive('loadingSpinner', function () {
+app.directive('mrtLoadingSpinner', function () {
   return {
     restrict: 'E',
     scope: {
@@ -188,15 +186,14 @@ app.directive('mrtBlogPosts', [function () {
   }
 }])
 
-app.directive('mrtGoBack', ['$window', '$document', function ($window, $document) {
+app.directive('mrtGoBack', [
+  'HistoryState',
+  function (historyState) {
   return {
     restrict: 'A',
     link: function (scope, elem, attrs) {
-      elem.bind('click', function () {
-        // console.log(document.referrer)
-        // $window.history.back()
-        // if ($window.location.host !== 'localhost') $window.history.forward()
-      })
-    }
+      if (historyState.isEmpty()) return elem.hide()
+      elem.bind('click', historyState.pop)
+    },
   }
 }])

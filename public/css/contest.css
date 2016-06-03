@@ -1,3 +1,179 @@
+/* <-- Contest Settings --> */
+
+.contest-settings-container {
+  margin-left: 30px;
+}
+
+.contest-settings-container .balloon {
+  position: relative;
+  margin: auto;
+  display: inline-block;
+  top: 0;
+}
+
+.contest-settings-container .balloon-contest {
+  display: block;
+}
+
+.contest-settings-container .balloon:hover {
+  text-decoration: none;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  top: -3px;
+}
+
+.contest-settings-container .balloon-label {
+  position: absolute;
+  top: 5px;
+  left: 0px;
+  text-align: center;
+  color: white;
+  text-shadow:
+    -1px 0px 0 #000,
+    0px 1px 0 #000,
+    1px 0px 0 #000,
+    0px -1px 0 #000;
+}
+
+.contest-settings-container .move-handle {
+  cursor: move;
+  color: #aaa;
+}
+
+.contest-settings-container .remove-problem {
+  cursor: pointer;
+  color: #EF9A9A;
+}
+
+.contest-settings-container .informative {
+  padding-left: 17px;
+  font-size: 12px;
+  color: #777;
+}
+
+.contest-settings-container h3{
+  font-weight: 300;
+  font-size: 30px;
+  color: #747474;
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 18px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.contest-settings-container .time-input input {
+  border-radius: 0px !important;
+  height: 56px;
+}
+
+.contest-settings-container .settings-data .time-input .hours input {
+  border-left: 0;
+}
+
+.contest-settings-container .data-input{
+  width: 100%;
+  padding: 17px;
+  border: solid 1px #d0d0d0;
+  border-radius: 0px;
+}
+
+.contest-settings-container .data-calendar-input{
+  border-right: none;
+}
+
+.contest-settings-container .calendar-input{
+  border-left: none;
+  border-radius: 0px;
+}
+
+.contest-settings-container .calendar-input:hover{
+  background: none;
+  border-color: #d0d0d0;
+}
+
+.contest-settings-container .calendar-input:focus{
+  outline: none;
+  background: none;
+  border-color: #d0d0d0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.contest-settings-container .calendar-input:select{
+  outline: none;
+  background: none;
+  border-color: #d0d0d0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.contest-settings-container .data-input:disabled{
+  background-color: #DCDCDC;
+  color: #DCDCDC;
+}
+
+.contest-settings-container .data-input:focus{
+  padding-left: 30px;
+  background: url("../imgs/register_area_bullet.png") no-repeat;
+  background-position: 16px 23px;
+}
+
+.contest-settings-container .data-input.ng-dirty.ng-invalid{
+  border: 2px solid #AD7070 !important;
+}
+
+.contest-settings-container .input-split .data-input:nth-child(1){
+  width: 50%;
+  float: left;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+.contest-settings-container .input-split .data-input:nth-child(2){
+  width: 50%;
+  float: left;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.contest-settings-container small.error{
+  font-size: 12px;
+  color: #AD7070;
+  display: block;
+}
+
+.contest-settings-container .data-button{
+  background-color: #45a7b9;
+  padding: 15px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.contest-settings-container .data-button:hover{
+  background: #3B8B9A;
+  box-shadow: 0px 2px rgba(0,0,0,0.2);
+}
+
+.contest-settings-container .settings-options small {
+  margin-left: 20px;
+}
+
+.contest-settings-container .settings-switch span {
+  font-size: 12px;
+}
+
+.contest-settings-container .settings-switch div:nth-child(1) {
+  max-width: 50px;
+  text-align: right;
+  margin-right: 8px;
+}
+
+/* 34167390 */
+/* <!------------------!> */
+
+
 .create-contest-add-descr {
   font-size: 12px;
 }
@@ -115,8 +291,7 @@
   pointer-events: none;
 }
 
-.balloon {
-  width: 32px;
+/*.balloon {
   position: relative;
   margin: auto;
   display: inline-block;
@@ -136,11 +311,7 @@
 
 .balloon-label {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  top: 2px;
-  left: 0;
-  right: 0;
+  top: 0px;
   text-align: center;
   color: white;
   text-shadow:
@@ -148,7 +319,7 @@
     0px 1px 0 #000,
     1px 0px 0 #000,
     0px -1px 0 #000;
-}
+}*/
 
 .rating {
     outline: 0;

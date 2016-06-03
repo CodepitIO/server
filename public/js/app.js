@@ -61,7 +61,8 @@ angular.module('mrtApp', [
   '$cookies',
   'amMoment',
   'UserState',
-  function ($rootScope, $cookies, amMoment, userState) {
+  'HistoryState',
+  function ($rootScope, $cookies, amMoment, userState, historyState) {
     amMoment.changeLocale('pt-br')
     try {
       $rootScope.user = JSON.parse($cookies.get('user'))
@@ -69,10 +70,6 @@ angular.module('mrtApp', [
       $rootScope.user = null
     }
     userState.reset()
-
-    $rootScope.history = []
-    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-      $rootScope.history.push({state: from.name, params: fromParams})
-    })
+    $rootScope.$on('$stateChangeSuccess', historyState.push)
   }
 ])

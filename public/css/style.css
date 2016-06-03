@@ -13,6 +13,7 @@
   min-height: 75px;
   margin-bottom: 0px;
   border: none;
+  border-radius: 0;
 }
 
 #header .navbar-brand {

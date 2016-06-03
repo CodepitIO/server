@@ -22,9 +22,10 @@ angular.module('Problems')
             return callback(null, data)
           })
         },
-        filter: function (text, callback) {
+        filter: function (text, problems, callback) {
           return ProblemsAPI.filter({
-            text: text
+            text: text,
+            problems: problems
           })
         }
       }

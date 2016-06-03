@@ -1,10 +1,12 @@
 var app = angular.module('Contests')
 app.controller('CreateContestController', [
   '$scope',
-  function ($scope) {
-    $scope.activeTab = 'tab2'
+  'SettingsState',
+  function ($scope, settingsState) {
+    $scope.settingsState = settingsState;
+    settingsState.tab = 2;
     $scope.changeTab = function(tab) {
-      $scope.activeTab = tab
+      settingsState.tab = tab
     }
     // $scope.name = ''
     // $scope.descr = ''
