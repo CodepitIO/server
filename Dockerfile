@@ -8,15 +8,12 @@ MAINTAINER Gustavo Stor
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential vim supervisor
-RUN mkdir -p /var/log/supervisor
+    apt-get -y install nodejs git-all build-essential vim
 
-RUN npm install -g grunt-cli nodemon bower node-gyp migrate
+RUN npm install -g grunt-cli nodemon bower node-gyp
 
 # Define working directory
 RUN mkdir -p /www
 WORKDIR /www
 
-COPY supervisord.dev.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord"]
+CMD bash ./devstart.sh

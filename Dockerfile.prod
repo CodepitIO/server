@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get -y install nodejs git-all build-essential vim supervisor nginx
 
 # Install node_modules and bower_components
-RUN npm install -g grunt-cli bower node-gyp migrate
+RUN npm install -g grunt-cli bower node-gyp
 COPY package.json /tmp/
 COPY local_modules/ /tmp/local_modules/
 RUN cd /tmp && npm install
@@ -35,6 +35,6 @@ RUN cp -a /tmp/node_modules /www/ && \
 # Set up config files
 VOLUME /www/public/problems
 COPY .prod/default.conf /etc/nginx/conf.d/
-COPY .prod/supervisord.prod.conf /etc/supervisor/conf.d/supervisord.conf
+COPY .prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
