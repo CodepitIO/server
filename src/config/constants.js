@@ -1,12 +1,5 @@
 module.exports = {
-  // OPS
-  GLOBAL_SET: {
-    _name: 'GLOBAL_CONFIG',
-    SEEDED: 'SEEDED'
-  },
-  CHANNELS: {
-    LOAD_PROBLEMS: 'LOAD_PROBLEMS_CHANNEL'
-  },
+  // Databases
   MONGO: {
     HOST: 'mongo',
     PORT: 27017,
@@ -17,7 +10,7 @@ module.exports = {
     PORT: 6379
   },
 
-  // DEV
+  // Dev
   ACCESS: {
     MEMBER: 0,
     ADMIN: 10

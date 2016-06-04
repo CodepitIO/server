@@ -12,9 +12,7 @@ const async = require('async'),
   favicon = require('serve-favicon'),
   express = require('express')
 
-const constants = require('./src/config/constants'),
-  redis = require('./src/services/dbs').redisClient,
-  routes = require('./src/routes')
+const routes = require('./src/routes')
 
 let app = express(),
   port = process.env.PORT || 3000,
