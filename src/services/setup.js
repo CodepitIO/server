@@ -55,14 +55,14 @@ function importProblems (problemsFile, callback) {
   })
 }
 
-function populate (callback) {
+function PopulateProblems (callback) {
   const utilsFolder = path.join(__dirname, '..', 'utils')
   const seedFile = path.join(utilsFolder, '.seed.tar.bz2')
   const tmpSeedFolder = path.join(utilsFolder, 'tmp')
   dbs.redisClient.sismember(globals._name, globals.SEEDED, (err, seeded) => {
     if (seeded) {
       console.log('Already seeded before.')
-      return callback()
+      return callback && callback()
     }
     console.log('Seeding application... This might take a few minutes.')
     untar(seedFile, utilsFolder, () => {
@@ -76,9 +76,8 @@ function populate (callback) {
   })
 }
 
-function populateAndIndexProblems () {
+function IndexProblems (callback) {
   async.waterfall([
-    populate,
     (next) => {
       Problem.find({}, next)
     },
@@ -92,12 +91,13 @@ function populateAndIndexProblems () {
     }
   ], () => {
     console.log('Finished adding problems to index.')
+    callback && callback()
   })
 }
 
 module.exports = function (callback) {
   if (process.env.NODE_ENV === 'development') {
-    populateAndIndexProblems()
+    PopulateProblems(() => {})
   }
-  callback && callback()
+  IndexProblems(callback)
 }
