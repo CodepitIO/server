@@ -34,7 +34,7 @@ app.directive('mrtPdf', ['$window', function ($window) {
       function getScaleToFit () {
         var viewport = page.getViewport(1)
         var clientRect = element[0].getBoundingClientRect()
-        return Math.max(1.0, clientRect.width / viewport.width * PX_TO_PT)
+        return Math.min(1.8, Math.max(1.0, clientRect.width / viewport.width * PX_TO_PT))
       }
 
       function drawPage () {
