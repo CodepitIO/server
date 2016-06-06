@@ -20,9 +20,9 @@
           </md-not-found>
         </md-autocomplete>
         <md-subheader class="md-no-sticky" style="margin-top: 5px;">Problemas</md-subheader>
-        <p ng-if="!problems.length" class="informative">Você deve inserir ao menos um problema.</p>
-        <md-list ui-sortable="sortableOptions" ng-model="problems">
-          <md-list-item class="md-3-line" ng-repeat="problem in problems">
+        <p ng-if="!settingsState.contest.problems.length" class="informative">Você deve inserir ao menos um problema.</p>
+        <md-list ui-sortable="sortableOptions" ng-model="settingsState.contest.problems">
+          <md-list-item class="md-3-line" ng-repeat="problem in settingsState.contest.problems">
             <div class="md-list-item-text move-handle" layout="column" flex="5">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </div>
@@ -44,7 +44,7 @@
           </md-list-item>
         </md-list>
         <div class="form-group">
-          <button type="submit" class="btn btn-block data-button" ng-click="settingsState.nextTab()" ng-disabled="problems.length === 0">Definir opções &#8594;</button>
+          <button type="submit" class="btn btn-block data-button" ng-click="settingsState.nextTab()" ng-disabled="settingsState.contest.problems.length === 0">Definir opções &#8594;</button>
         </div>
       </form>
     </div>

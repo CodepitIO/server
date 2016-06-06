@@ -109,7 +109,7 @@ app.directive('mrtDisplayTime', function () {
       '&month={{date.getUTCMonth()+1}}&year={{date.getUTCFullYear()}}&' +
       'hour={{date.getUTCHours()}}&min={{date.getUTCMinutes()}}&sec={{date.getUTCSeconds()}}">' +
       "<span>{{date | amUtc | amLocal | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</span>" +
-      "<sup>UTC{{date | amDateFormat:'Z' | mrtTimezoneStrap}}</sup></a>",
+      "<sup>UTC{{date | amUtc | amLocal | amDateFormat:'Z' | mrtTimezoneStrap}}</sup></a>",
     controller: [
       '$scope',
       function ($scope) {

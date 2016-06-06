@@ -1,32 +1,49 @@
-<div ng-controller="SettingsOptionsController" class="contest-settings-container">
+<div ng-controller="SettingsDataController" class="contest-settings-container">
   <div layout="column" flex="60" class="settings-options">
     <form name="form" novalidate>
       <md-subheader>Frozen&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <small>O <b>frozen</b> define o momento da competição em que o placar<br>congela, e o competidor só tem acesso ao resultado de suas<br>próprias submissões. Nas competições clássicas, o frozen<br>começa na última hora da competição.</small>
+            <p>O <b>frozen</b> define o momento da competição em que o placar<br>congela, e o competidor só tem acesso ao resultado de suas<br>próprias submissões. Nas competições clássicas, o frozen<br>começa na última hora da competição.</p>
           </md-tooltip>
         </i>
       </md-subheader>
       <div layout="row">
-        <div class="settings-switch" layout="row" layout-align="center center" flex>
+        <div class="settings-switch" layout="row" layout-align="center center" flex="40">
           <div><span>não</span></div>
           <div>
-            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasFrozen" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end"></md-switch>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasFrozen" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end" ng-change="settingsState.validateTimeRange()"></md-switch>
           </div>
           <div><span>sim</span></div>
         </div>
-        <div flex>
-          <uib-timepicker
-            class="time-input"
-            show-spinners="false"
-            ng-model="settingsState.contest.date_start"
-            ng-change="validateTimeRange()"
-            hour-step="1"
-            minute-step="5"
-            show-meridian="false"
-            required ng-disabled="true">
-          </uib-timepicker>
+        <div layout="column" ng-if="settingsState.contest.options.hasFrozen">
+          <div class="form-group" layout="row">
+            <input
+              show-button-bar="false"
+              placeholder="Início do frozen"
+              class="data-input data-calendar-input"
+              uib-datepicker-popup="EEE, d/MMM/yyyy"
+              is-open="opened.frozen"
+              datepicker-options="options"
+              ng-model="settingsState.contest.frozen_time"
+              ng-change="settingsState.validateTimeRange()"
+              ng-click="openDatepicker('frozen')"
+              readonly/>
+            <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('frozen')"><i class="fa fa-calendar"></i></button>
+            <uib-timepicker
+              class="time-input"
+              show-spinners="false"
+              ng-model="settingsState.contest.frozen_time"
+              ng-change="settingsState.validateTimeRange()"
+              hour-step="1"
+              minute-step="5"
+              show-meridian="false"
+              required>
+            </uib-timepicker>
+          </div>
+          <div>
+            <small><b>Duração do frozen</b>: {{(settingsState.contest.date_end - settingsState.contest.frozen_time) / 60000 | formatDuration}}</small>
+          </div>
         </div>
       </div>
       <small class="error" ng-show="!settingsState.contest.date_start || !settingsState.contest.date_end">* você deve configurar o início e o fim da competição para poder definir esta opção</small>
@@ -36,29 +53,46 @@
       <md-subheader>Blind&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <small>O <b>blind</b> define o momento da competição em que tudo<br>congela, e o competidor não tem mais acesso a nenhum<br>resultado. Nas competições clássicas, o blind começa<br>nos últimos 15 minutos de competição.</small>
+            <p>O <b>blind</b> define o momento da competição em que tudo<br>congela, e o competidor não tem mais acesso a nenhum<br>resultado. Nas competições clássicas, o blind começa<br>nos últimos 15 minutos de competição.</p>
           </md-tooltip>
         </i>
       </md-subheader>
       <div layout="row">
-        <div class="settings-switch" layout="row" layout-align="center center" flex>
+        <div class="settings-switch" layout="row" layout-align="center center" flex="40">
           <div><span>não</span></div>
           <div>
-            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasBlind" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end"></md-switch>
+            <md-switch class="md-primary" ng-model="settingsState.contest.options.hasBlind" ng-disabled="!settingsState.contest.date_start || !settingsState.contest.date_end" ng-change="settingsState.validateTimeRange()"></md-switch>
           </div>
           <div><span>sim</span></div>
         </div>
-        <div flex>
-          <uib-timepicker
-            class="time-input"
-            show-spinners="false"
-            ng-model="settingsState.contest.date_start"
-            ng-change="validateTimeRange()"
-            hour-step="1"
-            minute-step="5"
-            show-meridian="false"
-            required ng-disabled="true">
-          </uib-timepicker>
+        <div layout="column" ng-if="settingsState.contest.options.hasBlind">
+          <div class="form-group" layout="row">
+            <input
+              show-button-bar="false"
+              placeholder="Início do blind"
+              class="data-input data-calendar-input"
+              uib-datepicker-popup="EEE, d/MMM/yyyy"
+              is-open="opened.blind"
+              datepicker-options="options"
+              ng-model="settingsState.contest.blind_time"
+              ng-change="settingsState.validateTimeRange()"
+              ng-click="openDatepicker('blind')"
+              readonly/>
+            <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('blind')"><i class="fa fa-calendar"></i></button>
+            <uib-timepicker
+              class="time-input"
+              show-spinners="false"
+              ng-model="settingsState.contest.blind_time"
+              ng-change="settingsState.validateTimeRange()"
+              hour-step="1"
+              minute-step="5"
+              show-meridian="false"
+              required>
+            </uib-timepicker>
+          </div>
+          <div>
+            <small><b>Duração do blind</b>: {{(settingsState.contest.date_end - settingsState.contest.blind_time) / 60000 | formatDuration}}</small>
+          </div>
         </div>
       </div>
       <small class="error" ng-show="!settingsState.contest.date_start || !settingsState.contest.date_end">* você deve configurar o início e o fim da competição para poder definir esta opção</small>
@@ -68,41 +102,41 @@
       <md-subheader>Participação&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <small>Competições públicas não exigem senha, enquanto competições privadas exigem.</small>
+            <p>Competições públicas não exigem senha, enquanto competições privadas exigem.</p>
           </md-tooltip>
         </i>
       </md-subheader>
       <div layout="row">
-        <div class="settings-switch" layout="row" layout-align="center center" flex>
+        <div class="settings-switch" layout="row" layout-align="center center" flex="40">
           <div><span>público</span></div>
           <div>
             <md-switch class="md-primary" ng-model="settingsState.contest.options.isPrivate"></md-switch>
           </div>
           <div><span>privado</span></div>
         </div>
-        <div flex>
-          <input type="password" class="data-input" style="max-width: 160px;" placeholder="Senha" ng-disabled="!settingsState.contest.options.isPrivate"></input>
+        <div class="form-group" style="padding-right: 8px;" ng-if="settingsState.contest.options.isPrivate" flex>
+          <input type="password" name="password" ng-model="settingsState.contest.password" class="data-input" placeholder="Senha" ng-maxlength="100" required></input>
+          <small class="error" ng-show="form.password | mrtHasError">* a senha deve ter entre 1 e 100 caracteres</small>
         </div>
       </div>
       <md-divider></md-divider>
 
-
       <md-subheader>Visualização&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <small>Visualização pública permite que todos possam acessar<br>os problemas e o placar da competição, enquanto que<br>visualização para inscritos permite que apenas os que<br>estão participando tenham acesso.</small>
+            <p>Visualização pública permite que todos possam acessar<br>os problemas e o placar da competição, enquanto que<br>visualização para inscritos permite que apenas os que<br>estão participando tenham acesso.</p>
           </md-tooltip>
         </i>
       </md-subheader>
       <div layout="row">
-        <div class="settings-switch" layout="row" layout-align="center center" flex>
+        <div class="settings-switch" layout="row" layout-align="center center" flex="40">
           <div><span>público</span></div>
           <div>
             <md-switch class="md-primary" ng-model="settingsState.contest.options.watchPrivate"></md-switch>
           </div>
           <div><span>inscritos</span></div>
         </div>
-        <div flex/>
+        <div flex></div>
       </div>
       <md-divider></md-divider>
 
@@ -110,19 +144,22 @@
       <md-subheader>Penalidade&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <small>Quantos minutos de penalidade para cada erro de um<br>dado problema. Esses minutos só são contabilizados<br>quando o problema é aceito.</small>
+            <p>Quantos minutos de penalidade para cada erro de um<br>dado problema. Esses minutos só são contabilizados<br>quando o problema é aceito.</p>
           </md-tooltip>
         </i>
       </md-subheader>
       <div layout="row">
-        <div layout="row" layout-align="center center" flex>
+        <div layout="row" layout-align="center center" flex="40">
           <input type="number" ng-model="settingsState.contest.options.penalty" name="penalty" class="data-input" style="max-width: 100px; text-align: right;" min="0" max="10000" required></input>
           <small style="margin-left: 8px;"><span>minutos</span></small>
         </div>
-        <div flex/>
+        <div flex></div>
       </div>
       <small class="error" ng-show="form.penalty | mrtHasError">* a penalidade deve ser entre 0 e 10000 minutos</small>
 
     </form>
+    <div class="form-group" style="margin-top: 15px;">
+      <button type="submit" class="btn btn-block data-button" ng-click="settingsState.nextTab()" ng-disabled="form.$invalid">Revisar e criar &#8594;</button>
+    </div>
   </div>
 </div>

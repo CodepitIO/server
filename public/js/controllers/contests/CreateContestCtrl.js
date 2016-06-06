@@ -4,7 +4,7 @@ app.controller('CreateContestController', [
   'SettingsState',
   function ($scope, settingsState) {
     $scope.settingsState = settingsState;
-    settingsState.tab = 2;
+    settingsState.tab = 0;
     $scope.changeTab = function(tab) {
       settingsState.tab = tab
     }

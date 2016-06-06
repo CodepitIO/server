@@ -17,18 +17,11 @@
 }
 
 #header .navbar-brand {
-  text-decoration: none;
   height: 75px;
-  display: inline-block;
-  background: #45a7b9;
-  float: left;
-  padding: 0px 10px;
-  position: relative;
-}
-
-#header .navbar-brand img {
-  display: inline-block;
-  margin: 10px 8px;
+  width: 75px;
+  background-image: url("../imgs/logo_new.png");
+  background-size: cover;
+  background-color: #f1f1f1;
 }
 
 #header ul li a.dropdown-toggle {
@@ -71,8 +64,8 @@
 footer {
   margin-top: 40px;
   width: 100%;
-  background: url('../imgs/footer_bg.jpg') no-repeat;
-  background-size: cover;
+  background: url('../imgs/footer_bg.png');
+  background-color: #263238;
 }
 
 #footer-arrow {
@@ -96,17 +89,23 @@ footer ul li{
 footer ul li a{
   display: inline-block;
   color: #A0A0A0;
-  font: 600 14px "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   margin: 40px 20px 30px 20px;
   padding-bottom: 13px;
 }
 
-footer ul li a:hover{
+footer ul li a:hover {
   text-decoration: none;
   color: #f2f2f2;
   border-bottom: solid 3px #45a7b9;
   padding-bottom: 10px;
+}
+
+footer ul li a:focus {
+  text-decoration: none;
+  color: #f2f2f2;
 }
 
 footer ul li a:first-child{
