@@ -25,7 +25,8 @@
     "pindexer": "file:./local_modules/pindexer/",
     "redis": "^2.6.0-2",
     "request": "^2.72.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "socket.io": "^1.4.6"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

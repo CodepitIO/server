@@ -22,4 +22,25 @@
   <div layout="row" ng-repeat="problem in settingsState.contest.problems">
     <div flex><p><b>({{$index | mrtAlphabetize}})</b> <a ui-sref="problems.view({id:problem._id})" target="_blank">{{problem.fullName}}</a></p></div>
   </div>
+  <md-subheader>Opções</md-subheader>
+  <div layout="row">
+    <div flex="10"><b>Frozen</b></div>
+    <div flex><p ng-bind-html="settingsState.contest.frozen_time | mrtFilterTime"></p></div>
+  </div>
+  <div layout="row">
+    <div flex="10"><b>Blind</b></div>
+    <div flex><p ng-bind-html="settingsState.contest.blind_time | mrtFilterTime"></p></div>
+  </div>
+  <div layout="row">
+    <div flex="10"><b>Privacidade</b></div>
+    <div flex><p>{{settingsState.contest.options.isPrivate}}</p></div>
+  </div>
+  <div layout="row">
+    <div flex="10"><b>Visualização</b></div>
+    <div flex><p>{{settingsState.contest.options.watchPrivate}}</p></div>
+  </div>
+  <div layout="row">
+    <div flex="10"><b>Penalidade</b></div>
+    <div flex><p>{{settingsState.contest.options.penalty}} minutos</p></div>
+  </div>
 </div>

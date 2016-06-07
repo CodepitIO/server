@@ -57,3 +57,20 @@ angular.module('General')
       }
     }
   ])
+  .service('SocketState', [
+    function() {
+      var $scope = this
+      var socket = io.connect()
+      var room
+
+      $scope.join = function(newRoom) {
+        socket.emit('join', {
+          previous: room,
+          current: newRoom
+        })
+        room = newRoom
+        console.log('Vai trocar!')
+      }
+      $scope.join('blabla')
+    }
+  ])

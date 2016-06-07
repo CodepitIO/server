@@ -5,7 +5,8 @@ const async = require('async'),
 
 const Problem = require('../models/problem'),
   Dbs = require('./dbs'),
-  Queue = require('./queue')
+  Queue = require('./queue'),
+  Socket = require('./socket')
 
 function IndexProblems (callback) {
   async.waterfall([
@@ -26,6 +27,7 @@ function IndexProblems (callback) {
   })
 }
 
-module.exports = function (callback) {
-  IndexProblems(callback)
+exports.setup = function (server) {
+  IndexProblems()
+  Socket(server)
 }
