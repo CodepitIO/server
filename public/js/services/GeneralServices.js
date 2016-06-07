@@ -72,5 +72,9 @@ angular.module('General')
         console.log('Vai trocar!')
       }
       $scope.join('blabla')
+
+      socket.on('bleh', function(message) {
+        console.log(message)
+      })
     }
   ])
