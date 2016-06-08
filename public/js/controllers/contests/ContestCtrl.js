@@ -3,21 +3,30 @@ angular.module('Contests')
     '$scope',
     '$state',
     '$stateParams',
+    'TimeState',
     'ContestState',
-    function ($scope, $state, $stateParams, contestState) {
+    function ($scope, $state, $stateParams, timeState, contestState) {
       // Redirect to scoreboard when in path /contest
       if ($state.is('contest')) {
         $state.go('.scoreboard')
       }
       $scope.state = $state
+      $scope.contestState = contestState
+      $scope.timeState = timeState
 
-      contestState.reset()
+      contestState.reset($stateParams.id)
 
-      // Fetch contest data to contestService
-      var contestId = $stateParams.id
-      contestState.getScoreboard(contestId, function (err, ok) {
-        if (!ok) $state.go('contests.open')
-        else $scope.contest = contest.data
-      })
+      $scope.displayTop = function() {
+        var current = timeState.server.dynamic
+        return current >= contestState.contest.date_start &&
+          current < contestState.contest.date_end
+      }
+
+      $scope.getPercentage = function() {
+        var perc =
+          100 * (timeState.server.dynamic - contestState.contest.date_start) /
+          (contestState.contest.date_end - contestState.contest.date_start)
+        return perc
+      }
     }
   ])

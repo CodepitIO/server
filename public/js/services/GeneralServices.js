@@ -15,7 +15,7 @@ angular.module('General')
       $interval(function () {
         now = (new Date()).getTime()
         $scope.server.dynamic = new Date(now + diff)
-      }, 5000)
+      }, 1000)
 
       var GetServerTimeAPI = $resource('/api/v1/server/time', {})
       request.send('get', GetServerTimeAPI)({}).then(function (data) {
@@ -60,21 +60,15 @@ angular.module('General')
   .service('SocketState', [
     function() {
       var $scope = this
-      var socket = io.connect()
+      $scope.socket = io.connect()
       var room
 
       $scope.join = function(newRoom) {
-        socket.emit('join', {
+        $scope.socket.emit('join', {
           previous: room,
           current: newRoom
         })
         room = newRoom
-        console.log('Vai trocar!')
       }
-      $scope.join('blabla')
-
-      socket.on('bleh', function(message) {
-        console.log(message)
-      })
     }
   ])

@@ -1,12 +1,10 @@
 angular.module('Post', [])
-angular.module('Catalog', [])
 angular.module('Contests', [])
 angular.module('General', [])
 angular.module('Login', [])
 angular.module('Problems', [])
 angular.module('Submission', [])
 angular.module('Team', [])
-angular.module('Tag', [])
 angular.module('User', [])
 
 angular.module('mrtApp', [
@@ -28,13 +26,11 @@ angular.module('mrtApp', [
   'appRoutes',
 
   'Post',
-  'Catalog',
   'Contests',
   'General',
   'Login',
   'Problems',
   'Submission',
-  'Tag',
   'Team',
   'User'
 ])

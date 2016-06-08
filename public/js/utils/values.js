@@ -23,22 +23,76 @@ angular.module('General')
 		'timus': 'Timus',
 	})
 	.value('Verdict', {
-		'-4': 'Compilando...',
-		'-3': 'Executando...',
-		'-2': 'Compilando...',
-		'-1': 'Enviado para Correção',
-		'0': 'Pendendo',
-		'1': 'Aceito',
-		'2': 'Resposta Errada',
-		'3': 'Tempo Limite Excedido',
-		'4': 'Erro de Compilação',
-		'5': 'Erro durante Execução',
-		'6': 'Limite de Memória Excedido',
-		'7': 'Limite de Escrita Excedido',
-		'8': 'Erro de Formatação',
-		'9': 'Erro Desconhecido',
-		'10': 'Uso de função restrita',
-		'11': 'Submissão inválida',
-		'12': 'Erro de Submissão',
-		'15': 'Rascunho'
+		'-4': {
+			text: 'Compilando...',
+			class: 'white-submission',
+		},
+		'-3': {
+			text: 'Executando...',
+			class: 'white-submission',
+		},
+		'-2': {
+			text: 'Compilando...',
+			class: 'white-submission',
+		},
+		'-1': {
+			text: 'Enviado para Correção...',
+			class: 'white-submission',
+		},
+		'0': {
+			text: 'Pendendo',
+			class: 'white-submission',
+		},
+		'1': {
+			text: 'Aceito',
+			class: 'green-submission',
+		},
+		'2': {
+			text: 'Resposta Errada',
+			class: 'red-submission',
+		},
+		'3': {
+			text: 'Tempo Limite Excedido',
+			class: 'blue-submission',
+		},
+		'4': {
+			text: 'Erro de Compilação',
+			class: 'blue-submission',
+		},
+		'5': {
+			text: 'Erro durante Execução',
+			class: 'blue-submission',
+		},
+		'6': {
+			text: 'Limite de Memória Excedido',
+			class: 'blue-submission',
+		},
+		'7': {
+			text: 'Limite de Escrita Excedido',
+			class: 'blue-submission',
+		},
+		'8': {
+			text: 'Erro de Formatação',
+			class: 'yellow-submission',
+		},
+		'9': {
+			text: 'Erro Desconhecido',
+			class: 'grey-submission',
+		},
+		'10': {
+			text: 'Uso de função restrita',
+			class: 'blue-submission',
+		},
+		'11': {
+			text: 'Submissão inválida',
+			class: 'grey-submission',
+		},
+		'12': {
+			text: 'Erro de Submissão',
+			class: 'grey-submission',
+		},
+		'15': {
+			text: 'Rascunho',
+			class: 'grey-submission',
+		},
 	});

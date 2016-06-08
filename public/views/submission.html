@@ -1,2 +1,35 @@
-<h2 class="page-title col-md-offset-4">Submissão</h2>
-<pre>{{code}}</pre>
+<mrt-breadcrumbs
+  location="'Codepit'"
+  title="'Submissão'">
+</mrt-breadcrumbs>
+
+<mrt-page-wrapper wait-for='submission'>
+  <div layout="row">
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Problema</md-subheader>
+      <p><a ui-sref="problems.view({id:submission.problem._id})">{{submission.problem.fullName}}</a></p>
+    </div>
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Contest</md-subheader>
+      <p><a ui-sref="contest({id:submission.contest._id})">{{submission.contest.name}}</a></p>
+    </div>
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Usuário</md-subheader>
+      <p><a class="unrated-handle" ui-sref="profile({id:submission.contestant._id})">{{submission.contestant.local.username}}</a></p>
+    </div>
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Veredito</md-subheader>
+      <p class="verdict" ng-class="verdict[submission.verdict].class">{{verdict[submission.verdict].text}}</p>
+    </div>
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Data</md-subheader>
+      <mrt-display-time date="submission.date"></mrt-display-time>
+    </div>
+    <div layout="column" layout-align="center center" flex>
+      <md-subheader>Linguagem</md-subheader>
+      <p>{{languages[submission.language]}}</p>
+    </div>
+  </div>
+
+  <pre style="margin-top: 20px;">{{submission.code}}</pre>
+</mrt-page-wrapper>

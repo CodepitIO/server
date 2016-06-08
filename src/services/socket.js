@@ -10,11 +10,7 @@ module.exports = function(server) {
   io.on('connection', (socket) => {
     socket.on('join', (data) => {
       data.previous && socket.leave(data.previous)
-      socket.join(data.current)
-      console.log(data)
+      data.current && socket.join(data.current)
     })
-  })
-  io.on('bleh', (msg) => {
-    console.log(msg)
   })
 }

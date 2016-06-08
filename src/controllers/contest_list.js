@@ -64,8 +64,8 @@ var filters = {
   past: {
     opts: function (req) {
       var last
-      if (req.params.last === '0') last = new Date()
-      else last = new Date(parseInt(req.params.last) || 0)
+      if (req.params.from === '0') last = new Date()
+      else last = new Date(parseInt(req.params.from) || 0)
       return {
         date_end: {
           $lt: last

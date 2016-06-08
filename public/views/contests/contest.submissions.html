@@ -14,18 +14,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="sub in submissions | orderBy: '-date'" class="submission-row" ng-class="'{{getSubmissionClass(sub.verdict)}}'">
-          <td>{{sub.time}}</td>
+        <tr ng-repeat="submission in contestState.submissions | orderBy: '-date'" class="submission-row" ng-class="verdict[submission.verdict].class">
+          <td>{{submission.minutes}}</td>
           <td>
-            <div ng-hide="sub.problem" style="padding-left: 13px;">-</div>
             <div class="balloon">
-              <img ng-src="/imgs/baloes/{{problems[sub.problem].num}}.png" class="balloon-image" />
-              <a ng-href="{{problems[sub.problem].url}}" target="_blank" class="balloon-label">{{problems[sub.problem].letter}}</a>
+              <img ng-src="/imgs/baloes/{{submission.index}}.png" class="balloon-image" />
+              <a ui-sref="problems.view({id:submission.problem})" target="_blank" class="balloon-label">{{submission.index | mrtAlphabetize}}</a>
             </div>
           </td>
-          <td>{{languages[sub.language]}}</td>
-          <td>{{verdictName[sub.verdict]}}&nbsp;<i ng-if="getSubmissionClass(sub.verdict) == 'pending-submission'" class="fa fa-pulse fa-spinner"></i></td>
-          <td colspan="5"><a ui-sref="submission({id:sub._id})"><i class="fa fa-eye"></i></a></td>
+          <td>{{languages[submission.language]}}</td>
+          <td>{{verdict[submission.verdict].text}}&nbsp;<span><md-progress-circular ng-if="submission.verdict <= 0" class="md-accent md-hue-3" style="display: inline-block; top: 5px;" md-mode="indeterminate" md-diameter="20"></md-progress-circular></span></td>
+          <td colspan="5"><a ui-sref="submission({id:submission._id})"><i class="fa fa-eye"></i></a></td>
         </tr>
       </tbody>
     </table>

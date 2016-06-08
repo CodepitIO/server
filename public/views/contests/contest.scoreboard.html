@@ -6,11 +6,10 @@
 	  <tr>
 	    <th>Rank</th>
 	    <th>Nome</th>
-	    <th ng-repeat="problem in problemsArray">
+	    <th ng-repeat="problem in contestState.contest.problems">
 	      <div class="balloon balloon-contest">
 	        <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
-	        <span ng-if="progressBarValue < 0" class="balloon-label">{{alphabet[$index]}}</span>
-	        <a ng-if="progressBarValue >= 0" ng-href="{{problem.url}}" target="_blank" class="balloon-label">{{alphabet[$index]}}</a>
+	        <a ui-sref="problems.view({id:problem._id})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
 	      </div>
 	    </th>
 	    <th>Tempo</th>

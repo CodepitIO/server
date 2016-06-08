@@ -1,57 +1,60 @@
-<div ng-if="timeLeft === 0" class="alert alert-info alert-dismissible" role="alert" style="margin-top:10px;">
+<!-- <div ng-if="timeLeft === 0" class="alert alert-info alert-dismissible" role="alert" style="margin-top:10px;">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	<strong>A competição acabou!</strong> Qualquer submissão feita a partir de agora contará como upsolving - competição que continua rolando após o término da competição principal, mas não conta no placar oficial.
-</div>
+</div> -->
 
-<div layout="row" layout-margin>
+<div layout="row" layout-margin ng-hide="loading">
 	<div flex="10"></div>
 	<div layout="column" flex="55">
-		<form name="submitCodeForm">
+		<form name="form">
 	    <span>Código</span>
-			<ui-codemirror style="text-align: left; cursor: text;" ui-codemirror-opts="editorOptions" style="text-align: left;" ui-refresh="editorOptions.mode" ng-model="submission.code"></ui-codemirror>
+			<ui-codemirror style="text-align: left; cursor: text;" ui-codemirror-opts="editorOptions" style="text-align: left;" ui-refresh="editorOptions.mode" ng-model="contestState.submission.code" ng-required="!contestState.submission.codefile"></ui-codemirror>
 			<div layout="row" layout-align="center center" layout-margin>
 				<div flex="30">
 					<b>OU</b> selecione o arquivo
 				</div>
 				<md-button class="md-raised md-accent" flex="30" type="file" ngf-select
-				ngf-drop ng-model="submission.codefile" ngf-max-files="1" ngf-max-size="'64KB'"
-				ngf-drag-over-class="'md-primary md-hue-1'" ngf-model-invalid="submission.errorfile"
+				ngf-drop ng-model="contestState.submission.codefile" ngf-max-files="1" ngf-max-size="'64KB'"
+				ngf-drag-over-class="'md-primary md-hue-1'" ngf-model-invalid="contestState.submission.errorfile"
 				name="file">
 					&nbsp;&nbsp;Arquivo<md-icon class="material-icons">attach_file</md-icon>
 				</md-button>
 				<div flex="40" layout-align="left center">
-					<i class="md-body-1">{{submission.codefile.name}}</i>
-					<i ng-show="submitCodeForm.file.$error.maxSize">
-						<span>Arquivo muito grande {{submission.errorfile.size / 1000|number:1}}KB: max 64KB</p>
+					<i class="md-body-1">{{contestState.submission.codefile.name}}</i>
+					<i ng-show="form.file.$error.maxSize">
+						<span>Arquivo muito grande {{contestState.submission.errorfile.size / 1000|number:1}}KB: max 64KB</p>
 					</i>
 				</div>
-				<div ngf-src="submission.file" ngf-background="submission.file"></div>
+				<div ngf-src="contestState.submission.file" ngf-background="contestState.submission.file"></div>
 			</form>
 		</div>
 	</div>
 	<div layout="column" flex="25" layout-padding>
 		<md-input-container>
 			<label>Problema</label>
-			<md-select ng-model="submission.problem">
+			<md-select ng-model="contestState.submission.problem">
 				<md-option ng-value="0">(rascunho)</md-option>
-				<md-option ng-repeat="problem in contest.data.problems" ng-value="problem._id">
+				<md-option ng-repeat="problem in contestState.contest.problems" ng-value="problem._id">
 					{{problem | mrtProblemSubmitName : $index}}
 				</md-option>
 			</md-select>
 		</md-input-container>
 		<md-input-container>
       <label>Linguagem</label>
-      <md-select ng-model="submission.language" ng-change="updateTextMode()">
+      <md-select ng-model="contestState.submission.language" ng-change="updateTextMode()">
         <md-option ng-repeat="(id,name) in languages" ng-value="id">
           {{name}}
         </md-option>
       </md-select>
     </md-input-container>
 		<div flex>
-			<md-button class="md-fab md-primary md-hue-2" ng-click="submit()">
+			<md-button class="md-fab md-primary md-hue-2" ng-click="submit()" disabled="false" ng-disabled="form.$invalid || !contestState.submission.problem || !contestState.submission.language">
 			  <md-icon class="material-icons block">send</md-icon>
 			</md-button>
 		</div>
 	</div>
 	<div flex="10"></div>
+</div>
+<div ng-show="loading">
+	<mrt-loading-spinner diameter="200"></mrt-loading-spinner>
 </div>

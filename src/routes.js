@@ -14,12 +14,10 @@ const express = require('express'),
 
 const UserCtrl = require('./controllers/user'),
   PostCtrl = require('./controllers/post'),
-  CatalogCtrl = require('./controllers/catalog'),
-  ContestsCtrl = require('./controllers/contests'),
+  ContestListCtrl = require('./controllers/contest_list'),
   ProblemsCtrl = require('./controllers/problems'),
-  SingleContestCtrl = require('./controllers/single_contest'),
+  ContestCtrl = require('./controllers/contest'),
   SubmissionCtrl = require('./controllers/submission'),
-  TagCtrl = require('./controllers/tag'),
   TeamCtrl = require('./controllers/team')
 
 const User = require('./services/authorization'),
@@ -61,7 +59,12 @@ function APIRoutes () {
   // router.get('/team/get/:id', TeamCtrl.getById)
 
   // contests
-  router.get('/contest/list/:type/last/:last', ContestsCtrl.getList)
+  router.get('/contest/list/:type/from/:from', ContestListCtrl.getList)
+  router.get('/contest/:id/data', ContestCtrl.getData)
+  router.post('/contest/:id/submitfile', User.is('logged'), SubmissionCtrl.extractFile, SubmissionCtrl.submit)
+  router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.submit)
+  router.get('/contest/:id/submissions/user', User.is('logged'), SubmissionCtrl.getUserContestSubmissions)
+  router.get('/contest/:id/submission/timestamp/:timestamp', User.is('logged'), SubmissionCtrl.getVerdictByTimestamp)
   // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
   // router.post('/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit)
   // router.post('/contest/:id/join', isLoggedIn, SingleContestCtrl.join)
@@ -76,17 +79,7 @@ function APIRoutes () {
   router.get('/problems/:id', ProblemsCtrl.getProblemMetadata)
 
   // submissions
-  // router.post('/submission/send', isLoggedIn, SubmissionCtrl.send)
-  // router.post('/submission/sendfile', isLoggedIn, SubmissionCtrl.extractFile, SubmissionCtrl.send)
-  // router.get('/submission/:id', SubmissionCtrl.getById)
-
-  // tags
-  // router.get('/tags/create/:name', isLoggedIn, TagCtrl.createTag)
-  // router.get('/tags', TagCtrl.getTags)
-
-  // catalog
-  // router.post('/catalog/update', isLoggedIn, CatalogCtrl.update)
-  // router.post('/catalog/get', isLoggedIn, CatalogCtrl.get)
+  router.get('/submission/:id', SubmissionCtrl.getById)
 
   return router
 }
@@ -130,7 +123,7 @@ exports.configure = (app) => {
   app.use(bodyParser.json())
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(expressValidator())
+  app.use(expressValidator({ customValidators: Utils.validators }))
   app.use(methodOverride('X-HTTP-Method-Override'))
   app.use(express.static(__dirname + '/../public'))
 

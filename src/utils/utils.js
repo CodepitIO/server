@@ -31,7 +31,7 @@ exports.isValidId = function (req, res, next) {
 function ValidatorCtor(fields) {
   _.each(fields, (fn, key) => {
     this[_.camelCase(['see', key])] = function() {
-      fn.call(this.check(key))
+      fn.apply(this.check(key), _.toArray(arguments))
       return this
     }
   })
@@ -41,11 +41,34 @@ function ValidatorCtor(fields) {
   this.notOk = function() {
     return !!this.validationErrors()
   }
+  this.asyncOk = function() {
+    return this.asyncValidationErrors()
+  }
 }
 
 exports.validateChain = (fields) => {
   let chain = new ValidatorCtor(fields)
   return (req) => {
     return _.assign(chain, req)
+  }
+}
+
+const Contest = require('../models/contest')
+exports.validators = {
+  canSubmitToContest: (contestId, problemId, userId) => {
+    return new Promise((resolve, reject) => {
+      Contest.findById(contestId, (err, contest) => {
+        if (err || !contest) {
+          return reject()
+        }
+        if (!contest.problemInContest(problemId) || !contest.userInContest(userId)) {
+          return reject()
+        }
+        if (contest.date_start > new Date()) {
+          return reject()
+        }
+        return resolve()
+      })
+    })
   }
 }

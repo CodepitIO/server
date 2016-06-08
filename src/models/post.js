@@ -13,7 +13,6 @@ let schema = mongoose.Schema({
   },
   title: String,
   body: String,
-  tags: [String],
   page: String,
 }, {
   timestamps: true

@@ -36,6 +36,16 @@
   width: 100%;
 }
 
+#header .dropdown-menu {
+  width: 100%;
+}
+
+#header .dropdown-menu li a {
+  padding-top: 10px;
+  height: 40px;
+  text-align: center;
+}
+
 #header .navbar-toggle {
   margin-top: 18px;
 }

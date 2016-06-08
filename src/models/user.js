@@ -7,6 +7,8 @@ const mongoose = require('mongoose'),
 const Team = require('./team'),
   ValidateChain = require('../utils/utils').validateChain
 
+const ACCESS = require('../config/constants').ACCESS
+
 // define the schema for our user model
 let schema = mongoose.Schema({
   local: {
@@ -19,8 +21,8 @@ let schema = mongoose.Schema({
   access: {type: Number, default: 0}
 })
 
-schema.index({ username: 1 }, { unique: true })
-schema.index({ email: 1 }, { unique: true })
+schema.index({ 'local.username': 1 }, { unique: true })
+schema.index({ 'local.email': 1 }, { unique: true })
 
 schema.statics.validateChain = ValidateChain({
   name: function() {
@@ -62,6 +64,10 @@ schema.methods.countEmptyTeam = function() {
 
 schema.virtual('local.fullName').get(function() {
   return `${this.local.name} ${this.local.surname}`
+})
+
+schema.virtual('isAdmin').get(function() {
+  return this.access >= ACCESS.ADMIN
 })
 
 schema.virtual('local.emailHash').get(function() {

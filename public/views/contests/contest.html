@@ -2,31 +2,22 @@
   <div class="row">
     <div class="col-md-12">
       <span>Codepit / Competições</span>
-      <h2>{{ contest.name }}</h2>
+      <h2>{{ contestState.contest.name }}</h2>
     </div>
   </div>
 </div>
 
-<div id='contest-view-container'>
+<div class="contest-view">
   <mrt-page-wrapper wait-for='!loadingData' align='center'>
-    <div class="row">
-      <div class="col-sm-3" id="contest-view-time">
-        <h4 ng-show="!loadingData && timeLeft > 0">Tempo: {{progressBarValue | formatTime}}</h4>
-        <h4 ng-show="!loadingData && timeLeft <= 0">Tempo: {{timeline.moment | formatDuration}}</h4>
+    <div class="row" style="margin-bottom: 20px;" ng-if="displayTop()">
+      <div style="margin-bottom: 10px;">
+        <span style="font-weight: 200; font-size: 18px;">Tempo: {{(timeState.server.dynamic - contestState.contest.date_start) / 60000 | formatDuration}}</span>
       </div>
-
-      <div class="col-sm-6" id="contest-view-status"></div>
-
-      <div class="col-sm-3" id="contest-view-upsolving">
-        <h4 ng-if="timeLeft > 0 && !loadingData && progressBarValue >= 0">restam {{timeLeft | formatTime}}</h4>
-        <p ng-if="timeLeft <= 0 && !loadingData && progressBarValue >= 0"><input type="checkbox" ng-click="toggleUpsolving()">mostrar upsolving<span class="question-mark" data-toggle="tooltip" title="Upsolving é uma forma de você poder submeter questões após a competição ter terminado. Porém, não conta para o placar principal." tooltip><i class="fa fa-question-circle"></i></span>&nbsp;</p>
-      </div>
-    </div>
-
-    <div class="row" style="margin-bottom: 20px;">
       <div class="col-sm-12">
-        <!-- <div ng-show="!loadingData && timeLeft <= 0" id="blue" ui-slider="timeline.options" ng-model="timeline.moment"></div> -->
-        <md-progress-linear md-theme="progressBarTheme" ng-class="getProgressBarClass()" md-mode="determinate" ng-value="test"></md-progress-linear>
+        <md-progress-linear md-theme="progressBarTheme" md-mode="determinate" ng-value="getPercentage()"></md-progress-linear>
+      </div>
+      <div>
+        <span style="float: right; font-weight: 200;">restam {{(contestState.contest.date_end - timeState.server.dynamic) / 60000 | formatDuration}}</span>
       </div>
     </div>
 
@@ -36,7 +27,6 @@
           <li ng-class="{active: state.current.name === 'contest.scoreboard'}"><a ui-sref=".scoreboard">Placar</a></li>
           <li ng-class="{active: state.current.name === 'contest.submit'}"><a ui-sref=".submit">Submeter</a></li>
           <li ng-class="{active: state.current.name === 'contest.submissions'}"><a ui-sref=".submissions">Submissões</a></li>
-          <li ng-class="{active: state.current.name === 'contest.catalog'}"><a ui-sref=".catalog">Catálogo</a></li>
         </ul>
         <div class="tab-content">
           <div ui-view></div>

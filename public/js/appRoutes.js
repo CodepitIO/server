@@ -58,26 +58,21 @@ angular.module('appRoutes', []).config([
       .state('contest', {
         url: '^/contest/:id',
         templateUrl: 'views/contests/contest.html',
-        controller: 'ContestInstanceController'
+        controller: 'ContestController'
       })
       .state('contest.scoreboard', {
         templateUrl: 'views/contests/contest.scoreboard.html',
-        controller: 'ScoreboardController'
+        controller: 'ContestScoreboardController'
       })
       .state('contest.submit', {
         url: '/submit',
         templateUrl: 'views/contests/contest.submit.html',
-        controller: 'SubmitController'
+        controller: 'ContestSubmitController'
       })
       .state('contest.submissions', {
         url: '/submissions',
         templateUrl: 'views/contests/contest.submissions.html',
-        controller: 'SubmissionsController'
-      })
-      .state('contest.catalog', {
-        url: '/catalog',
-        templateUrl: 'views/contests/contest.catalog.html',
-        controller: 'CatalogController'
+        controller: 'ContestSubmissionsController'
       })
       .state('register', {
         url: '^/register',

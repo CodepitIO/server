@@ -2,16 +2,17 @@ var app = angular.module('Submission')
 app.controller('SubmissionController', [
   '$scope',
   '$stateParams',
-  'SubmissionFactory',
-  function ($scope, $stateParams, submission) {
-    $scope.code = ''
-    var getSubmission = function () {
-      submission.get({
-        id: $stateParams.id
-      }).then(function (data) {
-        $scope.code = data.code
-      })
-    }
-    getSubmission()
+  'Verdict',
+  'Languages',
+  'SubmissionAPI',
+  function ($scope, $stateParams, Verdict, Languages, submissionAPI) {
+    $scope.submission = null
+    $scope.verdict = Verdict
+    $scope.languages = Languages
+    submissionAPI.get({
+      id: $stateParams.id
+    }).then(function (data) {
+      $scope.submission = data.submission
+    })
   }
 ])
