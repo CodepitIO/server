@@ -10,10 +10,10 @@ lib-cov
 .dockerignore
 .gitignore
 .git
-.Dockerfile.*
 *.swp
 *.bower.json.md5
 *.package.json.md5
+test/
 
 pids
 logs

@@ -9,6 +9,7 @@ lib-cov
 *.DS_Store
 *.swp
 src/utils/tmp/
+test/
 
 pids
 logs

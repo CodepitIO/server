@@ -13,6 +13,7 @@ exports.getData = (req, res) => {
     path: 'problems',
     select: '_id name'
   }).then((contest) => {
+    console.log('oi')
     if (!contest) {
       return res.status(400).send()
     }

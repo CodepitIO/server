@@ -8,6 +8,7 @@
     "async": "^2.0.0-rc.5",
     "bcrypt": "^0.8.6",
     "body-parser": "^1.15.1",
+    "chai": "^3.5.0",
     "compression": "^1.6.2",
     "connect-roles": "^3.1.2",
     "cookie-parser": "^1.4.2",
