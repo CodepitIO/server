@@ -132,6 +132,7 @@ app.controller('SingleContestController', [
 		$scope.loadingData = true;
 		$scope.submittingProblem = false;
 		$scope.pendingSubmissions = {};
+		$scope.dirt = {};
 		$scope.verdictName = {
 			"-4": "Compilando...",
 			"-3": "Executando...",
@@ -282,6 +283,20 @@ app.controller('SingleContestController', [
 					}
 				}
 				$scope.ord = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores);
+				for (var c in $scope.contestants) {
+					$scope.dirt[c] = 0;
+				}
+				for (c in $scope.scores) {
+					var subs = $scope.scores[c];
+					var wrongs = 0, accs = 0;
+					for (var s in subs) {
+						if (subs[s].status === 1) {
+							wrongs += subs[s].errorCount;
+							accs ++;
+						}
+					}
+					if (accs > 0) $scope.dirt[c] = (100.0 * wrongs) / (wrongs + accs);
+				}
 				if (!$scope.$$phase) {
 					$scope.$digest();
 				}
@@ -340,6 +355,21 @@ app.controller('SingleContestController', [
 					if ($scope.timeLeft === 0) {
 						$scope.scores2 = data.upsolvingScores;
 						$scope.ord2 = singleContest.getLeadershipOrder($scope.contestants, $scope.problems, $scope.scores2);
+					}
+
+					for (var c in $scope.contestants) {
+						$scope.dirt[c] = 0;
+					}
+					for (c in $scope.scores) {
+						var subs = $scope.scores[c];
+						var wrongs = 0, accs = 0;
+						for (var s in subs) {
+							if (subs[s].status === 1) {
+								wrongs += subs[s].errorCount;
+								accs ++;
+							}
+						}
+						if (accs > 0) $scope.dirt[c] = (100.0 * wrongs) / (wrongs + accs);
 					}
 
 					if ($scope.timeLeft > 0) {
