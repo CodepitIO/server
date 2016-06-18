@@ -37,7 +37,7 @@ mongoose.connect(db.url); // connect to our database
 // passport authentication
 app.use(cookieParser());
 require('./config/passport')(passport); // pass passport for configuration
-app.use(connect.cookieSession({ secret: 'dDZDW!$%@!d2vDg4OSAbsadeA2$k%ozdc@$!qdz', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
+app.use(connect.cookieSession({ secret: 'dDZDW!$%OKDSAWJEODSA23$k%ozdc@$!qdz', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
