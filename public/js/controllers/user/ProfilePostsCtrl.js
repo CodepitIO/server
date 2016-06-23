@@ -27,19 +27,19 @@ angular.module('User')
   .controller('ProfilePostsDialogController', [
     '$scope',
     '$mdDialog',
-    'PostFacade',
+    'PostAPI',
     'ScopeData',
-    function ($scope, $mdDialog, post, scopeData) {
+    function ($scope, $mdDialog, PostAPI, post) {
       $scope.post = {
-        title: scopeData && post.title || '',
-        body: scopeData && post.body || ''
+        title: post && post.title || '',
+        body: post && post.body || ''
       }
-      $scope.create = (post.create === true)
+      $scope.create = (post && post.create === true)
       $scope.cancel = function () {
         $mdDialog.cancel()
       }
       $scope.submit = function () {
-        post.post($scope.post)
+        PostAPI.post($scope.post)
       }
     }
   ])

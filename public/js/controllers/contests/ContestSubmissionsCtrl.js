@@ -4,8 +4,8 @@ angular.module('Contests')
     'Languages',
     'Verdict',
     'ContestState',
-    function ($scope, Languages, Verdict, contestState) {
-      $scope.contestState = contestState
+    function ($scope, Languages, Verdict, ContestState) {
+      $scope.ContestState = ContestState
       $scope.languages = Languages
       $scope.verdict = Verdict
     }

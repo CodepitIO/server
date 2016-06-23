@@ -4,17 +4,18 @@ angular.module('User')
     '$state',
     '$stateParams',
     'UserState',
-    'SocketState',
-    function ($scope, $state, $stateParams, userState, socketState) {
-      if (!$stateParams.id) {
-        $state.go('.data', {
-          id: userState.user._id
-        }, {
-          notify: false
-        })
-      } else if ($state.is('profile')) {
-        $state.go('.data')
-      }
+    'UserAPI',
+    function ($scope, $state, $stateParams, UserState, UserAPI) {
       $scope.state = $state
+      $scope.UserState = UserState
+      $scope.id = $stateParams.id
+      if ($scope.id !== UserState.getId()) {
+        UserAPI.get($scope.id, function(user) {
+          $scope.user = user
+          $scope.usernameTitle = user.username
+        })
+      } else {
+        $scope.usernameTitle = 'Seu perfil'
+      }
     }
   ])

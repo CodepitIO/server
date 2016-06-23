@@ -25,6 +25,8 @@ var teamSchema = mongoose.Schema({
     type: ObjectId,
     ref: 'User'
   }
+}, {
+  timestamps: true
 })
 
 // utils ========================

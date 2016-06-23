@@ -1,9 +1,9 @@
 var app = angular.module('Contests')
 app.controller('SettingsProblemsController', [
   '$scope',
-  'ProblemsFacade',
+  'ProblemsAPI',
   'SettingsState',
-  function ($scope, problems, settingsState) {
+  function ($scope, ProblemsAPI, settingsState) {
     var problemIds = []
     $scope.searchText = ''
     $scope.selectedProblem = null
@@ -24,7 +24,7 @@ app.controller('SettingsProblemsController', [
         $scope.searchText = $scope.searchText.substring(0, 50)
       }
       var txt = $scope.searchText
-      return problems.filter($scope.searchText, problemIds).then(function (data) {
+      return ProblemsAPI.filter($scope.searchText, problemIds).then(function (data) {
         return data.list
       })
     }

@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="submission in contestState.submissions | orderBy: '-date'" class="submission-row" ng-class="verdict[submission.verdict].class">
+        <tr ng-repeat="submission in ContestState.submissions | orderBy: '-date'" class="submission-row" ng-class="verdict[submission.verdict].class">
           <td>{{submission.minutes}}</td>
           <td>
             <div class="balloon">

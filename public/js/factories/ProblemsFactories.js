@@ -1,29 +1,22 @@
 angular.module('Problems')
   .factory('ProblemsAPI', [
-    '$http',
-    '$resource',
-    '$q',
-    'RequestAPI',
-    function ($http, $resource, $q, request) {
-      return {
-        filter: request.send('post', $resource('/api/v1/problems/filter')),
-        get: request.send('get', $resource('/api/v1/problems/:id'))
+   '$resource',
+   'Request',
+    function ($resource, Request) {
+      var API = {
+        filter: Request.send('post', $resource('/api/v1/problems/filter')),
+        get: Request.send('get', $resource('/api/v1/problems/:id'))
       }
-    }
-  ])
-  .factory('ProblemsFacade', [
-    'ProblemsAPI',
-    function (ProblemsAPI) {
       return {
         get: function (id, callback) {
-          ProblemsAPI.get({
+          API.get({
             id: id
           }).then(function (data) {
             return callback(null, data)
           })
         },
         filter: function (text, problems, callback) {
-          return ProblemsAPI.filter({
+          return API.filter({
             text: text,
             problems: problems
           })

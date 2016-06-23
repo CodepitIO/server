@@ -27,6 +27,8 @@ let problemSchema = mongoose.Schema({
     type: Boolean,
     default: false
   }
+}, {
+  timestamps: true
 })
 
 problemSchema.index({
@@ -34,6 +36,23 @@ problemSchema.index({
   id: 1
 }, {
   unique: true
+})
+
+problemSchema.post('save', (problem, next) => {
+  if (problem.fullName && problem.url && problem.originalUrl) return next()
+  let oj = problem.oj
+  let id = problem.id
+  let name = problem.name
+  problem.fullName = "[" + Defaults[oj].name + " " + id + "] " + name
+  if (!problem.url) {
+    problem.url = Defaults[oj].url + Defaults[oj].getProblemPath(id)
+  }
+  if (problem.isPdf) {
+    problem.originalUrl = Defaults[oj].url + Defaults[oj].getProblemPdfPath(id)
+  } else {
+    problem.originalUrl = Defaults[oj].url + Defaults[oj].getProblemPath(id)
+  }
+  problem.save(next)
 })
 
 module.exports = mongoose.model('Problem', problemSchema)

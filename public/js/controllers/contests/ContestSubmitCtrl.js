@@ -4,9 +4,9 @@ angular.module('Contests')
     'Notification',
     'Languages',
     'TextEditorLanguageMode',
-    'ContestFacade',
+    'ContestAPI',
     'ContestState',
-    function ($scope, Notification, Languages, CodemirrorMode, contest, contestState) {
+    function ($scope, Notification, Languages, CodemirrorMode, ContestAPI, ContestState) {
       $scope.editorOptions = {
         theme: 'blackboard',
         lineWrapping: true,
@@ -14,24 +14,24 @@ angular.module('Contests')
         mode: ''
       }
       $scope.languages = Languages
-      $scope.contestState = contestState
+      $scope.ContestState = ContestState
 
       $scope.updateTextMode = function () {
-        $scope.editorOptions.mode = CodemirrorMode[$scope.contestState.submission.language || '']
+        $scope.editorOptions.mode = CodemirrorMode[$scope.ContestState.submission.language || '']
       }
 
       $scope.loading = false
       $scope.submit = function () {
         $scope.loading = true
-        contest.submit(contestState.id, contestState.submission, function (err, submission) {
+        ContestAPI.submit(ContestState.id, ContestState.submission, function (err, submission) {
           $scope.loading = false
           if (submission) {
-            contestState.submission.code =
-            contestState.submission.language =
-            contestState.submission.codefile =
-            contestState.submission.problem = null
+            ContestState.submission.code =
+              ContestState.submission.language =
+              ContestState.submission.codefile =
+              ContestState.submission.problem = null
             $scope.updateTextMode()
-            contestState.pushSubmission(submission)
+            ContestState.pushSubmission(submission)
           }
         })
       }

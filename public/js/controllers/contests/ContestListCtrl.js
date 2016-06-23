@@ -4,9 +4,9 @@ angular.module('Contests')
     '$rootScope',
     '$location',
     'TimeState',
-    'ContestFacade',
+    'ContestAPI',
     'UserState',
-    function ($scope, $rootScope, $location, timeState, contest, userState) {
+    function ($scope, $rootScope, $location, TimeState, ContestAPI, UserState) {
       $scope.loadingData = true
       $scope.contests = []
       $scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open'
@@ -37,7 +37,7 @@ angular.module('Contests')
         if (!$scope.loadingData && $scope.filterType !== 'past') return
 
         $scope.loadingNewPage = true
-        contest.getList($scope.filterType, lastQueryDate, function (err, contests) {
+        ContestAPI.getList($scope.filterType, lastQueryDate, function (err, contests) {
           if (contests.length > 0) {
             lastQueryDate = new Date(_.last(contests).date_end).getTime()
           }
@@ -45,7 +45,7 @@ angular.module('Contests')
             var start = contests[i].date_start = new Date(contests[i].date_start)
             var end = contests[i].date_end = new Date(contests[i].date_end)
             contests[i].duration = Math.floor((end - start) / 1000)
-            contests[i].isAdmin = (userState.user && contests[i].author === userState.user._id)
+            contests[i].isAdmin = (contests[i].author === UserState.getId())
             $scope.contests.push(contests[i])
           }
           $scope.loadingData = $scope.loadingNewPage = false
@@ -59,15 +59,15 @@ angular.module('Contests')
       }
 
       $scope.isInFuture = function (date) {
-        return new Date(date) > timeState.server.static
+        return new Date(date) > TimeState.server.static
       }
 
       $scope.isInPast = function (date) {
-        return new Date(date) <= timeState.server.static
+        return new Date(date) <= TimeState.server.static
       }
 
       $scope.isNewContest = function (date) {
-        return ((timeState.server.static - new Date(date)) / 60000) <= 10
+        return ((TimeState.server.static - new Date(date)) / 60000) <= 10
       }
     }
   ])

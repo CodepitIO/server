@@ -1,5 +1,5 @@
 angular.module('General')
-  .factory('RequestAPI', [
+  .factory('Request', [
     '$q',
     '$timeout',
     'Notification',

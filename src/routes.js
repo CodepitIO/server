@@ -5,7 +5,6 @@ const express = require('express'),
   mongo_express = require('mongo-express/lib/middleware'),
   bodyParser = require('body-parser'),
   expressValidator = require('express-validator'),
-  fs = require('fs'),
   methodOverride = require('method-override'),
   cookieParser = require('cookie-parser'),
   cookieSession = require('cookie-session'),
@@ -28,20 +27,23 @@ function APIRoutes () {
   let router = express.Router()
 
   router.use(Recaptcha.middleware())
+  router.param('id', Utils.isValidId)
 
   // utils
   router.get('/server/time', Utils.getTime)
 
   // user
+  router.get('/user/status', UserCtrl.status)
   router.post('/user/register', UserCtrl.register)
   router.post('/user/edit', User.is('logged'), UserCtrl.edit)
   router.post('/user/login', UserCtrl.login)
   router.get('/user/logout', User.is('logged'), UserCtrl.logout)
   router.get('/user/check/username/:username', UserCtrl.checkUsername)
   router.get('/user/check/email/:email', UserCtrl.checkEmail)
+  router.get('/user/:id', UserCtrl.get)
 
   // post
-  router.post('/post/', User.is('logged'), PostCtrl.post)
+  router.post('/post', User.is('logged'), PostCtrl.post)
   router.get('/post/user/get/:id', PostCtrl.getByUser)
   router.get('/post/user/count/:id', PostCtrl.getCountByUser)
   router.get('/post/page/get/:name', PostCtrl.getByPage)
@@ -60,11 +62,10 @@ function APIRoutes () {
 
   // contests
   router.get('/contest/list/:type/from/:from', ContestListCtrl.getList)
-  router.get('/contest/:id/data', ContestCtrl.getData)
-  router.post('/contest/:id/submitfile', User.is('logged'), SubmissionCtrl.extractFile, SubmissionCtrl.submit)
-  router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.submit)
+  router.get('/contest/:id/metadata', ContestCtrl.getMetadata)
+  router.get('/contest/:id/events', ContestCtrl.getEvents)
   router.get('/contest/:id/submissions/user', User.is('logged'), SubmissionCtrl.getUserContestSubmissions)
-  router.get('/contest/:id/submission/timestamp/:timestamp', User.is('logged'), SubmissionCtrl.getVerdictByTimestamp)
+  router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.tryExtractFile, SubmissionCtrl.submit)
   // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
   // router.post('/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit)
   // router.post('/contest/:id/join', isLoggedIn, SingleContestCtrl.join)
@@ -131,8 +132,6 @@ exports.configure = (app) => {
   app.use(passport.initialize())
   app.use(passport.session())
   app.use(User.middleware())
-
-  app.param('id', Utils.isValidId)
 
   app.use('/admin', AdminRoutes())
   app.use('/admin/mongo', mongo_express(require('./config/mongo_express')))

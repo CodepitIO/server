@@ -7,9 +7,10 @@ module.exports = function (grunt) {
 
     nodemon: {
       all: {
-        script: 'site.js',
+        script: 'main.js',
         options: {
           cwd: __dirname,
+          args: ['--cache'],
           ignore: ['node_modules/**', 'public/**', '**/*.json', 'Gruntfile.js']
         }
       }

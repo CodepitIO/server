@@ -1,5 +1,5 @@
 <div id="user-nav" class="nav navbar-nav navbar-right">
-  <div ng-hide="$root.user">
+  <div ng-hide="$root.user.isAuthenticated()">
     <form>
       <md-input-container class="form-group md-default-theme" flex>
         <label class="control-label">Email</label>
@@ -25,15 +25,15 @@
       Registre-se
     </a>
   </div>
-  <div ng-show="userState.user._id">
+  <div ng-show="$root.user.isAuthenticated()">
     <a class="btn btn-icon user-logout" ng-click="logout()">
       <span>
         <i class="fa fa-user"></i>
       </span>
       Sair
     </a>
-    <a class="profile-link" ui-sref="profile.data({id:userState.user._id})">
-      <img ng-src="//www.gravatar.com/avatar/{{userState.user.local.emailHash}}?d=identicon&s=50">
+    <a class="profile-link" ui-sref="profile({id:$root.user.getId()})">
+      <img ng-src="//www.gravatar.com/avatar/{{$root.user.getEmailHash()}}?d=identicon&s=50">
       Perfil
     </a>
   </div>

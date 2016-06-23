@@ -19,6 +19,8 @@ let schema = mongoose.Schema({
     password: String,
   },
   access: {type: Number, default: 0}
+}, {
+  timestamps: true
 })
 
 schema.index({ 'local.username': 1 }, { unique: true })
@@ -50,19 +52,8 @@ schema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password)
 }
 
-schema.methods.countEmptyTeam = function() {
-  return Team.count({
-    admin: this,
-    members: {
-      $size: 1
-    },
-    invites: {
-      $size: 0
-    }
-  })
-}
-
 schema.virtual('local.fullName').get(function() {
+  if (!this.local.surname) return this.local.name
   return `${this.local.name} ${this.local.surname}`
 })
 

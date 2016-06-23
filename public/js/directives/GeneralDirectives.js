@@ -142,8 +142,8 @@ app.directive('mrtBlogPosts', [function () {
       '$stateParams',
       '$mdDialog',
       '$mdMedia',
-      'PostFacade',
-      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, post) {
+      'PostAPI',
+      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, PostAPI) {
         $scope.user = $scope.user
 
         $scope.page = {
@@ -156,13 +156,13 @@ app.directive('mrtBlogPosts', [function () {
         $scope.loading = true
         function fetchPosts () {
           $scope.loading = true
-          post.get($scope.user, $scope.pagePath, function (err, posts) {
+          PostAPI.get($scope.user, $scope.pagePath, function (err, posts) {
             $scope.page.posts = posts
             $scope.loading = false
           })
         }
 
-        post.count($scope.user, $scope.pagePath, function (err, count) {
+        PostAPI.count($scope.user, $scope.pagePath, function (err, count) {
           $scope.page.total = count
           fetchPosts()
         })
@@ -188,12 +188,12 @@ app.directive('mrtBlogPosts', [function () {
 
 app.directive('mrtGoBack', [
   'HistoryState',
-  function (historyState) {
+  function (HistoryState) {
   return {
     restrict: 'A',
     link: function (scope, elem, attrs) {
-      if (historyState.isEmpty()) return elem.hide()
-      elem.bind('click', historyState.pop)
+      if (HistoryState.isEmpty()) return elem.hide()
+      elem.bind('click', HistoryState.pop)
     },
   }
 }])

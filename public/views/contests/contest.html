@@ -2,31 +2,40 @@
   <div class="row">
     <div class="col-md-12">
       <span>Codepit / Competições</span>
-      <h2>{{ contestState.contest.name }}</h2>
+      <h2>{{ ContestState.contest.name }}</h2>
     </div>
   </div>
 </div>
 
 <div class="contest-view">
-  <mrt-page-wrapper wait-for='!loadingData' align='center'>
+  <mrt-page-wrapper wait-while='ContestState.loading' align='center'>
     <div class="row" style="margin-bottom: 20px;" ng-if="displayTop()">
       <div style="margin-bottom: 10px;">
-        <span style="font-weight: 200; font-size: 18px;">Tempo: {{(timeState.server.dynamic - contestState.contest.date_start) / 60000 | formatDuration}}</span>
+        <span style="font-weight: 200; font-size: 18px;">Tempo: {{(timeState.server.dynamic - ContestState.contest.date_start) / 60000 | formatDuration}}</span>
       </div>
       <div class="col-sm-12">
         <md-progress-linear md-theme="progressBarTheme" md-mode="determinate" ng-value="getPercentage()"></md-progress-linear>
       </div>
       <div>
-        <span style="float: right; font-weight: 200;">restam {{(contestState.contest.date_end - timeState.server.dynamic) / 60000 | formatDuration}}</span>
+        <span style="float: right; font-weight: 200;">restam {{(ContestState.contest.date_end - timeState.server.dynamic) / 60000 | formatDuration}}</span>
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-12 bs-component">
         <ul id="contest-tabs" class="nav nav-tabs" style="margin-bottom: 15px;">
-          <li ng-class="{active: state.current.name === 'contest.scoreboard'}"><a ui-sref=".scoreboard">Placar</a></li>
-          <li ng-class="{active: state.current.name === 'contest.submit'}"><a ui-sref=".submit">Submeter</a></li>
-          <li ng-class="{active: state.current.name === 'contest.submissions'}"><a ui-sref=".submissions">Submissões</a></li>
+          <li class="join-button" ng-if="!ContestState.contest.inContest">
+            <a href="" ng-click="toggleRight()">Participar&nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i></a>
+          </li>
+          <li ng-class="{active: state.current.name === 'contest.scoreboard'}">
+            <a ui-sref=".scoreboard">Placar</a>
+          </li>
+          <li ng-class="{active: state.current.name === 'contest.submit'}" ng-if="ContestState.contest.inContest">
+            <a ui-sref=".submit">Submeter</a>
+          </li>
+          <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="ContestState.contest.inContest">
+            <a ui-sref=".submissions">Submissões</a>
+          </li>
         </ul>
         <div class="tab-content">
           <div ui-view></div>
@@ -34,4 +43,58 @@
       </div>
     </div>
   </mrt-page-wrapper>
+</div>
+
+<div id="join-contest-id">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="join-contest-sidenav">
+    <div ng-controller="JoinContestController">
+      <md-toolbar class="md-hue-2">
+        <h1 class="md-toolbar-tools">
+          {{contest.name}}
+        </h1>
+      </md-toolbar>
+      <md-content layout-padding>
+        <form>
+          <md-input-container ng-if="contest.isPrivate">
+            <label>Senha</label>
+            <input type="password" ng-model="data.password">
+          </md-input-container>
+          <md-radio-group ng-model="data.role" ng-show="contest.contestantType === 3">
+            <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
+            <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
+          </md-radio-group>
+          <div ng-show="data.role === 'team'" layout-fill>
+            <p>
+              <i>Escolha um time</i>&nbsp;
+              <i class="fa fa-question-circle" style="width: 50px;">
+                <md-tooltip md-direction="bottom">
+                  Como um perfil pode estar vinculado a times diferentes, se<br>
+                  registrar na competição com um time X não irá automaticamente<br>
+                  adicionar os outros membros do time X na competição. Para isso,<br>
+                  cada membro do time também deve se cadastrar na competição.<br>
+                </md-tooltip>
+              </i>
+            </p>
+            <br>
+            <md-input-container layout-fill>
+              <label>Time</label>
+              <md-select ng-model="data.team">
+                <md-option ng-repeat="t in teams" value="{{t.id}}">
+                  {{t.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </form>
+        <div layout="row">
+          <md-button class="md-icon-button" ng-click="close()" style="margin-top: 5px;">
+            <md-icon class="material-icons" style="color:grey;">keyboard_return</md-icon>
+          </md-button>
+          <md-button class="md-fab md-mini md-primary" ng-click="join()">
+            <md-icon class="material-icons" style="color:white;">person_add</md-icon>
+          </md-button>
+        </div>
+      </md-content>
+    </div>
+  </md-sidenav>
 </div>

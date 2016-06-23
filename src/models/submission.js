@@ -15,6 +15,7 @@ let schema = mongoose.Schema({
     type: ObjectId,
     ref: 'User'
   },
+  rep: ObjectId,
 
   problem: {
     type: ObjectId,
@@ -42,6 +43,7 @@ schema.index({
   contestant: 1,
   date: -1
 })
+schema.index({ date: 1 })
 
 schema.statics.validateChain = ValidateChain({
   language: function() {

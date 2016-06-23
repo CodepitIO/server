@@ -1,8 +1,8 @@
 {
-  "name": "maratonando.site",
-  "main": "site.js",
+  "name": "Codepit-Web-API",
+  "main": "main.js",
   "scripts": {
-    "start": "node site.js"
+    "start": "node main.js"
   },
   "dependencies": {
     "async": "^2.0.0-rc.5",
@@ -26,9 +26,7 @@
     "pindexer": "file:./local_modules/pindexer/",
     "redis": "^2.6.0-2",
     "request": "^2.72.0",
-    "serve-favicon": "^2.3.0",
-    "socket.io": "^1.4.6",
-    "socket.io-redis": "^1.0.0"
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

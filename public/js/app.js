@@ -55,17 +55,20 @@ angular.module('mrtApp', [
 .run([
   '$rootScope',
   '$cookies',
+  '$state',
   'amMoment',
   'UserState',
   'HistoryState',
-  function ($rootScope, $cookies, amMoment, userState, historyState) {
+  function ($rootScope, $cookies, $state, amMoment, UserState, HistoryState) {
     amMoment.changeLocale('pt-br')
-    try {
-      $rootScope.user = JSON.parse($cookies.get('user'))
-    } catch (err) {
-      $rootScope.user = null
-    }
-    userState.reset()
-    $rootScope.$on('$stateChangeSuccess', historyState.push)
+    $rootScope.user = UserState
+    $rootScope.$on('$stateChangeSuccess', HistoryState.push)
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      if ((toState.authenticate === true && !UserState.isAuthenticated()) ||
+          (toState.authenticate === false && UserState.isAuthenticated())) {
+        $state.transitionTo("home");
+        event.preventDefault();
+      }
+  });
   }
 ])

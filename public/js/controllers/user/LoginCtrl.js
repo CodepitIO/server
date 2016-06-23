@@ -1,18 +1,18 @@
 angular.module('User')
   .controller('LoginController', [
     '$scope',
-    'UserFacade',
+    'UserAPI',
     'UserState',
-    function ($scope, user, userState) {
+    function ($scope, UserAPI, userState) {
       $scope.userState = userState
       $scope.data = {}
 
       $scope.login = function () {
-        user.login($scope.data)
+        UserAPI.login($scope.data)
       }
 
       $scope.logout = function () {
-        user.logout()
+        UserAPI.logout()
       }
     }
   ])

@@ -2,8 +2,8 @@ var app = angular.module('User')
 
 app.directive('mrtUniqueUsername', [
   '$q',
-  'UserFacade',
-  function($q, user) {
+  'UserAPI',
+  function($q, UserAPI) {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
@@ -12,7 +12,7 @@ app.directive('mrtUniqueUsername', [
           return $q.when()
         }
         var def = $q.defer()
-        user.checkUsername(modelValue, function(err, available) {
+        UserAPI.checkUsername(modelValue, function(err, available) {
           if (available) def.resolve()
           else def.reject()
         })
@@ -24,8 +24,8 @@ app.directive('mrtUniqueUsername', [
 
 app.directive('mrtUniqueEmail', [
   '$q',
-  'UserFacade',
-  function($q, user) {
+  'UserAPI',
+  function($q, UserAPI) {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
@@ -34,7 +34,7 @@ app.directive('mrtUniqueEmail', [
           return $q.when()
         }
         var def = $q.defer()
-        user.checkEmail(modelValue, function(err, available) {
+        UserAPI.checkEmail(modelValue, function(err, available) {
           if (available) def.resolve()
           else def.reject()
         })

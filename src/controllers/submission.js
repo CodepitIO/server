@@ -2,14 +2,41 @@
 
 const Submission = require('../models/submission'),
   Problem = require('../models/problem'),
-  SubmissionQueue = require('../services/queue').SubmissionQueue
+  Contest = require('../models/contest'),
+  SubmissionQueue = require('../services/queue').SubmissionQueue,
+  Redis = require('../services/dbs').redisClient
 
 const async = require('async'),
   fs = require('fs'),
   multiparty = require('multiparty'),
   _ = require('lodash')
 
-exports.extractFile = function (req, res, next) {
+function createSubmission (submission, userId, callback) {
+  var sub = new Submission({
+    contest: submission.contest,
+    contestant: userId,
+    rep: submission.rep,
+    problem: submission.problem,
+    language: submission.language,
+    code: submission.code
+  })
+  sub.save(callback)
+}
+
+function enqueueSubmission (oj, s, callback) {
+  var job = SubmissionQueue.create(`submission:${oj}`, {
+    id: s._id
+  })
+  job.attempts(5)
+  job.backoff({
+    delay: 60 * 1000,
+    type: 'exponential'
+  })
+  job.save(callback)
+}
+
+exports.tryExtractFile = function (req, res, next) {
+  if (req.body.id) return next()
   var form = new multiparty.Form()
   // TODO(stor): erase the tmp file
   async.waterfall([
@@ -38,55 +65,40 @@ exports.extractFile = function (req, res, next) {
   })
 }
 
-function createSubmission (submission, userId, callback) {
-  var sub = new Submission({
-    contest: submission.contest,
-    contestant: userId,
-    problem: submission.problem,
-    language: submission.language,
-    code: submission.code
-  })
-  sub.save(callback)
-}
-
-function enqueueSubmission (oj, submission, callback) {
-  var job = SubmissionQueue.create(`submission:${oj}`, {
-    id: submission._id
-  })
-  job.attempts(5)
-  job.backoff({
-    delay: 60 * 1000,
-    type: 'exponential'
-  })
-  job.save(callback)
-}
-
 exports.submit = function (req, res, next) {
   req.body.contest = req.body.id
   delete req.body.id
 
-  let submission = req.body, userId = req.user._id
+  let submission = req.body, userId = req.user._id, problem
 
   let asyncValid = Submission.validateChain(req)
     .seeLanguage()
     .seeCode()
-    .seeContest(submission.problem, userId)
     .asyncOk()
 
   async.waterfall([
     (next) => {
-      return asyncValid.then(next).catch(next)
+      async.parallel({
+        contest: (next) => {
+          Contest.findById(submission.contest, 'contestants problems', next)
+        },
+        problem: (next) => {
+          Problem.findById(submission.problem, next)
+        }
+      }, next)
     },
-    (next) => {
+    (results, next) => {
+      if (!results.problem || !results.contest) return next(new Error())
+      if (!results.contest.problemInContest(submission.problem) ||
+          !results.contest.userInContest(userId)) return next(new Error())
+      submission.rep = results.contest.getUserRepresentative(userId)
+      problem = results.problem
       createSubmission(submission, userId, next)
     },
     (_submission, _ins, next) => {
       submission = _submission
-      Problem.findById(submission.problem, next)
-    },
-    (problem, next) => {
       enqueueSubmission(problem.oj, submission, next)
-    }
+    },
   ], (err) => {
     if (err) return res.status(400).send()
     return res.json({
@@ -127,18 +139,5 @@ exports.getUserContestSubmissions = function(req, res) {
   }, '_id date verdict language problem', (err, submissions) => {
     if (err) return res.status(400).send()
     return res.json({submissions: submissions})
-  })
-}
-
-exports.getVerdictByTimestamp = function(req, res) {
-  let contestId = req.params.id
-  let timestamp = new Date(parseInt(req.params.timestamp))
-  Submission.findOne({
-    contest: contestId,
-    contestant: req.user._id,
-    date: timestamp
-  }, '_id verdict', (err, submission) => {
-    if (err || !submission) return res.status(400).send()
-    return res.json({submission: submission})
   })
 }

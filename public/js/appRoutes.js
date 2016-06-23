@@ -35,25 +35,19 @@ angular.module('appRoutes', []).config([
       .state('contests.owned', {
         url: '/owned',
         templateUrl: 'views/contests/owned.html',
-        mustBeLogged: true
+        authenticate: true
       })
       // Controller is set on the directive
       .state('contests.joined', {
         url: '/joined',
         templateUrl: 'views/contests/joined.html',
-        mustBeLogged: true
+        authenticate: true
       })
       .state('contests.create', {
         url: '/create',
         templateUrl: 'views/contests/create.html',
         controller: 'CreateContestController',
-        mustBeLogged: true
-      })
-      .state('contests.edit', {
-        url: '/edit',
-        templateUrl: 'views/contests/edit.html',
-        controller: 'EditContestController',
-        mustBeLogged: true
+        authenticate: true
       })
       .state('contest', {
         url: '^/contest/:id',
@@ -72,23 +66,19 @@ angular.module('appRoutes', []).config([
       .state('contest.submissions', {
         url: '/submissions',
         templateUrl: 'views/contests/contest.submissions.html',
-        controller: 'ContestSubmissionsController'
+        controller: 'ContestSubmissionsController',
+        authenticate: true
       })
       .state('register', {
         url: '^/register',
         templateUrl: 'views/user/register.html',
         controller: 'RegisterController',
-        mustNotBeLogged: true
+        authenticate: false
       })
       .state('profile', {
         url: '^/profile/:id',
         templateUrl: 'views/user/profile.html',
         controller: 'ProfileController'
-      })
-      .state('profile.data', {
-        url: '/data',
-        templateUrl: 'views/user/profile.data.html',
-        controller: 'ProfileDataController'
       })
       .state('profile.teams', {
         url: '/teams',
@@ -102,8 +92,7 @@ angular.module('appRoutes', []).config([
       .state('team', {
         url: '^/team/:id',
         templateUrl: 'views/team.html',
-        controller: 'TeamController',
-        mustBeLogged: true
+        controller: 'TeamController'
       })
       .state('submission', {
         url: '^/submission/:id',

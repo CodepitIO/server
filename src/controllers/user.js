@@ -5,25 +5,6 @@ const passport = require('passport')
 const Errors = require('../utils/errors'),
   User = require('../models/user')
 
-exports.remapUser = (user) => {
-  if (!user) return null
-  return {
-    id: user._id,
-    username: user.local.username,
-    email: user.local.email,
-    emailHash: user.local.emailHash,
-    name: user.local.fullName
-  }
-}
-
-exports.getUserDataByEmail = (email, callback) => {
-  User.findOne({
-    'local.email': email
-  }, (user) => {
-    return callback(exports.remapUser(user))
-  })
-}
-
 exports.edit = (req, res, next) => {
   let account = req.body
   async.waterfall([
@@ -107,4 +88,23 @@ exports.checkEmail = (req, res) => {
   User.findOne({ 'local.email': email }, (err, user) => {
     return res.json({ available: !user })
   })
+}
+
+exports.get = (req, res) => {
+  let id = req.params.id
+  User.findById(id, '-local.password', (err, user) => {
+    if (err) return res.status(500).send()
+    user = user.toObject({
+      virtuals: true
+    })
+    delete user.local.email
+    return res.json({user: user.local})
+  })
+}
+
+exports.status = (req, res) => {
+  if (req.user && req.user._id) {
+    return res.json({user: req.user.toObject({virtuals: true})});
+  }
+  return res.json({})
 }

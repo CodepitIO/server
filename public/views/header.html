@@ -21,11 +21,11 @@
               <ul class="dropdown-menu">
                 <li><a ui-sref="contests.open">Em aberto</a></li>
                 <li><a ui-sref="contests.past">Passadas</a></li>
-                <li ng-show="$root.user" class="divider"></li>
-                <li ng-show="$root.user"><a ui-sref="contests.owned">Criadas</a></li>
-                <li ng-show="$root.user"><a ui-sref="contests.joined">Participadas</a></li>
-                <li ng-show="$root.user" class="divider"></li>
-                <li ng-show="$root.user"><a ui-sref="contests.create">Criar competição</a></li>
+                <li ng-show="$root.user.isAuthenticated()" class="divider"></li>
+                <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.owned">Criadas</a></li>
+                <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.joined">Participadas</a></li>
+                <li ng-show="$root.user.isAuthenticated()" class="divider"></li>
+                <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.create">Criar competição</a></li>
               </ul>
             </li>
           </ul>

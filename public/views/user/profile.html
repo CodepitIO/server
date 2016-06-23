@@ -1,17 +1,22 @@
 <mrt-breadcrumbs
   location="'Codepit / Usuários'"
-  title="'Seu perfil'">
+  title="usernameTitle">
 </mrt-breadcrumbs>
 
 <mrt-page-wrapper wait-for='!loadingData'>
   <div ng-cloak id="profile-container">
-    <md-content>
+    <md-content ng-if="id === $root.user.getId()">
       <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab ui-sref=".data" label="dados" md-active="state.current.name === 'profile.data'"></md-tab>
+        <md-tab ui-sref="." label="dados" md-active="state.current.name === 'profile'"></md-tab>
         <md-tab ui-sref=".teams" label="times" md-active="state.current.name === 'profile.teams'"></md-tab>
         <md-tab ui-sref=".posts" label="posts" md-active="state.current.name === 'profile.posts'"></md-tab>
       </md-tabs>
-      <ui-view/>
+      <ui-view>
+        <ng-include src="'views/user/profile.data.html'"></ng-include>
+      </ui-view>
     </md-content>
+    <div ng-if="id !== $root.user.getId()">
+      <ng-include src="'views/user/profile.user.html'"></ng-include>
+    </div>
   </div>
 </mrt-page-wrapper>

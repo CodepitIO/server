@@ -2,8 +2,8 @@ angular.module('General')
   .service('TimeState', [
     '$interval',
     '$resource',
-    'RequestAPI',
-    function ($interval, $resource, request) {
+    'Request',
+    function ($interval, $resource, Request) {
       var diff = 0, now
       var $scope = this
 
@@ -15,10 +15,10 @@ angular.module('General')
       $interval(function () {
         now = (new Date()).getTime()
         $scope.server.dynamic = new Date(now + diff)
-      }, 1000)
+      }, 3000)
 
       var GetServerTimeAPI = $resource('/api/v1/server/time', {})
-      request.send('get', GetServerTimeAPI)({}).then(function (data) {
+      Request.send('get', GetServerTimeAPI)({}).then(function (data) {
         var serverDate = new Date(data.date)
         var clientDate = new Date()
 
@@ -54,21 +54,6 @@ angular.module('General')
 
       $scope.isEmpty = function() {
         return _.isEmpty(history)
-      }
-    }
-  ])
-  .service('SocketState', [
-    function() {
-      var $scope = this
-      $scope.socket = io.connect()
-      var room
-
-      $scope.join = function(newRoom) {
-        $scope.socket.emit('join', {
-          previous: room,
-          current: newRoom
-        })
-        room = newRoom
       }
     }
   ])

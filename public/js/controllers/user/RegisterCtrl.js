@@ -4,8 +4,8 @@ angular.module('User')
     '$location',
     '$rootScope',
     'Notification',
-    'UserFacade',
-    function ($scope, $location, $rootScope, Notification, user) {
+    'UserAPI',
+    function ($scope, $location, $rootScope, Notification, UserAPI) {
       $scope.user = {
         name: '',
         surname: '',
@@ -19,7 +19,7 @@ angular.module('User')
       $scope.loading = false
       $scope.register = function () {
         $scope.loading = true
-        user.register($scope.user, function() {
+        UserAPI.register($scope.user, function() {
           $scope.loading = false
         })
       }

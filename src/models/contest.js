@@ -7,7 +7,18 @@ const Submission = require('./submission')
 
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-var schema = mongoose.Schema({
+let contestantSchema = mongoose.Schema({
+  id: {
+    type: ObjectId,
+    ref: 'User'
+  },
+  team: {
+    type: ObjectId,
+    ref: 'Team'
+  }
+}, { _id: false })
+
+let schema = mongoose.Schema({
   name: String,
   description: String,
 
@@ -27,16 +38,7 @@ var schema = mongoose.Schema({
     ref: 'Problem'
   }],
 
-  contestants: [{
-    id: {
-      type: ObjectId,
-      ref: 'User'
-    },
-    team: {
-      type: ObjectId,
-      ref: 'Team'
-    }
-  }],
+  contestants: [contestantSchema],
 
   contestantType: {
     type: Number,
@@ -69,20 +71,30 @@ schema.index({
   createdAt: -1
 })
 
-schema.methods.userInContest = function (id) {
+schema.methods.getUserRepresentative = function (id) {
   if (!id) return false
-  var index = _.findIndex(this.contestants, function (obj) {
+  var elem = _.find(this.contestants, function (obj) {
     return obj.id && obj.id.toString() === id.toString()
   })
-  return index !== -1
+  return elem && (elem.team || elem.id)
+}
+
+schema.methods.userInContest = function (id) {
+  if (!id) return false
+  id = id.toString()
+  return _.some(this.contestants, (obj) => {
+    let cid = obj.id && obj.id._id ? obj.id._id.toString() :
+              obj.id ? obj.id.toString() :
+              obj.toString()
+    return cid === id
+  })
 }
 
 schema.methods.problemInContest = function (id) {
   if (!id) return false
-  var index = _.findIndex(this.problems, function (obj) {
+  return _.some(this.problems, (obj) => {
     return obj.toString() === id.toString()
   })
-  return index !== -1
 }
 
 module.exports = mongoose.model('Contest', schema)

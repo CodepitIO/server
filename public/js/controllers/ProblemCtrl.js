@@ -4,12 +4,12 @@ app.controller('ProblemController', [
   '$stateParams',
   '$sce',
   '$window',
-  'ProblemsFacade',
+  'ProblemsAPI',
   'OJName',
-  function ($scope, $stateParams, $sce, $window, Problems, OJName) {
+  function ($scope, $stateParams, $sce, $window, ProblemsAPI, OJName) {
     $scope.problem = {}
     $scope.loadingData = true
-    Problems.get($stateParams.id, function (err, data) {
+    ProblemsAPI.get($stateParams.id, function (err, data) {
       data.oj = OJName[data.oj]
       $scope.problem = data
       $scope.loadingData = false

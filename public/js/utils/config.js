@@ -34,7 +34,10 @@ angular.module('General')
       },
       'progressBarTheme': {
         PrimaryPalette: {
-          color: 'blue'
+          color: 'cyan',
+          opts: {
+            'default': '500'
+          }
         },
         AccentPalette: {
           color: 'orange'

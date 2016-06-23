@@ -8,7 +8,7 @@
 					<li><a ui-sref="home">Home</a></li>
 					<li><a ui-sref="contests.open">Competições</a></li>
 					<li><a ui-sref="about">Sobre o Codepit</a></li>
-					<li ng-hide="$root.user"><a ui-sref="register">Registre-se</a></li>
+					<li ng-hide="$root.user.isAuthenticated()"><a ui-sref="register">Registre-se</a></li>
 				</ul>
 			</div>
 		</div>

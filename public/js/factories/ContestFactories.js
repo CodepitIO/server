@@ -1,37 +1,33 @@
 angular.module('Contests')
   .factory('ContestAPI', [
     '$resource',
-    'RequestAPI',
-    function ($resource, request) {
-      return {
-        create: request.send('post', $resource('/api/v1/contest/')),
-        remove: request.send('delete', $resource('/api/v1/contest/:id')),
-        edit: request.send('put', $resource('/api/v1/contest/:id/edit')),
-        join: request.send('put', $resource('/api/v1/contest/:id/join')),
-        leave: request.send('put', $resource('/api/v1/contest/:id/leave')),
-        getList: request.send('get', $resource('/api/v1/contest/list/:type/from/:from'), {ignoreThrottle: true}),
-
-        getData: request.send('get', $resource('/api/v1/contest/:id/data')),
-        getSubmissions: request.send('get', $resource('/api/v1/contest/:id/submissions/user')),
-        submit: request.send('post', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
-        getVerdictByTimestamp: request.send('get', $resource('/api/v1/contest/:id/submission/timestamp/:timestamp')),
-      }
-    }
-  ])
-  .factory('ContestFacade', [
+    'Request',
     'Notification',
     'Upload',
-    'ContestAPI',
-    function (Notification, Upload, contestAPI) {
+    function ($resource, Request, Notification, Upload) {
+      var API = {
+        create: Request.send('post', $resource('/api/v1/contest/')),
+        remove: Request.send('delete', $resource('/api/v1/contest/:id')),
+        edit: Request.send('put', $resource('/api/v1/contest/:id/edit')),
+        join: Request.send('put', $resource('/api/v1/contest/:id/join')),
+        leave: Request.send('put', $resource('/api/v1/contest/:id/leave')),
+        getList: Request.send('get', $resource('/api/v1/contest/list/:type/from/:from'), {ignoreThrottle: true}),
+
+        getMetadata: Request.send('get', $resource('/api/v1/contest/:id/metadata')),
+        getEvents: Request.send('get', $resource('/api/v1/contest/:id/events')),
+        getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/user')),
+        submit: Request.send('post', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
+      }
+
       return {
         getList: function(type, last, callback) {
-          contestAPI.getList({type: type, from: last}).then(function(data) {
+          API.getList({type: type, from: last}).then(function(data) {
             return callback(null, data.contests)
           })
         },
 
         leave: function (id, callback) {
-          contestAPI.leave({
+          API.leave({
             id: id
           }).then(function (data) {
             Notification('Você saiu da competição.')
@@ -43,7 +39,7 @@ angular.module('Contests')
         },
 
         join: function (contest, data, callback) {
-          contestAPI.join({
+          API.join({
             id: contest._id,
             password: data.password,
             team: data.team
@@ -57,7 +53,7 @@ angular.module('Contests')
         },
 
         remove: function (id, callback) {
-          contestAPI.remove({
+          API.remove({
             id: id
           }).then(function (data) {
             Notification('Competição removida.')
@@ -68,16 +64,34 @@ angular.module('Contests')
         },
 
         // Contest instance
-        getContestData: function(id, callback) {
-          contestAPI.getData({
+        getContestMetadata: function(id, callback) {
+          API.getMetadata({
             id: id
           }).then(function(data) {
             callback && callback(null, data)
           }, callback)
         },
 
+        getContestEvents: function(id, callback) {
+          API.getEvents({
+            id: id
+          }).then(function(data) {
+            var submissions = _.chain(_.concat(data.accepted, data.rejected, data.pending))
+              .map(function(o) {
+                o = _.split(o, ',')
+                o[3] = parseInt(o[3])
+                return o
+              })
+              .sortBy(function(o) {
+                return o[3]
+              })
+              .value()
+            callback(null, submissions)
+          }, callback)
+        },
+
         getSubmissions: function(id, callback) {
-          contestAPI.getSubmissions({
+          API.getSubmissions({
             id: id
           }).then(function(data) {
             callback(null, data.submissions)
@@ -88,7 +102,7 @@ angular.module('Contests')
           var promise
           if (submission.codefile) {
             promise = Upload.upload({
-              url: '/api/v1/contest/' + contestId + '/submitfile',
+              url: '/api/v1/contest/' + contestId + '/submit',
               data: {
                 id: contestId,
                 file: submission.codefile,
@@ -97,7 +111,7 @@ angular.module('Contests')
               }
             })
           } else {
-            promise = contestAPI.submit({
+            promise = API.submit({
               id: contestId,
               code: submission.code,
               problem: submission.problem,
@@ -112,15 +126,6 @@ angular.module('Contests')
             callback
           )
         },
-
-        getVerdictByTimestamp: function(contestId, timestamp, callback) {
-          contestAPI.getVerdictByTimestamp({
-            id: contestId,
-            timestamp: timestamp.getTime()
-          }).then(function(data) {
-            return callback && callback(null, data.submission)
-          }, callback)
-        }
       }
     }
   ])
