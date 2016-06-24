@@ -25,7 +25,7 @@ exports.remove = (req, res) => {
   })
 }
 
-function getPosts(req, res, query) {
+function getPosts(query, req, res) {
   let page = parseInt(req.body.page || 1)
   let skipCount = (page - 1) * POSTS_PER_PAGE
   query.populate({
@@ -46,13 +46,13 @@ function getPosts(req, res, query) {
 exports.getByUser = (req, res) => {
   let id = req.params.id
   let query = Post.find({ author: id })
-  return getPosts(req, res, query)
+  return getPosts(query, req, res)
 }
 
 exports.getByPage = (req, res) => {
   let name = req.params.name || 'home'
   let query = Post.find({ page: name })
-  return getPosts(req, res, query)
+  return getPosts(query, req, res)
 }
 
 exports.getCountByUser = (req, res) => {

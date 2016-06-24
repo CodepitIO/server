@@ -5,7 +5,7 @@ const passport = require('passport')
 const Errors = require('../utils/errors'),
   User = require('../models/user')
 
-exports.edit = (req, res, next) => {
+exports.edit = (req, res) => {
   let account = req.body
   async.waterfall([
     async.apply(User.findOne, {'local.email': account.email}),

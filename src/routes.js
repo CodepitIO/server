@@ -44,21 +44,21 @@ function APIRoutes () {
 
   // post
   router.post('/post', User.is('logged'), PostCtrl.post)
-  router.get('/post/user/get/:id', PostCtrl.getByUser)
-  router.get('/post/user/count/:id', PostCtrl.getCountByUser)
-  router.get('/post/page/get/:name', PostCtrl.getByPage)
-  router.get('/post/page/count/:name', PostCtrl.getCountByPage)
+  router.get('/post/user/:id/count', PostCtrl.getCountByUser)
+  router.get('/post/user/:id', PostCtrl.getByUser)
+  router.get('/post/page/:name/count', PostCtrl.getCountByPage)
+  router.get('/post/page/:name', PostCtrl.getByPage)
 
   // team
-  // router.post('/team/create', isLoggedIn, TeamCtrl.createNew)
-  // router.post('/team/leave', isLoggedIn, TeamCtrl.leave)
-  // router.post('/team/invite', isLoggedIn, TeamCtrl.invite)
-  // router.post('/team/remove', isLoggedIn, TeamCtrl.remove)
-  // router.post('/team/edit', isLoggedIn, TeamCtrl.edit)
-  // router.get('/team/accept/:id', isLoggedIn, TeamCtrl.accept)
-  // router.get('/team/decline/:id', isLoggedIn, TeamCtrl.decline)
-  // router.get('/team/user/:id', TeamCtrl.getByUser)
-  // router.get('/team/get/:id', TeamCtrl.getById)
+  router.post('/team/create', User.is('logged'), TeamCtrl.create)
+  router.post('/team/:id/edit', User.is('logged'), TeamCtrl.edit)
+  router.post('/team/:id/leave', User.is('logged'), TeamCtrl.leave)
+  router.post('/team/:id/invite', User.is('logged'), TeamCtrl.invite)
+  router.post('/team/:id/remove', User.is('logged'), TeamCtrl.remove)
+  router.post('/team/:id/accept', User.is('logged'), TeamCtrl.accept)
+  router.post('/team/:id/decline', User.is('logged'), TeamCtrl.decline)
+  router.get('/team/user', User.is('logged'), TeamCtrl.getByLoggedUser)
+  router.get('/team/:id', TeamCtrl.getById)
 
   // contests
   router.get('/contest/list/:type/from/:from', ContestListCtrl.getList)
@@ -124,7 +124,7 @@ exports.configure = (app) => {
   app.use(bodyParser.json())
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(expressValidator({ customValidators: Utils.validators }))
+  app.use(expressValidator())
   app.use(methodOverride('X-HTTP-Method-Override'))
   app.use(express.static(__dirname + '/../public'))
 

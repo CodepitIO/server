@@ -33,8 +33,5 @@ angular.module('Contests')
       $scope.toggleRight = function(contest) {
   			$mdSidenav('join-contest-sidenav').toggle()
   		}
-  		$scope.isOpenRight = function() {
-  			return $mdSidenav('join-contest-sidenav').isOpen()
-  		};
     }
   ])

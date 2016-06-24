@@ -366,6 +366,12 @@ tr.submission-row-parent {
   color: #0091EA;
 }
 
+#join-contest-id md-sidenav,
+#join-contest-id .md-sidenav-backdrop {
+  height: 100%;
+  position:fixed;
+}
+
 /* <!------------------!> */
 
 /* <-- Contests List --> */

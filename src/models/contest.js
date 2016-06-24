@@ -70,6 +70,9 @@ schema.index({
   author: 1,
   createdAt: -1
 })
+schema.index({
+  'contestants.id': 1
+})
 
 schema.methods.getUserRepresentative = function (id) {
   if (!id) return false

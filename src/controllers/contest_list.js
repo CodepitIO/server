@@ -4,7 +4,7 @@ const Contest = require('../models/contest'),
   mongoose = require('mongoose'),
   _ = require('lodash')
 
-exports.create = function (req, res, next) {
+exports.create = (req, res) => {
   var contest = req.body
   if (contest.startDateTime <= new Date()) {
     return res.json({
@@ -30,25 +30,13 @@ exports.create = function (req, res, next) {
     password: contest.password,
     isPrivate: (contest.password.length > 0),
     watchPrivate: (contest.watchPrivate == 1)
-  }).save(function (err, contest) {
-    if (err) {
-      return res.json({
-        error: err
-      })
-    }
+  }).save((err, contest) => {
+    if (err) return res.status(500).send()
     return res.json(contest)
   })
 }
 
-var isInContest = function (id, contest) {
-  var index = _.findIndex(contest.contestants, (obj) => {
-    return obj.id && obj.id.toString() == id.toString()
-  })
-  if (index !== -1) return true
-  return false
-}
-
-var filters = {
+let filters = {
   open: {
     opts: function () {
       var now = new Date()
@@ -122,7 +110,7 @@ var filters = {
   }
 }
 
-exports.getList = function (req, res) {
+exports.getList = (req, res) => {
   var filter = filters[req.params.type || '']
 
   if (filter === undefined) {

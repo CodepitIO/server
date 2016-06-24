@@ -77,7 +77,7 @@ exports.getEvents = (req, res) => {
         return Redis.zrangebyscore(`${id}:ACCEPTED`, 0, upTo, next)
       },
     }, (err, results) => {
-      if (err) return res.status(400).send()
+      if (err) return res.status(500).send()
       return res.json(results)
     })
   })

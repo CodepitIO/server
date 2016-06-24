@@ -1,300 +1,173 @@
-var Team = require('../models/team')
-var UserCtrl = require('./user')
+'use strict'
 
-var ObjectId = require('mongoose').Types.ObjectId
-var Submission = require('../models/submission')
+const async = require('async'),
+  ObjectId = require('mongoose').Types.ObjectId,
+  _ = require('lodash')
 
-var config = {
-  MAX_MEMBERS: 5
-}
+const Team = require('../models/team'),
+  UserCtrl = require('./user'),
+  Submission = require('../models/submission')
 
-exports.createNew = function (req, res, next) {
-  req.user.countEmptyTeam().exec().then(function (count) {
-    if (count > 0) {
-      return res.json({
-        error: 'Você já possui outro time vazio.'
-      })
+const MAX_TEAMS_PER_USER = 5
+
+exports.getByLoggedUser = (req, res) => {
+  let userId = req.user._id
+  async.parallel({
+    member: (next) => {
+      Team.find({members: userId}, '_id name', next)
+    },
+    invited: (next) => {
+      Team.find({invites: userId}, '_id name', next)
     }
-    var newTeam = new Team()
-
-    newTeam.name = req.body.name
-    newTeam.members.push(req.user._id)
-    newTeam.admin = req.user._id
-
-    newTeam.save(function (err, team) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
-      Team.findById(team._id)
-        .populate('members invites')
-        .lean()
-        .exec()
-        .then(function (data) {
-          data.members = data.members.map(UserCtrl.remapUser)
-          return res.json(data)
-        })
-    })
+  }, (err, results) => {
+    if (err) return res.status(500).end()
+    return res.json(results)
   })
 }
 
-exports.getByUser = function (req, res, next) {
-  /*Submission.find({verdict: 4, contest: new ObjectId('55b2cf66fbb7236c0182aea5')}).exec().then(function(subs) {
-    for (var i = 0; i < subs.length; i++) {
-      subs[i].code = _s.unescapeHTML(subs[i].code)
-      subs[i].verdict = 0
-      subs[i].save(function() {
-        console.log(": )")
-      })
-    }
-  });*/
-  /*Contest.find().select('_id').exec().then(function(all) {
-    console.log(all)
-  });*/
-  /*Team.find().exec().then(function(all) {
-    console.log(all)
-  });*/
-  var id = req.params.id || (req.user && req.user._id)
-  if (!id) {
-    return res.json({
-      error: 'Operação inválida.'
-    })
-  }
-  Team.find({
-    members: id
+exports.getById = (req, res) => {
+  let teamId = req.params.id
+  Team.findById(teamId)
+  .populate({
+    path: 'members',
+    select: '_id local.username'
   })
-    .select('_id name admin')
-    .lean()
-    .exec()
-    .then(function (teams) {
-      Team.find({
-        invites: id
-      })
-        .select('_id name admin')
-        .lean()
-        .exec()
-        .then(function (invited) {
-          return res.json({
-            teams: teams,
-            invited: invited
-          })
-        })
-    })
+  .populate({
+    path: 'invites',
+    select: '_id local.username'
+  })
+  .exec((err, team) => {
+    if (err) return res.status(500).end()
+    if (!team) return res.status(400).end()
+    return res.json(team)
+  })
 }
 
-exports.getById = function (req, res, next) {
-  var id = req.params.id
-  Team.findById(id)
-    .populate('members invites')
-    .lean()
-    .exec()
-    .then(function success (team) {
-      if (!team) {
-        return res.json({
-          error: 'Time não encontrado.'
-        })
-      }
-      team.members = team.members.map(UserCtrl.remapUser)
-      team.invites = team.invites.map(UserCtrl.remapUser)
-      team.isLoggedAdmin = (req.isAuthenticated() && team.admin.toString() == req.user._id.toString())
-      return res.json(team)
-    }, function error () {
-      return res.json({
-        error: 'Time não encontrado.'
-      })
-    })
-}
-
-exports.leave = function (req, res, next) {
-  Team.findByIdAndUpdate(req.body.id, {
+exports.leave = (req, res) => {
+  let teamId = req.body.id,
+    userId = req.user._id
+  Team.findByIdAndUpdate(teamId, {
     $pull: {
-      'members': req.user._id
+      'members': userId
     }
+  }, (err, team) => {
+    if (err) return res.status(500).end()
+    if (!team) return res.status(400).end()
+    return res.json({})
   })
-    .exec()
-    .then(function (team) {
-      if (team.isAdmin(req.user._id)) {
-        if (team.members.length == 0) {
-          team.remove(function () {
-            return res.json({})
-          })
-        } else {
-          team.admin = team.members[0]
-          team.save(function (err) {
-            if (err) {
-              return res.json({
-                error: err
-              })
-            }
-            return res.json({})
-          })
-        }
-      } else {
-        return res.json({})
-      }
-    })
 }
 
-exports.invite = function (req, res, next) {
-  var id = req.body.id
-  var invitee = req.body.invitee
-  Team.findById(id).exec().then(function (team) {
-    if (!team.isAdmin(req.user._id)) {
-      return res.json({
-        error: 'Você não é o administrador deste time.'
-      })
+exports.invite = (req, res) => {
+  let teamId = req.body.id
+  let invitedId = req.body.invited
+  let userId = req.user._id
+  async.parallel({
+    team: (next) => {
+      Team.find({_id: teamId, members: userId}, next)
+    },
+    invited: (next) => {
+      User.findById(invitedId, '_id local.username', next)
     }
-    if (team.getAllCount() >= config.MAX_MEMBERS) {
-      return res.json({
-        error: 'Seu time não pode ter mais do que ' + config.MAX_MEMBERS + ' membros.'
-      })
+  }, (err, results) => {
+    if (err) return res.status(500).send()
+    let team = results.teamId
+    let invited = results.invited
+    if (!team || !invited || team.hasUser(invitedId)) return res.status(400).send()
+    if (team.members.length + team.invites.length >= MAX_TEAMS_PER_USER) {
+      return res.status(400).send()
     }
-
-    UserCtrl.getUserDataByEmail(invitee, function (userData) {
-      if (!userData) {
-        return res.json({
-          error: 'Não existe usuário com este email.'
-        })
-      }
-      if (team.hasUser(userData.id)) {
-        return res.json({
-          error: 'Você não pode adicionar este usuário duas vezes.'
-        })
-      }
-      team.invites.push(userData.id)
-      team.save(function (err) {
-        if (err) {
-          return res.json({
-            error: err
-          })
-        }
-        return res.json(userData)
-      })
+    team.invites.push(invitedId)
+    team.save((err) => {
+      if (err) return res.status(500).send()
+      return res.json({invited: invited})
     })
   })
 }
 
-exports.remove = function (req, res, next) {
-  var id = req.body.id
-  var removee = req.body.removee
-  Team.findById(id).exec().then(function (team) {
-    if (!team.isAdmin(req.user._id) || team.isAdmin(removee) || !team.hasUser(removee)) {
-      return res.json({
-        error: 'Operação ilegal.'
-      })
-    }
-
-    var removeUserFilter = function (id) {
-      return id.toString() != removee.toString()
-    }
-    team.invites = team.invites.filter(removeUserFilter)
-    team.members = team.members.filter(removeUserFilter)
-
-    team.save(function (err) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
+exports.remove = (req, res) => {
+  let teamId = req.body.id
+  let removedId = req.body.removed
+  let userId = req.user._id
+  Team.find({_id: teamId, members: userId}, (err, team) => {
+    if (err) return res.status(500).send()
+    if (!team) return res.status(400).send()
+    _.pull(team.invites, removedId)
+    _.pull(team.members, removedId)
+    team.save((err) => {
+      if (err) return res.status(500).send()
       return res.json({})
     })
-  }, function (err) {
-    return res.json({
-      error: err
-    })
   })
 }
 
-exports.accept = function (req, res, next) {
-  var id = req.params.id
-  Team.findById(id).exec().then(function (team) {
-    if (!team.isInvited(req.user._id)) {
-      return res.json({
-        error: 'Operação ilegal.'
-      })
-    }
-
-    var removeUserFilter = function (elem) {
-      return elem.toString() != req.user._id.toString()
-    }
-    team.invites = team.invites.filter(removeUserFilter)
-    team.members.push(req.user._id)
-
-    team.save(function (err, team) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
-      return res.json({
-        _id: team._id,
-        name: team.name,
-        admin: team.admin
-      })
-    })
-  }, function (err) {
-    return res.json({
-      error: err
-    })
-  })
-}
-
-exports.decline = function (req, res, next) {
-  var id = req.params.id
-  Team.findById(id).exec().then(function (team) {
-    if (!team.isInvited(req.user._id)) {
-      return res.json({
-        error: 'Operação ilegal.'
-      })
-    }
-
-    var removeUserFilter = function (elem) {
-      return elem.toString() != req.user._id.toString()
-    }
-    team.invites = team.invites.filter(removeUserFilter)
-
-    team.save(function (err, team) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
+exports.accept = (req, res) => {
+  let teamId = req.body.id
+  let userId = req.user._id
+  Team.find({_id: teamId, invites: userId}, (err, team) => {
+    if (err) return res.status(500).send()
+    if (!team) return res.status(400).send()
+    _.pull(team.members, userId)
+    team.members.push(userId)
+    team.save((err) => {
+      if (err) return res.status(500).send()
       return res.json({})
     })
-  }, function (err) {
-    return res.json({
-      error: err
+  })
+}
+
+exports.decline = (req, res) => {
+  let teamId = req.body.id
+  let userId = req.user._id
+  Team.find({_id: teamId, invites: userId}, (err, team) => {
+    if (err) return res.status(500).send()
+    if (!team) return res.status(400).send()
+    _.pull(team.invites, userId)
+    team.save((err) => {
+      if (err) return res.status(500).send()
+      return res.json({})
     })
   })
 }
 
-exports.edit = function (req, res, next) {
-  Team.findById(req.body.id).exec().then(function (team) {
-    if (!team.isAdmin(req.user._id)) {
-      return res.json({
-        error: 'Operação ilegal.'
-      })
+exports.create = (req, res) => {
+  if (Team.validateChain(req).seeName().seeDescription().notOk()) {
+    return res.status(400).send()
+  }
+  // TODO: user should wait at least 10 minutes to create a new team
+  let userId = req.user._id
+  Team.find({
+    members: userId
+  }, (err, teams) => {
+    if (err) return res.status(500).end()
+    if (teams.length >= MAX_TEAMS_PER_USER) {
+      return res.status(400).send()
     }
-    var name = req.body.name || ''
-    var descr = req.body.descr || ''
-    if (name.length >= 1 && name.length <= 30) {
-      team.name = name
-    }
-    if (descr.length <= 250) {
-      team.description = descr
-    }
-    team.save(function (err, team) {
-      if (err) {
-        return res.json({
-          error: err
-        })
-      }
-      return res.json({})
+    let team = new Team({
+      name: req.body.name,
+      description: req.body.description || '',
+      members: [userId],
     })
-  }, function (err) {
-    return res.json({
-      error: err
+    team.save((err, team) => {
+      if (err) return res.status(500).end()
+      return res.json({team: team})
+    })
+  })
+}
+
+exports.edit = (req, res) => {
+  if (Team.validateChain(req).seeName().seeDescription().notOk()) {
+    return res.status(400).send()
+  }
+  let teamId = req.body.id
+  let userId = req.user._id
+  Team.find({_id: teamId, members: userId}, (err, team) => {
+    if (err) return res.status(500).send()
+    if (!team) return res.status(400).send()
+    team.name = req.body.name
+    team.description = req.body.description || ''
+    team.save((err) => {
+      if (err) return res.status(500).send()
+      return res.json({})
     })
   })
 }

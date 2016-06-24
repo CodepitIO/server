@@ -35,10 +35,10 @@ function enqueueSubmission (oj, s, callback) {
   job.save(callback)
 }
 
-exports.tryExtractFile = function (req, res, next) {
+exports.tryExtractFile = (req, res, next) => {
   if (req.body.id) return next()
   var form = new multiparty.Form()
-  // TODO(stor): erase the tmp file
+  // TODO: erase the tmp file
   async.waterfall([
     (callback) => {
       form.parse(req, callback)
@@ -65,16 +65,15 @@ exports.tryExtractFile = function (req, res, next) {
   })
 }
 
-exports.submit = function (req, res, next) {
+exports.submit = (req, res) => {
   req.body.contest = req.body.id
   delete req.body.id
 
   let submission = req.body, userId = req.user._id, problem
 
-  let asyncValid = Submission.validateChain(req)
-    .seeLanguage()
-    .seeCode()
-    .asyncOk()
+  if (Submission.validateChain(req).seeLanguage().seeCode().notOk()) {
+    return res.status(400).send()
+  }
 
   async.waterfall([
     (next) => {
@@ -107,7 +106,7 @@ exports.submit = function (req, res, next) {
   })
 }
 
-exports.getById = function (req, res, next) {
+exports.getById = (req, res) => {
   Submission.findById(req.params.id)
   .populate({
     path: 'contest',
@@ -131,7 +130,7 @@ exports.getById = function (req, res, next) {
   })
 }
 
-exports.getUserContestSubmissions = function(req, res) {
+exports.getUserContestSubmissions = (req, res) => {
   let contestId = req.params.id
   Submission.find({
     contest: contestId,

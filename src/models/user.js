@@ -4,8 +4,7 @@ const mongoose = require('mongoose'),
   bcrypt = require('bcrypt'),
   crypto = require('crypto')
 
-const Team = require('./team'),
-  ValidateChain = require('../utils/utils').validateChain
+const ValidateChain = require('../utils/utils').validateChain
 
 const ACCESS = require('../config/constants').ACCESS
 

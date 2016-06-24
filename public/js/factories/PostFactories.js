@@ -9,10 +9,10 @@ angular.module('Post')
     function ($rootScope, $cookies, $state, $resource, Request, Notification) {
       var API = {
         post: Request.send('save', $resource('/api/v1/post/')),
-        getByUser: Request.send('get', $resource('/api/v1/post/user/get/:id')),
-        getCountByUser: Request.send('get', $resource('/api/v1/post/user/count/:id')),
-        getByPage: Request.send('get', $resource('/api/v1/post/page/get/:name')),
-        getCountByPage: Request.send('get', $resource('/api/v1/post/page/count/:name')),
+        getByUser: Request.send('get', $resource('/api/v1/post/user/:id')),
+        getCountByUser: Request.send('get', $resource('/api/v1/post/user/:id/count')),
+        getByPage: Request.send('get', $resource('/api/v1/post/page/:name')),
+        getCountByPage: Request.send('get', $resource('/api/v1/post/page/:name/count')),
       }
       return {
         post: function (post, callback) {

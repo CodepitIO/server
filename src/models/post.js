@@ -19,7 +19,7 @@ let schema = mongoose.Schema({
 })
 
 schema.index({ author: 1, createdAt: -1 })
-schema.index({ page: 1 })
+schema.index({ page: 1, createdAt: -1 })
 
 schema.statics.validateChain = ValidateChain({
   author: function() {

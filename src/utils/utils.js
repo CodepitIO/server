@@ -52,23 +52,3 @@ exports.validateChain = (fields) => {
     return _.assign(chain, req)
   }
 }
-
-const Contest = require('../models/contest')
-exports.validators = {
-  canSubmitToContest: (contestId, problemId, userId) => {
-    return new Promise((resolve, reject) => {
-      Contest.findById(contestId, (err, contest) => {
-        if (err || !contest) {
-          return reject()
-        }
-        if (!contest.problemInContest(problemId) || !contest.userInContest(userId)) {
-          return reject()
-        }
-        if (contest.date_start > new Date()) {
-          return reject()
-        }
-        return resolve()
-      })
-    })
-  }
-}

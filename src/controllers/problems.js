@@ -15,7 +15,7 @@ fs.stat(PROBLEMS_PATH, (err) => {
   if (err) fs.mkdir(PROBLEMS_PATH)
 })
 
-exports.fetchProblems = (req, res, next) => {
+exports.fetchProblems = (req, res) => {
   let substr = req.body.text
   let insertedProblems = req.body.problems || []
   if (!_.isString(substr) || !_.isArray(insertedProblems)) return res.status(400).send()
@@ -25,16 +25,17 @@ exports.fetchProblems = (req, res, next) => {
   })
 }
 
-exports.getProblemMetadata = (req, res, next) => {
+exports.getProblemMetadata = (req, res) => {
   let id = req.params.id
   Problem.findById(id).select('name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf')
     .exec((err, problem) => {
-      if (err || !problem) return res.status(404).send()
+      if (err) return res.status(500).send()
+      if (!problem) return res.status(404).send()
       return res.json(problem)
     })
 }
 
-exports.getProblemContent = (req, res, next) => {
+exports.getProblemContent = (req, res) => {
   let ext = path.extname(req.params.id)
   if (ext !== '.html') return res.status(404).send()
   let problemPath = path.join(PROBLEMS_PATH, req.params.id)

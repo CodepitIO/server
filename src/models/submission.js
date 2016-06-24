@@ -51,9 +51,6 @@ schema.statics.validateChain = ValidateChain({
   },
   code: function() {
     this.notEmpty().isByteLength({min: 1, max: 64 * 1024})
-  },
-  contest: function(problemId, userId) {
-    this.canSubmitToContest(problemId, userId)
   }
 })
 
