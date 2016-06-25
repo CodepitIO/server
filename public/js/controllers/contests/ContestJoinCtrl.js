@@ -7,10 +7,10 @@ angular.module('Contests')
       $scope.team = {}
 
       $scope.teams = []
-      console.log($scope.ContestState.contest)
-      if ($scope.ContestState.contest.contestantType === 1) {
+      console.log($scope.contest)
+      if ($scope.contest.contestantType === 1) {
         $scope.role = 'individual';
-      } else if ($scope.ContestState.contest.contestantType === 2) {
+      } else if ($scope.contest.contestantType === 2) {
         $scope.role = 'team';
       }
 
