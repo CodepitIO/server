@@ -1,9 +1,9 @@
-<div ng-controller="SettingsDataController" class="contest-settings-container">
+<div ng-controller="ContestSettingsDataController" class="contest-settings-container">
   <div layout="row">
     <div layout="column" flex="60" class="settings-data">
       <form name="form" novalidate>
         <div class="form-group">
-          <input type="text" class="data-input" placeholder="Nome da competição" ng-model="settingsState.contest.name" name="name" maxlength="50" required/>
+          <input type="text" class="data-input" placeholder="Nome da competição" ng-model="contest.name" name="name" maxlength="50" required/>
           <small class="error" ng-show="form.name | mrtHasError">* a competição precisa ter um nome</small>
         </div>
         <div class="form-group" layout="row">
@@ -14,16 +14,16 @@
             uib-datepicker-popup="EEE, d/MMM/yyyy"
             is-open="opened.start"
             datepicker-options="options"
-            ng-model="settingsState.contest.date_start"
-            ng-change="settingsState.validateTimeRange()"
+            ng-model="contest.date_start"
+            ng-change="validateTimeRange()"
             ng-click="openDatepicker('start')"
             readonly required/>
           <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('start')"><i class="fa fa-calendar"></i></button>
           <uib-timepicker
             class="time-input"
             show-spinners="false"
-            ng-model="settingsState.contest.date_start"
-            ng-change="settingsState.debounceValidation()"
+            ng-model="contest.date_start"
+            ng-change="debounceValidation()"
             hour-step="1"
             minute-step="5"
             show-meridian="false"
@@ -38,27 +38,27 @@
             uib-datepicker-popup="EEE, d/MMM/yyyy"
             is-open="opened.end"
             datepicker-options="options"
-            ng-model="settingsState.contest.date_end"
+            ng-model="contest.date_end"
             ng-click="openDatepicker('end')"
-            ng-change="settingsState.validateTimeRange()"
+            ng-change="validateTimeRange()"
             readonly required/>
           <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('end')"><i class="fa fa-calendar"></i></button>
           <uib-timepicker
             class="time-input"
             show-spinners="false"
-            ng-model="settingsState.contest.date_end"
-            ng-change="settingsState.debounceValidation()"
+            ng-model="contest.date_end"
+            ng-change="debounceValidation()"
             hour-step="1"
             minute-step="5"
             show-meridian="false"
             required>
           </uib-timepicker>
         </div>
-        <div ng-if="settingsState.contest.date_start && settingsState.contest.date_end" style="float: right; padding-bottom: 15px;">
-          <small><b>Duração</b>: {{(settingsState.contest.date_end - settingsState.contest.date_start) / 60000 | formatDuration}}</small>
+        <div ng-if="contest.date_start && contest.date_end" style="float: right; padding-bottom: 15px;">
+          <small><b>Duração</b>: {{(contest.date_end - contest.date_start) / 60000 | formatDuration}}</small>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-block data-button" ng-click="settingsState.nextTab()" ng-disabled="form.$invalid">Escolher problemas &#8594;</button>
+          <button type="submit" class="btn btn-block data-button" ng-click="nextTab()" ng-disabled="form.$invalid">Escolher problemas &#8594;</button>
         </div>
       </form>
     </div>

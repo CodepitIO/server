@@ -46,7 +46,7 @@ angular.module('appRoutes', []).config([
       .state('contests.create', {
         url: '/create',
         templateUrl: 'views/contests/create.html',
-        controller: 'CreateContestController',
+        controller: 'ContestSettingsController',
         authenticate: true
       })
       .state('contest', {

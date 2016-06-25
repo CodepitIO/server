@@ -1,5 +1,5 @@
 angular.module('Contests')
-  .controller('JoinContestController', [
+  .controller('ContestJoinController', [
     '$scope',
     '$mdSidenav',
     function($scope, $mdSidenav) {

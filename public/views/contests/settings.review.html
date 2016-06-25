@@ -1,46 +1,46 @@
-<div ng-controller="SettingsDataController" class="contest-settings-container">
+<div ng-controller="ContestSettingsDataController" class="contest-settings-container">
   <md-subheader>Dados</md-subheader>
   <div layout="column">
     <div layout="row">
       <div flex="10"><b>Nome</b></div>
-      <div flex><p>{{settingsState.contest.name}}</p></div>
+      <div flex><p>{{contest.name}}</p></div>
     </div>
     <div layout="row">
       <div flex="10"><b>Início</b></div>
-      <div flex><p ng-bind-html="settingsState.contest.date_start | mrtFilterTime"></p></div>
+      <div flex><p ng-bind-html="contest.date_start | mrtFilterTime"></p></div>
     </div>
     <div layout="row">
       <div flex="10"><b>Fim</b></div>
-      <div flex><p ng-bind-html="settingsState.contest.date_end | mrtFilterTime"></p></div>
+      <div flex><p ng-bind-html="contest.date_end | mrtFilterTime"></p></div>
     </div>
     <div layout="row">
       <div flex="10"><b>Duração</b></div>
-      <div flex><p>{{(settingsState.contest.date_end - settingsState.contest.date_start) / 60000 | formatDuration}}</p></div>
+      <div flex><p>{{(contest.date_end - contest.date_start) / 60000 | formatDuration}}</p></div>
     </div>
   </div>
   <md-subheader>Problemas</md-subheader>
-  <div layout="row" ng-repeat="problem in settingsState.contest.problems">
+  <div layout="row" ng-repeat="problem in contest.problems">
     <div flex><p><b>({{$index | mrtAlphabetize}})</b> <a ui-sref="problems.view({id:problem._id})" target="_blank">{{problem.fullName}}</a></p></div>
   </div>
   <md-subheader>Opções</md-subheader>
   <div layout="row">
     <div flex="10"><b>Frozen</b></div>
-    <div flex><p ng-bind-html="settingsState.contest.frozen_time | mrtFilterTime"></p></div>
+    <div flex><p ng-bind-html="contest.frozen_time | mrtFilterTime"></p></div>
   </div>
   <div layout="row">
     <div flex="10"><b>Blind</b></div>
-    <div flex><p ng-bind-html="settingsState.contest.blind_time | mrtFilterTime"></p></div>
+    <div flex><p ng-bind-html="contest.blind_time | mrtFilterTime"></p></div>
   </div>
   <div layout="row">
     <div flex="10"><b>Privacidade</b></div>
-    <div flex><p>{{settingsState.contest.options.isPrivate}}</p></div>
+    <div flex><p>{{contest.options.isPrivate}}</p></div>
   </div>
   <div layout="row">
     <div flex="10"><b>Visualização</b></div>
-    <div flex><p>{{settingsState.contest.options.watchPrivate}}</p></div>
+    <div flex><p>{{contest.options.watchPrivate}}</p></div>
   </div>
   <div layout="row">
     <div flex="10"><b>Penalidade</b></div>
-    <div flex><p>{{settingsState.contest.options.penalty}} minutos</p></div>
+    <div flex><p>{{contest.options.penalty}} minutos</p></div>
   </div>
 </div>

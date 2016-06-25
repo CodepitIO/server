@@ -1,10 +1,8 @@
 var app = angular.module('Contests')
-app.controller('SettingsDataController', [
+app.controller('ContestSettingsDataController', [
   '$scope',
-  'SettingsState',
   'TimeState',
-  function ($scope, settingsState, timeState) {
-    $scope.settingsState = settingsState
+  function ($scope, timeState) {
     $scope.timeState = timeState
 
     var today = new Date(), sixMonthsFromNow = new Date()

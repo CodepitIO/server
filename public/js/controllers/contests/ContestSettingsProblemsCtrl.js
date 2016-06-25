@@ -1,17 +1,15 @@
 var app = angular.module('Contests')
-app.controller('SettingsProblemsController', [
+app.controller('ContestSettingsProblemsController', [
   '$scope',
   'ProblemsAPI',
-  'SettingsState',
-  function ($scope, ProblemsAPI, settingsState) {
+  function ($scope, ProblemsAPI) {
     var problemIds = []
     $scope.searchText = ''
     $scope.selectedProblem = null
-    $scope.settingsState = settingsState
 
     $scope.select = function() {
       if ($scope.selectedProblem) {
-        settingsState.contest.problems.push($scope.selectedProblem)
+        $scope.contest.problems.push($scope.selectedProblem)
         problemIds.push($scope.selectedProblem._id)
       }
       $scope.selectedProblem = null
@@ -30,7 +28,7 @@ app.controller('SettingsProblemsController', [
     }
 
     $scope.removeProblem = function(id) {
-      _.remove(settingsState.contest.problems, function(obj) {
+      _.remove($scope.contest.problems, function(obj) {
         return obj._id === id
       })
       _.pull(problemIds, id)
