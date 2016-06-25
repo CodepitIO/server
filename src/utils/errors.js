@@ -22,5 +22,17 @@ module.exports = {
       pt: 'Operação inválida.',
       en: 'Invalid operation'
     }
-  }
+  },
+  UserNotFoundByEmail: {
+    error: {
+      pt: 'Não há usuário cadastrado com este email.',
+      en: 'There\'s no user registered with this email.'
+    }
+  },
+  UserAlreadyInTeam: {
+    error: {
+      pt: 'Um usuário com este email já está no seu time.',
+      en: 'An user with this email is already on your team.'
+    }
+  },
 }

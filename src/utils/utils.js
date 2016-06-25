@@ -5,13 +5,13 @@ const async = require('async'),
 
 const constants = require('../config/constants')
 
-exports.getTime = function (req, res, next) {
+exports.getTime = (req, res) => {
   return res.json({
     date: new Date()
   })
 }
 
-exports.downloadFile = function (uri, filename, callback) {
+exports.downloadFile = (uri, filename, callback) => {
   async.series([
     async.reflect(async.apply(fs.unlink, filename)),
     async.apply(request.head, uri),
@@ -21,8 +21,14 @@ exports.downloadFile = function (uri, filename, callback) {
   ], callback)
 }
 
+exports.cmpToString = (rhs) => {
+  return (lhs) => {
+    return _.toString(lhs) === _.toString(rhs)
+  }
+}
+
 // Validate related functions
-exports.isValidId = function (req, res, next) {
+exports.isValidId = (req, res, next) => {
   req.check('id').isMongoId()
   if (req.validationErrors()) return res.status(400).send()
   return next()

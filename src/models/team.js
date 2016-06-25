@@ -40,7 +40,7 @@ schema.statics.validateChain = ValidateChain({
 
 schema.methods.hasUser = function(userId) {
   return _.some(_.concat(this.members, this.invites), (user) => {
-    return user._id.toString() == userId.toString()
+    return _.toString(user) === _.toString(userId)
   })
 }
 

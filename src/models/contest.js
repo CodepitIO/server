@@ -71,32 +71,32 @@ schema.index({
   createdAt: -1
 })
 schema.index({
-  'contestants.id': 1
+  'contestants.id': 1,
+  '_id': 1,
+})
+schema.index({
+  'contestants.team': 1,
+  'contestants.id': 1,
+  '_id': 1,
 })
 
 schema.methods.getUserRepresentative = function (id) {
-  if (!id) return false
-  var elem = _.find(this.contestants, function (obj) {
-    return obj.id && obj.id.toString() === id.toString()
+  let elem = _.find(this.contestants, function (obj) {
+    return obj.id && _.toString(obj.id) === _.toString(id)
   })
   return elem && (elem.team || elem.id)
 }
 
 schema.methods.userInContest = function (id) {
-  if (!id) return false
-  id = id.toString()
   return _.some(this.contestants, (obj) => {
-    let cid = obj.id && obj.id._id ? obj.id._id.toString() :
-              obj.id ? obj.id.toString() :
-              obj.toString()
-    return cid === id
+    let uid = (obj.id && obj.id._id) ? obj.id._id : (obj.id ? obj.id : obj)
+    return _.toString(uid) === _.toString(id)
   })
 }
 
 schema.methods.problemInContest = function (id) {
-  if (!id) return false
   return _.some(this.problems, (obj) => {
-    return obj.toString() === id.toString()
+    return _.toString(obj) === _.toString(id)
   })
 }
 

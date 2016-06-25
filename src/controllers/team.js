@@ -1,14 +1,14 @@
 'use strict'
 
 const async = require('async'),
-  ObjectId = require('mongoose').Types.ObjectId,
   _ = require('lodash')
 
 const Team = require('../models/team'),
-  UserCtrl = require('./user'),
-  Submission = require('../models/submission')
+  User = require('../models/user'),
+  Errors = require('../utils/errors'),
+  Utils = require('../utils/utils')
 
-const MAX_TEAMS_PER_USER = 5
+const MAX_TEAMS_PER_USER = 20
 
 exports.getByLoggedUser = (req, res) => {
   let userId = req.user._id
@@ -53,33 +53,36 @@ exports.leave = (req, res) => {
   }, (err, team) => {
     if (err) return res.status(500).end()
     if (!team) return res.status(400).end()
+    console.log(team)
     return res.json({})
   })
 }
 
 exports.invite = (req, res) => {
   let teamId = req.body.id
-  let invitedId = req.body.invited
+  let invitedEmail = req.body.invited
   let userId = req.user._id
   async.parallel({
     team: (next) => {
-      Team.find({_id: teamId, members: userId}, next)
+      Team.findOne({_id: teamId, members: userId}, next)
     },
     invited: (next) => {
-      User.findById(invitedId, '_id local.username', next)
+      User.findOne({'local.email': invitedEmail}, '_id local.username local.name local.surname local.email', next)
     }
   }, (err, results) => {
     if (err) return res.status(500).send()
-    let team = results.teamId
+    let team = results.team
     let invited = results.invited
-    if (!team || !invited || team.hasUser(invitedId)) return res.status(400).send()
+    if (!team) return res.status(400).send()
+    if (!invited) return res.json(Errors.UserNotFoundByEmail)
+    if (team.hasUser(invited._id)) return res.json(Errors.UserAlreadyInTeam)
     if (team.members.length + team.invites.length >= MAX_TEAMS_PER_USER) {
       return res.status(400).send()
     }
-    team.invites.push(invitedId)
+    team.invites.push(invited._id)
     team.save((err) => {
       if (err) return res.status(500).send()
-      return res.json({invited: invited})
+      return res.json({invited: invited.toObject({virtuals: true})})
     })
   })
 }
@@ -88,11 +91,11 @@ exports.remove = (req, res) => {
   let teamId = req.body.id
   let removedId = req.body.removed
   let userId = req.user._id
-  Team.find({_id: teamId, members: userId}, (err, team) => {
+  Team.findOne({_id: teamId, members: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    _.pull(team.invites, removedId)
-    _.pull(team.members, removedId)
+    _.remove(team.invites, Utils.cmpToString(removedId))
+    _.remove(team.members, Utils.cmpToString(removedId))
     team.save((err) => {
       if (err) return res.status(500).send()
       return res.json({})
@@ -103,10 +106,10 @@ exports.remove = (req, res) => {
 exports.accept = (req, res) => {
   let teamId = req.body.id
   let userId = req.user._id
-  Team.find({_id: teamId, invites: userId}, (err, team) => {
+  Team.findOne({_id: teamId, invites: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    _.pull(team.members, userId)
+    _.remove(team.invites, Utils.cmpToString(userId))
     team.members.push(userId)
     team.save((err) => {
       if (err) return res.status(500).send()
@@ -118,10 +121,10 @@ exports.accept = (req, res) => {
 exports.decline = (req, res) => {
   let teamId = req.body.id
   let userId = req.user._id
-  Team.find({_id: teamId, invites: userId}, (err, team) => {
+  Team.findOne({_id: teamId, invites: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    _.pull(team.invites, userId)
+    _.remove(team.invites, Utils.cmpToString(userId))
     team.save((err) => {
       if (err) return res.status(500).send()
       return res.json({})
@@ -135,11 +138,11 @@ exports.create = (req, res) => {
   }
   // TODO: user should wait at least 10 minutes to create a new team
   let userId = req.user._id
-  Team.find({
+  Team.count({
     members: userId
-  }, (err, teams) => {
+  }, (err, count) => {
     if (err) return res.status(500).end()
-    if (teams.length >= MAX_TEAMS_PER_USER) {
+    if (count >= MAX_TEAMS_PER_USER) {
       return res.status(400).send()
     }
     let team = new Team({
