@@ -53,7 +53,6 @@ exports.leave = (req, res) => {
   }, (err, team) => {
     if (err) return res.status(500).end()
     if (!team) return res.status(400).end()
-    console.log(team)
     return res.json({})
   })
 }
