@@ -132,10 +132,15 @@ exports.getById = (req, res) => {
 
 exports.getUserContestSubmissions = (req, res) => {
   let contestId = req.params.id
+  let startFrom = new Date(_.toInteger(req.params.from) || 0)
   Submission.find({
     contest: contestId,
-    contestant: req.user._id
-  }, '_id date verdict language problem', (err, submissions) => {
+    contestant: req.user._id,
+    date: {$gte: startFrom}
+  })
+  .select('_id date verdict language problem')
+  .sort('date')
+  .exec((err, submissions) => {
     if (err) return res.status(400).send()
     return res.json({submissions: submissions})
   })

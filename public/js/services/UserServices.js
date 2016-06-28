@@ -6,6 +6,7 @@ angular.module('User')
     'Request',
     function ($cookies, $interval, $resource, Request) {
       var $scope = this
+      $scope.user = {}
 
       $scope.reset = function () {
         $scope.user = {}
@@ -34,6 +35,14 @@ angular.module('User')
       }
       $scope.getEmailHash = function() {
         return $scope.user.local && $scope.user.local.emailHash || null
+      }
+
+      $scope.isUser = function(usr) {
+        var id = usr._id ? usr._id : usr
+        return id === $scope.getId()
+      }
+      $scope.isInArray = function(array) {
+        return _.some(array, $scope.isUser)
       }
 
       try {

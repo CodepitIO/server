@@ -4,14 +4,19 @@ angular.module('Contests')
     '$state',
     '$stateParams',
     '$mdSidenav',
+    '$interval',
+    'Notification',
     'ContestAPI',
     'TimeState',
-    function ($scope, $state, $stateParams, $mdSidenav, ContestAPI, TimeState) {
+    'UserState',
+    'Verdict',
+    function ($scope, $state, $stateParams, $mdSidenav, $interval, Notification, ContestAPI, TimeState, UserState, Verdict) {
       if ($state.is('contest')) {
         $state.go('.scoreboard')
       }
       $scope.state = $state
       $scope.timeState = TimeState
+      $scope.userState = UserState
 
       $scope.canViewContest = false
       $scope.loading = true
@@ -21,7 +26,8 @@ angular.module('Contests')
       // Submit
       $scope.submission = {}
       // Submissions
-      $scope.submissions = []
+      $scope.submissions = {}
+      $scope.submissionsIds = []
       // Scoreboard
       $scope.problems = []
       $scope.problemIndex = {}
@@ -44,10 +50,6 @@ angular.module('Contests')
           ($scope.contest.date_end - $scope.contest.date_start)
         return perc
       }
-
-      $scope.toggleRight = function(contest) {
-  			$mdSidenav('join-contest-sidenav').toggle()
-  		}
 
       function getReps(contestants) {
         return _.chain(contestants)
@@ -88,11 +90,13 @@ angular.module('Contests')
             $scope.contestants = getReps(data.contestants)
             $scope.contestantsIds = _.keys($scope.contestants)
 
-            if (data.inContest) {
-              fetchSubmissions()
-            }
             if (new Date() >= data.date_start) {
-              fetchContestScoreboard()
+              if (data.inContest) {
+                processSubmissions()
+              }
+              processContestEvents(function() {
+                $scope.loading = false
+              })
             }
           } else {
             $scope.loading = false
@@ -100,63 +104,120 @@ angular.module('Contests')
         })
       }
 
-      function fetchContestScoreboard(upTo) {
-        ContestAPI.getContestEvents($scope.id, function(err, events) {
-          if (err || !events) return
+      function sortContestants(callback) {
+        $scope.contestantsIds.sort(function(a,b) {
+          var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
+          var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
+          if (solvedA != solvedB) return solvedB - solvedA
+          var penaltyA = $scope.scores[a] && $scope.scores[a].penalty || 0
+          var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
+          return penaltyA - penaltyB
+        })
+        callback && callback()
+      }
+
+      var eventStartFrom = 0, markEvent = {}, pending = {}
+      function processContestEvents(callback) {
+        var newEventStartFrom = eventStartFrom
+        ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
+          var shouldSort = !!callback
+          events = events || []
+          if (events.length > 0) newEventStartFrom = _.last(events)[3]+1
           _.forEach(events, function(e) {
             var rep = e[0], pid = e[1], status = e[2], timestamp = e[3]
+            var pendingKey = _.join([rep,pid,timestamp], ',')
+            if (status === 'PENDING') {
+              newEventStartFrom = Math.min(newEventStartFrom, timestamp)
+              pending[pendingKey] = true
+            }
+            var uid = _.join(e, ',')
+            if (markEvent[uid]) return
+            markEvent[uid] = true
             _.update($scope.scoreboard, [rep, pid], function(o) {
               o = o || {err: 0, pending: 0, accepted: false}
-              if (!o.accepted) {
-                if (status === 'ACCEPTED') {
-                  o.accepted = true
-                  o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000)
-                  _.update($scope.firstAccepted, pid, function(s) {
-                    if (s) return s
-                    return { rep: rep, timestamp: timestamp }
-                  })
-                  _.update($scope.scores, rep, function(s) {
-                    s = s || {solved: 0, penalty: 0}
-                    s.solved++
-                    s.penalty += o.time + o.err * 20
-                    return s
-                  })
-                } else if (status === 'REJECTED') {
-                  o.err++
-                } else {
-                  o.pending++
-                }
+              if (status !== 'PENDING' && pending[pendingKey]) {
+                delete pending[pendingKey]
+                o.pending--
+              }
+              if (o.accepted) return o
+              if (status === 'ACCEPTED') {
+                shouldSort = true
+                o.accepted = true
+                o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000)
+                _.update($scope.firstAccepted, pid, function(s) {
+                  if (s) return s
+                  return { rep: rep, timestamp: timestamp }
+                })
+                _.update($scope.scores, rep, function(s) {
+                  s = s || {solved: 0, penalty: 0}
+                  s.solved++
+                  s.penalty += o.time + o.err * 20
+                  return s
+                })
+              } else if (status === 'REJECTED') {
+                o.err++
+              } else {
+                o.pending++
               }
               return o
             })
           })
-          $scope.contestantsIds.sort(function(a,b) {
-            var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
-            var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
-            if (solvedA != solvedB) return solvedB - solvedA
-            var penaltyA = $scope.scores[a] && $scope.scores[a].penalty || 0
-            var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
-            return penaltyA - penaltyB
-          })
-          $scope.loading = false
+          if (shouldSort) sortContestants(callback)
+          eventStartFrom = newEventStartFrom
         })
       }
 
-      $scope.pushSubmission = function(submission) {
-        submission.date = new Date(submission.date)
-        submission.minutes = Math.floor((submission.date - $scope.contest.date_start) / 60000)
-        submission.index = $scope.problemIndex[submission.problem]
-        $scope.submissions.push(submission)
+      var submissionStartFrom = 0
+      function processSubmissions() {
+        var newSubmissionStartFrom = submissionStartFrom
+        ContestAPI.getSubmissions($scope.id, submissionStartFrom, function(err, submissions) {
+          if (submissions.length > 0) {
+            newSubmissionStartFrom = new Date(_.head(submissions).date).getTime()+1
+          }
+          _.forEach(submissions, function(s) {
+            if (s.verdict <= 0) {
+              newSubmissionStartFrom =
+                Math.min(newSubmissionStartFrom, new Date(s.date).getTime())
+            }
+            $scope.tryPushSubmission(s)
+          })
+          submissionStartFrom = newSubmissionStartFrom
+        })
       }
 
-      function fetchSubmissions() {
-        ContestAPI.getSubmissions($scope.id, function(err, submissions) {
-          _.forEach(submissions, function(value) {
-            $scope.pushSubmission(value)
-          })
-        })
+      var processInterval = $interval(function() {
+        processContestEvents()
+        processSubmissions()
+      }, 5000, 0, false)
+      $scope.$on('$destroy', function() {
+        $interval.cancel(processInterval)
+      })
+
+      $scope.tryPushSubmission = function(s) {
+        if ($scope.submissions[s._id]) {
+          var olds = $scope.submissions[s._id]
+          if (olds.verdict <= 0 && s.verdict > 0) {
+            Notification[Verdict[s.verdict].notification](
+              'Problema ' + String.fromCharCode(65 + olds.index) + ': ' + Verdict[s.verdict].text
+            )
+          }
+          return olds.verdict = s.verdict
+        }
+        s.date = new Date(s.date)
+        s.minutes = Math.floor((s.date - $scope.contest.date_start) / 60000)
+        s.index = $scope.problemIndex[s.problem]
+        $scope.submissions[s._id] = s
+        $scope.submissionsIds.unshift(s._id)
       }
 
       fetchContestMetadata()
+
+      $scope.toggleRight = function(contest) {
+  			$mdSidenav('join-contest-sidenav').toggle()
+  		}
+
+      $scope.leave = function() {
+        ContestAPI.leave($scope.id)
+      }
     }
   ])

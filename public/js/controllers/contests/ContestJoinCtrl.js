@@ -2,53 +2,29 @@ angular.module('Contests')
   .controller('ContestJoinController', [
     '$scope',
     '$mdSidenav',
-    function($scope, $mdSidenav) {
+    'TeamAPI',
+    'ContestAPI',
+    function($scope, $mdSidenav, TeamAPI, ContestAPI) {
       $scope.password = ''
-      $scope.team = {}
-
-      $scope.teams = []
-      console.log($scope.contest)
+      $scope.team = null
       if ($scope.contest.contestantType === 1) {
-        $scope.role = 'individual';
+        $scope.role = 'individual'
       } else if ($scope.contest.contestantType === 2) {
-        $scope.role = 'team';
+        $scope.role = 'team'
       }
 
-      // var fetchTeams = function() {
-      //   team.getFromUser({})
-      //     .then(function(data) {
-      //       $scope.teams = data.teams.map(function(obj) {
-      //         return {
-      //           id: obj._id,
-      //           name: obj.name
-      //         };
-      //       });
-      //     });
-      // }
-      // fetchTeams();
+      $scope.teams = []
+      TeamAPI.getByLoggedUser(function(err, data) {
+        $scope.teams = data.member
+      })
 
       $scope.close = function() {
-        $mdSidenav('right').close();
-      };
+        $mdSidenav('join-contest-sidenav').close()
+      }
 
-      // $scope.setJoinContestData = function(contest) {
-      //   if ($scope.isCollapsed || $scope.curContest._id != contest._id) {
-      //     if (contest.contestantType == '2') {
-      //       if ($scope.teams.length === 0) {
-      //         Notification.error('Esta competição só permite times, e você não está em nenhum.');
-      //         return;
-      //       } else {
-      //         $scope.joinContest.team = $scope.teams[0].id;
-      //       }
-      //     } else {
-      //       $scope.joinContest.team = $scope.teamsAndSingle[0].id;
-      //     }
-      //     $scope.joinContest.password = '';
-      //     $scope.curContest = contest;
-      //     $scope.isCollapsed = false;
-      //   } else {
-      //     $scope.isCollapsed = true;
-      //   }
-      // };
+      $scope.join = function() {
+        var team = ($scope.role === 'individual') ? null : $scope.team
+        ContestAPI.join($scope.id, $scope.password, team)
+      }
     }
   ])

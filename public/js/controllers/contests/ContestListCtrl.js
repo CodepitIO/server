@@ -29,10 +29,10 @@ angular.module('Contests')
           break
       }
 
-      var lastQueryDate = 0
+      var lastQueryDate = 0, hitBottom = false
       $scope.fetchData = function () {
         // skip it if we're already loading
-        if ($scope.loadingNewPage) return
+        if ($scope.loadingNewPage || hitBottom) return
         // skip if it it's not the first load and this is not a past filter
         if (!$scope.loadingData && $scope.filterType !== 'past') return
 
@@ -40,6 +40,8 @@ angular.module('Contests')
         ContestAPI.getList($scope.filterType, lastQueryDate, function (err, contests) {
           if (contests.length > 0) {
             lastQueryDate = new Date(_.last(contests).date_end).getTime()
+          } else {
+            hitBottom = true
           }
           for (var i = 0; i < contests.length; i++) {
             var start = contests[i].date_start = new Date(contests[i].date_start)

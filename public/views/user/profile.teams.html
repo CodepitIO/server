@@ -1,1 +1,33 @@
-lala
+<mrt-page-wrapper wait-while='loading' class="team-container">
+  <md-button style="float: right;" ng-click="newTeam($event)" class="md-primary" ng-if="member.length < 20">
+    <md-icon class="material-icons">add</md-icon>Criar Time
+  </md-button>
+  <div layout="row" ng-if="member.length === 0">
+    <p style="color: #777;">
+      Você não está em nenhum time.
+    </p>
+  </div>
+  <div layout="row" ng-if="member.length > 0" layout-wrap>
+    <md-list-item flex="30" class="md-3-line" ng-repeat="team in member" ui-sref="team({id:team._id})" style="margin-top: 10px;">
+      <div class="md-list-item-text team-card" layout="column">
+        <h3><b>{{ team.name }}</b></h3>
+        <p ng-repeat="user in team.members">
+          <span><img class="profile-image" ng-src="//www.gravatar.com/avatar/{{user.local.emailHash}}?d=identicon&s=20"/>&nbsp;{{ user.local.username }}</span>
+        </p>
+      </div>
+    </md-list-item>
+  </div>
+  <div ng-if="invited.length > 0" style="margin-top: 20px;">
+    <md-subheader>Convites pendentes ({{invited.length}})</md-subheader>
+    <div layout="row" layout-wrap>
+      <md-list-item flex="30" class="md-3-line" ng-repeat="team in invited" ui-sref="team({id:team._id})" style="margin-top: 10px;">
+        <div class="md-list-item-text team-card" layout="column">
+          <h3><b>{{ team.name }}</b></h3>
+          <p ng-repeat="user in team.members">
+            <span><img class="profile-image" ng-src="//www.gravatar.com/avatar/{{user.local.emailHash}}?d=identicon&s=20"/>&nbsp;{{ user.local.username }}</span>
+          </p>
+        </div>
+      </md-list-item>
+    </div>
+  </div>
+</mrt-page-wrapper>

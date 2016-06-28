@@ -4,7 +4,7 @@ angular.module('Contests').controller('ContestScoreboardController', [
     $scope.getCellAttempts = function(rep, problem) {
       var score = _.get($scope.scoreboard, [rep, problem])
       if (!score) return ''
-      return score.err + 1
+      return score.err + (score.accepted? 1 : 0)
     }
 
     $scope.getCellPenalty = function(rep, problem) {

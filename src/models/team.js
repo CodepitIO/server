@@ -26,8 +26,8 @@ let schema = mongoose.Schema({
   timestamps: true
 })
 
-schema.index({ 'members': 1 })
-schema.index({ 'invites': 1 })
+schema.index({ 'members': 1, '_id': 1 })
+schema.index({ 'invites': 1, '_id': 1 })
 
 schema.statics.validateChain = ValidateChain({
   name: function() {

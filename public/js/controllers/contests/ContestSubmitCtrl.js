@@ -26,7 +26,7 @@ angular.module('Contests')
             $scope.submission.code = $scope.submission.language =
               $scope.submission.codefile = $scope.submission.problem = null
             $scope.updateTextMode()
-            $scope.pushSubmission(submission)
+            $scope.tryPushSubmission(submission)
           }
         })
       }

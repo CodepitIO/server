@@ -39,7 +39,7 @@ exports.create = (req, res) => {
 let filters = {
   open: {
     opts: function () {
-      var now = new Date()
+      let now = new Date()
       return {
         date_end: {
           $gt: now
@@ -51,7 +51,7 @@ let filters = {
   },
   past: {
     opts: function (req) {
-      var last
+      let last
       if (req.params.from === '0') last = new Date()
       else last = new Date(parseInt(req.params.from) || 0)
       return {
@@ -74,7 +74,7 @@ let filters = {
   },
   now: {
     opts: function () {
-      var now = new Date()
+      let now = new Date()
       return {
         date_start: {
           $lt: now
@@ -89,7 +89,7 @@ let filters = {
   },
   future: {
     opts: function () {
-      var now = new Date()
+      let now = new Date()
       return {
         date_start: {
           $gt: now
@@ -111,7 +111,7 @@ let filters = {
 }
 
 exports.getList = (req, res) => {
-  var filter = filters[req.params.type || '']
+  let filter = filters[req.params.type || '']
 
   if (filter === undefined) {
     return res.status(400).send()

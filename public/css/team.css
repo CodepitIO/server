@@ -1,0 +1,104 @@
+@media (max-width: 599px) {
+  .team-container .profile-image-container {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
+.team-container .profile-image-container {
+  padding: 10px;
+  max-width: 300px;
+}
+
+.team-container .profile-image-container .profile-image {
+  border-radius: 200px;
+}
+
+.team-container .user-name {
+  font-weight: 200;
+}
+
+.team-container .unrated-handle {
+  font-weight: 600;
+  color: #888;
+  font-style: normal;
+}
+
+.team-container .unrated-handle:hover {
+  text-decoration: none;
+}
+
+.team-container .team-menu-icon {
+  position: absolute;
+}
+
+.team-container .user-remove i {
+  color: #E57373;
+  margin: 5px 0 0 5px;
+}
+
+.team-container .user-remove i:hover {
+  color: #D32F2F;
+}
+
+.team-container .user-remove:hover {
+  text-decoration: none;
+}
+
+.team-container .user-join i {
+  color: #4CAF50;
+  margin: 4px 0 0 5px;
+}
+
+.team-container .user-join:hover i {
+  color: #388E3C;
+}
+
+.team-container .user-join:hover {
+  text-decoration: none;
+}
+
+.team-container .logged-user-card {
+  background-color: #eee;
+}
+
+.edit-dialog-container {
+  margin: 0 25px 20px 25px;
+  width: 300px;
+}
+
+.edit-dialog-container input {
+  width: 100%;
+  padding: 17px;
+  border: solid 1px #d0d0d0;
+  border-radius: 2px;
+}
+
+.edit-dialog-container input:disabled,
+.edit-dialog-container textarea:disabled {
+  background-color: #eee;
+}
+
+.edit-dialog-container input:focus,
+.edit-dialog-container textarea:focus {
+  padding-left: 30px;
+  background: url("../imgs/register_area_bullet.png") no-repeat;
+  background-position: 16px 23px;
+}
+
+.edit-dialog-container input.ng-dirty.ng-invalid,
+.edit-dialog-container textarea.ng-dirty.ng-invalid {
+  border: 2px solid #AD7070 !important;
+}
+
+.edit-dialog-container textarea {
+  width: 100%;
+  height: 100px;
+  padding: 17px;
+  border: solid 1px #d0d0d0;
+  border-radius: 2px;
+  resize: none;
+}
+
+.edit-dialog-container button {
+  float: right;
+}

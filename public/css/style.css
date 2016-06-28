@@ -164,7 +164,7 @@ footer ul li a:first-child{
   font: 300 14px "Open Sans";
   font-style: italic;
   margin: 30px 0px 0px 30px;
-  color: #adabab;
+  color: #7d7b7b;
 }
 
 #breadcrumbs h2{
@@ -206,4 +206,8 @@ footer ul li a:first-child{
   -o-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.md-title {
+  color: #777;
 }

@@ -72,6 +72,10 @@ schema.index({
 })
 schema.index({
   'contestants.id': 1,
+  'date_start': -1,
+})
+schema.index({
+  'contestants.id': 1,
   '_id': 1,
 })
 schema.index({

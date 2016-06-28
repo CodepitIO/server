@@ -1,18 +1,28 @@
 var app = angular.module('General')
 
-app.directive('confirmedClick', [function () {
-  return {
-    link: function (scope, element, attr) {
-      var msg = attr.ngConfirmClick || 'Você tem certeza?'
-      var clickAction = attr.confirmedClick
-      element.bind('click', function (event) {
-        if (window.confirm(msg)) {
-          scope.$eval(clickAction)
-        }
-      })
+app.directive('mrtConfirmClick', [
+  '$mdDialog',
+  function ($mdDialog) {
+    return {
+      link: function (scope, element, attr) {
+        var title = attr.mrtConfirmClickTitle || 'Você tem certeza?'
+        var descr = attr.mrtConfirmClickDescr || ''
+        element.bind('click', function(ev) {
+          var confirm = $mdDialog.confirm()
+          .title(title)
+          .textContent(descr)
+          .clickOutsideToClose(true)
+          .targetEvent(ev)
+          .ok('Sim')
+          .cancel('Não');
+          $mdDialog.show(confirm).then(function() {
+            scope.$eval(attr.mrtConfirmClick)
+          });
+        })
+      }
     }
   }
-}])
+])
 
 app.directive('mrtBreadcrumbs', function () {
   return {

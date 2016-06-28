@@ -27,6 +27,12 @@ exports.cmpToString = (rhs) => {
   }
 }
 
+exports.cmpDiffString = (rhs) => {
+  return (lhs) => {
+    return _.toString(lhs) !== _.toString(rhs)
+  }
+}
+
 // Validate related functions
 exports.isValidId = (req, res, next) => {
   req.check('id').isMongoId()

@@ -46,50 +46,62 @@ angular.module('General')
 		'1': {
 			text: 'Aceito',
 			class: 'green-submission',
+			notification: 'success',
 		},
 		'2': {
 			text: 'Resposta Errada',
 			class: 'red-submission',
+			notification: 'error',
 		},
 		'3': {
 			text: 'Tempo Limite Excedido',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'4': {
 			text: 'Erro de Compilação',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'5': {
 			text: 'Erro durante Execução',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'6': {
 			text: 'Limite de Memória Excedido',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'7': {
 			text: 'Limite de Escrita Excedido',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'8': {
 			text: 'Erro de Formatação',
 			class: 'yellow-submission',
+			notification: 'warning',
 		},
 		'9': {
 			text: 'Erro Desconhecido',
 			class: 'grey-submission',
+			notification: 'info',
 		},
 		'10': {
 			text: 'Uso de função restrita',
 			class: 'blue-submission',
+			notification: 'info',
 		},
 		'11': {
 			text: 'Submissão inválida',
 			class: 'grey-submission',
+			notification: 'info',
 		},
 		'12': {
 			text: 'Erro de Submissão',
 			class: 'grey-submission',
+			notification: 'info',
 		},
 		'15': {
 			text: 'Rascunho',

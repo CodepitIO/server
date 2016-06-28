@@ -36,6 +36,13 @@
           <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="contest.inContest">
             <a ui-sref=".submissions">Submissões</a>
           </li>
+          <li class="leave-button" ng-if="contest.inContest && submissions.length === 0">
+            <md-tooltip md-direction="left">
+              Você pode se desregistrar da competição<br>
+              enquanto não tiver feito nenhuma ação nela.</br>
+            </md-tooltip>
+            <a href="" mrt-confirm-click="leave()">Sair&nbsp;<i class="fa fa-user-times" aria-hidden="true"></i></a>
+          </li>
         </ul>
         <div class="tab-content">
           <div ui-view></div>

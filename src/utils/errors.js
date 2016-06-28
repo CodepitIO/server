@@ -35,4 +35,10 @@ module.exports = {
       en: 'An user with this email is already on your team.'
     }
   },
+  UserTeamLimitExceed: {
+    error: {
+      pt: 'Você já esgotou o limite de participações em time.',
+      en: 'You already exceeded the limit of team memberships.'
+    }
+  },
 }

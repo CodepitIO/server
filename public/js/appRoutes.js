@@ -82,7 +82,8 @@ angular.module('appRoutes', []).config([
       })
       .state('profile.teams', {
         url: '/teams',
-        templateUrl: 'views/user/profile.teams.html'
+        templateUrl: 'views/user/profile.teams.html',
+        controller: 'ProfileTeamsController'
       })
       .state('profile.posts', {
         url: '/posts?page',
@@ -91,7 +92,7 @@ angular.module('appRoutes', []).config([
       })
       .state('team', {
         url: '^/team/:id',
-        templateUrl: 'views/team.html',
+        templateUrl: 'views/team/team.html',
         controller: 'TeamController'
       })
       .state('submission', {

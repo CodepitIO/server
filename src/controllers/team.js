@@ -9,18 +9,33 @@ const Team = require('../models/team'),
   Utils = require('../utils/utils')
 
 const MAX_TEAMS_PER_USER = 20
+const MAX_USERS_PER_TEAM = 5
 
 exports.getByLoggedUser = (req, res) => {
   let userId = req.user._id
   async.parallel({
     member: (next) => {
-      Team.find({members: userId}, '_id name', next)
+      Team.find({members: userId}, '_id name description members')
+      .populate({
+        path: 'members',
+        select: '_id local.username local.name local.surname local.email'
+      })
+      .exec(next)
     },
     invited: (next) => {
-      Team.find({invites: userId}, '_id name', next)
+      Team.find({invites: userId}, '_id name description members')
+      .populate({
+        path: 'members',
+        select: '_id local.username local.name local.surname local.email'
+      })
+      .exec(next)
     }
   }, (err, results) => {
     if (err) return res.status(500).end()
+    results.member =
+      _.map(results.member, (obj) => { return obj.toObject({virtuals: true})})
+    results.invited =
+      _.map(results.invited, (obj) => { return obj.toObject({virtuals: true})})
     return res.json(results)
   })
 }
@@ -30,16 +45,17 @@ exports.getById = (req, res) => {
   Team.findById(teamId)
   .populate({
     path: 'members',
-    select: '_id local.username'
+    select: '_id local.username local.name local.surname local.email'
   })
   .populate({
     path: 'invites',
-    select: '_id local.username'
+    select: '_id local.username local.name local.surname local.email'
   })
   .exec((err, team) => {
     if (err) return res.status(500).end()
     if (!team) return res.status(400).end()
-    return res.json(team)
+    team = team.toObject({virtuals: true})
+    return res.json({team: team})
   })
 }
 
@@ -75,7 +91,7 @@ exports.invite = (req, res) => {
     if (!team) return res.status(400).send()
     if (!invited) return res.json(Errors.UserNotFoundByEmail)
     if (team.hasUser(invited._id)) return res.json(Errors.UserAlreadyInTeam)
-    if (team.members.length + team.invites.length >= MAX_TEAMS_PER_USER) {
+    if (team.members.length + team.invites.length >= MAX_USERS_PER_TEAM) {
       return res.status(400).send()
     }
     team.invites.push(invited._id)
@@ -93,9 +109,9 @@ exports.remove = (req, res) => {
   Team.findOne({_id: teamId, members: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    _.remove(team.invites, Utils.cmpToString(removedId))
-    _.remove(team.members, Utils.cmpToString(removedId))
-    team.save((err) => {
+    team.invites = _.filter(team.invites, Utils.cmpDiffString(removedId))
+    team.members = _.filter(team.members, Utils.cmpDiffString(removedId))
+    team.save((err, team) => {
       if (err) return res.status(500).send()
       return res.json({})
     })
@@ -105,10 +121,20 @@ exports.remove = (req, res) => {
 exports.accept = (req, res) => {
   let teamId = req.body.id
   let userId = req.user._id
-  Team.findOne({_id: teamId, invites: userId}, (err, team) => {
+  async.parallel({
+    count: (next) => {
+      Team.count({ members: userId }, next)
+    },
+    team: (next) => {
+      Team.findOne({ _id: teamId, invites: userId }, next)
+    }
+  }, (err, results) => {
     if (err) return res.status(500).send()
+    let team = results.team
+    let count = results.count
     if (!team) return res.status(400).send()
-    _.remove(team.invites, Utils.cmpToString(userId))
+    if (count >= MAX_TEAMS_PER_USER) return res.json(Errors.UserTeamLimitExceed)
+    team.invites = _.filter(team.invites, Utils.cmpDiffString(userId))
     team.members.push(userId)
     team.save((err) => {
       if (err) return res.status(500).send()
@@ -123,7 +149,7 @@ exports.decline = (req, res) => {
   Team.findOne({_id: teamId, invites: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    _.remove(team.invites, Utils.cmpToString(userId))
+    team.invites = _.filter(team.invites, Utils.cmpDiffString(userId))
     team.save((err) => {
       if (err) return res.status(500).send()
       return res.json({})
@@ -162,7 +188,7 @@ exports.edit = (req, res) => {
   }
   let teamId = req.body.id
   let userId = req.user._id
-  Team.find({_id: teamId, members: userId}, (err, team) => {
+  Team.findOne({_id: teamId, members: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
     team.name = req.body.name

@@ -237,7 +237,8 @@
 }
 
 .contest-view .join-button {
-  position: absolute; left: 15px;
+  position: absolute;
+  left: 15px;
 }
 
 .contest-view .join-button a,
@@ -249,6 +250,22 @@
 }
 .contest-view .join-button a:hover {
   background-color: #26A69A;
+}
+
+.contest-view .leave-button {
+  position: absolute;
+  right: 15px;
+}
+
+.contest-view .leave-button a,
+.contest-view .leave-button a:focus {
+  background-color: #EF9A9A;
+  color: white;
+  border-radius: 4px;
+  font-weight: 900;
+}
+.contest-view .leave-button a:hover {
+  background-color: #E57373;
 }
 
 tr.submission-row {
@@ -309,6 +326,14 @@ tr.submission-row-parent {
   border: 1px solid #ddd;
   vertical-align: middle;
 }
+
+.contest-view .scoreboard .user-row {
+  background-color: #F4F4F4;
+}
+.contest-view .scoreboard .user-row .rank-cell {
+  font-weight: 600;
+}
+
 .contest-view .scoreboard .accepted-cell {
   background-color: #CCFF90;
 }
@@ -317,10 +342,10 @@ tr.submission-row-parent {
   color: white;
 }
 .contest-view .scoreboard .rejected-cell {
-  background-color: #FF8A80 !important;
+  background-color: #FFA49C !important;
 }
-.pending-cell {
-  background-color: #FFF59D;
+.contest-view .scoreboard .pending-cell {
+  background-color: #C1E5FF;
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 1.5s;
   -webkit-animation-timing-function: linear;
@@ -370,6 +395,10 @@ tr.submission-row-parent {
 #join-contest-id .md-sidenav-backdrop {
   height: 100%;
   position:fixed;
+}
+
+#join-contest-id md-content {
+  margin-left: 12px;
 }
 
 /* <!------------------!> */

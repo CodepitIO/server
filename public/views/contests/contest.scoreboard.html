@@ -4,20 +4,20 @@
 			<thead>
 			  <tr>
 			    <th>Rank</th>
-			    <th>Nome</th>
+			    <th style="width: 100px;">Nome</th>
 			    <th ng-repeat="problem in problems">
 			      <div class="balloon balloon-contest">
 			        <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
 			        <a ui-sref="problems.view({id:problem._id})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
 			      </div>
 			    </th>
-			    <th>Tempo</th>
 			    <th>Questões</th>
+					<th>Tempo</th>
 			  </tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="c in contestantsIds track by c" id="{{c}}">
-					<td>{{$index+1}}</td>
+				<tr ng-repeat="c in contestantsIds track by c" id="{{c}}" ng-class="{'user-row': userState.isUser(c)}">
+					<td class="rank-cell">{{$index+1}}</td>
 					<td>
 						<div ng-if="contestants[c].handles">
 							<a ui-sref="team({id:contestants[c].id})" class="team-label">
@@ -37,8 +37,8 @@
 			      <div style="font-size:11px;">{{getCellAttempts(c,problem._id)}}</div>
 			      <div>{{getCellPenalty(c,problem._id)}}</div>
 			    </td>
-			    <td>{{getRowResults(c, 'penalty')}}</td>
-			    <td>{{getRowResults(c, 'solved')}}</td>
+					<td class="rank-cell">{{getRowResults(c, 'solved')}}</td>
+			    <td class="rank-cell">{{getRowResults(c, 'penalty')}}</td>
 				</tr>
 			</tbody>
 		</table>

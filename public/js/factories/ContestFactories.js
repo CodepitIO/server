@@ -1,22 +1,23 @@
 angular.module('Contests')
   .factory('ContestAPI', [
     '$resource',
+    '$state',
     'Request',
     'Notification',
     'Upload',
-    function ($resource, Request, Notification, Upload) {
+    function ($resource, $state, Request, Notification, Upload) {
       var API = {
-        create: Request.send('post', $resource('/api/v1/contest/')),
-        remove: Request.send('delete', $resource('/api/v1/contest/:id')),
-        edit: Request.send('put', $resource('/api/v1/contest/:id/edit')),
-        join: Request.send('put', $resource('/api/v1/contest/:id/join')),
-        leave: Request.send('put', $resource('/api/v1/contest/:id/leave')),
-        getList: Request.send('get', $resource('/api/v1/contest/list/:type/from/:from'), {ignoreThrottle: true}),
+        create: Request.send('save', $resource('/api/v1/contest/create')),
+        remove: Request.send('save', $resource('/api/v1/contest/:id/remove', { id: '@id' })),
+        edit: Request.send('save', $resource('/api/v1/contest/:id/edit', { id: '@id' })),
+        join: Request.send('save', $resource('/api/v1/contest/:id/join', { id: '@id' })),
+        leave: Request.send('save', $resource('/api/v1/contest/:id/leave', { id: '@id' })),
+        submit: Request.send('save', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
 
+        getList: Request.send('get', $resource('/api/v1/contest/list/:type/:from'), {ignoreThrottle: true}),
         getMetadata: Request.send('get', $resource('/api/v1/contest/:id/metadata')),
-        getEvents: Request.send('get', $resource('/api/v1/contest/:id/events')),
-        getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/user')),
-        submit: Request.send('post', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
+        getEvents: Request.send('get', $resource('/api/v1/contest/:id/events/:from')),
+        getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/:from')),
       }
 
       return {
@@ -27,28 +28,17 @@ angular.module('Contests')
         },
 
         leave: function (id, callback) {
-          API.leave({
-            id: id
-          }).then(function (data) {
+          API.leave({ id: id })
+          .then(function () {
             Notification('Você saiu da competição.')
-            callback(null, true)
-          }, function (err) {
-            Notification.error(err)
-            callback(err)
+            $state.go('contests.open')
           })
         },
 
-        join: function (contest, data, callback) {
-          API.join({
-            id: contest._id,
-            password: data.password,
-            team: data.team
-          }).then(function (data) {
-            Notification.success('Inscrito com sucesso nessa competição!')
-            callback(null, true)
-          }, function (err) {
-            Notification.error(err)
-            callback(err)
+        join: function (id, password, team, callback) {
+          API.join({ id: id, password: password, team: team })
+          .then(function () {
+            $state.go($state.current, {id: id}, {reload: true})
           })
         },
 
@@ -58,8 +48,6 @@ angular.module('Contests')
           }).then(function (data) {
             Notification('Competição removida.')
             callback && callback(null, true)
-          }, function (err) {
-            callback && callback(err)
           })
         },
 
@@ -69,13 +57,13 @@ angular.module('Contests')
             id: id
           }).then(function(data) {
             callback && callback(null, data)
-          }, callback)
+          })
         },
 
-        getContestEvents: function(id, callback) {
-          API.getEvents({
-            id: id
-          }).then(function(data) {
+        getContestEvents: function(id, startFrom, callback) {
+          if (_.isFunction(startFrom)) callback = startFrom, startFrom = undefined
+          API.getEvents({ id: id, from: startFrom })
+          .then(function(data) {
             var submissions = _.chain(_.concat(data.accepted, data.rejected, data.pending))
               .map(function(o) {
                 o = _.split(o, ',')
@@ -87,15 +75,14 @@ angular.module('Contests')
               })
               .value()
             callback(null, submissions)
-          }, callback)
+          })
         },
 
-        getSubmissions: function(id, callback) {
-          API.getSubmissions({
-            id: id
-          }).then(function(data) {
+        getSubmissions: function(id, startFrom, callback) {
+          API.getSubmissions({ id: id, from: startFrom })
+          .then(function(data) {
             callback(null, data.submissions)
-          }, callback)
+          })
         },
 
         submit: function (contestId, submission, callback) {
@@ -118,13 +105,10 @@ angular.module('Contests')
               language: submission.language
             })
           }
-          promise.then(
-            function (data) {
-              Notification('Código enviado!')
-              return callback(null, data.submission || data.data.submission)
-            },
-            callback
-          )
+          promise.then(function (data) {
+            Notification('Código enviado!')
+            return callback(null, data.submission || data.data.submission)
+          })
         },
       }
     }

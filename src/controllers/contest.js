@@ -1,9 +1,11 @@
 const async = require('async'),
   _ = require('lodash')
 
-const ProblemsCtrl = require('./problems'),
-  Contest = require('../models/contest'),
-  Redis = require('../services/dbs').redisClient
+const Contest = require('../models/contest'),
+  Team = require('../models/team'),
+  Submission = require('../models/submission'),
+  Redis = require('../services/dbs').redisClient,
+  Errors = require('../utils/errors')
 
 function canViewContest(contest, user) {
   return !contest.watchPrivate || (user && (user.isAdmin || contest.userInContest(user._id) ||
@@ -55,6 +57,7 @@ exports.getMetadata = (req, res) => {
 
 exports.getEvents = (req, res) => {
   let id = req.params.id
+  let startFrom = _.toInteger(req.params.from) || 0
   Contest.findById(id).then((contest) => {
     if (!contest || !canViewContest(contest, req.user)) {
       return res.status(400).send()
@@ -68,17 +71,66 @@ exports.getEvents = (req, res) => {
 
     async.parallel({
       pending: (next) => {
-        return Redis.zrangebyscore(`${id}:PENDING`, 0, upTo, next)
+        return Redis.zrangebyscore(`${id}:PENDING`, startFrom, upTo, next)
       },
       rejected: (next) => {
-        return Redis.zrangebyscore(`${id}:REJECTED`, 0, upTo, next)
+        return Redis.zrangebyscore(`${id}:REJECTED`, startFrom, upTo, next)
       },
       accepted: (next) => {
-        return Redis.zrangebyscore(`${id}:ACCEPTED`, 0, upTo, next)
+        return Redis.zrangebyscore(`${id}:ACCEPTED`, startFrom, upTo, next)
       },
     }, (err, results) => {
       if (err) return res.status(500).send()
       return res.json(results)
     })
+  })
+}
+
+exports.join = (req, res) => {
+  let id = req.body.id
+  let password = req.body.password
+  let teamId = req.body.team
+  let userId = req.user._id
+  async.auto({
+    contest: (next) => {
+      if (!id) return next()
+      Contest.findById(id, next)
+    },
+    team: (next) => {
+      if (!teamId) return next()
+      Team.count({_id: teamId, members: userId}, next)
+    },
+    proc: ['contest', 'team', (results, next) => {
+      let contest = results.contest,
+        teamCount = results.team
+      if (!contest) return res.status(400).send()
+      if (contest.contestantType === 1 && teamId) return res.status(400).send()
+      if (teamId && teamCount === 0) return res.status(400).send()
+      if (contest.password !== password) return res.json(Errors.InvalidPassword)
+      let contestant = {id: userId}
+      if (teamId) contestant.team = teamId
+      contest.contestants.push(contestant)
+      contest.save(next)
+    }]
+  }, (err) => {
+    if (err) return res.status(500).send()
+    return res.json({})
+  })
+}
+
+exports.leave = (req, res) => {
+  let id = req.body.id
+  let userId = req.user._id
+  async.waterfall([
+    (next) => {
+      Submission.count({ contest: id, rep: userId }, next)
+    },
+    (count, next) => {
+      if (count > 0) return res.status(400).send()
+      Contest.findByIdAndUpdate(id, { $pull: { 'contestants': {id: userId} } }, next)
+    }
+  ], (err) => {
+    if (err) return res.status(500).send()
+    return res.json({})
   })
 }
