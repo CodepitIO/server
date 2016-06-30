@@ -25,7 +25,6 @@ ADD . /www
 
 RUN cp -a /tmp/node_modules /www/ && \
     cp -a /tmp/public/bower_components /www/public/ && \
-    mkdir /www/public/problems && \
     rm -rf /tmp && \
     grunt prod && \
     mkdir -p /var/log/supervisor && \
@@ -33,7 +32,6 @@ RUN cp -a /tmp/node_modules /www/ && \
     rm -rf /etc/nginx/sites-enabled/*
 
 # Set up config files
-VOLUME /www/public/problems
 COPY .prod/default.conf /etc/nginx/conf.d/
 COPY .prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
