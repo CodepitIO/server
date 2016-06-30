@@ -1,0 +1,20 @@
+<div>
+  <div ng-show="!hasContestEnded()" style="margin-bottom: 10px;" align="center">
+    <span style="font-weight: 200; font-size: 18px;">Tempo: {{getUptime()}}</span>
+  </div>
+  <div ng-show="hasContestEnded()" style="margin-bottom: 10px;" align="left">
+    <span style="font-weight: 200; font-size: 18px;">Duração: {{getTotalTime()}}</span>
+  </div>
+  <div ng-show="previewBar || isContestRunning()" layout="row" md-theme="progressBarTheme" style="width:100%; position: relative;">
+    <md-progress-linear ng-class="getClass()" md-mode="determinate" ng-value="getPercentage()"></md-progress-linear>
+    <div ng-show="showBar('frozen')" class="preview-bar frozen-bar" ng-style="{'width': getWidthOf('frozen')+'%'}">
+      <md-tooltip md-direction="bottom">Modo <b>frozen</b></md-tooltip>
+    </div>
+    <div ng-show="showBar('blind')" class="preview-bar blind-bar" ng-style="{'width': getWidthOf('blind')+'%'}">
+      <md-tooltip md-direction="bottom">Modo <b>blind</b></md-tooltip>
+    </div>
+  </div>
+  <div ng-show="isContestRunning()">
+    <span style="float: right; font-weight: 200;">restam {{getTimeLeft()}}</span>
+  </div>
+</div>

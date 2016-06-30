@@ -1,0 +1,51 @@
+<div ng-controller="ContestJoinController" id="join-contest-id">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="join-contest-sidenav">
+    <form name="form">
+      <md-toolbar class="md-hue-2">
+        <div style="padding: 15px;">
+          Participar de <b>{{contest.name}}</b>
+        </div>
+      </md-toolbar>
+      <md-content layout-padding>
+        <md-input-container ng-show="contest.isPrivate">
+          <label>Senha</label>
+          <input type="password" ng-model="password" ng-required="contest.isPrivate">
+        </md-input-container>
+        <md-radio-group ng-model="role" ng-show="contest.contestantType === 3" ng-required="contest.contestantType === 3">
+          <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
+          <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
+        </md-radio-group>
+        <div ng-show="role === 'team'" layout-fill>
+          <p>
+            <i>Escolha um time</i>&nbsp;
+            <i class="fa fa-question-circle" style="width: 50px;">
+              <md-tooltip md-direction="bottom">
+                Se registrar na competição com um time X não irá automaticamente<br>
+                adicionar os outros membros do time X na competição. Para isso,<br>
+                cada membro do time também deve se cadastrar na competição.<br>
+              </md-tooltip>
+            </i>
+          </p>
+          <br>
+          <small ng-show="teams.length === 0">Você não está em nenhum time.</small>
+          <md-input-container ng-show="teams.length > 0" layout-fill>
+            <label>Time</label>
+            <md-select ng-model="team" ng-required="role === 'team'">
+              <md-option ng-repeat="t in teams" ng-value="t._id">
+                {{t.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <div layout="row">
+          <md-button class="md-icon-button" ng-click="close()" style="margin-top: 5px;">
+            <md-icon class="material-icons" style="color:grey;">keyboard_return</md-icon>
+          </md-button>
+          <md-button class="md-fab md-mini md-primary" ng-click="join()" ng-disabled="form.$invalid">
+            <md-icon class="material-icons" style="color:white;">person_add</md-icon>
+          </md-button>
+        </div>
+      </md-content>
+    </form>
+  </md-sidenav>
+</div>

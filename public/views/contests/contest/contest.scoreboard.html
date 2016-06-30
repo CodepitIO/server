@@ -1,0 +1,53 @@
+<div ng-controller="ContestScoreboardController" class="table-responsive">
+	<div ng-if="canViewContest">
+		<table ng-hide="loadingData" class="table scoreboard">
+			<thead>
+			  <tr>
+			    <th>Rank</th>
+			    <th style="width: 100px;">Nome</th>
+			    <th ng-repeat="problem in problems">
+			      <div class="balloon balloon-contest">
+			        <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
+			        <a ui-sref="problems({id:problem._id})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
+			      </div>
+			    </th>
+			    <th>Questões</th>
+					<th>Tempo</th>
+			  </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="c in contestantsIds track by c" id="{{c}}" ng-class="{'user-row': userState.isUser(c)}">
+					<td class="rank-cell">{{$index+1}}</td>
+					<td>
+						<div ng-if="contestants[c].handles">
+							<a ui-sref="team({id:contestants[c].id})" class="team-label">
+								{{contestants[c].name}}
+							</a>
+							<div class="row-handles">
+								(<span ng-repeat="user in contestants[c].handles"><span ng-if="$index!==0">,&nbsp;</span><a class="user-label" ui-sref="profile({id:user[0]})">{{user[1]}}</a></span>)
+							</div>
+						</div>
+						<div ng-if="!contestants[c].handles">
+							<a ui-sref="profile({id:contestants[c].id})" class="user user-label">
+								{{contestants[c].name}}
+							</a>
+						</div>
+					</td>
+					<td ng-repeat="problem in problems track by (c + problem._id)" ng-class="getCellClass(c,problem._id)">
+			      <div style="font-size:11px;">{{getCellAttempts(c,problem._id)}}</div>
+			      <div>{{getCellPenalty(c,problem._id)}}</div>
+			    </td>
+					<td class="rank-cell">{{getRowResults(c, 'solved')}}</td>
+			    <td class="rank-cell">{{getRowResults(c, 'penalty')}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-if="!canViewContest">
+		<div layout="column" layout-align="center center">
+			<span class="md-headline"><i class="fa fa-4x fa-lock" style="color: #455A64;" aria-hidden="true"></i></span>
+			<md-subheader>Competição Privada</md-subheader>
+			<small style="color: #888;">Se registre para visualizar.</small>
+		</div>
+	</div>
+</div>

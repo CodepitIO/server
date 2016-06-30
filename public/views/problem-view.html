@@ -1,0 +1,34 @@
+<mrt-breadcrumbs
+  location="'Codepit / Problemas / ' + problem.oj"
+  title="problem.name">
+</mrt-breadcrumbs>
+
+<mrt-page-wrapper>
+  <div class="problem-statement" ng-if="problem.timelimit || problem.memorylimit">
+    <div class="header">
+      <span ng-if="problem.timelimit">Time limit: {{problem.timelimit}}s</span>
+      <span ng-if="problem.memorylimit">Memory limit: {{problem.memorylimit}}</span>
+    </div>
+  </div>
+  <div ng-hide="problem.imported">
+    <div class="blog-container">
+      <div class="blog-section single" style="text-align: center;">
+        <div class="empty-blog">O <i>html</i> ou <i>pdf</i> deste problema ainda não foi importado!&nbsp;&nbsp;&nbsp;<div class="rotate90">:(</div></div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="problem.imported">
+    <div ng-if="!problem.isPdf">
+      <ui-view></ui-view>
+    </div>
+    <div ng-if="problem.isPdf" class="problem-pdf-wrapper">
+      <mrt-pdf url="{{problem.url}}" containerid="problem-pdf-container"></mrt-pdf>
+    </div>
+  </div>
+  <div class="problem-statement" ng-if="problem.source">
+    <p class="footer" ng-bind-html="problem.source"></p>
+  </div>
+  <div style="margin-top: 20px; float: right;">
+    <a class="small" ng-href="{{problem.originalUrl || problem.url}}" target="_blank">[link original]</a>
+  </div>
+</mrt-page-wrapper>

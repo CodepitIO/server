@@ -1,0 +1,53 @@
+<div ng-controller="ContestSettingsProblemsController" class="contest-settings-container">
+  <div layout="row">
+    <div flex="60">
+      <form name="form" novalidate>
+        <md-autocomplete
+          placeholder="Buscar"
+          md-input-name="autocomplete"
+          md-search-text="searchText"
+          md-selected-item="selectedProblem"
+          md-selected-item-change="select()"
+          md-items="problem in getProblems()"
+          md-item-text="problem.name"
+          md-min-length="3"
+          md-no-cache
+          ng-disabled="contest.problems.length >= 26">
+          <md-item-template>
+            <span>{{problem.fullName}}</span>
+          </md-item-template>
+          <md-not-found>
+            Nenhum problema encontrado.
+          </md-not-found>
+        </md-autocomplete>
+        <md-subheader class="md-no-sticky" style="margin-top: 5px;">Problemas</md-subheader>
+        <small ng-if="!contest.problems.length" class="informative error">* Você deve inserir ao menos um problema.</small>
+        <md-list ui-sortable="sortableOptions" ng-model="contest.problems">
+          <md-list-item class="md-3-line" ng-repeat="problem in contest.problems">
+            <div class="md-list-item-text move-handle" layout="column" flex="5">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </div>
+            <div class="balloon-ps">
+              <img ng-src="/imgs/baloes/{{$index}}.png" class="md-avatar" />
+              <a ui-sref="problems({id:problem._id})" target="_blank" class="balloon-ps-label md-avatar">{{$index | mrtAlphabetize}}</a>
+            </div>
+            <div class="md-list-item-text" layout="column" flex layout-align="center start">
+              <h3>{{ problem.name }}</h3>
+              <h4>{{ problem.oj | mrtOjName }} {{ problem.id }}</h4>
+            </div>
+            <div class="md-list-item-text" layout="column" flex="15">
+              <p ng-if="problem.timelimit !== 'undefined'">{{ problem.timelimit }}s</p>
+              <p ng-if="problem.memorylimit !== 'undefined'">{{ problem.memorylimit }}</p>
+            </div>
+            <div class="md-list-item-text remove-problem" layout="column" flex="5">
+              <i class="fa fa-times" aria-hidden="true" ng-click="removeProblem(problem._id)"></i>
+            </div>
+          </md-list-item>
+        </md-list>
+        <div class="form-group">
+          <button type="submit" class="btn btn-block data-button" ng-click="nextTab()" ng-disabled="contest.problems.length === 0">Opções &#8594;</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

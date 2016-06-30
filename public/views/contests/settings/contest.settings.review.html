@@ -1,0 +1,78 @@
+<div ng-controller="ContestSettingsDataController" class="contest-settings-container">
+  <div ng-hide="validateForm()">
+    <small class="error">Há correções pendentes. Por favor, navegue nas abas de Dados, Problemas e Opções para ver o que está faltando.</small>
+  </div>
+  <div ng-show="validateForm()">
+    <mrt-contest-progress
+      start-time="contest.date_start"
+      end-time="contest.date_end"
+      frozen-time="contest.frozen_time"
+      blind-time="contest.blind_time"
+      has-frozen="contest.hasFrozen"
+      has-blind="contest.hasBlind"
+      preview-bar="true">
+    </mrt-contest-progress>
+    <md-subheader>Dados</md-subheader>
+    <div layout="column">
+      <div layout="row">
+        <div flex="10"><b>Nome</b></div>
+        <div flex><p>{{contest.name}}</p></div>
+      </div>
+      <div layout="row">
+        <div flex="10"><b>Início</b></div>
+        <div flex><p ng-bind-html="contest.date_start | mrtFilterTime"></p></div>
+      </div>
+      <div layout="row">
+        <div flex="10"><b>Fim</b></div>
+        <div flex><p ng-bind-html="contest.date_end | mrtFilterTime"></p></div>
+      </div>
+      <div layout="row">
+        <div flex="10"><b>Duração</b></div>
+        <div flex><p>{{(contest.date_end - contest.date_start) / 60000 | formatDuration}}</p></div>
+      </div>
+    </div>
+    <md-subheader>Problemas</md-subheader>
+    <div layout="row" ng-repeat="problem in contest.problems">
+      <div flex><p><b>({{$index | mrtAlphabetize}})</b> <a ui-sref="problems({id:problem._id})" target="_blank">{{problem.fullName}}</a></p></div>
+    </div>
+    <md-subheader>Informações</md-subheader>
+    <div layout="column">
+      <div ng-if="contest.hasFrozen || contest.hasBlind" style="padding-bottom: 20px;">
+        <div ng-show="contest.hasFrozen">
+          O modo <b>frozen</b> começará <span ng-bind-html="contest.frozen_time | mrtFilterTime"></span>, faltando {{(contest.date_end - contest.frozen_time) / 60000 | formatDuration}} para o término da competição.
+        </div>
+        <div ng-show="contest.hasBlind">
+          O modo <b>blind</b> começará <span ng-bind-html="contest.blind_time | mrtFilterTime"></span>, faltando {{(contest.date_end - contest.blind_time) / 60000 | formatDuration}} para o término da competição.
+        </div>
+      </div>
+      <div>
+        <span ng-show="contest.isPrivate"><i class="fa fa-lock" style="display: inline;"></i>&nbsp;A competição <b>possui senha</b> para participar.</span>
+        <span ng-hide="contest.isPrivate"><i class="fa fa-unlock" style="display: inline;"></i>&nbsp;A competição <b>não possui senha</b> para participar.</span>
+      </div>
+      <div>
+        <span ng-show="contest.watchPrivate"><i class="fa fa-user-secret" style="display: inline;"></i>&nbsp;Apenas <b>quem está participando pode acompanhar</b> a competição.</span>
+        <span ng-hide="contest.watchPrivate"><i class="fa fa-globe" style="display: inline;"></i>&nbsp;A competição é <b>aberta para qualquer pessoa acompanhar</b>.</span>
+      </div>
+      <div>
+        <span ng-show="contest.allowIndividual && !contest.allowTeam">
+          <i class="fa fa-user" style="display: inline;"></i>&nbsp;Usuários podem participar da competição apenas <b>individualmente</b>.
+        </span>
+        <span ng-show="!contest.allowIndividual && contest.allowTeam">
+          <i class="fa fa-users" style="display: inline;"></i>&nbsp;Usuários podem participar da competição apenas <b>em time</b>.
+        </span>
+        <span ng-show="contest.allowIndividual && contest.allowTeam">
+          <i class="fa fa-user" style="display: inline;"></i><i class="fa fa-users" style="display: inline;"></i>&nbsp;Usuários podem participar da competição <b>individualmente</b> ou <b>em time</b>.
+        </span>
+      </div>
+    </div>
+    <div flex="50">
+      <div vc-recaptcha ng-model="contest.recaptcha" style="margin: 0 auto; padding: 20px 0 20px 0; width: 304px;"></div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-block data-button" ng-click="createOrEdit()">
+          <span ng-if="isEdit">Editar competição</span>
+          <span ng-if="!isEdit">Criar competição</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
