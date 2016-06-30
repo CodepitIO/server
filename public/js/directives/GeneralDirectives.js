@@ -95,13 +95,11 @@ app.directive('mrtPageWrapper', function () {
       waitWhile: '=?',
       color: '=?',
       diameter: '=?',
-      alignOpts: '=?'
     },
     templateUrl: 'views/misc/page-wrapper.html',
     controller: ['$scope', function ($scope) {
       $scope.color = angular.isDefined($scope.color) ? $scope.color : '#45a7b9'
       $scope.diameter = angular.isDefined($scope.diameter) ? $scope.diameter : '280'
-      $scope.alignOpts = angular.isDefined($scope.alignOpts) ? $scope.alignOpts : 'center'
       $scope.waitFor = angular.isDefined($scope.waitFor) ? $scope.waitFor : true
       $scope.waitWhile = angular.isDefined($scope.waitWhile) ? $scope.waitWhile : false
     }]
@@ -207,3 +205,82 @@ app.directive('mrtGoBack', [
     },
   }
 }])
+
+app.directive('mrtContestProgress', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      startTime: '=',
+      frozenTime: '=',
+      blindTime: '=',
+      endTime: '=',
+      hasFrozen: '=',
+      hasBlind: '=',
+      previewBar: '=?'
+    },
+    templateUrl: 'views/misc/contest-progress.html',
+    controller: [
+      '$scope',
+      'TimeState',
+      'formatDurationFilter',
+      function($scope, TimeState, formatDurationFilter) {
+        var getWidths = _.throttle(function() {
+          var total = ($scope.endTime - $scope.startTime)
+          if (!$scope.hasBlind) $scope.blindTime = $scope.endTime
+          if (!$scope.hasFrozen) $scope.frozenTime = $scope.blindTime
+          var frozen = Math.floor(($scope.endTime - $scope.frozenTime) * 100 / total)
+          var blind = Math.floor(($scope.endTime - $scope.blindTime) * 100 / total)
+          return {
+            frozen: frozen,
+            blind: blind
+          }
+        }, 1000)
+
+        $scope.getWidthOf = function(type) { return getWidths()[type] }
+        $scope.getPercentage = function() {
+          return Math.floor((TimeState.server.now - $scope.startTime) * 100 /
+            ($scope.endTime - $scope.startTime))
+        }
+        $scope.getClass = function() {
+          var now = TimeState.server.now
+          if ($scope.hasBlind && now >= $scope.blindTime) return 'md-warn'
+          if ($scope.hasFrozen && now >= $scope.frozenTime) return 'md-accent'
+          return 'md-primary'
+        }
+        $scope.showBar = function(type) {
+          var now = TimeState.server.now
+          if (type === 'frozen') {
+            if (!$scope.hasFrozen) return false
+            return now < $scope.frozenTime
+          }
+          if (type === 'blind') {
+            if (!$scope.hasBlind) return false
+            return now < $scope.blindTime
+          }
+        }
+
+        $scope.getUptime = function() {
+          var time = formatDurationFilter(Math.floor((TimeState.server.now - $scope.startTime) / 1000), true)
+          if (TimeState.server.now < $scope.startTime) time += ' para começar'
+          return time
+        }
+        $scope.getTimeLeft = function() {
+          var time = formatDurationFilter(Math.floor(($scope.endTime - TimeState.server.now) / 1000), true)
+          return time
+        }
+        $scope.getTotalTime = function() {
+          var time = formatDurationFilter(Math.floor(($scope.endTime - $scope.startTime) / 1000), true)
+          return time
+        }
+
+        $scope.isContestRunning = function() {
+          var now = TimeState.server.now
+          return now >= $scope.startTime && now < $scope.endTime
+        }
+        $scope.hasContestEnded = function() {
+          return TimeState.server.now >= $scope.endTime
+        }
+      }
+    ],
+  }
+})

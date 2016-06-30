@@ -17,7 +17,6 @@ let problemSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
-  html: String,
   source: String,
   timelimit: Number,
   memorylimit: String,

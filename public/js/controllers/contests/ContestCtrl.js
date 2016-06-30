@@ -7,15 +7,14 @@ angular.module('Contests')
     '$interval',
     'Notification',
     'ContestAPI',
-    'TimeState',
     'UserState',
+    'TimeState',
     'Verdict',
-    function ($scope, $state, $stateParams, $mdSidenav, $interval, Notification, ContestAPI, TimeState, UserState, Verdict) {
+    function ($scope, $state, $stateParams, $mdSidenav, $interval, Notification, ContestAPI, UserState, TimeState, Verdict) {
       if ($state.is('contest')) {
         $state.go('.scoreboard')
       }
       $scope.state = $state
-      $scope.timeState = TimeState
       $scope.userState = UserState
 
       $scope.canViewContest = false
@@ -23,6 +22,7 @@ angular.module('Contests')
 
       $scope.id = $stateParams.id
       $scope.contest = {}
+      $scope.editContest = {}
       // Submit
       $scope.submission = {}
       // Submissions
@@ -37,19 +37,6 @@ angular.module('Contests')
       $scope.scoreboard = {}
       $scope.scores = {}
       $scope.firstAccepted = {}
-
-      $scope.displayTop = function() {
-        var current = TimeState.server.dynamic
-        return current >= $scope.contest.date_start &&
-          current < $scope.contest.date_end
-      }
-
-      $scope.getPercentage = function() {
-        var perc =
-          100 * (TimeState.server.dynamic - $scope.contest.date_start) /
-          ($scope.contest.date_end - $scope.contest.date_start)
-        return perc
-      }
 
       function getReps(contestants) {
         return _.chain(contestants)
@@ -73,30 +60,48 @@ angular.module('Contests')
           .value()
       }
 
-      function fetchContestMetadata() {
+      var currentProblemsHash = null, currentContestants = []
+      function processContestMetadata() {
         ContestAPI.getContestMetadata($scope.id, function(err, data) {
           if (err || !data) return
           data.date_start = new Date(data.date_start)
           data.date_end = new Date(data.date_end)
           data.frozen_time = new Date(data.frozen_time)
           data.blind_time = new Date(data.blind_time)
+          data.hasFrozen = data.frozen_time < data.date_end
+          data.hasBlind = data.blind_time < data.date_end
           $scope.contest = data
+          if (!$scope.editContest.name) {
+            _.assign($scope.editContest, $scope.contest)
+            delete $scope.editContest.contestants
+            $scope.editContest.hasFrozen = data.frozen_time < data.date_end
+            $scope.editContest.hasBlind = data.blind_time < data.date_end
+            $scope.editContest.allowIndividual = data.contestantType !== 2
+            $scope.editContest.allowTeam = data.contestantType !== 1
+            $scope.date_start = data.date_start
+          }
           $scope.canViewContest = data.canViewContest
           if (data.canViewContest) {
+            var problemsHash = _.join(_.map(data.problems, function(o) { return o._id }), ',')
+            if (currentProblemsHash && currentProblemsHash != problemsHash) {
+              $state.go($state.current, {id: $scope.id}, {reload: true})
+            }
+            currentProblemsHash = problemsHash
             _.forEach(data.problems, function(value, key) {
               $scope.problemIndex[value._id] = key
             })
             $scope.problems = data.problems
-            $scope.contestants = getReps(data.contestants)
-            $scope.contestantsIds = _.keys($scope.contestants)
 
-            if (new Date() >= data.date_start) {
-              if (data.inContest) {
-                processSubmissions()
-              }
-              processContestEvents(function() {
-                $scope.loading = false
-              })
+            if (!_.isEqual(currentContestants, data.contestants)) {
+              currentContestants = data.contestants
+              $scope.contestants = getReps(currentContestants)
+              $scope.contestantsIds = _.keys($scope.contestants)
+              sortContestants()
+            }
+
+            if (TimeState.server.now >= data.date_start) {
+              processContestEvents()
+              if (data.inContest) processSubmissions()
             }
           } else {
             $scope.loading = false
@@ -104,7 +109,7 @@ angular.module('Contests')
         })
       }
 
-      function sortContestants(callback) {
+      function sortContestants(setLoading) {
         $scope.contestantsIds.sort(function(a,b) {
           var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
           var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
@@ -113,14 +118,14 @@ angular.module('Contests')
           var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
           return penaltyA - penaltyB
         })
-        callback && callback()
+        if ($scope.loading && setLoading) $scope.loading = false
       }
 
       var eventStartFrom = 0, markEvent = {}, pending = {}
-      function processContestEvents(callback) {
+      function processContestEvents() {
         var newEventStartFrom = eventStartFrom
         ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
-          var shouldSort = !!callback
+          var shouldSort = false
           events = events || []
           if (events.length > 0) newEventStartFrom = _.last(events)[3]+1
           _.forEach(events, function(e) {
@@ -162,7 +167,8 @@ angular.module('Contests')
               return o
             })
           })
-          if (shouldSort) sortContestants(callback)
+          if (shouldSort) sortContestants(true)
+          else if ($scope.loading) $scope.loading = false
           eventStartFrom = newEventStartFrom
         })
       }
@@ -185,10 +191,8 @@ angular.module('Contests')
         })
       }
 
-      var processInterval = $interval(function() {
-        processContestEvents()
-        processSubmissions()
-      }, 5000, 0, false)
+      processContestMetadata()
+      var processInterval = $interval(processContestMetadata, 3000, 0, false)
       $scope.$on('$destroy', function() {
         $interval.cancel(processInterval)
       })
@@ -210,7 +214,6 @@ angular.module('Contests')
         $scope.submissionsIds.unshift(s._id)
       }
 
-      fetchContestMetadata()
 
       $scope.toggleRight = function(contest) {
   			$mdSidenav('join-contest-sidenav').toggle()

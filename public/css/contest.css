@@ -4,25 +4,21 @@
   margin-left: 30px;
 }
 
-.contest-settings-container .balloon {
+.contest-settings-container .balloon-ps {
   position: relative;
   margin: auto;
   display: inline-block;
   top: 0;
 }
 
-.contest-settings-container .balloon-contest {
-  display: block;
-}
-
-.contest-settings-container .balloon:hover {
+.contest-settings-container .balloon-ps:hover {
   text-decoration: none;
   transition: all 0.2s ease;
   opacity: 0.7;
   top: -3px;
 }
 
-.contest-settings-container .balloon-label {
+.contest-settings-container .balloon-ps-label {
   position: absolute;
   top: 5px;
   left: 0px;
@@ -51,7 +47,7 @@
   color: #777;
 }
 
-.contest-settings-container h3{
+.contest-settings-container h3 {
   font-weight: 300;
   font-size: 30px;
   color: #747474;
@@ -160,14 +156,34 @@
   margin-left: 20px;
 }
 
-.contest-settings-container .settings-switch span {
+.contest-settings-container .settings-options span {
   font-size: 12px;
 }
 
-.contest-settings-container .settings-switch div:nth-child(1) {
+.contest-settings-container .settings-options.checkbox {
+  margin-left: 20px;
+}
+
+.contest-settings-container .settings-options div:nth-child(1) {
   max-width: 50px;
   text-align: right;
   margin-right: 8px;
+}
+
+.contest-settings-container .preview-bar {
+  height: 5px;
+  display: inline-block;
+  width: 50%;
+  position: absolute;
+  right: 0;
+}
+
+.contest-settings-container .frozen-bar {
+  background-color: #FFE0B2;
+}
+
+.contest-settings-container .blind-bar {
+  background-color: #FFCDD2;
 }
 
 /* <!------------------!> */
@@ -178,27 +194,28 @@
   padding: 30px;
 }
 
-.contest-view .nav-tabs{
+.contest-view .contest-tabs.nav-tabs {
   text-align: center;
 }
 
-.contest-view .nav-tabs>li{
+.contest-view .contest-tabs.nav-tabs .manage {
+  float: right;
+  top: 7px;
+}
+
+.contest-view .contest-tabs.nav-tabs .manage.active {
+  top: 0;
+}
+
+.contest-view .contest-tabs.nav-tabs>li{
   float: none;
   display: inline-block;
   border-radius: 0px;
 }
 
-.contest-view .nav-tabs > li.active a{
+.contest-view .contest-tabs.nav-tabs > li.active a{
   padding: 15px 30px;
   border-top: solid 3px #45A7B9;
-}
-
-.contest-view .tab-pane{
-  padding: 30px;
-}
-
-.contest-view table td{
-  padding: 15px;
 }
 
 .contest-view .balloon {
@@ -325,6 +342,7 @@ tr.submission-row-parent {
 .contest-view .scoreboard td {
   border: 1px solid #ddd;
   vertical-align: middle;
+  text-align: center;
 }
 
 .contest-view .scoreboard .user-row {
@@ -345,7 +363,7 @@ tr.submission-row-parent {
   background-color: #FFA49C !important;
 }
 .contest-view .scoreboard .pending-cell {
-  background-color: #C1E5FF;
+  background-color: #FFF9C4;
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 1.5s;
   -webkit-animation-timing-function: linear;
@@ -450,12 +468,16 @@ a.balloon-label,
 a.balloon-label:link,
 a.balloon-label:visited,
 a.balloon-label:hover,
-a.balloon-label:active {
+a.balloon-label:active,
+a.balloon-ps-label,
+a.balloon-ps-label:link,
+a.balloon-ps-label:visited,
+a.balloon-ps-label:hover,
+a.balloon-ps-label:active {
     color: white;
     text-decoration: inherit;
     font-weight: inherit;
 }
-
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;

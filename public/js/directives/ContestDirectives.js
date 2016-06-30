@@ -11,7 +11,7 @@ app.directive('mrtContestLabel', function () {
       newFlag: '=',
       contest: '=',
     },
-    templateUrl: 'views/contests/contest.label.html'
+    templateUrl: 'views/misc/contest-label.html'
   }
 })
 
@@ -36,7 +36,7 @@ app.directive('mrtContestList', function () {
       subTitle: '=', // Table's title
     // optional - String
     },
-    templateUrl: 'views/contests/contest-list.html',
+    templateUrl: 'views/contests/list/contest-list.html',
     controller: 'ContestListController'
   }
 })

@@ -25,8 +25,6 @@ const User = require('./services/authorization'),
 
 function APIRoutes () {
   let router = express.Router()
-
-  router.use(Recaptcha.middleware())
   router.param('id', Utils.isValidId)
 
   // utils
@@ -34,7 +32,7 @@ function APIRoutes () {
 
   // user
   router.get('/user/status', UserCtrl.status)
-  router.post('/user/register', UserCtrl.register)
+  router.post('/user/register', Recaptcha.check, UserCtrl.register)
   router.post('/user/edit', User.is('logged'), UserCtrl.edit)
   router.post('/user/login', UserCtrl.login)
   router.get('/user/logout', User.is('logged'), UserCtrl.logout)
@@ -67,9 +65,9 @@ function APIRoutes () {
   router.get('/contest/:id/submissions/:from?', User.is('logged'), SubmissionCtrl.getUserContestSubmissions)
   router.post('/contest/:id/join', User.is('logged'), ContestCtrl.join)
   router.post('/contest/:id/leave', User.is('logged'), ContestCtrl.leave)
+  router.post('/contest/:id/edit', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.edit)
   router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.tryExtractFile, SubmissionCtrl.submit)
   // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
-  // router.post('/contest/:id/edit', isLoggedIn, SingleContestCtrl.prevalidation, SingleContestCtrl.edit)
   // router.get('/contest/:id/remove', isLoggedIn, SingleContestCtrl.remove)
   // router.get('/contest/:id/get/full', isLoggedIn, SingleContestCtrl.getFullData)
   // router.get('/contest/:id/scoreboard/dynamic', SingleContestCtrl.getDynamicScoreboard)
@@ -90,19 +88,13 @@ function OpenRoutes () {
   if (process.env.NODE_ENV === 'development') {
     indexFile = './public/_index.html'
   }
-
   let router = express.Router()
-
-  router.get('/problems/:id', ProblemsCtrl.getProblemContent)
-
   router.get('/', (req, res) => {
     return res.sendfile(indexFile)
   })
-
   router.get('*', (req, res) => {
     res.redirect('/')
   })
-
   return router
 }
 

@@ -26,11 +26,11 @@
   </md-menu>
 
   <div layout="column" layout-align="center center">
-    <span ng-if="team.description" style="color: #888; font-style: italic; width: 400px; word-wrap: break-word;">
+    <div ng-if="team.description" style="color: #888; max-width: 400px; font-style: italic; word-wrap: break-word;">
       <i class="fa fa-quote-left" aria-hidden="true"></i>
       {{team.description}}
       <i class="fa fa-quote-right" aria-hidden="true"></i>
-    </span>
+    </div>
     <h2 class="md-title">Membros do time</h2>
     <div layout="row" layout-xs="column" layout-align="center center" layout-wrap>
       <div ng-repeat="user in team.members">

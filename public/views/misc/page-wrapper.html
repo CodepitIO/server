@@ -1,6 +1,6 @@
 <div id="wrapper" class="container-fluid" style="padding: 30px;">
-	<div ng-if="!waitFor || waitWhile" align="{{alignOpts}}">
+	<div ng-hide="waitFor && !waitWhile">
 		<mrt-loading-spinner diameter="diameter"></mrt-loading-spinner>
 	</div>
-  <div class="col-md-12" ng-if="waitFor && !waitWhile" ng-transclude></div>
+  <div class="col-md-12" ng-show="waitFor && !waitWhile" ng-transclude></div>
 </div>

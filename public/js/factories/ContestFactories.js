@@ -8,8 +8,8 @@ angular.module('Contests')
     function ($resource, $state, Request, Notification, Upload) {
       var API = {
         create: Request.send('save', $resource('/api/v1/contest/create')),
-        remove: Request.send('save', $resource('/api/v1/contest/:id/remove', { id: '@id' })),
         edit: Request.send('save', $resource('/api/v1/contest/:id/edit', { id: '@id' })),
+        remove: Request.send('save', $resource('/api/v1/contest/:id/remove', { id: '@id' })),
         join: Request.send('save', $resource('/api/v1/contest/:id/join', { id: '@id' })),
         leave: Request.send('save', $resource('/api/v1/contest/:id/leave', { id: '@id' })),
         submit: Request.send('save', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
@@ -21,9 +21,12 @@ angular.module('Contests')
       }
 
       return {
-        getList: function(type, last, callback) {
-          API.getList({type: type, from: last}).then(function(data) {
-            return callback(null, data.contests)
+        edit: function(id, params, callback) {
+          params.id = id
+          API.edit(params)
+          .then(function() {
+            Notification('Competição editada.')
+            $state.go('contest', {id: id}, {reload: true})
           })
         },
 
@@ -108,6 +111,12 @@ angular.module('Contests')
           promise.then(function (data) {
             Notification('Código enviado!')
             return callback(null, data.submission || data.data.submission)
+          })
+        },
+
+        getList: function(type, last, callback) {
+          API.getList({type: type, from: last}).then(function(data) {
+            return callback(null, data.contests)
           })
         },
       }

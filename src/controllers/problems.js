@@ -6,14 +6,27 @@ const async = require('async'),
   pindexer = require('pindexer'),
   _ = require('lodash')
 
-const ImportQueue = require('../services/queue').ImportQueue,
-  Problem = require('../models/problem')
+const Problem = require('../models/problem')
 
-const PROBLEMS_PATH = path.join(__dirname, '..', '..', 'public', 'problems')
-
-fs.stat(PROBLEMS_PATH, (err) => {
-  if (err) fs.mkdir(PROBLEMS_PATH)
-})
+function IndexProblems (callback) {
+  async.waterfall([
+    (next) => {
+      Problem.find({}, next)
+    },
+    (problems, next) => {
+      async.eachSeries(problems, (item, callback) => {
+        if (item.id && item.url && item.fullName && item.fullName.substring(0, 1) === '[') {
+          pindexer.addProblem(item)
+        }
+        return async.setImmediate(callback)
+      }, next)
+    }
+  ], () => {
+    console.log('Finished adding problems to index.')
+    callback && callback()
+  })
+}
+IndexProblems()
 
 exports.fetchProblems = (req, res) => {
   let substr = req.body.text
@@ -33,14 +46,4 @@ exports.getProblemMetadata = (req, res) => {
       if (!problem) return res.status(404).send()
       return res.json(problem)
     })
-}
-
-exports.getProblemContent = (req, res) => {
-  let ext = path.extname(req.params.id)
-  if (ext !== '.html') return res.status(404).send()
-  let problemPath = path.join(PROBLEMS_PATH, req.params.id)
-  ImportQueue.push(problemPath, (err) => {
-    if (err) return res.sendfile('./public/views/problems/not-imported.html')
-    return res.sendfile(problemPath)
-  })
 }

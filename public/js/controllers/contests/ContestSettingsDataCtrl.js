@@ -2,8 +2,8 @@ var app = angular.module('Contests')
 app.controller('ContestSettingsDataController', [
   '$scope',
   'TimeState',
-  function ($scope, timeState) {
-    $scope.timeState = timeState
+  function ($scope, TimeState) {
+    $scope.timeState = TimeState
 
     var today = new Date(), sixMonthsFromNow = new Date()
     sixMonthsFromNow.setMonth(today.getMonth() + 6)
@@ -11,7 +11,6 @@ app.controller('ContestSettingsDataController', [
       dateDisabled: false,
       formatYear: 'yy',
       startingDay: 1,
-      minDate: today,
       maxDate: sixMonthsFromNow,
     }
     $scope.opened = {}

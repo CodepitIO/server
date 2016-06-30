@@ -1,24 +1,16 @@
 var app = angular.module('Problems')
 app.controller('ProblemController', [
   '$scope',
-  '$stateParams',
+  '$state',
   '$sce',
   '$window',
-  'ProblemsAPI',
   'OJName',
-  function ($scope, $stateParams, $sce, $window, ProblemsAPI, OJName) {
-    $scope.problem = {}
-    $scope.loadingData = true
-    ProblemsAPI.get($stateParams.id, function (err, data) {
-      data.oj = OJName[data.oj]
-      $scope.problem = data
-      $scope.loadingData = false
-      if (data.source) {
-        $scope.problem.source = $sce.trustAsHtml(data.source)
-      }
-      if (!data.imported && !data.isPdf) {
-        $window.open(data.originalUrl || data.url)
-      }
-    })
+  'problem',
+  function ($scope, $state, $sce, $window, OJName, problem) {
+    if ($state.is('problems')) $state.go('.view')
+    $scope.problem = problem
+    $scope.problem.oj = OJName[problem.oj]
+    if (problem.source) $scope.problem.source = $sce.trustAsHtml(problem.source)
+    if (!problem.imported) $window.open(problem.originalUrl || problem.url)
   }
 ])

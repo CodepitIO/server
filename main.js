@@ -1,17 +1,16 @@
 'use strict'
 
-const express = require('express'),
-  http = require('http')
+const express = require('express')
+const http = require('http')
 
-const services = require('./src/services/services'),
-  routes = require('./src/routes')
+const Dbs = require('./src/services/dbs')
+const Routes = require('./src/routes')
 
 let app = express()
-routes.configure(app)
+Routes.configure(app)
 
 let port = process.env.PORT || 3000
 let server = require('http').Server(app)
 server.listen(port)
-services.setup(server)
 
 console.log('Codepit web online')

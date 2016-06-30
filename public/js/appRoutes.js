@@ -24,49 +24,51 @@ angular.module('appRoutes', []).config([
       // Controller is set on the directive
       .state('contests.open', {
         url: '/open',
-        templateUrl: 'views/contests/open.html'
+        templateUrl: 'views/contests/list/open.html'
       })
       // Controller is set on the directive
       .state('contests.past', {
         url: '/past',
-        templateUrl: 'views/contests/past.html'
+        templateUrl: 'views/contests/list/past.html'
       })
       // Controller is set on the directive
       .state('contests.owned', {
         url: '/owned',
-        templateUrl: 'views/contests/owned.html',
+        templateUrl: 'views/contests/list/owned.html',
         authenticate: true
       })
       // Controller is set on the directive
       .state('contests.joined', {
         url: '/joined',
-        templateUrl: 'views/contests/joined.html',
+        templateUrl: 'views/contests/list/joined.html',
         authenticate: true
       })
       .state('contests.create', {
         url: '/create',
-        templateUrl: 'views/contests/create.html',
-        controller: 'ContestSettingsController',
+        templateUrl: 'views/contests/settings/contest.create.html',
         authenticate: true
       })
       .state('contest', {
         url: '^/contest/:id',
-        templateUrl: 'views/contests/contest.html',
+        templateUrl: 'views/contests/contest/contest.html',
         controller: 'ContestController'
       })
       .state('contest.scoreboard', {
-        templateUrl: 'views/contests/contest.scoreboard.html',
-        controller: 'ContestScoreboardController'
+        title: 'Placar'
       })
       .state('contest.submit', {
         url: '/submit',
-        templateUrl: 'views/contests/contest.submit.html',
-        controller: 'ContestSubmitController'
+        title: 'Submeter',
+        authenticate: true
       })
       .state('contest.submissions', {
         url: '/submissions',
-        templateUrl: 'views/contests/contest.submissions.html',
-        controller: 'ContestSubmissionsController',
+        title: 'Submissões',
+        authenticate: true
+      })
+      .state('contest.edit', {
+        url: '/edit',
+        title: 'Editar',
         authenticate: true
       })
       .state('register', {
@@ -101,16 +103,25 @@ angular.module('appRoutes', []).config([
         controller: 'SubmissionController'
       })
       .state('problems', {
-        abstract: true,
         url: '^/problems/:id',
-        templateUrl: 'views/problems/problem-view.html',
-        controller: 'ProblemController'
+        templateUrl: 'views/problem-view.html',
+        controller: 'ProblemController',
+        resolve: {
+          problem: ['$q', '$stateParams', 'ProblemsAPI', function($q, $stateParams, ProblemsAPI) {
+            var deferred = $q.defer()
+            ProblemsAPI.get($stateParams.id, function (err, data) {
+              if (err) deferred.reject(err)
+              else deferred.resolve(data)
+            })
+            return deferred.promise
+          }]
+        }
       })
       .state('problems.view', {
         url: '/view',
-        templateUrl: function ($stateParams) {
-          return 'problems/' + $stateParams.id + '.html'
-        }
+        templateProvider: ['$templateFactory', 'problem', function($templateFactory, problem) {
+          return $templateFactory.fromUrl(problem.url);
+        }],
       })
   }
 ])

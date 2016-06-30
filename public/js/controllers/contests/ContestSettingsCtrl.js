@@ -1,16 +1,22 @@
 var app = angular.module('Contests')
 app.controller('ContestSettingsController', [
   '$scope',
-  function ($scope) {
-    $scope.contest = {
-      problems: [],
-      options: {
+  'TimeState',
+  'ContestAPI',
+  function ($scope, TimeState, ContestAPI) {
+    if (!$scope.contest) {
+      $scope.contest = {
+        problems: [],
         hasFrozen: false,
         hasBlind: false,
         isPrivate: false,
         watchPrivate: false,
-        penalty: 20,
+        allowIndividual: true,
+        allowTeam: true,
       }
+    } else {
+      $scope.isEdit = true
+      $scope.contest = $scope.editContest
     }
     $scope.tab = 0
     $scope.nextTab = function() {
@@ -20,40 +26,68 @@ app.controller('ContestSettingsController', [
       $scope.tab = tab
     }
 
+    var MIN_CONTEST_DURATION = 10 * 60 * 1000
+    var setFrozen = true, setBlind = true
     $scope.validateTimeRange = function() {
-      if ($scope.contest.date_start) {
-        $scope.contest.date_start = Math.max($scope.contest.date_start, new Date())
-      }
-      if ($scope.contest.date_end) {
-        $scope.contest.date_end = Math.max($scope.contest.date_end, new Date())
-      }
-      if (!$scope.contest.date_start || !$scope.contest.date_end) {
-        $scope.contest.options.hasFrozen = $scope.contest.options.hasBlind = false
-        return
-      }
-
-      $scope.contest.date_end = Math.max(
-        $scope.contest.date_start,
-        $scope.contest.date_end
+      var now = TimeState.server.now.getTime()
+      var minTime = Math.min(
+        now - 60 * 60 * 1000,
+        $scope.date_start && $scope.date_start.getTime() || now
       )
-      if (!$scope.contest.options.hasFrozen) {
-        $scope.contest.frozen_time = $scope.contest.date_end - 60 * 60 * 1000
+      var c = $scope.contest
+      if (c.date_start && c.date_start.getTime) c.date_start = c.date_start.getTime()
+      if (c.date_end && c.date_end.getTime) c.date_end = c.date_end.getTime()
+      if (c.frozen_time && c.frozen_time.getTime) c.frozen_time = c.frozen_time.getTime()
+      if (c.blind_time && c.blind_time.getTime) c.blind_time = c.blind_time.getTime()
+
+      if (c.date_start) c.date_start += (60000 - c.date_start % 60000) % 60000;
+      if (c.date_end) c.date_end += (60000 - c.date_end % 60000) % 60000;
+
+      if (c.date_start) c.date_start = Math.max(c.date_start, minTime)
+      if (c.date_end) c.date_end = Math.max(c.date_end, now + MIN_CONTEST_DURATION)
+      if (!c.date_start || !c.date_end) return c.hasFrozen = c.hasBlind = false
+
+      c.date_end = Math.max(c.date_start + MIN_CONTEST_DURATION, c.date_end)
+      if (setFrozen) c.frozen_time = c.date_end - 60 * 60 * 1000
+      if (setBlind) c.blind_time = c.date_end - 15 * 60 * 1000
+
+      if (c.hasBlind) {
+        setBlind = false
+        if (c.blind_time >= c.date_end) {
+          c.blind_time = c.date_end - 60 * 1000
+        }
       }
-      if (!$scope.contest.options.hasBlind) {
-        $scope.contest.blind_time = $scope.contest.date_end - 15 * 60 * 1000
+      if (c.hasFrozen) {
+        setFrozen = false
+        if (c.hasBlind && c.frozen_time >= c.blind_time) {
+          c.frozen_time = c.blind_time - 60 * 1000
+        } else if (c.frozen_time >= c.date_end) {
+          c.frozen_time = c.date_end - 60 * 1000
+        }
       }
 
-      $scope.contest.frozen_time = Math.max($scope.contest.frozen_time, $scope.contest.date_start)
-      $scope.contest.frozen_time = Math.min($scope.contest.frozen_time, $scope.contest.date_end)
+      c.frozen_time = Math.max(c.frozen_time, c.date_start)
+      c.frozen_time = Math.min(c.frozen_time, c.date_end)
 
-      $scope.contest.blind_time = Math.max($scope.contest.blind_time, $scope.contest.date_start)
-      $scope.contest.blind_time = Math.min($scope.contest.blind_time, $scope.contest.date_end)
-
-      if ($scope.contest.blind_time <= $scope.contest.frozen_time && $scope.contest.options.hasFrozen && $scope.contest.options.hasBlind) {
-        $scope.contest.frozen_time = $scope.contest.blind_time
-      }
+      c.blind_time = Math.max(c.blind_time, c.date_start)
+      c.blind_time = Math.min(c.blind_time, c.date_end)
     }
 
     $scope.debounceValidation = _.debounce($scope.validateTimeRange, 500)
+
+    $scope.validateForm = function() {
+      var c = $scope.contest
+      var validateData = c.name && c.date_start && c.date_end
+      var validateProblems = c.problems && c.problems.length > 0
+      var validateOptions =
+        (!c.isPrivate || (c.password) && c.password.length > 0) &&
+        (c.allowIndividual || c.allowTeam)
+      return validateData && validateProblems && validateOptions
+    }
+
+    $scope.createOrEdit = function() {
+      if ($scope.id) ContestAPI.edit($scope.id, $scope.contest)
+
+    }
   }
 ])

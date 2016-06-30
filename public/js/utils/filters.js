@@ -24,18 +24,25 @@ app.filter('formatTime', [function () {
 }])
 
 app.filter('formatDuration', [function () {
-  return function (minutes, noTrailingZero) {
-    minutes = Math.round(minutes)
-    var d = Math.floor(minutes / 1440)
-    minutes -= d * 1440
-    var h = Math.floor(minutes / 60)
-    minutes -= h * 60
-    var m = minutes
-
+  return function (time, seconds) {
+    if (time < 0) time = -time
+    time = Math.round(time)
+    var s = 0
+    if (seconds) {
+      if (time > 10 * 60) seconds = false
+      s = time % 60
+      time = Math.floor((time - s) / 60)
+    }
+    var m = time % 60
+    time = Math.floor((time - m) / 60)
+    var h = time % 24
+    time = Math.floor((time - h) / 24)
+    var d = time
     var arr = []
     if (d > 0) arr.push(d + 'd')
     if (h > 0) arr.push(h + 'hr')
-    if (m > 0 || arr.length === 0) arr.push(m + 'min')
+    if (m > 0 || (!seconds && arr.length === 0)) arr.push(m + 'min')
+    if (seconds && (s > 0 || arr.length === 0)) arr.push(s + 's')
 
     if (arr.length === 1) return arr[0]
     return _.join([_.join(_.initial(arr), ', '), _.last(arr)], ' e ')

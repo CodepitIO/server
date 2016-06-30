@@ -3,7 +3,8 @@
 const mongoose = require('mongoose'),
   _ = require('lodash')
 
-const Submission = require('./submission')
+const Submission = require('./submission'),
+  ValidateChain = require('../utils/utils').validateChain
 
 const ObjectId = mongoose.Schema.Types.ObjectId
 
@@ -20,7 +21,6 @@ let contestantSchema = mongoose.Schema({
 
 let schema = mongoose.Schema({
   name: String,
-  description: String,
 
   author: {
     type: ObjectId,
@@ -60,29 +60,12 @@ let schema = mongoose.Schema({
   timestamps: true
 })
 
-schema.index({
-  date_start: -1
-})
-schema.index({
-  date_end: -1
-})
-schema.index({
-  author: 1,
-  createdAt: -1
-})
-schema.index({
-  'contestants.id': 1,
-  'date_start': -1,
-})
-schema.index({
-  'contestants.id': 1,
-  '_id': 1,
-})
-schema.index({
-  'contestants.team': 1,
-  'contestants.id': 1,
-  '_id': 1,
-})
+schema.index({ date_start: -1 })
+schema.index({ date_end: -1 })
+schema.index({ author: 1, createdAt: -1 })
+schema.index({ 'contestants.id': 1, 'date_start': -1, })
+schema.index({ 'contestants.id': 1, '_id': 1, })
+schema.index({ 'contestants.team': 1, 'contestants.id': 1, '_id': 1, })
 
 schema.methods.getUserRepresentative = function (id) {
   let elem = _.find(this.contestants, function (obj) {

@@ -8,14 +8,14 @@ angular.module('General')
       var $scope = this
 
       $scope.server = {
-        dynamic: new Date(),
+        now: new Date(),
         static: new Date()
       }
 
       $interval(function () {
         now = (new Date()).getTime()
-        $scope.server.dynamic = new Date(now + diff)
-      }, 3000)
+        $scope.server.now = new Date(now + diff)
+      }, 1000)
 
       var GetServerTimeAPI = $resource('/api/v1/server/time', {})
       Request.send('get', GetServerTimeAPI)({}).then(function (data) {
@@ -24,7 +24,7 @@ angular.module('General')
 
         diff = Math.max(0, serverDate - clientDate)
         now = (new Date()).getTime()
-        $scope.server.dynamic = $scope.server.static = new Date(now + diff)
+        $scope.server.now = $scope.server.static = new Date(now + diff)
       })
     }
   ])
