@@ -109,7 +109,7 @@ angular.module('Contests')
         })
       }
 
-      function sortContestants(setLoading) {
+      function sortContestants() {
         $scope.contestantsIds.sort(function(a,b) {
           var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
           var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
@@ -118,7 +118,7 @@ angular.module('Contests')
           var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
           return penaltyA - penaltyB
         })
-        if ($scope.loading && setLoading) $scope.loading = false
+        $scope.loading = false
       }
 
       var eventStartFrom = 0, markEvent = {}, pending = {}
@@ -167,7 +167,7 @@ angular.module('Contests')
               return o
             })
           })
-          if (shouldSort) sortContestants(true)
+          if (shouldSort) sortContestants()
           else if ($scope.loading) $scope.loading = false
           eventStartFrom = newEventStartFrom
         })
