@@ -61,9 +61,12 @@ angular.module('mrtApp', [
   'HistoryState',
   function ($rootScope, $cookies, $state, amMoment, UserState, HistoryState) {
     amMoment.changeLocale('pt-br')
+    $rootScope.title = 'Codepit'
     $rootScope.user = UserState
     $rootScope.$on('$stateChangeSuccess', HistoryState.push)
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      if (toState.title) $rootScope.title = toState.title + ' - Codepit'
+      else $rootScope.title = 'Codepit'
       if ((toState.authenticate === true && !UserState.isAuthenticated()) ||
           (toState.authenticate === false && UserState.isAuthenticated())) {
         $state.transitionTo("home");

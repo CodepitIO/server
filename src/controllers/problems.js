@@ -4,31 +4,44 @@ const async = require('async'),
   fs = require('fs'),
   path = require('path'),
   pindexer = require('pindexer'),
-  _ = require('lodash')
+  _ = require('lodash'),
+  CronJob = require('cron').CronJob
 
 const Problem = require('../models/problem')
 
-function IndexProblems (callback) {
+const INDEX_PROBLEMS_CRON = '00 00 04 * * *';
+const INDEX_PROBLEMS_TZ = 'America/Recife';
+
+let problems = {}
+
+function runProblemsIndexer() {
   async.waterfall([
     (next) => {
       Problem.find({}, next)
     },
-    (problems, next) => {
-      async.eachSeries(problems, (item, callback) => {
-        if (item.id && item.url && item.fullName && item.fullName.substring(0, 1) === '[') {
+    (_problems, next) => {
+      async.eachSeries(_problems, (item, callback) => {
+        if (!problems[item._id] && item.imported) {
+          problems[item._id] = true;
           pindexer.addProblem(item)
         }
         return async.setImmediate(callback)
       }, next)
     }
   ], () => {
-    console.log('Finished adding problems to index.')
-    callback && callback()
+    console.log('Finished indexing problems.')
   })
 }
-IndexProblems()
 
-exports.fetchProblems = (req, res) => {
+let job = new CronJob({
+  cronTime: INDEX_PROBLEMS_CRON,
+  onTick: runProblemsIndexer,
+  timeZone: INDEX_PROBLEMS_TZ,
+  runOnInit: true
+});
+job.start();
+
+exports.searchProblems = (req, res) => {
   let substr = req.body.text
   let insertedProblems = req.body.problems || []
   if (!_.isString(substr) || !_.isArray(insertedProblems)) return res.status(400).send()
@@ -46,4 +59,14 @@ exports.getProblemMetadata = (req, res) => {
       if (!problem) return res.status(404).send()
       return res.json(problem)
     })
+}
+
+exports.isIndexed = (array) => {
+  if (!_.isArray(array)) array = [array]
+  for (let i = 0; i < array.length; i++) {
+    let id = array[i]
+    if (_.isString(id) && !problems[id]) return false
+    else if (_.isObject(id) && _.isString(id._id) && !problems[id._id]) return false
+  }
+  return true
 }

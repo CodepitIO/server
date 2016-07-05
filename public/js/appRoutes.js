@@ -103,7 +103,7 @@ angular.module('appRoutes', []).config([
         controller: 'SubmissionController'
       })
       .state('problems', {
-        url: '^/problems/:id',
+        url: '^/problems/:id?index',
         templateUrl: 'views/problem-view.html',
         controller: 'ProblemController',
         resolve: {

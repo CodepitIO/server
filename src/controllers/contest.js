@@ -5,6 +5,7 @@ const Contest = require('../models/contest'),
   Team = require('../models/team'),
   Submission = require('../models/submission'),
   Redis = require('../services/dbs').redisClient,
+  Problems = require('./problems'),
   Errors = require('../utils/errors'),
   Utils = require('../utils/utils')
 
@@ -40,6 +41,7 @@ exports.getMetadata = (req, res) => {
       contestantType: contest.contestantType,
       problems: [],
 
+      hasStarted: contest.date_start <= new Date(),
       canViewContest: canViewContest(contest, req.user),
       inContest: contest.userInContest(userId),
       isContestAdmin: Utils.cmpToString(req.user && req.user._id)(contest.author)
@@ -150,7 +152,7 @@ exports.validateContest = (req, res, next) => {
     (contest, next) => {
       // <<-- Validate dates -->>
       let now = new Date().getTime()
-      if (contest && contest.date_end < now - 24 * 60 * 60 * 1000) return res.status(400).send()
+      if (contest && contest.date_end < now) return res.status(400).send()
       try {
         c.date_start = new Date(data.date_start)
         c.date_end = new Date(data.date_end)
@@ -159,22 +161,20 @@ exports.validateContest = (req, res, next) => {
         if (data.hasBlind) c.blind_time = new Date(data.blind_time)
         else c.blind_time = c.date_end
 
-        let timeArr = []
+        let timeArr = [c.date_start, c.frozen_time, c.blind_time, c.date_end];
         if (_.some(timeArr, _.isNaN)) return res.status(400).send()
         for (let i = 0; i < 3; i++) {
           if (timeArr[i] > timeArr[i+1]) return res.status(400).send()
         }
 
-        let sixMonthsFromNow = now
-        sixMonthsFromNow.setMonth(now.getMonth() + 6)
+        let sixMonthsFromNow = now + 6 * 30 * 24 * 60 * 60 * 1000;
         if (c.date_end > sixMonthsFromNow) return res.status(400).send()
-        if (contest) {
-          if (c.date_start < contest.date_start) return res.status(400).send()
-        } else {
-          if (c.date_start < now - 60 * 60 * 1000) return res.status(400).send()
+        if (c.date_start < Math.min(now - 60 * 60 * 1000, contest && contest.date_start || now)) {
+          return res.status(400).send()
         }
         return next()
       } catch (err) {
+        console.log(err)
         return res.status(400).send()
       }
     },
@@ -194,6 +194,16 @@ exports.validateContest = (req, res, next) => {
     },
     (next) => {
       // <<-- Validate problems -->>
+      c.problems = data.problems
+      if (!_.isArray(c.problems) || c.problems.length < 1 || c.problems.length > 26) {
+        return res.status(400).send()
+      }
+      c.problems = _.chain(c.problems)
+        .map((obj) => {
+          if (obj._id) return _.toString(obj._id)
+          return _.toString(obj)
+        }).uniq().value()
+      if (!Problems.isIndexed(c.problems)) return res.status(400).send()
       return next()
     }
   ], (err) => {
@@ -203,7 +213,18 @@ exports.validateContest = (req, res, next) => {
   })
 }
 
-exports.edit = (req, res) => {
+exports.createOrEdit = (req, res) => {
   let id = req.params.id
-
+  if (!id) {
+    let contest = new Contest(req.body)
+    return contest.save((err, contest) => {
+      if (err) return res.status(500).send()
+      return res.json({id: contest._id})
+    })
+  } else {
+    Contest.findOneAndUpdate({_id: id}, req.body, (err, contest) => {
+      if (err) return res.status(500).send()
+      return res.json({})
+    })
+  }
 }

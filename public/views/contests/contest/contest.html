@@ -12,7 +12,7 @@
     has-frozen="contest.hasFrozen"
     has-blind="contest.hasBlind">
   </mrt-contest-progress>
-  <div class="row">
+  <div class="row" style="margin-top: 20px;">
     <div class="col-sm-12 bs-component">
       <ul class="contest-tabs nav nav-tabs" style="margin-bottom: 15px;">
         <li class="join-button" ng-if="!contest.inContest">
@@ -21,10 +21,10 @@
         <li ng-class="{active: state.current.name === 'contest.scoreboard'}">
           <a ui-sref=".scoreboard">Placar&nbsp;<i class="fa fa-trophy" aria-hidden="true"></i></a>
         </li>
-        <li ng-class="{active: state.current.name === 'contest.submit'}" ng-if="contest.inContest">
+        <li ng-class="{active: state.current.name === 'contest.submit'}" ng-if="contest.inContest && contest.hasStarted">
           <a ui-sref=".submit">Submeter&nbsp;<i class="fa fa-send" aria-hidden="true"></i></a>
         </li>
-        <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="contest.inContest">
+        <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="contest.inContest && contest.hasStarted">
           <a ui-sref=".submissions">Submissões&nbsp;<i class="fa fa-bars" aria-hidden="true"></i></a>
         </li>
         <li class="manage" ng-class="{active: state.current.name === 'contest.edit'}" ng-if="contest.isContestAdmin">

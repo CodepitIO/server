@@ -1,7 +1,4 @@
-const async = require('async'),
-  fs = require('fs'),
-  request = require('request'),
-  _ = require('lodash')
+const _ = require('lodash')
 
 const constants = require('../config/constants')
 
@@ -9,16 +6,6 @@ exports.getTime = (req, res) => {
   return res.json({
     date: new Date()
   })
-}
-
-exports.downloadFile = (uri, filename, callback) => {
-  async.series([
-    async.reflect(async.apply(fs.unlink, filename)),
-    async.apply(request.head, uri),
-    (next) => {
-      request(uri).pipe(fs.createWriteStream(filename)).on('close', next)
-    }
-  ], callback)
 }
 
 exports.cmpToString = (rhs) => {

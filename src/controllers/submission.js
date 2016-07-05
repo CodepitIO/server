@@ -3,8 +3,7 @@
 const Submission = require('../models/submission'),
   Problem = require('../models/problem'),
   Contest = require('../models/contest'),
-  SubmissionQueue = require('../services/queue').SubmissionQueue,
-  Redis = require('../services/dbs').redisClient
+  SubmissionQueue = require('../services/queue').SubmissionQueue
 
 const async = require('async'),
   fs = require('fs'),
@@ -90,6 +89,7 @@ exports.submit = (req, res) => {
       if (!results.problem || !results.contest) return next(new Error())
       if (!results.contest.problemInContest(submission.problem) ||
           !results.contest.userInContest(userId)) return next(new Error())
+      if (results.contest.date_start > new Date()) return next(new Error())
       submission.rep = results.contest.getUserRepresentative(userId)
       problem = results.problem
       createSubmission(submission, userId, next)
@@ -108,22 +108,12 @@ exports.submit = (req, res) => {
 
 exports.getById = (req, res) => {
   Submission.findById(req.params.id)
-  .populate({
-    path: 'contest',
-    select: 'name'
-  })
-  .populate({
-    path: 'contestant',
-    select: 'local.username'
-  })
-  .populate({
-    path: 'problem',
-    select: 'fullName'
-  })
-  .then((submission) => {
-    if (!submission) {
-      return res.status(400).send()
-    }
+  .populate({ path: 'contest', select: 'name' })
+  .populate({ path: 'contestant', select: 'local.username' })
+  .populate({ path: 'problem', select: 'fullName' })
+  .exec((err, submission) => {
+    if (err) return res.status(500).send()
+    if (!submission) return res.status(400).send()
     return res.json({
       submission: submission
     })

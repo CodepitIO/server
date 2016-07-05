@@ -65,8 +65,9 @@ function APIRoutes () {
   router.get('/contest/:id/submissions/:from?', User.is('logged'), SubmissionCtrl.getUserContestSubmissions)
   router.post('/contest/:id/join', User.is('logged'), ContestCtrl.join)
   router.post('/contest/:id/leave', User.is('logged'), ContestCtrl.leave)
-  router.post('/contest/:id/edit', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.edit)
   router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.tryExtractFile, SubmissionCtrl.submit)
+  router.post('/contest/:id/edit', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.createOrEdit)
+  router.post('/contest/create', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.createOrEdit)
   // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
   // router.get('/contest/:id/remove', isLoggedIn, SingleContestCtrl.remove)
   // router.get('/contest/:id/get/full', isLoggedIn, SingleContestCtrl.getFullData)
@@ -74,7 +75,7 @@ function APIRoutes () {
   // router.get('/contest/:id/scoreboard', SingleContestCtrl.getScoreboard)
 
   // problems
-  router.post('/problems/filter', ProblemsCtrl.fetchProblems)
+  router.post('/problems/filter', ProblemsCtrl.searchProblems)
   router.get('/problems/:id', ProblemsCtrl.getProblemMetadata)
 
   // submissions

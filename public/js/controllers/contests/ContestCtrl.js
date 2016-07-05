@@ -8,9 +8,8 @@ angular.module('Contests')
     'Notification',
     'ContestAPI',
     'UserState',
-    'TimeState',
     'Verdict',
-    function ($scope, $state, $stateParams, $mdSidenav, $interval, Notification, ContestAPI, UserState, TimeState, Verdict) {
+    function ($scope, $state, $stateParams, $mdSidenav, $interval, Notification, ContestAPI, UserState, Verdict) {
       if ($state.is('contest')) {
         $state.go('.scoreboard')
       }
@@ -60,7 +59,7 @@ angular.module('Contests')
           .value()
       }
 
-      var currentProblemsHash = null, currentContestants = []
+      var currentProblemsHash = null, currentContestants = [], startTimestamp = 0
       function processContestMetadata() {
         ContestAPI.getContestMetadata($scope.id, function(err, data) {
           if (err || !data) return
@@ -83,10 +82,12 @@ angular.module('Contests')
           $scope.canViewContest = data.canViewContest
           if (data.canViewContest) {
             var problemsHash = _.join(_.map(data.problems, function(o) { return o._id }), ',')
-            if (currentProblemsHash && currentProblemsHash != problemsHash) {
+            if ((currentProblemsHash && currentProblemsHash != problemsHash) ||
+              (startTimestamp > 0 && startTimestamp !== data.date_start.getTime())) {
               $state.go($state.current, {id: $scope.id}, {reload: true})
             }
             currentProblemsHash = problemsHash
+            startTimestamp = data.date_start.getTime()
             _.forEach(data.problems, function(value, key) {
               $scope.problemIndex[value._id] = key
             })
@@ -96,13 +97,10 @@ angular.module('Contests')
               currentContestants = data.contestants
               $scope.contestants = getReps(currentContestants)
               $scope.contestantsIds = _.keys($scope.contestants)
-              sortContestants()
             }
 
-            if (TimeState.server.now >= data.date_start) {
-              processContestEvents()
-              if (data.inContest) processSubmissions()
-            }
+            processContestEvents()
+            if (data.inContest) processSubmissions()
           } else {
             $scope.loading = false
           }
@@ -123,6 +121,7 @@ angular.module('Contests')
 
       var eventStartFrom = 0, markEvent = {}, pending = {}
       function processContestEvents() {
+        eventStartFrom = Math.max(eventStartFrom, $scope.contest.date_start.getTime())
         var newEventStartFrom = eventStartFrom
         ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
           var shouldSort = false
@@ -175,6 +174,7 @@ angular.module('Contests')
 
       var submissionStartFrom = 0
       function processSubmissions() {
+        submissionStartFrom = Math.max(submissionStartFrom, $scope.contest.date_start.getTime())
         var newSubmissionStartFrom = submissionStartFrom
         ContestAPI.getSubmissions($scope.id, submissionStartFrom, function(err, submissions) {
           if (submissions.length > 0) {
@@ -198,6 +198,7 @@ angular.module('Contests')
       })
 
       $scope.tryPushSubmission = function(s) {
+        if ($scope.problemIndex[s.problem] === undefined) return
         if ($scope.submissions[s._id]) {
           var olds = $scope.submissions[s._id]
           if (olds.verdict <= 0 && s.verdict > 0) {

@@ -5,11 +5,10 @@ app.controller('SubmissionController', [
   'Verdict',
   'Languages',
   'SubmissionAPI',
-  function ($scope, $stateParams, Verdict, Languages, submissionAPI) {
-    $scope.submission = null
+  function ($scope, $stateParams, Verdict, Languages, SubmissionAPI) {
     $scope.verdict = Verdict
     $scope.languages = Languages
-    submissionAPI.get({
+    SubmissionAPI.get({
       id: $stateParams.id
     }).then(function (data) {
       $scope.submission = data.submission
