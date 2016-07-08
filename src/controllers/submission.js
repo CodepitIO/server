@@ -142,7 +142,7 @@ exports.getUserContestSubmissions = (req, res) => {
       let isBlind = !contest.hasEnded() && new Date() >= contest.blind_time
       if (isBlind) {
         _.map(submissions, (s) => {
-          if (isBlind && s.date >= contest.blind_time) s.verdict = 0
+          if (s.date >= contest.blind_time) s.verdict = 0
           return s
         })
       }
