@@ -11,16 +11,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="s in submissionsIds" class="submission-row" ng-class="verdict[submissions[s].verdict].class">
-          <td>{{submissions[s].minutes}}</td>
+        <tr ng-repeat="s in ContestState.submissionsIds" class="submission-row" ng-class="verdict[ContestState.submissions[s].verdict].class">
+          <td>{{ContestState.submissions[s].minutes}}</td>
           <td>
-            <div class="balloon">
-              <img ng-src="/imgs/baloes/{{submissions[s].index}}.png" class="balloon-image" />
-              <a ui-sref="problems({id:submissions[s].problem})" target="_blank" class="balloon-label">{{submissions[s].index | mrtAlphabetize}}</a>
+            <div class="balloon" ng-show="ContestState.submissions[s].problem != null">
+              <img ng-src="/imgs/baloes/{{ContestState.submissions[s].index}}.png" class="balloon-image" />
+              <a ui-sref="problems({id:ContestState.submissions[s].problem, index:$index})" target="_blank" class="balloon-label">{{ContestState.submissions[s].index | mrtAlphabetize}}</a>
             </div>
+            <div class="balloon" ng-hide="ContestState.submissions[s].problem != null">{{ContestState.submissions[s].verdict}}</div>
           </td>
-          <td>{{languages[submissions[s].language]}}</td>
-          <td>{{verdict[submissions[s].verdict].text}}&nbsp;<span><md-progress-circular ng-if="submissions[s].verdict <= 0" class="md-accent md-hue-3" style="display: inline-block; top: 5px;" md-mode="indeterminate" md-diameter="20"></md-progress-circular></span></td>
+          <td>{{languages[ContestState.submissions[s].language]}}</td>
+          <td>{{verdict[ContestState.submissions[s].verdict].text}}&nbsp;<span><md-progress-circular ng-if="ContestState.submissions[s].verdict <= 0" class="md-accent md-hue-3" style="display: inline-block; top: 5px;" md-mode="indeterminate" md-diameter="20"></md-progress-circular></span></td>
           <td colspan="5"><a ui-sref="submission({id:s})"><i class="fa fa-eye"></i></a></td>
         </tr>
       </tbody>

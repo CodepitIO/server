@@ -32,10 +32,11 @@ function APIRoutes () {
 
   // user
   router.get('/user/status', UserCtrl.status)
-  router.post('/user/register', Recaptcha.check, UserCtrl.register)
-  router.post('/user/edit', User.is('logged'), UserCtrl.edit)
   router.post('/user/login', UserCtrl.login)
   router.get('/user/logout', User.is('logged'), UserCtrl.logout)
+  router.post('/user/edit', User.is('logged'), UserCtrl.edit)
+  router.post('/user/register', Recaptcha.check, UserCtrl.register)
+  router.get('/user/teams', User.is('logged'), TeamCtrl.getByLoggedUser)
   router.get('/user/check/username/:username', UserCtrl.checkUsername)
   router.get('/user/check/email/:email', UserCtrl.checkEmail)
   router.get('/user/:id', UserCtrl.get)
@@ -55,7 +56,6 @@ function APIRoutes () {
   router.post('/team/:id/remove', User.is('logged'), TeamCtrl.remove)
   router.post('/team/:id/accept', User.is('logged'), TeamCtrl.accept)
   router.post('/team/:id/decline', User.is('logged'), TeamCtrl.decline)
-  router.get('/team/user', User.is('logged'), TeamCtrl.getByLoggedUser)
   router.get('/team/:id', TeamCtrl.getById)
 
   // contests
@@ -68,11 +68,6 @@ function APIRoutes () {
   router.post('/contest/:id/submit', User.is('logged'), SubmissionCtrl.tryExtractFile, SubmissionCtrl.submit)
   router.post('/contest/:id/edit', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.createOrEdit)
   router.post('/contest/create', User.is('logged'), Recaptcha.check, ContestCtrl.validateContest, ContestCtrl.createOrEdit)
-  // router.post('/contests/create', isLoggedIn, SingleContestCtrl.prevalidation, ContestsCtrl.create)
-  // router.get('/contest/:id/remove', isLoggedIn, SingleContestCtrl.remove)
-  // router.get('/contest/:id/get/full', isLoggedIn, SingleContestCtrl.getFullData)
-  // router.get('/contest/:id/scoreboard/dynamic', SingleContestCtrl.getDynamicScoreboard)
-  // router.get('/contest/:id/scoreboard', SingleContestCtrl.getScoreboard)
 
   // problems
   router.post('/problems/filter', ProblemsCtrl.searchProblems)

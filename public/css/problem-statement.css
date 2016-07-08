@@ -377,13 +377,21 @@ div .problem-statement-overlay {
 .problem-statement .problem .center{
     text-align: center;
 }
-.problem-statement .code{
+.problem-statement .code {
     font-family: "Courier New", Courier, "Nimbus Mono L", monospace;
 }
-.problem-statement .footer{
+.problem-statement p code{
+  background: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-weight: 500;
+}
+.problem-statement .footer {
     color: #545454;
     font-size: 10px;
     line-height: 12px;
+}
+.problem-statement img {
+  vertical-align: top !important;
 }
 
 .timus-problem TABLE.sample {border:solid 1px #000; border-collapse:collapse;}

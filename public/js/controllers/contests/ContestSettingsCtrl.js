@@ -2,9 +2,10 @@ var app = angular.module('Contests')
 app.controller('ContestSettingsController', [
   '$scope',
   'TimeState',
+  'ContestState',
   'ContestAPI',
-  function ($scope, TimeState, ContestAPI) {
-    if (!$scope.contest) {
+  function ($scope, TimeState, ContestState, ContestAPI) {
+    if (!ContestState.id) {
       $scope.contest = {
         problems: [],
         hasFrozen: false,
@@ -16,7 +17,7 @@ app.controller('ContestSettingsController', [
       }
     } else {
       $scope.isEdit = true
-      $scope.contest = $scope.editContest
+      $scope.contest = ContestState.editContest
     }
     $scope.tab = 0
     $scope.nextTab = function() {
@@ -87,7 +88,7 @@ app.controller('ContestSettingsController', [
 
     $scope.createOrEdit = function() {
       if ($scope.id) ContestAPI.edit($scope.id, $scope.contest)
-
+      else ContestAPI.create($scope.contest)
     }
   }
 ])

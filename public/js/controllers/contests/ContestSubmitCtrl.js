@@ -4,7 +4,8 @@ angular.module('Contests')
     'Languages',
     'TextEditorLanguageMode',
     'ContestAPI',
-    function ($scope, Languages, CodemirrorMode, ContestAPI) {
+    'ContestState',
+    function ($scope, Languages, CodemirrorMode, ContestAPI, ContestState) {
       $scope.languages = Languages
       $scope.editorOptions = {
         theme: 'blackboard',
@@ -14,19 +15,18 @@ angular.module('Contests')
       }
 
       $scope.updateTextMode = function () {
-        $scope.editorOptions.mode = CodemirrorMode[$scope.submission.language || '']
+        $scope.editorOptions.mode = CodemirrorMode[ContestState.submit.language || '']
       }
 
       $scope.loading = false
       $scope.submit = function () {
         $scope.loading = true
-        ContestAPI.submit($scope.id, $scope.submission, function (err, submission) {
+        ContestAPI.submit($scope.id, ContestState.submit, function (err, submission) {
           $scope.loading = false
           if (submission) {
-            $scope.submission.code = $scope.submission.language =
-              $scope.submission.codefile = $scope.submission.problem = null
+            ContestState.submit = {}
+            ContestState.tryPushSubmission(submission)
             $scope.updateTextMode()
-            $scope.tryPushSubmission(submission)
           }
         })
       }

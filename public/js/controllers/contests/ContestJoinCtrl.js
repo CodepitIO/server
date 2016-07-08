@@ -2,19 +2,20 @@ angular.module('Contests')
   .controller('ContestJoinController', [
     '$scope',
     '$mdSidenav',
-    'TeamAPI',
+    'UserAPI',
     'ContestAPI',
-    function($scope, $mdSidenav, TeamAPI, ContestAPI) {
+    'ContestState',
+    function($scope, $mdSidenav, UserAPI, ContestAPI, ContestState) {
       $scope.password = ''
       $scope.team = null
-      if ($scope.contest.contestantType === 1) {
+      if (ContestState.contest.contestantType === 1) {
         $scope.role = 'individual'
-      } else if ($scope.contest.contestantType === 2) {
+      } else if (ContestState.contest.contestantType === 2) {
         $scope.role = 'team'
       }
 
       $scope.teams = []
-      TeamAPI.getByLoggedUser(function(err, data) {
+      UserAPI.teams(function(err, data) {
         $scope.teams = data.member
       })
 
@@ -24,7 +25,7 @@ angular.module('Contests')
 
       $scope.join = function() {
         var team = ($scope.role === 'individual') ? null : $scope.team
-        ContestAPI.join($scope.id, $scope.password, team)
+        ContestAPI.join(ContestState.id, $scope.password, team)
       }
     }
   ])

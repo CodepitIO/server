@@ -13,6 +13,7 @@ angular.module('User')
         logout: Request.send('get', $resource('/api/v1/user/logout')),
         checkUsername: Request.send('get', $resource('/api/v1/user/check/username/:username')),
         checkEmail: Request.send('get', $resource('/api/v1/user/check/email/:email')),
+        teams: Request.send('get', $resource('/api/v1/user/teams')),
         get: Request.send('get', $resource('/api/v1/user/:id'))
       }
       return {
@@ -52,6 +53,13 @@ angular.module('User')
           API.edit(user).then(function (data) {
             Notification.info('Dados atualizados!')
             return callback && callback(null, true)
+          })
+        },
+
+        teams: function(callback) {
+          if (!UserState.isAuthenticated()) return
+          API.teams().then(function(data) {
+            return callback && callback(null, {member: data.member, invited: data.invited})
           })
         },
 

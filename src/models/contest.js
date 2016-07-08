@@ -67,24 +67,36 @@ schema.index({ 'contestants.id': 1, 'date_start': -1, })
 schema.index({ 'contestants.id': 1, '_id': 1, })
 schema.index({ 'contestants.team': 1, 'contestants.id': 1, '_id': 1, })
 
-schema.methods.getUserRepresentative = function (id) {
+schema.methods.getUserRepresentative = function (user) {
+  let id = user && user._id && _.toString(user._id) || _.toString(user)
   let elem = _.find(this.contestants, function (obj) {
-    return obj.id && _.toString(obj.id) === _.toString(id)
+    return obj.id && _.toString(obj.id) === id
   })
   return elem && (elem.team || elem.id)
 }
 
-schema.methods.userInContest = function (id) {
+schema.methods.userInContest = function (user) {
+  let id = user && user._id && _.toString(user._id) || _.toString(user)
   return _.some(this.contestants, (obj) => {
     let uid = (obj.id && obj.id._id) ? obj.id._id : (obj.id ? obj.id : obj)
-    return _.toString(uid) === _.toString(id)
+    return _.toString(uid) === id
   })
 }
 
-schema.methods.problemInContest = function (id) {
+schema.methods.problemInContest = function (problem) {
+  let id = problem && problem._id && _.toString(problem._id) || _.toString(problem)
   return _.some(this.problems, (obj) => {
     return _.toString(obj) === _.toString(id)
   })
+}
+
+schema.methods.isAuthor = function(user) {
+  let id = user && user._id && _.toString(user._id) || _.toString(user)
+  return this.author.toString() === id
+}
+
+schema.methods.hasStarted = function() {
+  return this.date_start <= new Date()
 }
 
 module.exports = mongoose.model('Contest', schema)

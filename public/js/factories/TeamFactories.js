@@ -14,7 +14,6 @@ angular.module('Team')
         remove: Request.send('save', $resource('/api/v1/team/:id/remove', { id: '@id' })),
         accept: Request.send('save', $resource('/api/v1/team/:id/accept', { id: '@id' })),
         decline: Request.send('save', $resource('/api/v1/team/:id/decline', { id: '@id' })),
-        getByLoggedUser: Request.send('get', $resource('/api/v1/team/user')),
         get: Request.send('get', $resource('/api/v1/team/:id')),
       }
       return {
@@ -59,11 +58,6 @@ angular.module('Team')
         decline: function(teamId, callback) {
           API.decline({id: teamId}).then(function(data) {
             return callback && callback()
-          })
-        },
-        getByLoggedUser: function(callback) {
-          API.getByLoggedUser().then(function(data) {
-            return callback && callback(null, {member: data.member, invited: data.invited})
           })
         },
         get: function(teamId, callback) {

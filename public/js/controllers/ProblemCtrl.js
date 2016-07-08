@@ -15,7 +15,7 @@ app.controller('ProblemController', [
       var letter = String.fromCharCode(65 + parseInt($stateParams.index))
       problem.name = '(' + letter + ') ' + problem.name
     }
-    $rootScope.title += problem.name + ' - Codepit'
+    $rootScope.title += problem.name + ' - ' + OJName[problem.oj] + ' - Codepit'
     $scope.problem = problem
     $scope.problem.oj = OJName[problem.oj]
     if (problem.source) $scope.problem.source = $sce.trustAsHtml(problem.source)

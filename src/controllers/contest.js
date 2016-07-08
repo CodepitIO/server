@@ -10,8 +10,8 @@ const Contest = require('../models/contest'),
   Utils = require('../utils/utils')
 
 function canViewContest(contest, user) {
-  return !contest.watchPrivate || (user && (user.isAdmin || contest.userInContest(user._id) ||
-                                         user._id.toString() === contest.author.toString()));
+  return !contest.watchPrivate ||
+    (user && (user.isAdmin || contest.userInContest(user) || contest.isAuthor(user)));
 }
 
 exports.getMetadata = (req, res) => {
@@ -41,18 +41,19 @@ exports.getMetadata = (req, res) => {
       contestantType: contest.contestantType,
       problems: [],
 
-      hasStarted: contest.date_start <= new Date(),
+      hasStarted: contest.hasStarted(),
       canViewContest: canViewContest(contest, req.user),
       inContest: contest.userInContest(userId),
       isContestAdmin: Utils.cmpToString(req.user && req.user._id)(contest.author)
     }
 
-    let canViewContestants = obj.canViewContest
-    let canViewProblems = new Date(contest.date_start) <= new Date() && canViewContestants
-
     let isAdmin = req.user && req.user.isAdmin
-    if (isAdmin || canViewContestants) obj.contestants = contest.contestants
-    if (isAdmin || canViewProblems) obj.problems = contest.problems
+    let canViewContestants = obj.canViewContest
+    let canViewProblems = obj.canViewContest &&
+      (isAdmin || contest.isAuthor(req.user) || obj.hasStarted)
+
+    if (canViewContestants) obj.contestants = contest.contestants
+    if (canViewProblems) obj.problems = contest.problems
     if (obj.isContestAdmin) obj.password = contest.password
 
     return res.json(obj)
@@ -72,7 +73,6 @@ exports.getEvents = (req, res) => {
     if (!isAdmin && upTo >= contest.frozen_time && upTo < contest.date_end) {
       upTo = contest.frozen_time;
     }
-
     async.parallel({
       pending: (next) => {
         return Redis.zrangebyscore(`${id}:PENDING`, startFrom, upTo, next)
@@ -216,6 +216,7 @@ exports.validateContest = (req, res, next) => {
 exports.createOrEdit = (req, res) => {
   let id = req.params.id
   if (!id) {
+    req.body.author = req.user._id
     let contest = new Contest(req.body)
     return contest.save((err, contest) => {
       if (err) return res.status(500).send()

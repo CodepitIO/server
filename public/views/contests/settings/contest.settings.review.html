@@ -68,7 +68,7 @@
     <div flex="50">
       <div vc-recaptcha ng-model="contest.recaptcha" style="margin: 0 auto; padding: 20px 0 20px 0; width: 304px;"></div>
       <div class="form-group">
-        <button type="submit" class="btn btn-block data-button" ng-click="createOrEdit()">
+        <button type="submit" class="btn btn-block data-button" ng-click="createOrEdit()" ng-disabled="!contest.recaptcha">
           <span ng-if="isEdit">Editar competição</span>
           <span ng-if="!isEdit">Criar competição</span>
         </button>

@@ -3,8 +3,8 @@ angular.module('User')
     '$scope',
     'UserAPI',
     'UserState',
-    function ($scope, UserAPI, userState) {
-      $scope.userState = userState
+    function ($scope, UserAPI, UserState) {
+      $scope.UserState = UserState
       $scope.data = {}
 
       $scope.login = function () {

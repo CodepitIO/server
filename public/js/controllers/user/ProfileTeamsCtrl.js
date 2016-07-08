@@ -3,11 +3,12 @@ angular.module('User')
     '$scope',
     '$mdDialog',
     'TeamAPI',
-    function ($scope, $mdDialog, TeamAPI) {
+    'UserAPI',
+    function ($scope, $mdDialog, TeamAPI, UserAPI) {
       $scope.member = []
       $scope.invited = []
       $scope.loading = true
-      TeamAPI.getByLoggedUser(function(err, teams) {
+      UserAPI.teams(function(err, teams) {
         $scope.member = teams.member
         $scope.invited = teams.invited
         $scope.loading = false

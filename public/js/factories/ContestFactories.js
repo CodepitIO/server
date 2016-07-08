@@ -15,18 +15,27 @@ angular.module('Contests')
         submit: Request.send('save', $resource('/api/v1/contest/:id/submit', { id: '@id' })),
 
         getList: Request.send('get', $resource('/api/v1/contest/list/:type/:from'), {ignoreThrottle: true}),
-        getMetadata: Request.send('get', $resource('/api/v1/contest/:id/metadata')),
-        getEvents: Request.send('get', $resource('/api/v1/contest/:id/events/:from')),
-        getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/:from')),
+        getMetadata: Request.send('get', $resource('/api/v1/contest/:id/metadata'), {ignoreThrottle: true}),
+        getEvents: Request.send('get', $resource('/api/v1/contest/:id/events/:from'), {ignoreThrottle: true}),
+        getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/:from'), {ignoreThrottle: true}),
       }
 
       return {
         edit: function(id, params, callback) {
           params.id = id
           API.edit(params)
-          .then(function() {
+          .then(function(data) {
             Notification('Competição editada.')
+//            callback && callback()
             $state.go('contest', {id: id}, {reload: true})
+          })
+        },
+
+        create: function(params, callback) {
+          API.create(params)
+          .then(function(data) {
+            Notification('Competição criada.')
+            $state.go('contest', {id: data.id})
           })
         },
 
@@ -41,6 +50,7 @@ angular.module('Contests')
         join: function (id, password, team, callback) {
           API.join({ id: id, password: password, team: team })
           .then(function () {
+            Notification.success('Inscrito com sucesso na competição.')
             $state.go($state.current, {id: id}, {reload: true})
           })
         },
@@ -110,7 +120,9 @@ angular.module('Contests')
           }
           promise.then(function (data) {
             Notification('Código enviado!')
-            return callback(null, data.submission || data.data.submission)
+            return callback && callback(null, data.submission || data.data.submission)
+          }, function(err) {
+            return callback && callback(err)
           })
         },
 

@@ -3,15 +3,15 @@
     <form name="form">
       <md-toolbar class="md-hue-2">
         <div style="padding: 15px;">
-          Participar de <b>{{contest.name}}</b>
+          Participar de <b>{{ContestState.contest.name}}</b>
         </div>
       </md-toolbar>
       <md-content layout-padding>
-        <md-input-container ng-show="contest.isPrivate">
+        <md-input-container ng-show="ContestState.contest.isPrivate">
           <label>Senha</label>
-          <input type="password" ng-model="password" ng-required="contest.isPrivate">
+          <input type="password" ng-model="password" ng-required="ContestState.contest.isPrivate">
         </md-input-container>
-        <md-radio-group ng-model="role" ng-show="contest.contestantType === 3" ng-required="contest.contestantType === 3">
+        <md-radio-group ng-model="role" ng-show="ContestState.contest.contestantType === 3" ng-required="ContestState.contest.contestantType === 3">
           <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
           <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
         </md-radio-group>

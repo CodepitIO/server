@@ -19,6 +19,7 @@ function createSubmission (submission, userId, callback) {
     language: submission.language,
     code: submission.code
   })
+  if (!submission.problem) sub.verdict = 15
   sub.save(callback)
 }
 
@@ -74,6 +75,7 @@ exports.submit = (req, res) => {
     return res.status(400).send()
   }
 
+  if (submission.problem === 0) submission.problem = null
   async.waterfall([
     (next) => {
       async.parallel({
@@ -81,13 +83,14 @@ exports.submit = (req, res) => {
           Contest.findById(submission.contest, 'contestants problems', next)
         },
         problem: (next) => {
+          if (!submission.problem) return next()
           Problem.findById(submission.problem, next)
         }
       }, next)
     },
     (results, next) => {
-      if (!results.problem || !results.contest) return next(new Error())
-      if (!results.contest.problemInContest(submission.problem) ||
+      if (!results.contest) return next(new Error())
+      if (results.problem && !results.contest.problemInContest(submission.problem) ||
           !results.contest.userInContest(userId)) return next(new Error())
       if (results.contest.date_start > new Date()) return next(new Error())
       submission.rep = results.contest.getUserRepresentative(userId)
@@ -96,10 +99,11 @@ exports.submit = (req, res) => {
     },
     (_submission, _ins, next) => {
       submission = _submission
+      if (submission.problem === null) return next()
       enqueueSubmission(problem.oj, submission, next)
     },
   ], (err) => {
-    if (err) return res.status(400).send()
+    if (err) return res.status(500).send()
     return res.json({
       submission: submission
     })

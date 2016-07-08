@@ -124,21 +124,16 @@ footer ul li a:first-child{
 
 #footer-bottom {
   width: 100%;
-  height: 70px;
+  height: 75px;
   background: rgba(0,0,0,0.2);
 }
 
-#footer-bottom img{
-  display: inline-block;
-  margin-top: 8px;
-}
-
 #footer-bottom a{
-  float: right;
   color: #A0A0A0;
   text-decoration: none;
   line-height: 70px;
   font-size: 25px;
+  margin-left: 25px;
 }
 
 #footer-bottom a:hover{
@@ -148,9 +143,14 @@ footer ul li a:first-child{
 #footer-bottom h4{
   font: 300 14px "Open Sans";
   color: #A0A0A0;
-  display: inline-block;
   line-height: 70px;
   margin: 0px;
+}
+
+#footer-bottom .codepit-logo {
+  height: 35px;
+	width: 150px;
+  margin-right: 20px;
 }
 
 /* Breadcrumbs */

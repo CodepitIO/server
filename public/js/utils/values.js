@@ -94,7 +94,7 @@ angular.module('General')
 			notification: 'info',
 		},
 		'11': {
-			text: 'Submissão inválida',
+			text: 'Erro Interno',
 			class: 'grey-submission',
 			notification: 'info',
 		},
