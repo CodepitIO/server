@@ -220,8 +220,8 @@ app.directive('mrtContestProgress', function () {
           var total = (ContestState.contest.date_end - ContestState.contest.date_start)
           if (!ContestState.contest.hasBlind) ContestState.contest.blind_time = $scope.date_end
           if (!ContestState.contest.hasFrozen) ContestState.contest.frozen_time = $scope.blind_time
-          var frozen = Math.floor((ContestState.contest.date_end - ContestState.contest.frozen_time) * 100 / total)
-          var blind = Math.floor((ContestState.contest.date_end - ContestState.contest.blind_time) * 100 / total)
+          var frozen = Math.floor((ContestState.contest.date_end - ContestState.contest.frozen_time) * 100 / total) || 0
+          var blind = Math.floor((ContestState.contest.date_end - ContestState.contest.blind_time) * 100 / total) || 0
           return {
             frozen: frozen,
             blind: blind
