@@ -130,9 +130,11 @@ exports.getUserContestSubmissions = (req, res) => {
   Contest.findById(contestId, (err, contest) => {
     if (err) return res.status(500).send()
     if (!contest) return res.status(400).send()
+    let rep = contest.getUserRepresentative(req.user._id)
+    if (!rep) return res.status(400).send()
     Submission.find({
       contest: contestId,
-      contestant: req.user._id,
+      rep: rep,
       date: {$gte: startFrom}
     })
     .select('_id date verdict language problem')

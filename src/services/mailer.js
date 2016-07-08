@@ -1,3 +1,5 @@
+'use strict'
+
 const nodemailer = require('nodemailer'),
   sesTransport = require('nodemailer-ses-transport'),
   fs = require('fs')
@@ -13,10 +15,10 @@ let transporter = nodemailer.createTransport(sesTransport({
 // setup e-mail data with unicode symbols
 var mailOptions = {
     from: '"Codepit" <hello@codepit.io>', // sender address
-    to: 'gustavostor@gmail.com', // list of receivers
+    to: 'gustavostor@gmail.com, victorddiniz@gmail.com', // list of receivers
     subject: 'Bem-vindo ao Codepit!', // Subject line
-    text: fs.readFileSync('./templates/register_mail.html', 'utf8'),
-    html: fs.readFileSync('./templates/register_mail.html', 'utf8')
+    text: fs.readFileSync('/Users/stor/workspace/codepit/web/src/services/templates/register_mail.html', 'utf8'),
+    html: fs.readFileSync('/Users/stor/workspace/codepit/web/src/services/templates/register_mail.html', 'utf8')
 };
 
 // send mail with defined transport object

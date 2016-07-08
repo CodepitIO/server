@@ -38,11 +38,8 @@ let schema = mongoose.Schema({
   }
 })
 
-schema.index({
-  contest: 1,
-  contestant: 1,
-  date: -1
-})
+schema.index({ contest: 1, contestant: 1, date: -1 })
+schema.index({ contest: 1, rep: 1, date: -1 })
 schema.index({ date: 1 })
 
 schema.statics.validateChain = ValidateChain({
