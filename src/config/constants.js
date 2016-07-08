@@ -9,6 +9,11 @@ module.exports = {
     HOST: 'redis',
     PORT: 6379
   },
+  MAILER: {
+    SES_REGION: 'us-west-2',
+    RATE_LIMIT: 5,
+    MAX_CONN: 5,
+  },
 
   // Dev
   ACCESS: {

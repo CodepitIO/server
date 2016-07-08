@@ -22,6 +22,8 @@
     "mongo-express": "^0.30.59",
     "mongoose": "^4.4.19",
     "multiparty": "^4.1.2",
+    "nodemailer": "^2.4.2",
+    "nodemailer-ses-transport": "^1.4.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pindexer": "file:./local_modules/pindexer/",
