@@ -11,12 +11,14 @@ angular.module('Contests')
         theme: 'blackboard',
         lineWrapping: true,
         lineNumbers: true,
-        mode: ''
       }
 
       $scope.updateTextMode = function () {
         $scope.editorOptions.mode = CodemirrorMode[ContestState.submit.language || '']
       }
+      setTimeout(function() {
+        $scope.updateTextMode()
+      }, 0)
 
       $scope.loading = false
       $scope.submit = function () {

@@ -64,13 +64,14 @@ exports.getMetadata = (req, res) => {
 exports.getEvents = (req, res) => {
   let id = req.params.id
   let startFrom = _.toInteger(req.params.from) || 0
-  Contest.findById(id).then((contest) => {
+  Contest.findById(id, (err, contest) => {
+    if (err) return res.status(500).send()
     if (!contest || !canViewContest(contest, req.user)) {
       return res.status(400).send()
     }
 
     let isAdmin = req.user && req.user.isAdmin
-    let upTo = new Date().getTime()
+    let upTo = Math.min(contest.date_end, new Date().getTime())
     if (!isAdmin && upTo >= contest.frozen_time && upTo < contest.date_end) {
       upTo = contest.frozen_time;
     }
@@ -85,7 +86,10 @@ exports.getEvents = (req, res) => {
         return Redis.zrangebyscore(`${id}:ACCEPTED`, startFrom, upTo, next)
       },
     }, (err, results) => {
-      if (err) return res.status(500).send()
+      if (err) {
+        console.log('contest.js 89', err)
+        return res.status(500).send()
+      }
       return res.json(results)
     })
   })

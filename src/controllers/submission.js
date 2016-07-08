@@ -127,15 +127,21 @@ exports.getById = (req, res) => {
 exports.getUserContestSubmissions = (req, res) => {
   let contestId = req.params.id
   let startFrom = new Date(_.toInteger(req.params.from) || 0)
-  Submission.find({
-    contest: contestId,
-    contestant: req.user._id,
-    date: {$gte: startFrom}
-  })
-  .select('_id date verdict language problem')
-  .sort('date')
-  .exec((err, submissions) => {
-    if (err) return res.status(400).send()
-    return res.json({submissions: submissions})
+  Contest.findById(contestId, (err, contest) => {
+    if (err) return res.status(500).send()
+    if (!contest) return res.status(400).send()
+    Submission.find({
+      contest: contestId,
+      contestant: req.user._id,
+      date: {$gte: startFrom}
+    })
+    .select('_id date verdict language problem')
+    .sort('date')
+    .exec((err, submissions) => {
+      if (err) return res.status(400).send()
+      let isBlind = !contest.hasEnded() && new Date() >= contest.blind_time
+      console.log(isBlind)
+      return res.json({submissions: submissions})
+    })
   })
 }

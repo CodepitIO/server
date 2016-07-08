@@ -28,7 +28,7 @@
             </td>
             <td><mrt-display-time date="contest.date_start"></mrt-display-time></td>
             <td><mrt-display-time date="contest.date_end"></mrt-display-time></td>
-            <td>{{contest.duration | formatTime : false}}</td>
+            <td>{{contest.duration | formatDuration : true}}</td>
           </tr>
           <tr ng-hide="contests.length">
             <td colspan="6"><span style="font-style: italic;">{{emptyMessage}}</span></td>
