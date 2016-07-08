@@ -38,9 +38,11 @@ angular.module('mrtApp', [
   'NotificationProvider',
   '$uibTooltipProvider',
   '$mdThemingProvider',
+  '$compileProvider',
   'vcRecaptchaServiceProvider',
   'Config',
-  function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider, vcRecaptchaServiceProvider, Config) {
+  function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider, $compileProvider, vcRecaptchaServiceProvider, Config) {
+    $compileProvider.debugInfoEnabled(false)
     vcRecaptchaServiceProvider.setSiteKey(Config.RecaptchaKey)
     NotificationProvider.setOptions(Config.NotificationOptions)
     $uibTooltipProvider.setTriggers(Config.TooltipOptions)
