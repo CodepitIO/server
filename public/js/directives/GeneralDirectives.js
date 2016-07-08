@@ -218,8 +218,8 @@ app.directive('mrtContestProgress', function () {
       function($scope, TimeState, ContestState, formatDurationFilter) {
         var getWidths = _.throttle(function() {
           var total = (ContestState.contest.date_end - ContestState.contest.date_start)
-          if (!ContestState.contest.hasBlind) ContestState.contest.blind_time = $scope.date_end
-          if (!ContestState.contest.hasFrozen) ContestState.contest.frozen_time = $scope.blind_time
+          if (!ContestState.contest.hasBlind) ContestState.contest.blind_time = ContestState.contest.date_end
+          if (!ContestState.contest.hasFrozen) ContestState.contest.frozen_time = ContestState.contest.blind_time
           var frozen = Math.floor((ContestState.contest.date_end - ContestState.contest.frozen_time) * 100 / total) || 0
           var blind = Math.floor((ContestState.contest.date_end - ContestState.contest.blind_time) * 100 / total) || 0
           return {
@@ -253,7 +253,7 @@ app.directive('mrtContestProgress', function () {
 
         $scope.getUptime = function() {
           var time = formatDurationFilter(Math.floor((TimeState.server.now - ContestState.contest.date_start) / 1000), true)
-          if (TimeState.server.now < $scope.startTime) time += ' para começar'
+          if (TimeState.server.now < ContestState.contest.date_start) time += ' para começar'
           return time
         }
         $scope.getTimeLeft = function() {
