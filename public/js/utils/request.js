@@ -37,7 +37,7 @@ angular.module('General')
           }
 
           return function(params) {
-            if (opts.ignoreThrottle) return deferAPI(params)
+            if (true || opts.ignoreThrottle) return deferAPI(params)
             if (timer) $timeout.cancel(timer)
             var ellapsed = new Date() - lastCall
             timer = $timeout(function() {
