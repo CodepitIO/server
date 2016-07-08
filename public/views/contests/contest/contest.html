@@ -27,7 +27,7 @@
         <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="ContestState.contest.inContest && ContestState.contest.hasStarted">
           <a ui-sref=".submissions">Submissões&nbsp;<i class="fa fa-bars" aria-hidden="true"></i></a>
         </li>
-        <li class="manage" ng-class="{active: state.current.name === 'contest.edit'}" ng-if="ContestState.contest.isContestAdmin">
+        <li class="manage" ng-class="{active: state.current.name === 'contest.edit'}" ng-if="ContestState.contest.isContestAdmin && !ContestState.contest.hasEnded">
           <a ui-sref=".edit">Editar&nbsp;<i class="fa fa-wrench" aria-hidden="true"></i></a>
         </li>
         <li class="leave-button" ng-if="ContestState.contest.inContest && ContestState.submissionsIds.length === 0">

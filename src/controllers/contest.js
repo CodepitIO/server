@@ -42,6 +42,7 @@ exports.getMetadata = (req, res) => {
       problems: [],
 
       hasStarted: contest.hasStarted(),
+      hasEnded: contest.hasEnded(),
       canViewContest: canViewContest(contest, req.user),
       inContest: contest.userInContest(userId),
       isContestAdmin: Utils.cmpToString(req.user && req.user._id)(contest.author)

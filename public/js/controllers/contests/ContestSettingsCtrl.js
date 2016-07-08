@@ -6,6 +6,7 @@ app.controller('ContestSettingsController', [
   'ContestState',
   'ContestAPI',
   function ($scope, $state, TimeState, ContestState, ContestAPI) {
+    $scope.loading = false
     if ($state.is('contests.create')) {
       $scope.contest = {
         problems: [],
@@ -88,6 +89,7 @@ app.controller('ContestSettingsController', [
     }
 
     $scope.createOrEdit = function() {
+      $scope.loading = true
       if ($scope.id) ContestAPI.edit($scope.id, $scope.contest)
       else ContestAPI.create($scope.contest)
     }

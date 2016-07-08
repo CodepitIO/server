@@ -99,4 +99,8 @@ schema.methods.hasStarted = function() {
   return this.date_start <= new Date()
 }
 
+schema.methods.hasEnded = function() {
+  return this.date_end <= new Date()
+}
+
 module.exports = mongoose.model('Contest', schema)

@@ -170,22 +170,6 @@
   margin-right: 8px;
 }
 
-.contest-settings-container .preview-bar {
-  height: 5px;
-  display: inline-block;
-  width: 50%;
-  position: absolute;
-  right: 0;
-}
-
-.contest-settings-container .frozen-bar {
-  background-color: #FFE0B2;
-}
-
-.contest-settings-container .blind-bar {
-  background-color: #FFCDD2;
-}
-
 /* <!------------------!> */
 
 /* <-- Contest View --> */
@@ -466,6 +450,10 @@ tr.submission-row-parent {
   font-size: 10px;
 }
 
+#contests-list .contests-view-table-icon {
+  color: #999;
+}
+
 /* <!------------------!> */
 
 /* <-- Miscellaneous --> */
@@ -494,4 +482,20 @@ a.balloon-ps-label:active {
     border-radius: 4px;
     background-color: rgba(0,0,0,.5);
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.preview-bar {
+  height: 5px;
+  display: inline-block;
+  width: 50%;
+  position: absolute;
+  right: 0;
+}
+
+.frozen-bar {
+  background-color: #FFE0B2;
+}
+
+.blind-bar {
+  background-color: #FFCDD2;
 }
