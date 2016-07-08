@@ -140,10 +140,12 @@ exports.getUserContestSubmissions = (req, res) => {
     .exec((err, submissions) => {
       if (err) return res.status(400).send()
       let isBlind = !contest.hasEnded() && new Date() >= contest.blind_time
-      _.map(submissions, (s) => {
-        if (isBlind && s.date >= contest.blind_time) s.verdict = 0
-        return s
-      })
+      if (isBlind) {
+        _.map(submissions, (s) => {
+          if (isBlind && s.date >= contest.blind_time) s.verdict = 0
+          return s
+        })
+      }
       return res.json({submissions: submissions})
     })
   })
