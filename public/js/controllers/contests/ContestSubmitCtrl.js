@@ -23,7 +23,7 @@ angular.module('Contests')
       $scope.loading = false
       $scope.submit = function () {
         $scope.loading = true
-        ContestAPI.submit($scope.id, ContestState.submit, function (err, submission) {
+        ContestAPI.submit(ContestState.id, ContestState.submit, function (err, submission) {
           $scope.loading = false
           if (submission) {
             ContestState.submit = {}

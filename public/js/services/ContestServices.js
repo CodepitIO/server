@@ -91,7 +91,7 @@ angular.module('Contests')
           data.hasBlind = data.blind_time < data.date_end
           var now = new Date()
           if (now >= data.frozen_time && now < data.blind_time) data.isFrozen = true
-          else if (now >= data.blind_time && now < data.end_time) data.isBlind = true
+          else if (now >= data.blind_time && now < data.date_end) data.isBlind = true
           if (now >= data.date_start && now < data.date_end) data.isRunning = true
           $scope.contest = data
           if (!$scope.editContest.name) {

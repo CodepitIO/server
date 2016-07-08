@@ -230,12 +230,12 @@ app.directive('mrtContestProgress', function () {
 
         $scope.getWidthOf = function(type) { return getWidths()[type] }
         $scope.getPercentage = function() {
-          return Math.floor((TimeState.server.now - $scope.startTime) * 100 /
-            ($scope.endTime - $scope.startTime))
+          return (TimeState.server.now - ContestState.contest.date_start) * 100 /
+            (ContestState.contest.date_end - ContestState.contest.date_start)
         }
         $scope.getClass = function() {
-          if (ContestState.isFrozen) return 'md-warn'
-          if (ContestState.isBlind) return 'md-accent'
+          if (ContestState.contest.isBlind) return 'md-warn'
+          if (ContestState.contest.isFrozen) return 'md-accent'
           return 'md-primary'
         }
         $scope.showBar = function(type) {

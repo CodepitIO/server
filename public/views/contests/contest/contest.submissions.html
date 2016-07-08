@@ -16,7 +16,7 @@
           <td>
             <div class="balloon" ng-show="ContestState.submissions[s].problem != null">
               <img ng-src="/imgs/baloes/{{ContestState.submissions[s].index}}.png" class="balloon-image" />
-              <a ui-sref="problems({id:ContestState.submissions[s].problem, index:$index})" target="_blank" class="balloon-label">{{ContestState.submissions[s].index | mrtAlphabetize}}</a>
+              <a ui-sref="problems.view({id:ContestState.submissions[s].problem, index:$index})" target="_blank" class="balloon-label">{{ContestState.submissions[s].index | mrtAlphabetize}}</a>
             </div>
             <div class="balloon" ng-hide="ContestState.submissions[s].problem != null">--</div>
           </td>

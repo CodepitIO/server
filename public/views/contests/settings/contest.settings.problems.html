@@ -29,7 +29,7 @@
             </div>
             <div class="balloon-ps">
               <img ng-src="/imgs/baloes/{{$index}}.png" class="md-avatar" />
-              <a ui-sref="problems({id:problem._id})" target="_blank" class="balloon-ps-label md-avatar">{{$index | mrtAlphabetize}}</a>
+              <a ui-sref="problems.view({id:problem._id})" target="_blank" class="balloon-ps-label md-avatar">{{$index | mrtAlphabetize}}</a>
             </div>
             <div class="md-list-item-text" layout="column" flex layout-align="center start">
               <h3>{{ problem.name }}</h3>

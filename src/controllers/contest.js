@@ -73,7 +73,7 @@ exports.getEvents = (req, res) => {
     let isAdmin = req.user && req.user.isAdmin
     let upTo = Math.min(contest.date_end, new Date().getTime())
     if (!isAdmin && upTo >= contest.frozen_time && upTo < contest.date_end) {
-      upTo = contest.frozen_time;
+      upTo = contest.frozen_time.getTime()
     }
     async.parallel({
       pending: (next) => {
@@ -87,7 +87,7 @@ exports.getEvents = (req, res) => {
       },
     }, (err, results) => {
       if (err) {
-        console.log('contest.js 89', err)
+        console.log('contest.js', err)
         return res.status(500).send()
       }
       return res.json(results)
@@ -161,10 +161,10 @@ exports.validateContest = (req, res, next) => {
       try {
         c.date_start = new Date(data.date_start)
         c.date_end = new Date(data.date_end)
-        if (data.hasFrozen) c.frozen_time = new Date(data.frozen_time)
-        else c.frozen_time = c.date_end
         if (data.hasBlind) c.blind_time = new Date(data.blind_time)
         else c.blind_time = c.date_end
+        if (data.hasFrozen) c.frozen_time = new Date(data.frozen_time)
+        else c.frozen_time = c.blind_time
 
         let timeArr = [c.date_start, c.frozen_time, c.blind_time, c.date_end];
         if (_.some(timeArr, _.isNaN)) return res.status(400).send()
