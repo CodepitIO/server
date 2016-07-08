@@ -42,6 +42,16 @@ module.exports = function (grunt) {
       }
     },
 
+    filerev: {
+      options: {
+        algorithm: 'md5',
+        length: 6
+      },
+      prod: {
+        src: ['public/dist/*']
+      }
+    },
+
     clean: {
       dist: {
         src: ['public/dist']
@@ -82,6 +92,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-html2js')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
+  grunt.loadNpmTasks('grunt-filerev')
   grunt.loadNpmTasks('grunt-usemin')
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-copy')
@@ -97,6 +108,7 @@ module.exports = function (grunt) {
     'concat:generated',
     'cssmin:generated',
     'uglify:generated',
+    'filerev:prod',
     'usemin'
   ])
   grunt.registerTask('dev', [
