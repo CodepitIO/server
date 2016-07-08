@@ -460,6 +460,12 @@ tr.submission-row-parent {
   color: #F3643C;
 }
 
+#contests-list .team-admin {
+  color: #E57373;
+  vertical-align: super;
+  font-size: 10px;
+}
+
 /* <!------------------!> */
 
 /* <-- Miscellaneous --> */

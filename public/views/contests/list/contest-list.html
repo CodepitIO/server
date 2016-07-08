@@ -7,9 +7,8 @@
           <tr>
             <th class="col-md-3"><a class="link" ng-click="order('name')">Nome</a></th>
             <th class="col-md-2"><a class="link" ng-click="order('date_start')">Início</a></th>
+            <th class="col-md-2"><a class="link" ng-click="order('date_end')">Fim</a></th>
             <th class="col-md-1"><a class="link" ng-click="order('duration')">Duração</a></th>
-            <th class="col-md-1" style="text-align: center;">Tipo</th>
-            <th class="col-md-1" style="text-align: center;">Acesso</th>
           </tr>
         </thead>
         <tbody>
@@ -20,19 +19,16 @@
                 admin-flag="contest.isAdmin && adminFlag"
                 new-flag="contest.isAdmin && isNewContest(contest.date_created) && newFlag">
               </mrt-contest-label>
+              <i class="fa fa-lock contests-view-table-icon" ng-if="contest.isPrivate">
+                <md-tooltip md-direction="top">Possui senha para se registrar.</md-tooltip>
+              </i>
+              <i class="fa fa-user-secret contests-view-table-icon" ng-if="contest.watchPrivate">
+                <md-tooltip md-direction="top">Apenas quem está registrado pode entrar no link.</md-tooltip>
+              </i>
             </td>
             <td><mrt-display-time date="contest.date_start"></mrt-display-time></td>
+            <td><mrt-display-time date="contest.date_end"></mrt-display-time></td>
             <td>{{contest.duration | formatTime : false}}</td>
-            <td class="contests-view-table-td">
-              <i class="fa fa-user contests-view-table-icon" ng-if="contest.contestantType != '2'" data-toggle="tooltip" title="Perfis individuais podem participar." tooltip></i>
-              <i class="fa fa-users contests-view-table-icon" ng-if="contest.contestantType != '1'" data-toggle="tooltip" title="Times podem participar." tooltip></i>
-            </td>
-            <td class="contests-view-table-td">
-              <i class="fa fa-lock contests-view-table-icon" ng-if="contest.isPrivate" data-toggle="tooltip" title="Possui senha para se registrar." tooltip></i>
-              <i class="fa fa-unlock contests-view-table-icon" ng-if="!contest.isPrivate" data-toggle="tooltip" title="Não possui senha para se registrar." tooltip></i>
-              <i class="fa fa-user-secret contests-view-table-icon" ng-if="contest.watchPrivate" data-toggle="tooltip" title="Apenas quem está registrado pode entrar no link." tooltip></i>
-              <i class="fa fa-globe contests-view-table-icon" ng-if="!contest.watchPrivate" data-toggle="tooltip" title="Qualquer um pode entrar no link." tooltip></i>
-            </td>
           </tr>
           <tr ng-hide="contests.length">
             <td colspan="6"><span style="font-style: italic;">{{emptyMessage}}</span></td>

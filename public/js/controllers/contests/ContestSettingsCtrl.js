@@ -1,11 +1,12 @@
 var app = angular.module('Contests')
 app.controller('ContestSettingsController', [
   '$scope',
+  '$state',
   'TimeState',
   'ContestState',
   'ContestAPI',
-  function ($scope, TimeState, ContestState, ContestAPI) {
-    if (!ContestState.id) {
+  function ($scope, $state, TimeState, ContestState, ContestAPI) {
+    if ($state.is('contests.create')) {
       $scope.contest = {
         problems: [],
         hasFrozen: false,
