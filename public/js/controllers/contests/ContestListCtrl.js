@@ -14,7 +14,6 @@ angular.module('Contests')
       switch ($scope.filterType) {
         case 'now':
         case 'future':
-        case 'joined':
           $scope.predicate = 'date_start'
           $scope.reverse = false
           break
@@ -23,6 +22,7 @@ angular.module('Contests')
           $scope.reverse = true
           break
         case 'past':
+        case 'joined':
         default:
           $scope.predicate = 'date_end'
           $scope.reverse = true

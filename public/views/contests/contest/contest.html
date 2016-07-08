@@ -3,7 +3,7 @@
   title="ContestState.contest.name">
 </mrt-breadcrumbs>
 
-<mrt-page-wrapper wait-while='ContestState.loading' class="contest-view">
+<mrt-page-wrapper wait-while='ContestState.loading !== false' class="contest-view">
   <mrt-contest-progress
     start-time="ContestState.contest.date_start"
     end-time="ContestState.contest.date_end"
@@ -15,7 +15,7 @@
   <div class="row" style="margin-top: 20px;">
     <div class="col-sm-12 bs-component">
       <ul class="contest-tabs nav nav-tabs" style="margin-bottom: 15px;">
-        <li class="join-button" ng-if="!ContestState.contest.inContest && UserState.isAuthenticated()">
+        <li class="join-button" ng-if="ContestState.contest.inContest === false && UserState.isAuthenticated()">
           <a href="" ng-click="toggleRight()">Participar&nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i></a>
         </li>
         <li ng-class="{active: state.current.name === 'contest.scoreboard'}">
@@ -30,7 +30,7 @@
         <li class="manage" ng-class="{active: state.current.name === 'contest.edit'}" ng-if="ContestState.contest.isContestAdmin && !ContestState.contest.hasEnded">
           <a ui-sref=".edit">Editar&nbsp;<i class="fa fa-wrench" aria-hidden="true"></i></a>
         </li>
-        <li class="leave-button" ng-if="ContestState.contest.inContest && ContestState.submissionsIds.length === 0">
+        <li class="leave-button" ng-if="ContestState.contest.inContest && ContestState.loadedSubmissions && ContestState.submissionsIds.length === 0">
           <md-tooltip md-direction="right">
             Você pode se desregistrar da competição<br>
             enquanto não tiver feito nenhuma ação nela.</br>

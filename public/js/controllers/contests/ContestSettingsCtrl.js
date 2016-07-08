@@ -88,10 +88,14 @@ app.controller('ContestSettingsController', [
       return validateData && validateProblems && validateOptions
     }
 
+    function handleError() {
+      $scope.loading = false
+    }
+
     $scope.createOrEdit = function() {
       $scope.loading = true
-      if ($scope.id) ContestAPI.edit($scope.id, $scope.contest)
-      else ContestAPI.create($scope.contest)
+      if ($state.is('contests.create')) ContestAPI.create($scope.contest, handleError)
+      else ContestAPI.edit(ContestState.id, $scope.contest, handleError)
     }
   }
 ])

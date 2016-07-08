@@ -105,7 +105,7 @@ let filters = {
         'contestants.id': req.user.id
       }
     },
-    sort: 'date_start',
+    sort: '-date_end',
     limit: 0
   }
 }

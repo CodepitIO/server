@@ -49,11 +49,13 @@ angular.module('appRoutes', []).config([
         authenticate: true
       })
       .state('contest', {
+        abstract: true,
         url: '^/contest/:id',
         templateUrl: 'views/contests/contest/contest.html',
         controller: 'ContestController'
       })
       .state('contest.scoreboard', {
+        url: '/view',
         title: 'Placar'
       })
       .state('contest.submit', {
@@ -103,6 +105,7 @@ angular.module('appRoutes', []).config([
         controller: 'SubmissionController'
       })
       .state('problems', {
+        abstract: true,
         url: '^/problems/:id?index',
         templateUrl: 'views/problem-view.html',
         controller: 'ProblemController',

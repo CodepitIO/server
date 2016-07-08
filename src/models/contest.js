@@ -64,6 +64,7 @@ schema.index({ date_start: -1 })
 schema.index({ date_end: -1 })
 schema.index({ author: 1, createdAt: -1 })
 schema.index({ 'contestants.id': 1, 'date_start': -1, })
+schema.index({ 'contestants.id': 1, 'date_end': -1, })
 schema.index({ 'contestants.id': 1, '_id': 1, })
 schema.index({ 'contestants.team': 1, 'contestants.id': 1, '_id': 1, })
 

@@ -209,27 +209,19 @@ app.directive('mrtGoBack', [
 app.directive('mrtContestProgress', function () {
   return {
     restrict: 'E',
-    scope: {
-      startTime: '=',
-      frozenTime: '=',
-      blindTime: '=',
-      endTime: '=',
-      hasFrozen: '=',
-      hasBlind: '=',
-      previewBar: '=?'
-    },
     templateUrl: 'views/misc/contest-progress.html',
     controller: [
       '$scope',
       'TimeState',
+      'ContestState',
       'formatDurationFilter',
-      function($scope, TimeState, formatDurationFilter) {
+      function($scope, TimeState, ContestState, formatDurationFilter) {
         var getWidths = _.throttle(function() {
-          var total = ($scope.endTime - $scope.startTime)
-          if (!$scope.hasBlind) $scope.blindTime = $scope.endTime
-          if (!$scope.hasFrozen) $scope.frozenTime = $scope.blindTime
-          var frozen = Math.floor(($scope.endTime - $scope.frozenTime) * 100 / total)
-          var blind = Math.floor(($scope.endTime - $scope.blindTime) * 100 / total)
+          var total = (ContestState.contest.date_end - ContestState.contest.date_start)
+          if (!ContestState.contest.hasBlind) ContestState.contest.blind_time = $scope.date_end
+          if (!ContestState.contest.hasFrozen) ContestState.contest.frozen_time = $scope.blind_time
+          var frozen = Math.floor((ContestState.contest.date_end - ContestState.contest.frozen_time) * 100 / total)
+          var blind = Math.floor((ContestState.contest.date_end - ContestState.contest.blind_time) * 100 / total)
           return {
             frozen: frozen,
             blind: blind
@@ -242,43 +234,42 @@ app.directive('mrtContestProgress', function () {
             ($scope.endTime - $scope.startTime))
         }
         $scope.getClass = function() {
-          var now = TimeState.server.now
-          if ($scope.hasBlind && now >= $scope.blindTime) return 'md-warn'
-          if ($scope.hasFrozen && now >= $scope.frozenTime) return 'md-accent'
+          if (ContestState.isFrozen) return 'md-warn'
+          if (ContestState.isBlind) return 'md-accent'
           return 'md-primary'
         }
         $scope.showBar = function(type) {
           var now = TimeState.server.now
           if (type === 'frozen') {
-            if (!$scope.hasFrozen) return false
-            return now < $scope.frozenTime
+            if (!ContestState.contest.hasFrozen) return false
+            return now < ContestState.contest.frozen_time
           }
           if (type === 'blind') {
-            if (!$scope.hasBlind) return false
-            return now < $scope.blindTime
+            if (!ContestState.contest.hasBlind) return false
+            return now < ContestState.contest.blind_time
           }
+          return true
         }
 
         $scope.getUptime = function() {
-          var time = formatDurationFilter(Math.floor((TimeState.server.now - $scope.startTime) / 1000), true)
+          var time = formatDurationFilter(Math.floor((TimeState.server.now - ContestState.contest.date_start) / 1000), true)
           if (TimeState.server.now < $scope.startTime) time += ' para começar'
           return time
         }
         $scope.getTimeLeft = function() {
-          var time = formatDurationFilter(Math.floor(($scope.endTime - TimeState.server.now) / 1000), true)
+          var time = formatDurationFilter(Math.floor((ContestState.contest.date_end - TimeState.server.now) / 1000), true)
           return time
         }
         $scope.getTotalTime = function() {
-          var time = formatDurationFilter(Math.floor(($scope.endTime - $scope.startTime) / 1000), true)
+          var time = formatDurationFilter(Math.floor((ContestState.contest.date_end - ContestState.contest.date_start) / 1000), true)
           return time
         }
 
         $scope.isContestRunning = function() {
-          var now = TimeState.server.now
-          return now >= $scope.startTime && now < $scope.endTime
+          return ContestState.contest.isRunning
         }
         $scope.hasContestEnded = function() {
-          return TimeState.server.now >= $scope.endTime
+          return ContestState.contest.hasEnded
         }
       }
     ],

@@ -26,8 +26,9 @@ angular.module('Contests')
           API.edit(params)
           .then(function(data) {
             Notification('Competição editada.')
-//            callback && callback()
-            $state.go('contest', {id: id}, {reload: true})
+            $state.go('contest.scoreboard', {id: id}, {reload: true})
+          }, function(err) {
+            callback && callback(err)
           })
         },
 
@@ -35,7 +36,9 @@ angular.module('Contests')
           API.create(params)
           .then(function(data) {
             Notification('Competição criada.')
-            $state.go('contest', {id: data.id})
+            $state.go('contest.scoreboard', {id: data.id})
+          }, function(err) {
+            callback && callback(err)
           })
         },
 

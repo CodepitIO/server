@@ -8,7 +8,7 @@
 			    <th ng-repeat="problem in ContestState.problems">
 			      <div class="balloon balloon-contest">
 			        <img ng-src="/imgs/baloes/{{$index}}.png" class="balloon-image" />
-			        <a ui-sref="problems({id:problem._id, index:$index})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
+			        <a ui-sref="problems.view({id:problem._id, index:$index})" target="_blank" class="balloon-label">{{$index | mrtAlphabetize}}</a>
 			      </div>
 			    </th>
 			    <th>Questões</th>

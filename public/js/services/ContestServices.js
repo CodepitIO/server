@@ -1,11 +1,12 @@
 angular.module('Contests')
   .service('ContestState', [
     '$state',
+    '$stateParams',
     '$interval',
     'Notification',
     'ContestAPI',
     'Verdict',
-    function ($state, $interval, Notification, ContestAPI, Verdict) {
+    function ($state, $stateParams, $interval, Notification, ContestAPI, Verdict) {
       var $scope = this
 
       $scope.loading = true
@@ -17,7 +18,8 @@ angular.module('Contests')
           currentContestants,
           startTimestamp,
           submissionStartFrom,
-          processInterval
+          processInterval,
+          processing
       function reset() {
         $scope.id = null
         $scope.contest = {}
@@ -27,6 +29,7 @@ angular.module('Contests')
         // Submissions
         $scope.submissions = {}
         $scope.submissionsIds = []
+        $scope.loadedSubmissions = false
         // Scoreboard
         $scope.problems = []
         $scope.problemIndex = {}
@@ -46,8 +49,13 @@ angular.module('Contests')
         startTimestamp = 0
         submissionStartFrom = 0
         processInterval = null
+        processing = false
       }
       reset()
+
+      function isActive() {
+        return $state.includes('contest')
+      }
 
       function getContestantRows(contestants) {
         return _.chain(contestants)
@@ -72,15 +80,19 @@ angular.module('Contests')
           .value()
       }
 
-      function processContestMetadata() {
+      function processContestMetadata(callback) {
         ContestAPI.getContestMetadata($scope.id, function(err, data) {
-          if (err || !data) return
+          if (err || !data || !isActive()) return callback && callback()
           data.date_start = new Date(data.date_start)
           data.date_end = new Date(data.date_end)
           data.frozen_time = new Date(data.frozen_time)
           data.blind_time = new Date(data.blind_time)
           data.hasFrozen = data.frozen_time < data.date_end
           data.hasBlind = data.blind_time < data.date_end
+          var now = new Date()
+          if (now >= data.frozen_time && now < data.blind_time) data.isFrozen = true
+          else if (now >= data.blind_time && now < data.end_time) data.isBlind = true
+          if (now >= data.date_start && now < data.date_end) data.isRunning = true
           $scope.contest = data
           if (!$scope.editContest.name) {
             _.assign($scope.editContest, $scope.contest)
@@ -112,15 +124,15 @@ angular.module('Contests')
               $scope.contestants = getContestantRows(currentContestants)
               $scope.contestantsIds = _.keys($scope.contestants)
             }
-            processContestEvents()
+            processContestEvents(callback)
             if (data.inContest) processSubmissions()
           } else {
-            $scope.loading = false
+            callback()
           }
         })
       }
 
-      function sortContestants() {
+      function sortContestants(callback) {
         $scope.contestantsIds.sort(function(a,b) {
           var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
           var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
@@ -129,12 +141,13 @@ angular.module('Contests')
           var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
           return penaltyA - penaltyB
         })
-        $scope.loading = false
+        callback && callback()
       }
 
-      function processContestEvents() {
+      function processContestEvents(callback) {
         var newEventStartFrom = eventStartFrom
         ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
+          if (!isActive()) return callback && callback()
           var shouldSort = false
           events = events || []
           if (events.length > 0) newEventStartFrom = _.last(events)[3]+1
@@ -177,15 +190,16 @@ angular.module('Contests')
               return o
             })
           })
-          if (shouldSort) sortContestants()
-          else if ($scope.loading) $scope.loading = false
           eventStartFrom = newEventStartFrom
+          if (shouldSort) sortContestants(callback)
+          else callback && callback()
         })
       }
 
       function processSubmissions() {
         var newSubmissionStartFrom = submissionStartFrom
         ContestAPI.getSubmissions($scope.id, submissionStartFrom, function(err, submissions) {
+          if (!isActive()) return
           if (submissions.length > 0) {
             newSubmissionStartFrom = new Date(_.head(submissions).date).getTime()+1
           }
@@ -197,6 +211,7 @@ angular.module('Contests')
             $scope.tryPushSubmission(s)
           })
           submissionStartFrom = newSubmissionStartFrom
+          $scope.loadedSubmissions = true
         })
       }
 
@@ -218,12 +233,20 @@ angular.module('Contests')
         $scope.submissionsIds.unshift(s._id)
       }
 
-      $scope.start = function(id) {
+      $scope.start = function() {
         $interval.cancel(processInterval)
         reset()
-        $scope.id = id
-        processContestMetadata()
-        processInterval = $interval(processContestMetadata, 3000, 0, false)
+        $scope.id = $stateParams.id
+        processing = true
+        processContestMetadata(function() {
+          $scope.loading = processing = false
+        })
+        processInterval = $interval(function() {
+          if (!processing && isActive()) {
+            processing = true
+            processContestMetadata(function() { processing = false })
+          }
+        }, 3000, 0, false)
       }
     }
   ])
