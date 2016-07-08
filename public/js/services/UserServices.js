@@ -27,6 +27,10 @@ angular.module('User')
         return !!$scope.user._id
       }
 
+      $scope.isAdmin = function() {
+        return $scope.isAuthenticated() && $scope.user.access >= 10
+      }
+
       $scope.getId = function() {
         return $scope.user._id || null
       }
