@@ -18,7 +18,7 @@
               <img ng-src="/imgs/baloes/{{ContestState.submissions[s].index}}.png" class="balloon-image" />
               <a ui-sref="problems({id:ContestState.submissions[s].problem, index:$index})" target="_blank" class="balloon-label">{{ContestState.submissions[s].index | mrtAlphabetize}}</a>
             </div>
-            <div class="balloon" ng-hide="ContestState.submissions[s].problem != null">{{ContestState.submissions[s].verdict}}</div>
+            <div class="balloon" ng-hide="ContestState.submissions[s].problem != null">--</div>
           </td>
           <td>{{languages[ContestState.submissions[s].language]}}</td>
           <td>{{verdict[ContestState.submissions[s].verdict].text}}&nbsp;<span><md-progress-circular ng-if="ContestState.submissions[s].verdict <= 0" class="md-accent md-hue-3" style="display: inline-block; top: 5px;" md-mode="indeterminate" md-diameter="20"></md-progress-circular></span></td>

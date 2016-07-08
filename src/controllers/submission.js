@@ -114,7 +114,7 @@ exports.getById = (req, res) => {
   Submission.findById(req.params.id)
   .populate({ path: 'contest', select: 'name' })
   .populate({ path: 'contestant', select: 'local.username' })
-  .populate({ path: 'problem', select: 'fullName' })
+  .populate({ path: 'problem', select: 'name' })
   .exec((err, submission) => {
     if (err) return res.status(500).send()
     if (!submission) return res.status(400).send()
