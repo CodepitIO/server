@@ -6,6 +6,7 @@ const redis = require('redis'),
 const MONGO = require('../config/constants').MONGO,
   REDIS = require('../config/constants').REDIS
 
+mongoose.Promise = require('bluebird')
 mongoose.connect(`mongodb://${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`)
 
 let redisClient = redis.createClient({
