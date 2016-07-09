@@ -18,7 +18,7 @@ angular.module('Contests')
   		}
 
       $scope.leave = function() {
-        ContestAPI.leave($scope.id)
+        ContestAPI.leave(ContestState.id)
       }
     }
   ])
