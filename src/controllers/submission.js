@@ -3,7 +3,7 @@
 const Submission = require('../models/submission'),
   Problem = require('../models/problem'),
   Contest = require('../models/contest'),
-  SubmissionQueue = require('../services/queue').SubmissionQueue
+  Queue = require('../services/queue')
 
 const async = require('async'),
   fs = require('fs'),
@@ -11,7 +11,7 @@ const async = require('async'),
   _ = require('lodash')
 
 function createSubmission (submission, userId, callback) {
-  var sub = new Submission({
+  let sub = new Submission({
     contest: submission.contest,
     contestant: userId,
     rep: submission.rep,
@@ -23,21 +23,9 @@ function createSubmission (submission, userId, callback) {
   sub.save(callback)
 }
 
-function enqueueSubmission (oj, s, callback) {
-  var job = SubmissionQueue.create(`submission:${oj}`, {
-    id: s._id
-  })
-  job.attempts(5)
-  job.backoff({
-    delay: 60 * 1000,
-    type: 'exponential'
-  })
-  job.save(callback)
-}
-
 exports.tryExtractFile = (req, res, next) => {
   if (req.body.id) return next()
-  var form = new multiparty.Form()
+  let form = new multiparty.Form()
   // TODO: erase the tmp file
   async.waterfall([
     (callback) => {
@@ -100,7 +88,7 @@ exports.submit = (req, res) => {
     (_submission, _ins, next) => {
       submission = _submission
       if (submission.problem === null) return next()
-      enqueueSubmission(problem.oj, submission, next)
+      Queue.pushSubmission(problem.oj, submission, next)
     },
   ], (err) => {
     if (err) return res.status(500).send()

@@ -24,7 +24,7 @@
     </div>
     <md-subheader>Problemas</md-subheader>
     <div layout="row" ng-repeat="problem in contest.problems">
-      <div flex><p><b>({{$index | mrtAlphabetize}})</b> <a ui-sref="problems.view({id:problem._id})" target="_blank">{{problem.fullName}}</a></p></div>
+      <div flex><p><b>({{$index | mrtAlphabetize}})</b> <a ui-sref="problems.view({id:problem._id,index:$index})" target="_blank">{{problem.fullName}}</a></p></div>
     </div>
     <md-subheader>Informações</md-subheader>
     <div layout="column">

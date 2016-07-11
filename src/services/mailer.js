@@ -2,7 +2,11 @@
 
 const nodemailer = require('nodemailer'),
   sesTransport = require('nodemailer-ses-transport'),
-  fs = require('fs')
+  fs = require('fs'),
+  util = require('util'),
+  _ = require('lodash')
+
+const Queue = require('./queue')
 
 const MAILER = require('../config/constants').MAILER
 
@@ -12,19 +16,29 @@ let transporter = nodemailer.createTransport(sesTransport({
   maxConnections: MAILER.MAX_CONN,
 }))
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Codepit" <hello@codepit.io>', // sender address
-    to: 'gustavostor@gmail.com, victorddiniz@gmail.com', // list of receivers
-    subject: 'Bem-vindo ao Codepit!', // Subject line
-    text: fs.readFileSync('/Users/stor/workspace/codepit/web/src/services/templates/register_mail.html', 'utf8'),
-    html: fs.readFileSync('/Users/stor/workspace/codepit/web/src/services/templates/register_mail.html', 'utf8')
-};
+const TEMPLATE_URL = __dirname + '/templates/%s.html'
+let REGISTER_TMPL = _.template(fs.readFileSync(util.format(TEMPLATE_URL,'register'), 'utf8'))
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
+let mailHandler = {
+  register: function(job, done) {
+    let body = REGISTER_TMPL(job.data)
+    var mailOptions = {
+      from: '"Codepit" <hello@codepit.io>',
+      subject: 'Bem-vindo ao Codepit!',
+      to: job.data.to,
+      text: body,
+      html: body
     }
-    console.log('Message sent: ' + info.response);
-});
+    console.log(mailOptions)
+    return transporter.sendMail(mailOptions, done)
+  }
+}
+
+function delegateEmailHandler(job, done) {
+  if (mailHandler[job.data.type]) return mailHandler[job.data.type](job, done)
+  return done(new Error())
+}
+
+Queue.pullEmail(delegateEmailHandler)
+
+exports.sendMail = Queue.pushEmail

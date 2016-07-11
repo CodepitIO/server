@@ -210,3 +210,9 @@ footer ul li a:first-child{
 .md-title {
   color: #777;
 }
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}

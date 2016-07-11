@@ -20,27 +20,39 @@
 }
 
 .problem-statement .header {
-  border-bottom: #DDD solid 1px;
-  margin-top: -10px;
-  margin-bottom: 1em;
-  padding-bottom: 0.8em;
   display: flex;
   justify-content: center;
 }
 
-.problem-statement .header span {
+.problem-statement .header.title {
+  display: none;
+}
+
+.problem-statement .header.metadata {
+  margin-top: -20px;
+  margin-bottom: 1em;
+  border-bottom: #DDD solid 1px;
+  padding-bottom: 0.8em;
+}
+
+.problem-statement .header.metadata span {
     color: #777;
     font-size: 12px;
     font-weight: normal;
     margin: 0 60px 0 60px;
 }
 
-.problem-statement .header .title {
+.problem-statement .header .print-button {
+  position: absolute;
+  right: 0;
+}
+
+.problem-statement .header.metadata .title {
     font-size: 150%;
     margin-bottom: 0.5em;
 }
 
-.problem-statement .header .title {
+.problem-statement .header.metadata .title {
     font-size: 150%;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     /*font-family: arial,sans-serif;*/
@@ -421,4 +433,24 @@ div .problem-statement-overlay {
 .problem-pdf-wrapper {
   padding: 0 50px 0 50px;
   text-align: center;
+}
+
+@media print {
+  .problem-statement .header.title {
+    display: flex !important;
+    margin: 0px 0 30px 0;
+  }
+  .problem-statement .header.title span {
+    font-size: 30px;
+    font-weight: 200;
+    color: #777;
+  }
+  .problem-statement .header.metadata {
+    margin-top: 0 !important;
+  }
+  .problem-pdf-wrapper {
+    margin-left: -50px;
+    padding: 0 !important;
+    text-align: left;
+  }
 }

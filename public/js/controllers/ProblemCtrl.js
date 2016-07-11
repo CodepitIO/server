@@ -13,6 +13,7 @@ app.controller('ProblemController', [
     $rootScope.title = ''
     if ($stateParams.index) {
       var letter = String.fromCharCode(65 + parseInt($stateParams.index))
+      problem.printName = letter + '. ' + problem.name
       problem.name = '(' + letter + ') ' + problem.name
     }
     $rootScope.title += problem.name + ' - ' + OJName[problem.oj] + ' - Codepit'
@@ -20,5 +21,9 @@ app.controller('ProblemController', [
     $scope.problem.oj = OJName[problem.oj]
     if (problem.source) $scope.problem.source = $sce.trustAsHtml(problem.source)
     if (!problem.imported) $window.open(problem.originalUrl || problem.url)
+
+    $scope.print = function() {
+      $window.print()
+    }
   }
 ])

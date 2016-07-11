@@ -5,9 +5,13 @@
 
 <mrt-page-wrapper>
   <div class="problem-statement" ng-if="problem.timelimit || problem.memorylimit">
-    <div class="header">
+    <div class="header title print">
+      <span>{{problem.printName}}</span>
+    </div>
+    <div class="header metadata">
       <span ng-if="problem.timelimit">Time limit: {{problem.timelimit}}s</span>
       <span ng-if="problem.memorylimit">Memory limit: {{problem.memorylimit}}</span>
+      <span class="print-button no-print"><a class="small" href="" ng-click="print()" target="_blank">[imprimir]</a></div>
     </div>
   </div>
   <div ng-hide="problem.imported">
@@ -28,7 +32,7 @@
   <div class="problem-statement" ng-if="problem.source">
     <p class="footer" ng-bind-html="problem.source"></p>
   </div>
-  <div style="margin-top: 20px; float: right;">
+  <div style="margin-top: 20px; float: right;" class="no-print">
     <a class="small" ng-href="{{problem.originalUrl || problem.url}}" target="_blank">[link original]</a>
   </div>
 </mrt-page-wrapper>
