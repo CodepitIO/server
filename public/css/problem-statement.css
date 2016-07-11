@@ -392,7 +392,8 @@ div .problem-statement-overlay {
 .problem-statement .code {
     font-family: "Courier New", Courier, "Nimbus Mono L", monospace;
 }
-.problem-statement p code{
+.problem-statement p code,
+.problem-statement ul code{
   background: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-weight: 500;
