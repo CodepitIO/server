@@ -453,4 +453,7 @@ div .problem-statement-overlay {
     padding: 0 !important;
     text-align: left;
   }
+  .textLayer {
+    display: none !important;
+  }
 }
