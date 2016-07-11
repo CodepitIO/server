@@ -123,6 +123,7 @@ angular.module('Contests')
               currentContestants = data.contestants
               $scope.contestants = getContestantRows(currentContestants)
               $scope.contestantsIds = _.keys($scope.contestants)
+              sortContestants()
             }
             processContestEvents(callback)
             if (data.inContest) processSubmissions()
