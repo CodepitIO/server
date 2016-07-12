@@ -1,0 +1,29 @@
+<mrt-breadcrumbs
+  location="'Codepit / Usuários'"
+  title="'Recuperação de Senha'">
+</mrt-breadcrumbs>
+
+<mrt-page-wrapper>
+  <div class="row" id="form-container">
+    <div class="col-md-6 col-md-offset-3">
+      <form name="form" novalidate>
+        <div class="form-group">
+          <input type="hidden" placeholder="Token de validação" ng-model="user.hash" name="hash" required/>
+          <small class="error" ng-show="form.hash | mrtHasError">* o token de validação é obrigatório</small>
+        </div>
+        <div class="form-group input-split">
+          <input type="password" name="password" placeholder="Nova senha" ng-model="user.password" maxlength="100" required/>
+          <input type="password" name="confirmPassword" placeholder="Repita a nova senha" ng-model="user.confirmPassword" name="confirmPass" mrt-match-field="{{user.password}}" maxlength="100" required />
+          <br style="clear: both" />
+          <small class="error" ng-show="form.password | mrtHasError">* você deve inserir uma senha.</small>
+          <small class="error" ng-show="form.confirmPassword | mrtHasError">* você deve confirmar a senha corretamente.</small>
+        </div>
+        <div vc-recaptcha ng-model="user.recaptcha" style="margin: 0 auto; width: 304px;"></div>
+        <br style="clear: both" />
+        <div class="form-group">
+          <button type="submit" class="btn btn-block" ng-click="recover()" class="btn btn-default btn-block" ng-disabled="form.$invalid">Mudar senha</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mrt-page-wrapper>

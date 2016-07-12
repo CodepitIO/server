@@ -46,7 +46,8 @@ angular.module('appRoutes', []).config([
       .state('contests.create', {
         url: '/create',
         templateUrl: 'views/contests/settings/contest.create.html',
-        authenticate: true
+        authenticate: true,
+        validate: true
       })
       .state('contest', {
         abstract: true,
@@ -77,6 +78,17 @@ angular.module('appRoutes', []).config([
         url: '^/register',
         templateUrl: 'views/user/register.html',
         controller: 'RegisterController',
+        authenticate: false
+      })
+      .state('validate', {
+        url: '^/validate/:hash',
+        templateUrl: 'views/user/validate.html',
+        controller: 'ProfileValidateController'
+      })
+      .state('recover', {
+        url: '^/recover/:hash',
+        templateUrl: 'views/user/recover.html',
+        controller: 'ProfileRecoverController',
         authenticate: false
       })
       .state('profile', {

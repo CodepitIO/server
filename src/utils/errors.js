@@ -41,4 +41,22 @@ module.exports = {
       en: 'You already exceeded the limit of team memberships.'
     }
   },
+  EmailSendTimelimit: {
+    error: {
+      pt: 'Você só pode exercer esta ação uma vez a cada 30 minutos.',
+      en: 'You can only make this action once every 30 minutes.'
+    }
+  },
+  PasswordRecoveryFindFail: {
+    error: {
+      pt: 'Não há nenhuma conta validada com este e-mail ou username.',
+      en: 'There\'s not validated account with the specified e-mail or username.'
+    }
+  },
+  EmailRecoverExpired: {
+    error: {
+      pt: 'O token de validação expirou.',
+      en: 'The validation token expired.'
+    }
+  },
 }

@@ -39,6 +39,10 @@ function APIRoutes () {
   router.get('/user/teams', User.is('logged'), TeamCtrl.getByLoggedUser)
   router.get('/user/check/username/:username', UserCtrl.checkUsername)
   router.get('/user/check/email/:email', UserCtrl.checkEmail)
+  router.post('/user/recover', User.is('logged-off'), Recaptcha.check, UserCtrl.recover)
+  router.get('/user/recover/:user', User.is('logged-off'), UserCtrl.sendPasswordRecoveryEmail)
+  router.get('/user/validate', User.is('logged'), UserCtrl.sendValidationEmail)
+  router.get('/user/validate/:hash', UserCtrl.validate)
   router.get('/user/:id', UserCtrl.get)
 
   // post

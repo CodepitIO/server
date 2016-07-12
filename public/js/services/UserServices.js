@@ -40,6 +40,9 @@ angular.module('User')
       $scope.getEmailHash = function() {
         return $scope.user.local && $scope.user.local.emailHash || null
       }
+      $scope.isVerified = function() {
+        return $scope.user.local && $scope.user.local.verified
+      }
 
       $scope.isUser = function(usr) {
         var id = usr._id ? usr._id : usr

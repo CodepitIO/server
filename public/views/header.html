@@ -24,8 +24,8 @@
                 <li ng-show="$root.user.isAuthenticated()" class="divider"></li>
                 <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.owned">Criadas</a></li>
                 <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.joined">Participadas</a></li>
-                <li ng-show="$root.user.isAuthenticated()" class="divider"></li>
-                <li ng-show="$root.user.isAuthenticated()"><a ui-sref="contests.create">Criar competição</a></li>
+                <li ng-show="$root.user.isAuthenticated() && $root.user.isVerified()" class="divider"></li>
+                <li ng-show="$root.user.isAuthenticated() && $root.user.isVerified()"><a ui-sref="contests.create">Criar competição</a></li>
               </ul>
             </li>
           </ul>

@@ -172,6 +172,73 @@ footer ul li a:first-child{
   margin: 5px 0px 30px 30px;
 }
 
+/* Form Container */
+#form-container h3{
+  font-weight: 300;
+  font-size: 30px;
+  color: #747474;
+  text-align: center;
+  margin-bottom: 0px;
+  font-size: 18px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+#form-container input{
+  width: 100%;
+  padding: 17px;
+  border: solid 1px #d0d0d0;
+  border-radius: 2px;
+}
+
+#form-container input:disabled{
+  background-color: #eee;
+}
+
+#form-container input:focus{
+  padding-left: 30px;
+  background: url("../imgs/register_area_bullet.png") no-repeat;
+  background-position: 16px 23px;
+}
+
+#form-container input.ng-dirty.ng-invalid{
+  border: 2px solid #AD7070 !important;
+}
+
+#form-container .input-split input:nth-child(1){
+  width: 50%;
+  float: left;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+}
+
+#form-container .input-split input:nth-child(2){
+  width: 50%;
+  float: left;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+#form-container small.error{
+  font-size: 12px;
+  color: #AD7070;
+  display: block;
+}
+
+#form-container button{
+  background-color: #45a7b9;
+  padding: 15px;
+  color: #fff;
+  font: 600 16px "Open Sans";
+  transition: all 0.3s ease;
+}
+
+#form-container button:hover{
+  background: #3B8B9A;
+  box-shadow: 0px 2px rgba(0,0,0,0.2);
+}
+
 /* Misc */
 .link {
   cursor: pointer;

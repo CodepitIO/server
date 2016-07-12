@@ -17,5 +17,8 @@ angular.module('User')
       } else {
         $scope.usernameTitle = 'Seu perfil'
       }
+      $scope.sendValidationEmail = function() {
+        UserAPI.sendValidationEmail()
+      }
     }
   ])

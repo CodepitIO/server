@@ -111,6 +111,10 @@
   border-radius: 200px;
 }
 
+#profile-container .team-card {
+  padding: 15px 0;
+}
+
 #profile-container .team-card h3 {
   color: #777;
 }
@@ -133,71 +137,4 @@
   font-size: 0.7em;
   text-transform: uppercase;
   color: #aaa;
-}
-
-/* Register Page */
-#register-container h3{
-  font-weight: 300;
-  font-size: 30px;
-  color: #747474;
-  text-align: center;
-  margin-bottom: 0px;
-  font-size: 18px;
-  margin-bottom: 40px;
-  margin-top: 20px;
-}
-
-#register-container input{
-  width: 100%;
-  padding: 17px;
-  border: solid 1px #d0d0d0;
-  border-radius: 2px;
-}
-
-#register-container input:disabled{
-  background-color: #eee;
-}
-
-#register-container input:focus{
-  padding-left: 30px;
-  background: url("../imgs/register_area_bullet.png") no-repeat;
-  background-position: 16px 23px;
-}
-
-#register-container input.ng-dirty.ng-invalid{
-  border: 2px solid #AD7070 !important;
-}
-
-#register-container .input-split input:nth-child(1){
-  width: 50%;
-  float: left;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-right: 0px;
-}
-
-#register-container .input-split input:nth-child(2){
-  width: 50%;
-  float: left;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-}
-
-#register-container small.error{
-  font-size: 12px;
-  color: #AD7070;
-  display: block;
-}
-
-#register-container button{
-  background-color: #45a7b9;
-  padding: 15px;
-  color: #fff;
-  font: 600 16px "Open Sans";
-  transition: all 0.3s ease;
-}
-
-#register-container button:hover{
-  background: #3B8B9A;
-  box-shadow: 0px 2px rgba(0,0,0,0.2);
 }

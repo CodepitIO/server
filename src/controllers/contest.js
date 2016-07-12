@@ -145,6 +145,7 @@ exports.leave = (req, res) => {
 }
 
 exports.validateContest = (req, res, next) => {
+  if (!req.user.local.verified) return res.status(400).send()
   let c = {}, data = req.body
   async.waterfall([
     (next) => {

@@ -5,6 +5,12 @@
 
 <mrt-page-wrapper wait-for='!loadingData'>
   <div ng-cloak id="profile-container">
+    <div ng-if="id === UserState.getId() && !UserState.isVerified()">
+      <div class="alert alert-warning" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Sua conta ainda não foi verificada</strong>, o que limita suas ações no Codepit. Caso não tenha recebido o e-mail de verificação, <a href="" ng-click="sendValidationEmail()">clique aqui</a> para enviarmos novamente.
+      </div>
+    </div>
     <md-content ng-if="id === $root.user.getId()">
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab ui-sref="." label="dados" md-active="state.current.name === 'profile'"></md-tab>

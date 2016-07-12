@@ -7,35 +7,17 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const ValidateChain = require('../utils/utils').validateChain
 
 let schema = mongoose.Schema({
-  contest: {
-    type: ObjectId,
-    ref: 'Contest'
-  },
-  contestant: {
-    type: ObjectId,
-    ref: 'User'
-  },
+  contest: { type: ObjectId, ref: 'Contest' },
+  contestant: { type: ObjectId, ref: 'User' },
   rep: ObjectId,
 
-  problem: {
-    type: ObjectId,
-    ref: 'Problem'
-  },
+  problem: { type: ObjectId, ref: 'Problem' },
   code: String,
   language: String,
 
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  verdict: {
-    type: Number,
-    default: 0
-  },
-  oj_id: {
-    type: Number,
-    default: -1
-  }
+  date: { type: Date, default: Date.now },
+  verdict: { type: Number, default: 0 },
+  oj_id: { type: Number, default: -1 }
 })
 
 schema.index({ contest: 1, contestant: 1, date: -1 })

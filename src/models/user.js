@@ -16,6 +16,9 @@ let schema = mongoose.Schema({
     surname: String,
     email: String,
     password: String,
+    verified: { type: Boolean, default: false },
+    verifyHash: String,
+    lastAccess: { type: Date, default: Date.now }
   },
   access: {type: Number, default: 0}
 }, {
@@ -24,6 +27,7 @@ let schema = mongoose.Schema({
 
 schema.index({ 'local.username': 1 }, { unique: true })
 schema.index({ 'local.email': 1 }, { unique: true })
+schema.index({ 'local.verifyHash': 1 }, { unique: true })
 
 schema.statics.validateChain = ValidateChain({
   name: function() {
@@ -43,8 +47,8 @@ schema.statics.validateChain = ValidateChain({
   }
 })
 
-schema.statics.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
+schema.statics.generateHash = function(text) {
+  return bcrypt.hashSync(text, bcrypt.genSaltSync(8))
 }
 
 schema.methods.validPassword = function(password) {
@@ -62,6 +66,13 @@ schema.virtual('isAdmin').get(function() {
 
 schema.virtual('local.emailHash').get(function() {
   return crypto.createHash('md5').update(this.local.email.toLowerCase()).digest('hex')
+})
+
+schema.set('toObject', {
+  transform: function(doc, ret, options) {
+    delete ret.local.verifyHash
+    return ret
+  }
 })
 
 module.exports = mongoose.model('User', schema)

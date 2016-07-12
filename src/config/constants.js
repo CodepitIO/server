@@ -13,6 +13,11 @@ module.exports = {
     SES_REGION: 'us-west-2',
     RATE_LIMIT: 5,
     MAX_CONN: 5,
+    TIMELIMIT_PER_USER: 1800
+  },
+  GET_DOMAIN: function() {
+    if (process.env.NODE_ENV === 'development') return 'http://localhost'
+    else return 'https://www.codepit.io'
   },
 
   // Dev

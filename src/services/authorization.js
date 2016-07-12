@@ -19,6 +19,10 @@ user.use('logged', (req) => {
   return req.isAuthenticated()
 })
 
+user.use('logged-off', (req) => {
+  return !req.isAuthenticated()
+})
+
 user.use('admin', (req) => {
   return req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN
 })

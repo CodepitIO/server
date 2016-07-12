@@ -11,10 +11,11 @@ app.controller('ProblemController', [
   function ($rootScope, $scope, $state, $stateParams, $sce, $window, OJName, problem) {
     if ($state.is('problems')) $state.go('.view')
     $rootScope.title = ''
+    problem.printName = problem.name
     if ($stateParams.index) {
       var letter = String.fromCharCode(65 + parseInt($stateParams.index))
-      problem.printName = letter + '. ' + problem.name
       problem.name = '(' + letter + ') ' + problem.name
+      problem.printName = letter + '. ' + problem.printName
     }
     $rootScope.title += problem.name + ' - ' + OJName[problem.oj] + ' - Codepit'
     $scope.problem = problem

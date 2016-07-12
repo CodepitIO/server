@@ -4,16 +4,8 @@ const express = require('express')
 const http = require('http')
 
 const Dbs = require('./src/services/dbs')
-const Mailer = require('./src/services/mailer')
 const Queue = require('./src/services/queue')
 const Routes = require('./src/routes')
-
-/*Mailer.sendMail({
-  type: 'register',
-  to: 'gustavostor@gmail.com',
-  name: 'Gustavo',
-  verifyUrl: 'https://www.codepit.io/'
-})*/
 
 let app = express()
 Routes.configure(app)

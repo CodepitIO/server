@@ -5,6 +5,11 @@
     font-size: 1.4rem;
 }
 
+.problem-statement span {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 1.4rem !important;
+}
+
 .problem-statement .epigraph {
     margin-left: 67%;
     width: 33%;

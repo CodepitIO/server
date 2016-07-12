@@ -7,14 +7,18 @@ angular.module('User')
     'UserState',
     function ($state, $resource, Request, Notification, UserState) {
       var API = {
-        register: Request.send('save', $resource('/api/v1/user/register')),
-        edit: Request.send('save', $resource('/api/v1/user/edit')),
-        login: Request.send('save', $resource('/api/v1/user/login')),
+        register: Request.send('post', $resource('/api/v1/user/register')),
+        edit: Request.send('post', $resource('/api/v1/user/edit')),
+        login: Request.send('post', $resource('/api/v1/user/login')),
         logout: Request.send('get', $resource('/api/v1/user/logout')),
         checkUsername: Request.send('get', $resource('/api/v1/user/check/username/:username')),
         checkEmail: Request.send('get', $resource('/api/v1/user/check/email/:email')),
         teams: Request.send('get', $resource('/api/v1/user/teams')),
-        get: Request.send('get', $resource('/api/v1/user/:id'))
+        recover: Request.send('post', $resource('api/v1/user/recover')),
+        sendPasswordRecoveryEmail: Request.send('get', $resource('/api/v1/user/recover/:user')),
+        sendValidationEmail: Request.send('get', $resource('/api/v1/user/validate')),
+        validate: Request.send('get', $resource('/api/v1/user/validate/:hash')),
+        get: Request.send('get', $resource('/api/v1/user/:id')),
       }
       return {
         login: function (user, callback) {
@@ -34,6 +38,36 @@ angular.module('User')
           UserState.reset()
           $state.go('home')
           API.logout().then(callback)
+        },
+
+        recover: function(user, callback) {
+          API.recover(user).then(function(data) {
+            UserState.set(data)
+            $state.go('profile', {id: data._id})
+            Notification.success('Bem-vindo, ' + data.local.name + '!')
+          })
+        },
+
+        sendPasswordRecoveryEmail: function(user, callback) {
+          API.sendPasswordRecoveryEmail({user: user}).then(function() {
+            Notification.info('E-mail de recuperação de senha enviado.')
+          })
+        },
+
+        sendValidationEmail: function(callback) {
+          API.sendValidationEmail().then(function() {
+            Notification.info('E-mail de verificação enviado.')
+          })
+        },
+
+        validate: function (hash, callback) {
+          API.validate({hash: hash}).then(function(data) {
+            UserState.set(data)
+            $state.go('profile', {id: data._id})
+            Notification.success('E-mail validado!')
+          }, function() {
+            $state.go('home')
+          })
         },
 
         register: function (user, callback) {

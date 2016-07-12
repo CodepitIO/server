@@ -64,6 +64,7 @@ angular.module('Team')
           controller: 'EditTeamDialogController',
           locals: { ScopeData: $scope.team },
           templateUrl: 'views/team/edit.dialog.html',
+          targetEvent: ev,
           clickOutsideToClose: true,
           fullscreen: ($mdMedia('sm') || $mdMedia('xs'))
         }).then(function(team) {

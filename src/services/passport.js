@@ -1,6 +1,7 @@
 'use strict'
 
-const LocalStrategy = require('passport-local').Strategy
+const crypto = require('crypto'),
+  LocalStrategy = require('passport-local').Strategy
 
 const User = require('../models/user'),
   Errors = require('../utils/errors')
@@ -33,16 +34,11 @@ module.exports = (passport) => {
           surname: account.surname,
           email: account.email,
           username: account.username,
-          password: User.generateHash(account.password)
+          password: User.generateHash(account.password),
+          verifyHash: crypto.randomBytes(8).toString('hex')
         }
       })
-
-      user.save((err) => {
-        if (err) return done()
-        return done(null, user.toObject({
-          virtuals: true
-        }))
-      })
+      user.save(done)
     })
   }))
 
@@ -58,9 +54,10 @@ module.exports = (passport) => {
       if (!user || !user.validPassword(password)) {
         return done(Errors.InvalidEmailOrPassword)
       }
-      return done(null, user.toObject({
-        virtuals: true
-      }))
+      user.local.lastAccess = new Date()
+      return user.save((err, user) => {
+        done(null, user.toObject({virtuals: true}))
+      })
     })
   }))
 }
