@@ -58,6 +58,9 @@ module.exports = function (grunt) {
       },
       fonts: {
         src: ['public/fonts']
+      },
+      tmp: {
+        src: ['.tmp']
       }
     },
 
@@ -85,7 +88,21 @@ module.exports = function (grunt) {
           dest: 'public/fonts'
         }]
       }
-    }
+    },
+
+    ngAnnotate: {
+      options: {
+        singleQuotes: true,
+      },
+      prod: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/dist',
+          src: '*.js',
+          dest: '.tmp/concat/dist'
+        }]
+      },
+    },
   })
 
   grunt.loadNpmTasks('grunt-contrib-uglify')
@@ -97,6 +114,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-nodemon')
+  grunt.loadNpmTasks('grunt-ng-annotate')
 
   grunt.registerTask('prod', [
     'clean:dist',
@@ -106,10 +124,12 @@ module.exports = function (grunt) {
     'copy:index',
     'useminPrepare',
     'concat:generated',
+    'ngAnnotate:prod',
     'cssmin:generated',
     'uglify:generated',
     'filerev:prod',
-    'usemin'
+    'usemin',
+    'clean:tmp'
   ])
   grunt.registerTask('dev', [
     'clean:dist',

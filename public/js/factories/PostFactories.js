@@ -1,12 +1,5 @@
 angular.module('Post')
-  .factory('PostAPI', [
-    '$rootScope',
-    '$cookies',
-    '$state',
-    '$resource',
-    'Request',
-    'Notification',
-    function ($rootScope, $cookies, $state, $resource, Request, Notification) {
+  .factory('PostAPI', function ($rootScope, $cookies, $state, $resource, Request, Notification) {
       var API = {
         post: Request.send('save', $resource('/api/v1/post/')),
         getByUser: Request.send('get', $resource('/api/v1/post/user/:id')),
@@ -39,5 +32,4 @@ angular.module('Post')
           })
         }
       }
-    }
-  ])
+    })

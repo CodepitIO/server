@@ -1,11 +1,5 @@
 angular.module('User')
-  .controller('LoginController', [
-    '$scope',
-    '$mdDialog',
-    '$mdMedia',
-    'UserAPI',
-    'UserState',
-    function ($scope, $mdDialog, $mdMedia, UserAPI, UserState) {
+  .controller('LoginController', function ($scope, $mdDialog, $mdMedia, UserAPI, UserState) {
       $scope.loading = false
       $scope.UserState = UserState
       $scope.data = {}
@@ -34,5 +28,4 @@ angular.module('User')
           UserAPI.sendPasswordRecoveryEmail(email)
         })
       }
-    }
-  ])
+    })

@@ -1,6 +1,6 @@
 var app = angular.module('General')
 
-app.filter('formatTime', [function () {
+app.filter('formatTime', function () {
   return function (seconds, trailingZero) {
     var str = ''
     var suffix = ''
@@ -21,9 +21,9 @@ app.filter('formatTime', [function () {
     else str = s + 'seg'
     return str + suffix
   }
-}])
+})
 
-app.filter('formatDuration', [function () {
+app.filter('formatDuration', function () {
   return function (time, seconds) {
     if (time < 0) time = -time
     time = Math.round(time)
@@ -47,13 +47,13 @@ app.filter('formatDuration', [function () {
     if (arr.length === 1) return arr[0]
     return _.join([_.join(_.initial(arr), ', '), _.last(arr)], ' e ')
   }
-}])
+})
 
-app.filter('mrtProblemSubmitName', [function () {
+app.filter('mrtProblemSubmitName', function () {
   return function (problem, index) {
     return '(' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index] + ') ' + problem.name
   }
-}])
+})
 
 app.filter('mrtTimezoneStrap', function () {
   var regex = /^(Z|[+-])(2[0-3]|[01][0-9]):([0-5][0-9])$/
@@ -78,18 +78,13 @@ app.filter('mrtAlphabetize', function () {
   }
 })
 
-app.filter('mrtOjName', ['OJName', function (OJName) {
+app.filter('mrtOjName', function (OJName) {
   return function (oj) {
     return OJName[oj]
   }
-}])
+})
 
-app.filter('mrtFilterTime', [
-  'amUtcFilter',
-  'amLocalFilter',
-  'amDateFormatFilter',
-  'mrtTimezoneStrapFilter',
-  function (amUtcFilter, amLocalFilter, amDateFormatFilter, mrtTimezoneStrapFilter) {
+app.filter('mrtFilterTime', function (amUtcFilter, amLocalFilter, amDateFormatFilter, mrtTimezoneStrapFilter) {
     return function(date) {
       date = new Date(date)
       var time = amUtcFilter(date)
@@ -102,5 +97,4 @@ app.filter('mrtFilterTime', [
       var link = '<a target="_blank" href="http://www.timeanddate.com/worldclock/fixedtime.html?day=' + date.getUTCDate() + '&month=' + (date.getUTCMonth()+1) + '&year=' + date.getUTCFullYear() + '&hour=' + date.getUTCHours() + '&min=' + date.getUTCMinutes() + '&sec=' + date.getUTCSeconds() + '">' + time + ' <sup>UTC' + timeZone + '</sup></a>'
       return link
     }
-  }
-])
+  })

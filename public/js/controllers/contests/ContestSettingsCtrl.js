@@ -1,11 +1,5 @@
 var app = angular.module('Contests')
-app.controller('ContestSettingsController', [
-  '$scope',
-  '$state',
-  'TimeState',
-  'ContestState',
-  'ContestAPI',
-  function ($scope, $state, TimeState, ContestState, ContestAPI) {
+app.controller('ContestSettingsController', function ($scope, $state, TimeState, ContestState, ContestAPI) {
     $scope.loading = false
     if ($state.is('contests.create')) {
       $scope.contest = {
@@ -97,5 +91,4 @@ app.controller('ContestSettingsController', [
       if ($state.is('contests.create')) ContestAPI.create($scope.contest, handleError)
       else ContestAPI.edit(ContestState.id, $scope.contest, handleError)
     }
-  }
-])
+  })

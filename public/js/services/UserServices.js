@@ -1,10 +1,5 @@
 angular.module('User')
-  .service('UserState', [
-    '$cookies',
-    '$interval',
-    '$resource',
-    'Request',
-    function ($cookies, $interval, $resource, Request) {
+  .service('UserState', function ($cookies, $interval, $resource, Request) {
       var $scope = this
       $scope.user = {}
 
@@ -65,5 +60,4 @@ angular.module('User')
           if (curId !== newId) $scope.set(data.user)
         })
       }, 30 * 1000, 0, false)
-    }
-  ])
+    })

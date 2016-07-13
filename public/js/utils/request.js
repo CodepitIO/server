@@ -1,10 +1,5 @@
 angular.module('General')
-  .factory('Request', [
-    '$q',
-    '$timeout',
-    'Notification',
-    'Config',
-    function ($q, $timeout, Notification, Config) {
+  .factory('Request', function ($q, $timeout, Notification, Config) {
       var resolveOrReject = function (deferred, result) {
         if (result.error) {
           Notification.error(result.error.pt || result.error)
@@ -47,5 +42,4 @@ angular.module('General')
           }
         }
       }
-    }
-  ])
+    })

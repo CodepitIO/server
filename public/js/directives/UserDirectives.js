@@ -1,9 +1,6 @@
 var app = angular.module('User')
 
-app.directive('mrtUniqueUsername', [
-  '$q',
-  'UserAPI',
-  function($q, UserAPI) {
+app.directive('mrtUniqueUsername', function($q, UserAPI) {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
@@ -20,12 +17,9 @@ app.directive('mrtUniqueUsername', [
       }
     }
   }
-}])
+})
 
-app.directive('mrtUniqueEmail', [
-  '$q',
-  'UserAPI',
-  function($q, UserAPI) {
+app.directive('mrtUniqueEmail', function($q, UserAPI) {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
@@ -42,4 +36,4 @@ app.directive('mrtUniqueEmail', [
       }
     }
   }
-}])
+})

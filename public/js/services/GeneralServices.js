@@ -1,9 +1,5 @@
 angular.module('General')
-  .service('TimeState', [
-    '$interval',
-    '$resource',
-    'Request',
-    function ($interval, $resource, Request) {
+  .service('TimeState', function ($interval, $resource, Request) {
       var diff = 0, now
       var $scope = this
 
@@ -26,13 +22,8 @@ angular.module('General')
         now = (new Date()).getTime()
         $scope.server.now = $scope.server.static = new Date(now + diff)
       })
-    }
-  ])
-  .service('HistoryState', [
-    '$rootScope',
-    '$state',
-    '$location',
-    function ($rootScope, $state, $location) {
+    })
+  .service('HistoryState', function ($rootScope, $state, $location) {
       var $scope = this
       var history = []
       var lastState = ''
@@ -55,5 +46,4 @@ angular.module('General')
       $scope.isEmpty = function() {
         return _.isEmpty(history)
       }
-    }
-  ])
+    })

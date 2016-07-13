@@ -1,10 +1,5 @@
 angular.module('User')
-  .controller('ProfileTeamsController', [
-    '$scope',
-    '$mdDialog',
-    'TeamAPI',
-    'UserAPI',
-    function ($scope, $mdDialog, TeamAPI, UserAPI) {
+  .controller('ProfileTeamsController', function ($scope, $mdDialog, TeamAPI, UserAPI) {
       $scope.member = []
       $scope.invited = []
       $scope.loading = true
@@ -26,5 +21,4 @@ angular.module('User')
           TeamAPI.create(name)
         })
       }
-    }
-  ])
+    })

@@ -1,12 +1,5 @@
 angular.module('Team')
-  .controller('TeamController', [
-    '$scope',
-    '$stateParams',
-    '$mdDialog',
-    '$mdMedia',
-    'TeamAPI',
-    'UserState',
-    function ($scope, $stateParams, $mdDialog, $mdMedia, TeamAPI, UserState) {
+  .controller('TeamController', function ($scope, $stateParams, $mdDialog, $mdMedia, TeamAPI, UserState) {
       $scope.isUser = UserState.isUser;
       $scope.id = $stateParams.id
       $scope.loading = true
@@ -72,14 +65,8 @@ angular.module('Team')
           $scope.team.description = team.description
         })
       }
-    }
-  ])
-  .controller('EditTeamDialogController', [
-    '$scope',
-    '$mdDialog',
-    'ScopeData',
-    'TeamAPI',
-    function($scope, $mdDialog, ScopeData, TeamAPI) {
+    })
+  .controller('EditTeamDialogController', function($scope, $mdDialog, ScopeData, TeamAPI) {
       $scope.team = {
         id: ScopeData._id,
         name: ScopeData.name,
@@ -94,5 +81,4 @@ angular.module('Team')
       $scope.cancel = function() {
         $mdDialog.cancel()
       }
-    }
-  ])
+    })

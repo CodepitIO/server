@@ -1,6 +1,6 @@
 var app = angular.module('General')
 
-app.directive('mrtPdf', ['$window', function ($window) {
+app.directive('mrtPdf', function ($window) {
   PDFJS.disableWorker = true
   var renderTask = null
   var pdfLoaderTask = null
@@ -101,4 +101,4 @@ app.directive('mrtPdf', ['$window', function ($window) {
       start(attrs.url)
     }
   }
-}])
+})

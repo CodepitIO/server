@@ -1,11 +1,5 @@
 angular.module('User')
-  .controller('ProfileController', [
-    '$scope',
-    '$state',
-    '$stateParams',
-    'UserState',
-    'UserAPI',
-    function ($scope, $state, $stateParams, UserState, UserAPI) {
+  .controller('ProfileController', function ($scope, $state, $stateParams, UserState, UserAPI) {
       $scope.state = $state
       $scope.UserState = UserState
       $scope.id = $stateParams.id
@@ -20,5 +14,4 @@ angular.module('User')
       $scope.sendValidationEmail = function() {
         UserAPI.sendValidationEmail()
       }
-    }
-  ])
+    })

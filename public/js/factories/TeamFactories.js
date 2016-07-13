@@ -1,11 +1,5 @@
 angular.module('Team')
-  .factory('TeamAPI', [
-    '$resource',
-    '$state',
-    'Request',
-    'Notification',
-    'UserState',
-    function ($resource, $state, Request, Notification, UserState) {
+  .factory('TeamAPI', function ($resource, $state, Request, Notification, UserState) {
       var API = {
         create: Request.send('save', $resource('/api/v1/team/create')),
         edit: Request.send('save', $resource('/api/v1/team/:id/edit', { id: '@id' })),
@@ -66,5 +60,4 @@ angular.module('Team')
           })
         }
       }
-    }
-  ])
+    })

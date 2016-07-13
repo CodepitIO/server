@@ -1,8 +1,6 @@
 var app = angular.module('General')
 
-app.directive('mrtConfirmClick', [
-  '$mdDialog',
-  function ($mdDialog) {
+app.directive('mrtConfirmClick', function ($mdDialog) {
     return {
       link: function (scope, element, attr) {
         var title = attr.mrtConfirmClickTitle || 'Você tem certeza?'
@@ -21,8 +19,7 @@ app.directive('mrtConfirmClick', [
         })
       }
     }
-  }
-])
+  })
 
 app.directive('mrtBreadcrumbs', function () {
   return {
@@ -35,7 +32,7 @@ app.directive('mrtBreadcrumbs', function () {
   }
 })
 
-app.directive('mrtMatchField', [function () {
+app.directive('mrtMatchField', function () {
   return {
     require: 'ngModel',
     link: function ($scope, $elem, $attrs, ngModel) {
@@ -61,7 +58,7 @@ app.directive('mrtMatchField', [function () {
       })
     }
   }
-}])
+})
 
 app.directive('tooltip', function () {
   return {
@@ -97,12 +94,12 @@ app.directive('mrtPageWrapper', function () {
       diameter: '=?',
     },
     templateUrl: 'views/misc/page-wrapper.html',
-    controller: ['$scope', function ($scope) {
+    controller: function ($scope) {
       $scope.color = angular.isDefined($scope.color) ? $scope.color : '#45a7b9'
       $scope.diameter = angular.isDefined($scope.diameter) ? $scope.diameter : '280'
       $scope.waitFor = angular.isDefined($scope.waitFor) ? $scope.waitFor : true
       $scope.waitWhile = angular.isDefined($scope.waitWhile) ? $scope.waitWhile : false
-    }]
+    }
   }
 })
 
@@ -118,24 +115,21 @@ app.directive('mrtDisplayTime', function () {
       'hour={{date.getUTCHours()}}&min={{date.getUTCMinutes()}}&sec={{date.getUTCSeconds()}}">' +
       "<span>{{date | amUtc | amLocal | amDateFormat:'ddd, D/MMM/YYYY, HH:mm'}}</span>" +
       "<sup>UTC{{date | amUtc | amLocal | amDateFormat:'Z' | mrtTimezoneStrap}}</sup></a>",
-    controller: [
-      '$scope',
-      function ($scope) {
+    controller: function ($scope) {
         $scope.date = new Date($scope.date)
       }
-    ]
   }
 })
 
-app.directive('mrtLoginForm', [function () {
+app.directive('mrtLoginForm', function () {
   return {
     restrict: 'E',
     templateUrl: 'views/user/login-form.html',
     controller: 'LoginController'
   }
-}])
+})
 
-app.directive('mrtBlogPosts', [function () {
+app.directive('mrtBlogPosts', function () {
   return {
     restrict: 'E',
     templateUrl: 'views/misc/blog-posts.html',
@@ -144,14 +138,7 @@ app.directive('mrtBlogPosts', [function () {
       pagePath: '=?',
       isInfo: '=?'
     },
-    controller: [
-      '$scope',
-      '$state',
-      '$stateParams',
-      '$mdDialog',
-      '$mdMedia',
-      'PostAPI',
-      function ($scope, $state, $stateParams, $mdDialog, $mdMedia, PostAPI) {
+    controller: function ($scope, $state, $stateParams, $mdDialog, $mdMedia, PostAPI) {
         $scope.user = $scope.user
 
         $scope.page = {
@@ -190,13 +177,10 @@ app.directive('mrtBlogPosts', [function () {
           })
         }
       }
-    ]
   }
-}])
+})
 
-app.directive('mrtGoBack', [
-  'HistoryState',
-  function (HistoryState) {
+app.directive('mrtGoBack', function (HistoryState) {
   return {
     restrict: 'A',
     link: function (scope, elem, attrs) {
@@ -204,18 +188,13 @@ app.directive('mrtGoBack', [
       elem.bind('click', HistoryState.pop)
     },
   }
-}])
+})
 
 app.directive('mrtContestProgress', function () {
   return {
     restrict: 'E',
     templateUrl: 'views/misc/contest-progress.html',
-    controller: [
-      '$scope',
-      'TimeState',
-      'ContestState',
-      'formatDurationFilter',
-      function($scope, TimeState, ContestState, formatDurationFilter) {
+    controller: function($scope, TimeState, ContestState, formatDurationFilter) {
         var getWidths = _.throttle(function() {
           var total = (ContestState.contest.date_end - ContestState.contest.date_start)
           if (!ContestState.contest.hasBlind) ContestState.contest.blind_time = ContestState.contest.date_end
@@ -271,7 +250,6 @@ app.directive('mrtContestProgress', function () {
         $scope.hasContestEnded = function() {
           return ContestState.contest.hasEnded
         }
-      }
-    ],
+      },
   }
 })

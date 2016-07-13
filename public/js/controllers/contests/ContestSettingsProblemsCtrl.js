@@ -1,8 +1,5 @@
 var app = angular.module('Contests')
-app.controller('ContestSettingsProblemsController', [
-  '$scope',
-  'ProblemsAPI',
-  function ($scope, ProblemsAPI) {
+app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAPI) {
     var problemIds = []
     $scope.searchText = ''
     $scope.selectedProblem = null
@@ -38,5 +35,4 @@ app.controller('ContestSettingsProblemsController', [
       handle: '> .move-handle',
       axis: 'y'
     }
-  }
-])
+  })

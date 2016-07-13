@@ -1,11 +1,5 @@
 angular.module('User')
-  .factory('UserAPI', [
-    '$state',
-    '$resource',
-    'Request',
-    'Notification',
-    'UserState',
-    function ($state, $resource, Request, Notification, UserState) {
+  .factory('UserAPI', function ($state, $resource, Request, Notification, UserState) {
       var API = {
         register: Request.send('post', $resource('/api/v1/user/register')),
         edit: Request.send('post', $resource('/api/v1/user/edit')),
@@ -117,5 +111,4 @@ angular.module('User')
           })
         },
       }
-    }
-  ])
+    })

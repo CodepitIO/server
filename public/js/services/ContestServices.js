@@ -1,12 +1,5 @@
 angular.module('Contests')
-  .service('ContestState', [
-    '$state',
-    '$stateParams',
-    '$interval',
-    'Notification',
-    'ContestAPI',
-    'Verdict',
-    function ($state, $stateParams, $interval, Notification, ContestAPI, Verdict) {
+  .service('ContestState', function ($state, $stateParams, $interval, Notification, ContestAPI, Verdict) {
       var $scope = this
 
       $scope.loading = true
@@ -249,5 +242,4 @@ angular.module('Contests')
           }
         }, 3000, 0, false)
       }
-    }
-  ])
+    })

@@ -1,11 +1,5 @@
 angular.module('Contests')
-  .factory('ContestAPI', [
-    '$resource',
-    '$state',
-    'Request',
-    'Notification',
-    'Upload',
-    function ($resource, $state, Request, Notification, Upload) {
+  .factory('ContestAPI', function ($resource, $state, Request, Notification, Upload) {
       var API = {
         create: Request.send('save', $resource('/api/v1/contest/create')),
         edit: Request.send('save', $resource('/api/v1/contest/:id/edit', { id: '@id' })),
@@ -135,5 +129,4 @@ angular.module('Contests')
           })
         },
       }
-    }
-  ])
+    })

@@ -1,10 +1,5 @@
 angular.module('User')
-  .controller('ProfilePostsController', [
-    '$scope',
-    '$mdDialog',
-    '$mdMedia',
-    '$stateParams',
-    function ($scope, $mdDialog, $mdMedia, $stateParams) {
+  .controller('ProfilePostsController', function ($scope, $mdDialog, $mdMedia, $stateParams) {
       $scope.newPost = function () {
         $mdDialog.show({
           controller: 'ProfilePostsDialogController',
@@ -22,14 +17,8 @@ angular.module('User')
         })
       }
       $scope.id = $stateParams.id
-    }
-  ])
-  .controller('ProfilePostsDialogController', [
-    '$scope',
-    '$mdDialog',
-    'PostAPI',
-    'ScopeData',
-    function ($scope, $mdDialog, PostAPI, post) {
+    })
+  .controller('ProfilePostsDialogController', function ($scope, $mdDialog, PostAPI, post) {
       $scope.post = {
         title: post && post.title || '',
         body: post && post.body || ''
@@ -41,5 +30,4 @@ angular.module('User')
       $scope.submit = function () {
         PostAPI.post($scope.post)
       }
-    }
-  ])
+    })

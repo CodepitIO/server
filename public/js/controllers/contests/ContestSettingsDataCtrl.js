@@ -1,8 +1,5 @@
 var app = angular.module('Contests')
-app.controller('ContestSettingsDataController', [
-  '$scope',
-  'TimeState',
-  function ($scope, TimeState) {
+app.controller('ContestSettingsDataController', function ($scope, TimeState) {
     $scope.timeState = TimeState
 
     var today = new Date(), sixMonthsFromNow = new Date()
@@ -18,5 +15,4 @@ app.controller('ContestSettingsDataController', [
     $scope.openDatepicker = function(type) {
       $scope.opened[type] = true;
     }
-  }
-])
+  })

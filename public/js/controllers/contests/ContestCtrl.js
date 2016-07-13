@@ -1,12 +1,5 @@
 angular.module('Contests')
-  .controller('ContestController', [
-    '$scope',
-    '$state',
-    '$mdSidenav',
-    'ContestAPI',
-    'ContestState',
-    'UserState',
-    function ($scope, $state, $mdSidenav, ContestAPI, ContestState, UserState) {
+  .controller('ContestController', function ($scope, $state, $mdSidenav, ContestAPI, ContestState, UserState) {
       $scope.state = $state
       $scope.UserState = UserState
       $scope.ContestState = ContestState
@@ -20,5 +13,4 @@ angular.module('Contests')
       $scope.leave = function() {
         ContestAPI.leave(ContestState.id)
       }
-    }
-  ])
+    })

@@ -1,7 +1,4 @@
-angular.module('Contests').controller('ContestScoreboardController', [
-  '$scope',
-  'ContestState',
-  function ($scope, ContestState) {
+angular.module('Contests').controller('ContestScoreboardController', function ($scope, ContestState) {
     $scope.getCellAttempts = function(rep, problem) {
       var score = _.get(ContestState.scoreboard, [rep, problem])
       if (!score) return ''
@@ -31,5 +28,4 @@ angular.module('Contests').controller('ContestScoreboardController', [
     $scope.getRowResults = function(rep, type) {
       return _.get(ContestState.scores, [rep, type], '0')
     }
-  }
-])
+  })

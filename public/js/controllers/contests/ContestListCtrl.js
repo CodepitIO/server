@@ -1,12 +1,5 @@
 angular.module('Contests')
-  .controller('ContestListController', [
-    '$scope',
-    '$rootScope',
-    '$location',
-    'TimeState',
-    'ContestAPI',
-    'UserState',
-    function ($scope, $rootScope, $location, TimeState, ContestAPI, UserState) {
+  .controller('ContestListController', function ($scope, $rootScope, $location, TimeState, ContestAPI, UserState) {
       $scope.loadingData = true
       $scope.contests = []
       $scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open'
@@ -71,5 +64,4 @@ angular.module('Contests')
       $scope.isNewContest = function (date) {
         return ((TimeState.server.static - new Date(date)) / 60000) <= 10
       }
-    }
-  ])
+    })

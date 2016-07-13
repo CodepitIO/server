@@ -1,9 +1,5 @@
 angular.module('User')
-  .controller('ProfileRecoverController', [
-    '$scope',
-    '$stateParams',
-    'UserAPI',
-    function ($scope, $stateParams, UserAPI) {
+  .controller('ProfileRecoverController', function ($scope, $stateParams, UserAPI) {
       $scope.user = {
         hash: $stateParams.hash,
         password: '',
@@ -12,5 +8,4 @@ angular.module('User')
       $scope.recover = function() {
         UserAPI.recover($scope.user)
       }
-    }
-  ])
+    })

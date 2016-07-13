@@ -1,11 +1,5 @@
 angular.module('Contests')
-  .controller('ContestJoinController', [
-    '$scope',
-    '$mdSidenav',
-    'UserAPI',
-    'ContestAPI',
-    'ContestState',
-    function($scope, $mdSidenav, UserAPI, ContestAPI, ContestState) {
+  .controller('ContestJoinController', function($scope, $mdSidenav, UserAPI, ContestAPI, ContestState) {
       $scope.password = ''
       $scope.team = null
       if (ContestState.contest.contestantType === 1) {
@@ -27,5 +21,4 @@ angular.module('Contests')
         var team = ($scope.role === 'individual') ? null : $scope.team
         ContestAPI.join(ContestState.id, $scope.password, team)
       }
-    }
-  ])
+    })

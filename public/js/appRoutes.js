@@ -1,7 +1,4 @@
-angular.module('appRoutes', []).config([
-  '$stateProvider',
-  '$urlRouterProvider',
-  function ($stateProvider, $urlRouterProvider) {
+angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise('home')
@@ -122,21 +119,20 @@ angular.module('appRoutes', []).config([
         templateUrl: 'views/problem-view.html',
         controller: 'ProblemController',
         resolve: {
-          problem: ['$q', '$stateParams', 'ProblemsAPI', function($q, $stateParams, ProblemsAPI) {
+          problem: function($q, $stateParams, ProblemsAPI) {
             var deferred = $q.defer()
             ProblemsAPI.get($stateParams.id, function (err, data) {
               if (err) deferred.reject(err)
               else deferred.resolve(data)
             })
             return deferred.promise
-          }]
+          }
         }
       })
       .state('problems.view', {
         url: '/view',
-        templateProvider: ['$templateFactory', 'problem', function($templateFactory, problem) {
+        templateProvider: function($templateFactory, problem) {
           return $templateFactory.fromUrl(problem.url);
-        }],
+        },
       })
-  }
-])
+  })

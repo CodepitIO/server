@@ -1,11 +1,6 @@
 angular.module('User')
-  .controller('RegisterController', [
-    '$scope',
-    '$location',
-    '$rootScope',
-    'Notification',
-    'UserAPI',
-    function ($scope, $location, $rootScope, Notification, UserAPI) {
+  .controller('RegisterController',
+    function ($scope, $location, $rootScope, Countries, Notification, UserAPI) {
       $scope.user = {
         name: '',
         surname: '',
@@ -24,4 +19,4 @@ angular.module('User')
         })
       }
     }
-  ])
+  )

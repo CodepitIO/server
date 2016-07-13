@@ -1,14 +1,5 @@
 var app = angular.module('Problems')
-app.controller('ProblemController', [
-  '$rootScope',
-  '$scope',
-  '$state',
-  '$stateParams',
-  '$sce',
-  '$window',
-  'OJName',
-  'problem',
-  function ($rootScope, $scope, $state, $stateParams, $sce, $window, OJName, problem) {
+app.controller('ProblemController', function ($rootScope, $scope, $state, $stateParams, $sce, $window, OJName, problem) {
     if ($state.is('problems')) $state.go('.view')
     $rootScope.title = ''
     problem.printName = problem.name
@@ -26,5 +17,4 @@ app.controller('ProblemController', [
     $scope.print = function() {
       $window.print()
     }
-  }
-])
+  })

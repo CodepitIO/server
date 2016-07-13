@@ -1,11 +1,5 @@
 var app = angular.module('Submission')
-app.controller('SubmissionController', [
-  '$scope',
-  '$stateParams',
-  'Verdict',
-  'Languages',
-  'SubmissionAPI',
-  function ($scope, $stateParams, Verdict, Languages, SubmissionAPI) {
+app.controller('SubmissionController', function ($scope, $stateParams, Verdict, Languages, SubmissionAPI) {
     $scope.verdict = Verdict
     $scope.languages = Languages
     SubmissionAPI.get({
@@ -13,5 +7,4 @@ app.controller('SubmissionController', [
     }).then(function (data) {
       $scope.submission = data.submission
     })
-  }
-])
+  })

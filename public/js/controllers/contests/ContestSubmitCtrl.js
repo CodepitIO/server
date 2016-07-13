@@ -1,11 +1,5 @@
 angular.module('Contests')
-  .controller('ContestSubmitController', [
-    '$scope',
-    'Languages',
-    'TextEditorLanguageMode',
-    'ContestAPI',
-    'ContestState',
-    function ($scope, Languages, CodemirrorMode, ContestAPI, ContestState) {
+  .controller('ContestSubmitController', function ($scope, Languages, CodemirrorMode, ContestAPI, ContestState) {
       $scope.languages = Languages
       $scope.editorOptions = {
         theme: 'blackboard',
@@ -32,5 +26,4 @@ angular.module('Contests')
           }
         })
       }
-    }
-  ])
+    })

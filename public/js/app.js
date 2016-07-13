@@ -34,14 +34,7 @@ angular.module('mrtApp', [
   'Team',
   'User'
 ])
-.config([
-  'NotificationProvider',
-  '$uibTooltipProvider',
-  '$mdThemingProvider',
-  '$compileProvider',
-  'vcRecaptchaServiceProvider',
-  'Config',
-  function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider, $compileProvider, vcRecaptchaServiceProvider, Config) {
+.config(function (NotificationProvider, $uibTooltipProvider, $mdThemingProvider, $compileProvider, vcRecaptchaServiceProvider, Config) {
     $compileProvider.debugInfoEnabled(false)
     vcRecaptchaServiceProvider.setSiteKey(Config.RecaptchaKey)
     NotificationProvider.setOptions(Config.NotificationOptions)
@@ -52,16 +45,8 @@ angular.module('mrtApp', [
         .accentPalette(val.AccentPalette.color, val.AccentPalette.opts)
         .warnPalette(val.WarnPalette.color, val.WarnPalette.opts)
     })
-  }
-])
-.run([
-  '$rootScope',
-  '$cookies',
-  '$state',
-  'amMoment',
-  'UserState',
-  'HistoryState',
-  function ($rootScope, $cookies, $state, amMoment, UserState, HistoryState) {
+  })
+.run(function ($rootScope, $cookies, $state, amMoment, UserState, HistoryState) {
     amMoment.changeLocale('pt-br')
     $rootScope.title = 'Codepit'
     $rootScope.user = UserState
@@ -76,5 +61,4 @@ angular.module('mrtApp', [
         event.preventDefault();
       }
   });
-  }
-])
+  })
