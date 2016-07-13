@@ -31,6 +31,8 @@ angular.module('User')
               Notification.success('Bem-vindo, ' + data.local.name + '!')
             }
             return callback && callback()
+          }, function() {
+            return callback && callback()
           })
         },
 
