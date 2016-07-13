@@ -9,7 +9,7 @@ app.controller('SubmissionController',
       theme: 'blackboard',
       lineWrapping: true,
       lineNumbers: true,
-      readOnly: 'nocursor',
+      readOnly: true,
       viewportMargin: Infinity,
       onLoad : function(_cm){
         cm = _cm

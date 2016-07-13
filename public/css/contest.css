@@ -512,3 +512,5 @@ a.balloon-ps-label:active {
   background-color: #fff;
   outline: none;
 }
+
+.submission .CodeMirror-cursor { display: none !important })
