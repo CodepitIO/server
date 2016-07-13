@@ -90,7 +90,7 @@ function OpenRoutes () {
   }
   let router = express.Router()
   router.get('/', (req, res) => {
-    return res.sendfile(indexFile)
+    return res.sendFile(indexFile)
   })
   router.get('*', (req, res) => {
     res.redirect('/')
