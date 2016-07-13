@@ -9,7 +9,8 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   cookieSession = require('cookie-session'),
   compression = require('compression'),
-  favicon = require('serve-favicon')
+  favicon = require('serve-favicon'),
+  path = require('path')
 
 const UserCtrl = require('./controllers/user'),
   PostCtrl = require('./controllers/post'),
@@ -84,13 +85,13 @@ function APIRoutes () {
 }
 
 function OpenRoutes () {
-  let indexFile = './public/index.html'
+  let indexFile = 'index.html'
   if (process.env.NODE_ENV === 'development') {
-    indexFile = './public/_index.html'
+    indexFile = '_index.html'
   }
   let router = express.Router()
   router.get('/', (req, res) => {
-    return res.sendFile(indexFile)
+    return res.sendFile(indexFile, { root: path.join(__dirname, '../public/') })
   })
   router.get('*', (req, res) => {
     res.redirect('/')
@@ -112,7 +113,7 @@ exports.configure = (app) => {
   app.use(cookieParser())
   app.use(cookieSession({ secret: cookieSecret, maxAge: 30 * 24 * 60 * 60 * 1000 }))
   app.use(compression())
-  app.use(favicon(__dirname + '/../public/imgs/favicon.ico'))
+  app.use(favicon(path.join(__dirname,'../public/imgs/favicon.ico')))
   app.use(bodyParser.json())
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
   app.use(bodyParser.urlencoded({ extended: true }))
