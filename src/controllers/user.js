@@ -206,9 +206,8 @@ exports.get = (req, res) => {
 exports.status = (req, res) => {
   if (req.user && req.user._id) {
     req.user.local.lastAccess = new Date()
-    return req.user.save((err, user) => {
-      res.json({user: user.toObject({virtuals: true})})
-    })
+    req.user.save()
+    return res.json({user: req.user.toObject({virtuals: true})})
   }
   return res.json({})
 }

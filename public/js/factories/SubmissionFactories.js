@@ -1,6 +1,6 @@
 angular.module('Submission')
-  .factory('SubmissionAPI', function ($q, $resource, request) {
+  .factory('SubmissionAPI', function ($q, $resource, Request) {
       return {
-        get: request.send('get', $resource('/api/v1/submission/:id'))
+        get: Request.send('get', $resource('/api/v1/submission/:id'))
       }
     })

@@ -1,5 +1,6 @@
 angular.module('Contests')
-  .controller('ContestSubmitController', function ($scope, Languages, CodemirrorMode, ContestAPI, ContestState) {
+  .controller('ContestSubmitController',
+    function ($scope, Languages, TextEditorLanguageMode, ContestAPI, ContestState) {
       $scope.languages = Languages
       $scope.editorOptions = {
         theme: 'blackboard',
@@ -8,7 +9,7 @@ angular.module('Contests')
       }
 
       $scope.updateTextMode = function () {
-        $scope.editorOptions.mode = CodemirrorMode[ContestState.submit.language || '']
+        $scope.editorOptions.mode = TextEditorLanguageMode[ContestState.submit.language || '']
       }
       setTimeout(function() {
         $scope.updateTextMode()

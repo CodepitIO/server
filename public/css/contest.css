@@ -499,3 +499,16 @@ a.balloon-ps-label:active {
 .blind-bar {
   background-color: #FFCDD2;
 }
+
+.submission .CodeMirror {
+  height: auto;
+}
+
+.submission button {
+  position: absolute; right: 15px;
+  z-index: 1000;
+  border-radius: 0 0 0 5px;
+  border: none;
+  background-color: #fff;
+  outline: none;
+}

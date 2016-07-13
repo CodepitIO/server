@@ -13,7 +13,7 @@
     </div>
     <md-content ng-if="id === $root.user.getId()">
       <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab ui-sref="." label="dados" md-active="state.current.name === 'profile'"></md-tab>
+        <md-tab ui-sref="." label="perfil" md-active="state.current.name === 'profile'"></md-tab>
         <md-tab ui-sref=".teams" label="times" md-active="state.current.name === 'profile.teams'"></md-tab>
         <md-tab ng-if="$root.user.isAdmin()" ui-sref=".posts" label="posts" md-active="state.current.name === 'profile.posts'"></md-tab>
       </md-tabs>
