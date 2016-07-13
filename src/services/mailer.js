@@ -20,7 +20,7 @@ const TEMPLATE_URL = __dirname + '/templates/%s.html'
 let REGISTER_TMPL = _.template(fs.readFileSync(util.format(TEMPLATE_URL,'register'), 'utf8'))
 let RECOVER_TMPL = _.template(fs.readFileSync(util.format(TEMPLATE_URL,'recover'), 'utf8'))
 
-let domain = process.env.domain || Constants.GET_DOMAIN()
+let domain = process.env.DOMAIN || Constants.GET_DOMAIN()
 
 let mailHandler = {
   register: function(job, done) {

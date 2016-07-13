@@ -34,8 +34,7 @@ module.exports = (passport) => {
           surname: account.surname,
           email: account.email,
           username: account.username,
-          password: User.generateHash(account.password),
-          verifyHash: crypto.randomBytes(8).toString('hex')
+          password: User.generateHash(account.password)
         }
       })
       user.save(done)

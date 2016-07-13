@@ -31,13 +31,15 @@
   <img src="https://www.codepit.io/imgs/codepit-full-blue.png" width="300px"/>
   <h2><p>Oi, <%- name %>!</p></h2>
   <div class="paragraph">
-    <p>Recentemente alguém requisitou a recuperação da sua senha no Codepit. Se esse alguém não foi você, ignore este e-mail. Caso contrário, clique no link a seguir para redefinir sua senha.</p>
+    <p>Recentemente alguém requisitou a redefinição da sua senha no Codepit. Se esse alguém não foi você, ignore este e-mail. Caso contrário, clique no link a seguir para redefinir sua senha.</p>
   </div>
   <div class="paragraph">
-    <a href="<%- domain %>/#/recover/<%- hash %>" class="button"><span>Recuperar sua Senha</span></a>
+    <a href="<%- domain %>/#/recover/<%- hash %>" class="button"><span>Redefinir Senha</span></a>
   </div>
   <div class="paragraph">
-    <small>Caso o link não funcione, visite a seguinte URL manualmente: <%- domain %>/#/recover/<%- hash %></small>
+    <small>Lembre-se que você precisa estar deslogado de qualquer conta no Codepit para poder acessar o link. Caso mesmo assim o link não funcione, visite a seguinte URL manualmente: <%- domain %>/#/recover/<%- hash %></small>
+  </div>
+  <div class="paragraph">
     <small>Este link expirará em 30 minutos.</small>
   </div>
 </div>

@@ -13,6 +13,10 @@ function sendMail(type, user, res) {
   Redis.exists(`email:${type}:${user._id}`, (err, exists) => {
     if (err) return res.status(500).send()
     if (exists) return res.json(Errors.EmailSendTimelimit)
+    if (!user.local.verifyHash) {
+      user.local.verifyHash = crypto.randomBytes(8).toString('hex')
+      user.save()
+    }
     Mailer.sendMail({
       type: type,
       id: user._id,
@@ -121,11 +125,8 @@ exports.sendPasswordRecoveryEmail = (req, res) => {
   }, (err, user) => {
     if (err) return res.status(500).send()
     if (!user) return res.json(Errors.PasswordRecoveryFindFail)
-    user.local.verifyHash = crypto.randomBytes(8).toString('hex')
-    user.save((err, user) => {
-      if (err) return res.status(500).send()
-      sendMail('recover', user, res)
-    })
+    user.local.verifyHash = null
+    sendMail('recover', user, res)
   })
 }
 
@@ -142,7 +143,7 @@ exports.recover = (req, res) => {
       Redis.exists(`email:recover:${user._id}`, (err, exists) => {
         if (err) return next(err)
         if (!exists) return res.json(Errors.EmailRecoverExpired)
-        Redis.del(`email:recover:${user._id}`)
+        user.local.verifyHash = null
         user.local.password = User.generateHash(req.body.password)
         user.save(next)
       })
