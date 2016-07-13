@@ -5,7 +5,7 @@
     "start": "node main.js"
   },
   "dependencies": {
-    "async": "^2.0.0-rc.5",
+    "async": "^2.0.0",
     "bcrypt": "^0.8.6",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.1",
@@ -15,9 +15,9 @@
     "cookie-parser": "^1.4.2",
     "cookie-session": "^2.0.0-alpha.1",
     "cron": "^1.1.0",
-    "express": "~4.5.1",
+    "express": "^4.14.0",
     "express-validator": "^2.20.5",
-    "kue": "^0.10.5",
+    "kue": "^0.11.1",
     "lodash": "^4.13.1",
     "method-override": "^2.3.6",
     "mongo-express": "^0.30.59",
@@ -32,14 +32,14 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-cssmin": "^0.12.2",
-    "grunt-contrib-uglify": "~0.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
     "grunt-filerev": "^2.3.1",
-    "grunt-html2js": "~0.2.7",
+    "grunt-html2js": "^0.3.6",
     "grunt-nodemon": "^0.4.0",
     "grunt-usemin": "^3.0.0"
   }
