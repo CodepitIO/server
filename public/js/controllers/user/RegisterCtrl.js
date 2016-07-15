@@ -10,6 +10,7 @@ angular.module('User')
         username: '',
         recaptcha: null
       }
+      $scope.Countries = Countries
 
       $scope.loading = false
       $scope.register = function () {
@@ -17,6 +18,10 @@ angular.module('User')
         UserAPI.register($scope.user, function() {
           $scope.loading = false
         })
+      }
+
+      $scope.querySearch = function(val) {
+        
       }
     }
   )

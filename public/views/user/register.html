@@ -4,33 +4,44 @@
 </mrt-breadcrumbs>
 
 <mrt-page-wrapper wait-while="loading">
-  <div class="row" id="form-container">
-    <div class="col-md-6 col-md-offset-3">
+  <div id="form-container" layout="row" layout-align="center center">
+    <div flex="50">
       <h3>Registre-se no <strong>Codepit</strong> e comece a criar e competir em competições de programação. </h3>
       <form name="form" novalidate>
         <div class="form-group input-split">
-          <input type="text" placeholder="Nome"  ng-model="user.name" name="name" maxlength="100" required/>
-          <input type="text" placeholder="Sobrenome" ng-model="user.surname" name="surname" maxlength="100" required/>
+          <input type="text" placeholder="Nome*"  ng-model="user.name" name="name" maxlength="100" required/>
+          <input type="text" placeholder="Sobrenome*" ng-model="user.surname" name="surname" maxlength="100" required/>
           <br style="clear: both" />
           <small class="error" ng-show="form.name | mrtHasError">* você deve inserir um nome</small>
           <small class="error" ng-show="form.surname | mrtHasError">* você deve inserir um sobrenome</small>
         </div>
         <div class="form-group">
-          <input type="text" placeholder="Nome de usuário" ng-model="user.username" name="username" maxlength="30" mrt-unique-username required uib-tooltip="Este nome será seu handle oficial nas competições e não poderá ser modificado."/>
+          <input type="text" placeholder="Nome de usuário*" ng-model="user.username" name="username" maxlength="30" mrt-unique-username required uib-tooltip="Este nome será seu handle oficial nas competições e não poderá ser modificado."/>
           <small class="error" ng-show="form.username | mrtHasError">* nome de usuário inválido ou já cadastrado</small>
         </div>
         <div class="form-group">
-          <input type="email" placeholder="Email" ng-model="user.email" name="email" mrt-unique-email maxlength="100" required/>
+          <input type="email" placeholder="Email*" ng-model="user.email" name="email" mrt-unique-email maxlength="100" required/>
           <small class="error" ng-show="form.email | mrtHasError">* e-mail inválido ou já cadastrado</small>
         </div>
         <div class="form-group input-split">
-          <input type="password" name="password" placeholder="Senha" ng-model="user.password" maxlength="100" required/>
-          <input type="password" name="confirmPassword" placeholder="Repita a senha" ng-model="user.confirmPassword" name="confirmPass" mrt-match-field="{{user.password}}" maxlength="100" required />
+          <input type="password" name="password" placeholder="Senha*" ng-model="user.password" maxlength="100" required/>
+          <input type="password" name="confirmPassword" placeholder="Repita a senha*" ng-model="user.confirmPassword" name="confirmPass" mrt-match-field="{{user.password}}" maxlength="100" required />
           <br style="clear: both" />
           <small class="error" ng-show="form.password | mrtHasError">* você deve inserir uma senha.</small>
           <small class="error" ng-show="form.confirmPassword | mrtHasError">* você deve confirmar a senha corretamente.</small>
         </div>
-        <input type="text" ng-model="user.country" placeholder="País" uib-typeahead="country as country.Name for country in Countries | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+        <div class="form-group input-split">
+          <input type="text" placeholder="Universidade ou Organização"  ng-model="user.university" name="university" maxlength="100" required/>
+          <input type="text"
+            ng-model="user.country"
+            placeholder="País"
+            uib-typeahead="country as country.Name for country in Countries | filter:{Name:$viewValue}"
+            typeahead-template-url="countryElement.html"
+            typeahead-editable="false"
+            typeahead-min-length="3"
+            typeahead-select-on-exact="true" />
+          <br style="clear: both" />
+        </div>
         <div vc-recaptcha ng-model="user.recaptcha" style="margin: 0 auto; width: 304px;"></div>
         <br style="clear: both" />
         <div class="form-group">
@@ -40,3 +51,10 @@
     </div>
   </div>
 </mrt-page-wrapper>
+
+<script type="text/ng-template" id="countryElement.html">
+  <a>
+      <img ng-src="/imgs/flags/{{match.model.Code}}.gif" width="16">
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  </a>
+</script>
