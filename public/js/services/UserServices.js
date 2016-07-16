@@ -51,7 +51,7 @@ angular.module('User')
       }
 
       try {
-        let user = JSON.parse($cookies.get('user'))
+        var user = JSON.parse($cookies.get('user'))
         $scope.set(user)
       } catch (err) {
         $scope.reset()
