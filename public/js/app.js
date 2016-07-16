@@ -61,4 +61,4 @@ angular.module('mrtApp', [
         event.preventDefault();
       }
   });
-  })
+})

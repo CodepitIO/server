@@ -15,7 +15,7 @@
           <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
           <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
         </md-radio-group>
-        <div ng-show="role === 'team'" layout-fill>
+        <div ng-show="isTeam()" layout-fill>
           <p>
             <i>Escolha um time</i>&nbsp;
             <i class="fa fa-question-circle" style="width: 50px;">
