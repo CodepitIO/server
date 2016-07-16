@@ -229,6 +229,7 @@ angular.module('Contests')
 
       $scope.start = function() {
         $interval.cancel(processInterval)
+        // CHANGE THIS!!! NOT WORKING, SINCE SOME CALLS MAY FAIL AND EVERYTHING WILL FAIL AFTER
         reset()
         $scope.id = $stateParams.id
         processing = true
