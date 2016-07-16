@@ -38,6 +38,9 @@ angular.module('User')
       $scope.isVerified = function() {
         return $scope.user.local && $scope.user.local.verified
       }
+      $scope.isNotVerified = function() {
+        return $scope.user.local && $scope.user.local.verified === false
+      }
 
       $scope.isUser = function(usr) {
         var id = usr._id ? usr._id : usr

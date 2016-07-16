@@ -56,7 +56,7 @@ angular.module('mrtApp', [
       else $rootScope.title = 'Codepit'
       if ((toState.authenticate === true && !UserState.isAuthenticated()) ||
           (toState.authenticate === false && UserState.isAuthenticated()) ||
-          (toState.validate === true && !UserState.isVerified())) {
+          (toState.validate === true && UserState.isNotVerified())) {
         $state.transitionTo("home");
         event.preventDefault();
       }
