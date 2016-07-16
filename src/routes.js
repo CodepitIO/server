@@ -111,7 +111,7 @@ function AdminRoutes () {
 exports.configure = (app) => {
   let cookieSecret = process.env.COOKIE_SECRET || 'COOKIE_SECRET'
   app.use(cookieParser())
-  app.use(cookieSession({ secret: cookieSecret, maxAge: 30 * 24 * 60 * 60 * 1000 }))
+  app.use(cookieSession({ secret: cookieSecret, maxAge: 24 * 60 * 60 * 1000 }))
   app.use(compression())
   app.use(favicon(path.join(__dirname,'../public/imgs/favicon.ico')))
   app.use(bodyParser.json())

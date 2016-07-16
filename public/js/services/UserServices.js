@@ -11,7 +11,7 @@ angular.module('User')
         $scope.user = user || {}
         if (user && user.local.verified != null) {
           $cookies.put('user', JSON.stringify(user), {
-            expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)
+            expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
           })
         } else {
           $cookies.remove('user')
