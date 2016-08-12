@@ -21,11 +21,9 @@ angular.module('User')
       $scope.isAuthenticated = function() {
         return !!$scope.user._id
       }
-
       $scope.isAdmin = function() {
         return $scope.isAuthenticated() && $scope.user.access >= 10
       }
-
       $scope.getId = function() {
         return $scope.user._id || null
       }
@@ -57,11 +55,13 @@ angular.module('User')
         $scope.reset()
       }
 
-      $interval(function() {
+      function checkUserStatus() {
         Request.send('get', $resource('/api/v1/user/status'))({}).then(function(data) {
           var curId = $scope.user && $scope.user._id || null
           var newId = data.user && data.user._id || null
           if (curId !== newId) $scope.set(data.user)
         })
-      }, 30 * 1000, 0, false)
+      }
+      $interval(checkUserStatus, 30 * 1000, 0, false)
+      checkUserStatus()
     })

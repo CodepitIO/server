@@ -49,6 +49,8 @@ angular.module('Contests')
           .then(function () {
             Notification.success('Inscrito com sucesso na competição.')
             $state.go($state.current, {id: id}, {reload: true})
+          }, function() {
+            callback && callback()
           })
         },
 

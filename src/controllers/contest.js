@@ -116,7 +116,10 @@ exports.join = (req, res) => {
       if (!contest) return res.status(400).send()
       if (contest.contestantType === 1 && teamId) return res.status(400).send()
       if (teamId && teamCount === 0) return res.status(400).send()
-      if (contest.password !== password) return res.json(Errors.InvalidPassword)
+      if (contest.userInContest(userId)) return res.status(400).send()
+      if (contest.isPrivate && contest.password !== password) {
+        return res.json(Errors.InvalidPassword)
+      }
       let contestant = {id: userId}
       if (teamId) contestant.team = teamId
       contest.contestants.push(contestant)

@@ -3,6 +3,7 @@ angular.module('Contests')
       $scope.password = ''
       $scope.team = null
       $scope.role = 'individual'
+      $scope.loading = false
 
       $scope.isTeam = function() {
         return ContestState.contest.contestantType === 2 || $scope.role === 'team'
@@ -20,6 +21,9 @@ angular.module('Contests')
       $scope.join = function() {
         if (ContestState.contest.contestantType === 2) $scope.role = 'team'
         var team = ($scope.role === 'individual') ? null : $scope.team
-        ContestAPI.join(ContestState.id, $scope.password, team)
+        $scope.loading = true
+        ContestAPI.join(ContestState.id, $scope.password, team, function() {
+          $scope.loading = false
+        })
       }
     })

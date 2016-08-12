@@ -41,9 +41,10 @@
           <md-button class="md-icon-button" ng-click="close()" style="margin-top: 5px;">
             <md-icon class="material-icons" style="color:grey;">keyboard_return</md-icon>
           </md-button>
-          <md-button class="md-fab md-mini md-primary" ng-click="join()" ng-disabled="form.$invalid">
+          <md-button class="md-fab md-mini md-primary" ng-click="join()" ng-disabled="form.$invalid" ng-hide="loading">
             <md-icon class="material-icons" style="color:white;">person_add</md-icon>
           </md-button>
+          <md-progress-circular md-mode="indeterminate" md-diameter="60" ng-show="loading"></md-progress-circular>
         </div>
       </md-content>
     </form>
