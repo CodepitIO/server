@@ -8,13 +8,11 @@ exports.getTime = (req, res) => {
   })
 }
 
-exports.cmpToString = (rhs) => {
-  return (lhs) => {
-    return _.toString(lhs) === _.toString(rhs)
-  }
+exports.cmpToString = (a, b) => {
+  return _.toString(a) === _.toString(rhs)
 }
 
-exports.cmpDiffString = (rhs) => {
+exports.cmpDiffStringFn = (rhs) => {
   return (lhs) => {
     return _.toString(lhs) !== _.toString(rhs)
   }

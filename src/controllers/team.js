@@ -109,8 +109,8 @@ exports.remove = (req, res) => {
   Team.findOne({_id: teamId, members: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    team.invites = _.filter(team.invites, Utils.cmpDiffString(removedId))
-    team.members = _.filter(team.members, Utils.cmpDiffString(removedId))
+    team.invites = _.filter(team.invites, Utils.cmpDiffStringFn(removedId))
+    team.members = _.filter(team.members, Utils.cmpDiffStringFn(removedId))
     team.save((err, team) => {
       if (err) return res.status(500).send()
       return res.json({})
@@ -134,7 +134,7 @@ exports.accept = (req, res) => {
     let count = results.count
     if (!team) return res.status(400).send()
     if (count >= MAX_TEAMS_PER_USER) return res.json(Errors.UserTeamLimitExceed)
-    team.invites = _.filter(team.invites, Utils.cmpDiffString(userId))
+    team.invites = _.filter(team.invites, Utils.cmpDiffStringFn(userId))
     team.members.push(userId)
     team.save((err) => {
       if (err) return res.status(500).send()
@@ -149,7 +149,7 @@ exports.decline = (req, res) => {
   Team.findOne({_id: teamId, invites: userId}, (err, team) => {
     if (err) return res.status(500).send()
     if (!team) return res.status(400).send()
-    team.invites = _.filter(team.invites, Utils.cmpDiffString(userId))
+    team.invites = _.filter(team.invites, Utils.cmpDiffStringFn(userId))
     team.save((err) => {
       if (err) return res.status(500).send()
       return res.json({})

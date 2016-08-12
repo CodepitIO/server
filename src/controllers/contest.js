@@ -45,7 +45,7 @@ exports.getMetadata = (req, res) => {
       hasEnded: contest.hasEnded(),
       canViewContest: canViewContest(contest, req.user),
       inContest: contest.userInContest(userId),
-      isContestAdmin: Utils.cmpToString(req.user && req.user._id)(contest.author)
+      isContestAdmin: Utils.cmpToString(req.user && req.user._id, contest.author)
     }
 
     let isAdmin = req.user && req.user.isAdmin
@@ -71,7 +71,7 @@ exports.getEvents = (req, res) => {
     }
 
     let isAdmin = req.user && req.user.isAdmin
-    let isContestAdmin = Utils.cmpToString(req.user && req.user._id)(contest.author)
+    let isContestAdmin = Utils.cmpToString(req.user && req.user._id, contest.author)
     let upTo = Math.min(contest.date_end, new Date().getTime())
     if (!isAdmin && !isContestAdmin && upTo >= contest.frozen_time && upTo < contest.date_end) {
       upTo = contest.frozen_time.getTime()
@@ -157,9 +157,12 @@ exports.validateContest = (req, res, next) => {
       Contest.findById(req.params.id, next)
     },
     (contest, next) => {
-      // <<-- Validate dates -->>
+      // <<-- Validate author and dates -->>
       let now = new Date().getTime()
-      if (contest && contest.date_end < now) return res.status(400).send()
+      if (contest) {
+        if (!Utils.cmpToString(req.user._id, contest.author)) return res.status(400).send()
+        if (contest && contest.date_end < now) return res.status(400).send()
+      }
       try {
         c.date_start = new Date(data.date_start)
         c.date_end = new Date(data.date_end)
