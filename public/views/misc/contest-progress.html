@@ -2,8 +2,12 @@
   <div ng-show="!hasContestEnded()" style="margin-bottom: 10px;" align="center">
     <span style="font-weight: 200; font-size: 18px;">Tempo: {{getUptime()}}</span>
   </div>
-  <div ng-show="hasContestEnded()" style="margin-bottom: 10px;" align="left">
-    <span style="font-weight: 200; font-size: 18px;">Duração: {{getTotalTime()}}</span>
+  <div ng-show="hasContestEnded()" style="font-weight: 200; font-size: 18px; margin-bottom: 10px;" layout="row" layout-align="center center">
+    <div flex><span>Duração: {{getTotalTime()}}</span></div>
+    <div flex layout="row" layout-align="end center">
+      <div>Upsolving&nbsp;&nbsp;</div>
+      <div><md-switch class="md-primary" ng-model="ContestState.upsolving" ng-change="ContestState.changeUpsolving()"></md-switch></div>
+    </div>
   </div>
   <div ng-show="previewBar || isContestRunning()" layout="row" md-theme="progressBarTheme" style="width:100%; position: relative;">
     <md-progress-linear ng-class="getClass()" md-mode="determinate" ng-value="getPercentage()"></md-progress-linear>

@@ -48,7 +48,7 @@ angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvi
       })
       .state('contest', {
         abstract: true,
-        url: '^/contest/:id',
+        url: '^/contest/:id?upsolving',
         templateUrl: 'views/contests/contest/contest.html',
         controller: 'ContestController'
       })

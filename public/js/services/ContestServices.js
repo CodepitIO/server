@@ -29,11 +29,13 @@ angular.module('Contests')
         $scope.contestantsIds = []
         $scope.contestants = {}
 
+        $scope.events = []
         $scope.scoreboard = {}
         $scope.scores = {}
         $scope.firstAccepted = {}
         $scope.canViewContest = false
         $scope.loading = true
+        $scope.upsolving = ($stateParams.upsolving === '1')
         eventStartFrom = 0
         markEvent = {}
         pending = {}
@@ -130,61 +132,67 @@ angular.module('Contests')
         $scope.contestantsIds.sort(function(a,b) {
           var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0
           var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0
-          if (solvedA != solvedB) return solvedB - solvedA
+          if (solvedA !== solvedB) return solvedB - solvedA
           var penaltyA = $scope.scores[a] && $scope.scores[a].penalty || 0
           var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0
-          return penaltyA - penaltyB
+          if (penaltyA !== penaltyB) return penaltyA - penaltyB
+          return a < b
         })
         callback && callback()
       }
 
-      function processContestEvents(callback) {
-        var newEventStartFrom = eventStartFrom
-        ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
-          if (!isActive()) return callback && callback()
-          var shouldSort = false
-          events = events || []
-          if (events.length > 0) newEventStartFrom = _.last(events)[3]+1
-          _.forEach(events, function(e) {
-            var rep = e[0], pid = e[1], status = e[2], timestamp = e[3]
-            var pendingKey = _.join([rep,pid,timestamp], ',')
-            if (status === 'PENDING') {
-              newEventStartFrom = Math.min(newEventStartFrom, timestamp)
-              pending[pendingKey] = true
-            }
-            var uid = _.join(e, ',')
-            if (markEvent[uid]) return
-            markEvent[uid] = true
-            _.update($scope.scoreboard, [rep, pid], function(o) {
-              o = o || {err: 0, pending: 0, accepted: false}
-              if (status !== 'PENDING' && pending[pendingKey]) {
-                delete pending[pendingKey]
-                o.pending--
-              }
-              if (o.accepted) return o
-              if (status === 'ACCEPTED') {
-                shouldSort = true
-                o.accepted = true
-                o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000)
-                _.update($scope.firstAccepted, pid, function(s) {
-                  if (s) return s
-                  return { rep: rep, timestamp: timestamp }
-                })
-                _.update($scope.scores, rep, function(s) {
-                  s = s || {solved: 0, penalty: 0}
-                  s.solved++
-                  s.penalty += o.time + o.err * 20
-                  return s
-                })
-              } else if (status === 'REJECTED') {
-                o.err++
-              } else {
-                o.pending++
-              }
-              return o
+      function updateScoreboard(ev) {
+        var rep = ev[0], pid = ev[1], status = ev[2], timestamp = ev[3]
+        var pendingKey = _.join([rep,pid,timestamp], ',')
+        if (status === 'PENDING') {
+          eventStartFrom = Math.min(eventStartFrom, timestamp)
+          pending[pendingKey] = true
+        }
+        var uid = _.join(ev, ',')
+        if (markEvent[uid]) return false
+        markEvent[uid] = true
+        _.update($scope.scoreboard, [rep, pid], function(o) {
+          o = o || {err: 0, pending: 0, accepted: false}
+          if (status !== 'PENDING' && pending[pendingKey]) {
+            delete pending[pendingKey]
+            o.pending--
+          }
+          if (o.accepted) return o
+          if (status === 'ACCEPTED') {
+            shouldSort = true
+            o.accepted = true
+            o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000)
+            _.update($scope.firstAccepted, pid, function(s) {
+              if (s) return s
+              return { rep: rep, timestamp: timestamp }
             })
+            _.update($scope.scores, rep, function(s) {
+              s = s || {solved: 0, penalty: 0}
+              s.solved++
+              s.penalty += o.time + o.err * 20
+              return s
+            })
+          } else if (status === 'REJECTED') {
+            o.err++
+          } else {
+            o.pending++
+          }
+          return o
+        })
+        return shouldSort
+      }
+
+      function processContestEvents(callback) {
+        ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
+          if (err || !_.isArray(events) || !isActive()) return callback && callback()
+          if (events.length > 0) eventStartFrom = _.last(events)[3]+1
+          $scope.events = $scope.events.concat(events)
+          var shouldSort = false
+          _.forEach(events, function(ev) {
+            if (ev[3] < $scope.contest.date_end || $scope.upsolving) {
+              shouldSort |= updateScoreboard(ev)
+            }
           })
-          eventStartFrom = newEventStartFrom
           if (shouldSort) sortContestants(callback)
           else callback && callback()
         })
@@ -207,6 +215,20 @@ angular.module('Contests')
           submissionStartFrom = newSubmissionStartFrom
           $scope.loadedSubmissions = true
         })
+      }
+
+      $scope.changeUpsolving = function() {
+        $state.go($state.current, {upsolving: $scope.upsolving ? '1' : '0'}, {notify: false})
+        markEvent = {}
+        $scope.firstAccepted = {}
+        $scope.scoreboard = {}
+        $scope.scores = {}
+        _.forEach($scope.events, function(ev) {
+          if (ev[3] < $scope.contest.date_end || $scope.upsolving) {
+            updateScoreboard(ev)
+          }
+        })
+        sortContestants()
       }
 
       $scope.tryPushSubmission = function(s) {

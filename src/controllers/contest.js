@@ -72,7 +72,7 @@ exports.getEvents = (req, res) => {
 
     let isAdmin = req.user && req.user.isAdmin
     let isContestAdmin = Utils.cmpToString(req.user && req.user._id, contest.author)
-    let upTo = Math.min(contest.date_end, new Date().getTime())
+    let upTo = new Date().getTime()
     if (!isAdmin && !isContestAdmin && upTo >= contest.frozen_time && upTo < contest.date_end) {
       upTo = contest.frozen_time.getTime()
     }

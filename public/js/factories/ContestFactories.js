@@ -87,6 +87,8 @@ angular.module('Contests')
               })
               .value()
             callback(null, submissions)
+          }, function(err) {
+            return callback && callback(err)
           })
         },
 
