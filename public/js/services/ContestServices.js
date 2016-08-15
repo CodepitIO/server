@@ -142,7 +142,11 @@ angular.module('Contests')
       }
 
       function updateScoreboard(ev) {
-        var rep = ev[0], pid = ev[1], status = ev[2], timestamp = ev[3]
+        var rep = ev[0],
+            pid = ev[1],
+            status = ev[2],
+            timestamp = ev[3],
+            shouldSort = false
         var pendingKey = _.join([rep,pid,timestamp], ',')
         if (status === 'PENDING') {
           eventStartFrom = Math.min(eventStartFrom, timestamp)
