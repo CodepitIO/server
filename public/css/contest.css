@@ -336,6 +336,11 @@ tr.submission-row-parent {
   font-weight: 600;
 }
 
+.contest-view .scoreboard [ng-click] {
+  cursor: default;
+  outline: none;
+}
+
 .contest-view .scoreboard .accepted-cell {
   background-color: #CCFF90;
 }
@@ -362,6 +367,11 @@ tr.submission-row-parent {
   animation-duration: 1.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+.contest-view .scoreboard .spy-cell:hover {
+  border: 2px solid #AAA;
+  cursor: pointer;
+  z-index: 999;
 }
 
 @-moz-keyframes blinker {

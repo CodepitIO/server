@@ -33,7 +33,9 @@
 							</a>
 						</div>
 					</td>
-					<td ng-repeat="problem in ContestState.problems track by (c + problem._id)" ng-class="getCellClass(c,problem._id)">
+					<td ng-repeat="problem in ContestState.problems track by (c + problem._id)"
+					ng-class="getCellClass(c,problem._id)"
+					ng-click="spySubmissions(c,problem._id)">
 			      <div style="font-size:11px;">{{getCellAttempts(c,problem._id)}}</div>
 			      <div>{{getCellPenalty(c,problem._id)}}</div>
 			    </td>

@@ -12,6 +12,7 @@ angular.module('Contests')
         getMetadata: Request.send('get', $resource('/api/v1/contest/:id/metadata'), {ignoreThrottle: true}),
         getEvents: Request.send('get', $resource('/api/v1/contest/:id/events/:from'), {ignoreThrottle: true}),
         getSubmissions: Request.send('get', $resource('/api/v1/contest/:id/submissions/:from'), {ignoreThrottle: true}),
+        getRepProblemSubmissions: Request.send('get', $resource('/api/v1/contest/:id/rep/:rid/problem/:pid')),
       }
 
       return {
@@ -94,6 +95,13 @@ angular.module('Contests')
 
         getSubmissions: function(id, startFrom, callback) {
           API.getSubmissions({ id: id, from: startFrom })
+          .then(function(data) {
+            callback(null, data.submissions)
+          })
+        },
+
+        getRepProblemSubmissions: function(id, rep, problem, callback) {
+          API.getRepProblemSubmissions({ id: id, rid: rep, pid: problem })
           .then(function(data) {
             callback(null, data.submissions)
           })

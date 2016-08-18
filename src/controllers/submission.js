@@ -3,7 +3,8 @@
 const Submission = require('../models/submission'),
   Problem = require('../models/problem'),
   Contest = require('../models/contest'),
-  Queue = require('../services/queue')
+  Queue = require('../services/queue'),
+  Utils = require('../utils/utils')
 
 const async = require('async'),
   fs = require('fs'),
@@ -112,7 +113,7 @@ exports.getById = (req, res) => {
   })
 }
 
-exports.getUserContestSubmissions = (req, res) => {
+exports.getRepContestSubmissions = (req, res) => {
   let contestId = req.params.id
   let startFrom = new Date(_.toInteger(req.params.from) || 0)
   Contest.findById(contestId, (err, contest) => {
@@ -128,7 +129,7 @@ exports.getUserContestSubmissions = (req, res) => {
     .select('_id date verdict language problem')
     .sort('date')
     .exec((err, submissions) => {
-      if (err) return res.status(400).send()
+      if (err) return res.status(500).send()
       let isBlind = !contest.hasEnded() && new Date() >= contest.blind_time
       if (isBlind) {
         _.map(submissions, (s) => {
@@ -136,6 +137,31 @@ exports.getUserContestSubmissions = (req, res) => {
           return s
         })
       }
+      return res.json({submissions: submissions})
+    })
+  })
+}
+
+exports.getRepProblemSubmissions = (req, res) => {
+  let contestId = req.params.id
+  let repId = req.params.rid
+  let problemId = req.params.pid
+  Contest.findById(contestId, (err, contest) => {
+    if (err) return res.status(500).send()
+    if (!contest) return res.status(400).send()
+    let rep = contest.getUserRepresentative(req.user._id)
+    if (!req.user.isAdmin && !Utils.cmpToString(req.user._id, contest.author)) {
+      return res.status(400).send()
+    }
+    Submission.find({
+      contest: contestId,
+      rep: repId,
+      problem: problemId
+    })
+    .select('_id date verdict language problem')
+    .sort('-date')
+    .exec((err, submissions) => {
+      if (err) return res.status(500).send()
       return res.json({submissions: submissions})
     })
   })
