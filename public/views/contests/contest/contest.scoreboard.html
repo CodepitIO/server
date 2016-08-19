@@ -16,7 +16,9 @@
 			  </tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="c in ContestState.contestantsIds track by c" id="{{c}}" ng-class="{'user-row': UserState.isUser(c)}">
+				<tr ng-repeat="c in ContestState.contestantsIds track by c"
+				id="{{c}}"
+				ng-class="{'user-row': isRep(c)}">
 					<td class="rank-cell">{{$index+1}}</td>
 					<td>
 						<div ng-if="ContestState.contestants[c].handles">
@@ -34,6 +36,7 @@
 						</div>
 					</td>
 					<td ng-repeat="problem in ContestState.problems track by (c + problem._id)"
+					class="cell"
 					ng-class="getCellClass(c,problem._id)"
 					ng-click="spySubmissions(c,problem._id)">
 			      <div style="font-size:11px;">{{getCellAttempts(c,problem._id)}}</div>

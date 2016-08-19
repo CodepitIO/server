@@ -13,6 +13,14 @@ angular.module('Contests')
       return (score.accepted) ? score.time : '--'
     }
 
+    $scope.isRep = function(rep) {
+      if (!ContestState.contestants[rep].handles) {
+        return UserState.isUser(rep)
+      }
+      var ids = _.map(ContestState.contestants[rep].handles, 0)
+      return UserState.isInArray(ids)
+    }
+
     $scope.getCellClass = function(rep, problem) {
       var score = _.get(ContestState.scoreboard, [rep, problem])
       if (!score) return ''
