@@ -17,4 +17,7 @@ app.controller('ProblemController', function ($rootScope, $scope, $state, $state
     $scope.print = function() {
       $window.print()
     }
+    $scope.openPage = function(problem) {
+      window.location = problem
+    }
   })

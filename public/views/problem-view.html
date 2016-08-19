@@ -33,6 +33,6 @@
     <p class="footer" ng-bind-html="problem.source"></p>
   </div>
   <div style="margin-top: 20px; float: right;" class="no-print">
-    <a class="small" ng-href="{{problem.originalUrl || problem.url}}" target="_blank">[link original]</a>
+    <a class="small link" ng-click="openPage(problem.originalUrl || problem.url)">[link original]</a>
   </div>
 </mrt-page-wrapper>
