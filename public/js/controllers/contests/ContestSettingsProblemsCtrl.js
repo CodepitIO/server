@@ -1,13 +1,11 @@
 var app = angular.module('Contests')
 app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAPI) {
-    var problemIds = []
     $scope.searchText = ''
     $scope.selectedProblem = null
 
     $scope.select = function() {
       if ($scope.selectedProblem) {
         $scope.contest.problems.push($scope.selectedProblem)
-        problemIds.push($scope.selectedProblem._id)
       }
       $scope.selectedProblem = null
       $scope.searchText = ''
@@ -19,6 +17,7 @@ app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAP
         $scope.searchText = $scope.searchText.substring(0, 50)
       }
       var txt = $scope.searchText
+      var problemIds = _.map($scope.contest.problems, '_id')
       return ProblemsAPI.filter($scope.searchText, problemIds).then(function (data) {
         return data.list
       })
@@ -28,7 +27,6 @@ app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAP
       _.remove($scope.contest.problems, function(obj) {
         return obj._id === id
       })
-      _.pull(problemIds, id)
     }
 
     $scope.sortableOptions = {
