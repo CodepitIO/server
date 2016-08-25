@@ -26,15 +26,14 @@ function createSubmission (submission, userId, callback) {
 
 exports.tryExtractFile = (req, res, next) => {
   if (req.body.id) return next()
-  let form = new multiparty.Form()
-  // TODO: erase the tmp file
+  let form = new multiparty.Form(), fpath
   async.waterfall([
     (callback) => {
       form.parse(req, callback)
     },
     (fields, files, callback) => {
       try {
-        var fpath = files.file[0].path
+        fpath = files.file[0].path
         req.body = {}
         req.body.id = fields.id[0]
         req.body.problem = fields.problem[0]
@@ -46,7 +45,7 @@ exports.tryExtractFile = (req, res, next) => {
     },
     (code, callback) => {
       req.body.code = code
-      callback()
+      fs.unlink(fpath, callback)
     }
   ], (err) => {
     if (err) return res.status(400).send()
