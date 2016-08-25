@@ -115,6 +115,7 @@ exports.join = (req, res) => {
         teamCount = results.team
       if (!contest) return res.status(400).send()
       if (contest.contestantType === 1 && teamId) return res.status(400).send()
+      if (contest.contestantType === 2 && !teamId) return res.status(400).send()
       if (teamId && teamCount === 0) return res.status(400).send()
       if (contest.userInContest(userId)) return res.status(400).send()
       if (contest.isPrivate && contest.password !== password) {

@@ -30,7 +30,7 @@
           <small ng-show="teams.length === 0">Você não está em nenhum time.</small>
           <md-input-container ng-show="teams.length > 0" layout-fill>
             <label>Time</label>
-            <md-select ng-model="team" ng-required="role === 'team'">
+            <md-select ng-model="team" ng-required="isTeam()">
               <md-option ng-repeat="t in teams" ng-value="t._id">
                 {{t.name}}
               </md-option>
