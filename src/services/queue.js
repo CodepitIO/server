@@ -14,7 +14,7 @@ let SubscribeQueue = kue.createQueue({
 
 exports.pushSubmission = (oj, s, callback) => {
   let job = PublishQueue.create(`submission:${oj}`, { id: s._id })
-  job.attempts(5)
+  job.attempts(7)
   job.backoff({ delay: 60 * 1000, type: 'exponential' })
   job.save(callback)
 }
