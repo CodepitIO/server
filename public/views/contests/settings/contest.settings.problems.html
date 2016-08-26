@@ -32,7 +32,7 @@
               <a ui-sref="problems.view({id:problem._id,index:$index})" target="_blank" class="balloon-ps-label md-avatar">{{$index | mrtAlphabetize}}</a>
             </div>
             <div class="md-list-item-text" layout="column" flex layout-align="center start">
-              <h3>{{ problem.name }}</h3>
+              <h3 style="white-space: normal; text-align: left;">{{ problem.name }}</h3>
               <h4>{{ problem.oj | mrtOjName }} {{ problem.id }}</h4>
             </div>
             <div class="md-list-item-text" layout="column" flex="15">
