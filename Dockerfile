@@ -8,7 +8,7 @@ MAINTAINER Gustavo Stor
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential vim
+    apt-get -y install nodejs git-all build-essential vim dos2unix
 
 RUN npm install -g grunt-cli nodemon bower node-gyp
 
@@ -16,4 +16,4 @@ RUN npm install -g grunt-cli nodemon bower node-gyp
 RUN mkdir -p /www
 WORKDIR /www
 
-CMD bash ./devstart.sh
+CMD dos2unix ./devstart.sh && bash ./devstart.sh
