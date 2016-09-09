@@ -16,4 +16,4 @@ RUN npm install -g grunt-cli nodemon bower node-gyp
 RUN mkdir -p /www
 WORKDIR /www
 
-CMD bash ./devstart.sh
+CMD npm run dev

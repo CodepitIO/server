@@ -2,6 +2,7 @@
   "name": "Codepit-Web-API",
   "main": "main.js",
   "scripts": {
+    "dev": "npm install --loglevel info && bower install --allow-root && grunt dev",
     "start": "node main.js"
   },
   "dependencies": {
