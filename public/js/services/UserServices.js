@@ -45,7 +45,6 @@ angular.module('User')
         return id === $scope.getId()
       }
       $scope.isInArray = function(array) {
-        console.log(array)
         return _.some(array, $scope.isUser)
       }
 
