@@ -121,7 +121,7 @@ let filters = {
         }
       }
     },
-    sort: '-date_end',
+    sort: '-date_start',
     limit: 0
   }
 }
