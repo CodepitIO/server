@@ -26,7 +26,7 @@ app.directive('mrtContestList', function () {
     required: 'mrtPageWrapper',
     scope: {
       filterType: '@', // Select the filter to apply over the list
-      // optional - value = ['past', 'future', 'now', 'owned']
+      // optional - value = ['past', 'future', 'now', 'owned', 'joined', 'joined_now']
       emptyMessage: '=', // Message to display when list is empty
       // optional - String
       adminFlag: '=', // Span to indicate the user has admin properties over contest
@@ -34,7 +34,9 @@ app.directive('mrtContestList', function () {
       newFlag: '=', // Span to indicate that contest is new (based on function declared on controller)
       // optional - values = true/false
       subTitle: '=', // Table's title
-    // optional - String
+      // optional - String
+      notShowEmpty: '=',
+      // optional - values = true/false
     },
     templateUrl: 'views/contests/list/contest-list.html',
     controller: 'ContestListController'
