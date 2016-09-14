@@ -5,6 +5,7 @@ angular.module('Contests')
       $scope.filterType = $scope.filterType || $location.path().split('/')[2] || 'open'
 
       switch ($scope.filterType) {
+        case 'joined_now':
         case 'now':
         case 'future':
           $scope.predicate = 'date_start'
