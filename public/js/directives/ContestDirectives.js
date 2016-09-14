@@ -34,7 +34,9 @@ app.directive('mrtContestList', function () {
       newFlag: '=', // Span to indicate that contest is new (based on function declared on controller)
       // optional - values = true/false
       subTitle: '=', // Table's title
-    // optional - String
+      // optional - String
+      notShowEmpty: '=',
+      // optional - values = true/false
     },
     templateUrl: 'views/contests/list/contest-list.html',
     controller: 'ContestListController'
