@@ -107,6 +107,21 @@ let filters = {
     },
     sort: '-date_end',
     limit: 0
+  },
+  joined_now: {
+    opts: function (req) {
+      return {
+        'contestants.id': req.user.id,
+        date_start: {
+          $lt: now
+        },
+        date_end: {
+          $gt: now
+        }
+      }
+    },
+    sort: '-date_end',
+    limit: 0
   }
 }
 
