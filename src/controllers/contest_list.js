@@ -110,6 +110,7 @@ let filters = {
   },
   joined_now: {
     opts: function (req) {
+      let now = new Date()
       return {
         'contestants.id': req.user.id,
         date_start: {
