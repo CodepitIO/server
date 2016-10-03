@@ -13,6 +13,7 @@ app.controller('ContestSettingsController', function ($scope, $state, TimeState,
       }
     } else {
       $scope.isEdit = true
+      $scope.date_start=ContestState.editContest.date_start
       $scope.contest = ContestState.editContest
     }
     $scope.tab = 0
