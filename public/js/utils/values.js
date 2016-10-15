@@ -4,14 +4,14 @@ angular.module('General')
 		'cpp': 'C++',
 		'cpp11': 'C++11',
 		'java': 'Java',
-		'python': 'Python',
+		'python3': 'Python 3',
 	})
 	.value('TextEditorLanguageMode', {
 		'c': 'text/x-csrc',
 		'cpp': 'text/x-c++src',
 		'cpp11': 'text/x-c++src',
 		'java': 'text/x-java',
-		'python': 'text/x-python',
+		'python3': 'text/x-python',
 		'': '',
 	})
 	.value('OJName', {
