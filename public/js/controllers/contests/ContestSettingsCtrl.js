@@ -13,7 +13,7 @@ app.controller('ContestSettingsController', function ($scope, $state, TimeState,
       }
     } else {
       $scope.isEdit = true
-      $scope.date_start=ContestState.editContest.date_start
+      $scope.date_start=ContestState.date_start
       $scope.contest = ContestState.editContest
     }
     $scope.tab = 0
@@ -28,9 +28,10 @@ app.controller('ContestSettingsController', function ($scope, $state, TimeState,
     var setFrozen = true, setBlind = true
     $scope.validateTimeRange = function() {
       var now = TimeState.server.now.getTime()
+      var date_start = $scope.date_start
       var minTime = Math.min(
         now - 60 * 60 * 1000,
-        $scope.date_start && $scope.date_start.getTime() || now
+        date_start && date_start.getTime() || now
       )
       var c = $scope.contest
       if (c.date_start && c.date_start.getTime) c.date_start = c.date_start.getTime()
