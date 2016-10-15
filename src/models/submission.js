@@ -27,7 +27,7 @@ schema.index({ date: 1 })
 
 schema.statics.validateChain = ValidateChain({
   language: function() {
-    this.notEmpty().isIn(['c', 'cpp', 'cpp11', 'java'])
+    this.notEmpty().isIn(['c', 'cpp', 'cpp11', 'java', 'python'])
   },
   code: function() {
     this.notEmpty().isByteLength({min: 1, max: 64 * 1024})
