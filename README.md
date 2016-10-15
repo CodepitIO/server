@@ -24,38 +24,26 @@ https://docs.docker.com/compose/install/
 
 ### Clone repository
 
-Clone the original repo to folder **site** inside the folder **maratonando**:
+Clone the original repo to folder **web** inside the folder **codepit**:
 
 ```
-git clone https://github.com/godely/maratonando-site.git maratonando/site
+git clone https://github.com/godely/codepit.git web
 ```
 
 You can also fork the repo in GitHub and clone your repo.
 
 ### Configuration
 
-Create a file named **docker-compose.yml** inside the folder **maratonando**
+Create a file named **docker-compose.yml** inside the folder **codepit**
 
 ```yml
 version: '2'
 services:
-  judger:
-    container_name: judger
-    build: ./judger
-    restart: unless-stopped
-    volumes:
-      - ./judger:/judger
-    environment:
-      - NODE_ENV=development
-    links:
-      - mongo:mongo
-      - redis:redis
   web:
     container_name: web
-    build: ./site
-    restart: unless-stopped
+    build: ./web
     volumes:
-      - ./site:/www
+      - ./web:/www
     ports:
       - "80:3000"
     environment:
@@ -63,34 +51,21 @@ services:
     links:
       - mongo:mongo
       - redis:redis
-  adminui:
-    container_name: mongo-express
-    image: "maratonando/mongo-express"
-    restart: unless-stopped
-    environment:
-      - ME_CONFIG_BASICAUTH_USERNAME=maratonando
-      - ME_CONFIG_BASICAUTH_PASSWORD=123456
-    ports:
-      - "28017:8081"
-    links:
-      - mongo:mongo
   redis:
     container_name: redis
-    image: "redis:3.0"
-    restart: unless-stopped
+    image: "redis:3.2"
     command: "redis-server --appendonly yes --dbfilename redis"
     ports:
         - "6379:6379"
   mongo:
     container_name: mongo
-    image: "mongo:3.2"
-    restart: unless-stopped
+    image: "mongo:3.3"
     command: "--smallfiles --logpath=/dev/null"
     ports:
       - "27017:27017"
 ```
 
-From **maratonando** folder, build the application (this will download images and can take some time):
+From **codepit** folder, build the application (this will download images and can take some time):
 
 ```
 docker-compose build
@@ -98,13 +73,10 @@ docker-compose build
 
 ### Running
 
-From **maratonando** folder, run the application (the first time might take some time installing packages):
+From **codepit** folder, run the application (the first time might take some time installing packages):
 
 ```
 docker-compose up
 ```
 
-Wait until the service prints `Listening to port 3000`, then the application will bootstrap when running
-for the first time, so you have to wait some more minutes to access the website. Your host name will depend on which OS you're using to develop. If you're a Linux user, you can access the website via `localhost`. Otherwise, you'll have to check the Docker host IP. To do that, run `docker-machine env default`, and look for the IP in `DOCKER_HOST`. It's usually `192.168.99.100`, but it can change.
-
-You can access the database in `<host>:28017` with login `maratonando` and pass `123456`.
+Wait until the service prints `Listening to port 3000`, then the application will bootstrap when running for the first time, so you have to wait some more minutes to access the website. Your host name will depend on which OS you're using to develop. If you're a docker engine user, you can access the website via `localhost`. Otherwise, you'll have to check the Docker host IP. To do that, run `docker-machine env default`, and look for the IP in `DOCKER_HOST`. It's usually `192.168.99.100`, but it can change.

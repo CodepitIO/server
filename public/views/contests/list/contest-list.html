@@ -1,4 +1,4 @@
-<mrt-page-wrapper wait-for="!loadingData">
+<mrt-page-wrapper wait-for="!loadingData" ng-if="!notShowEmpty || contests.length > 0">
   <div id="contests-list" class="row">
     <div class="table-container">
       <h2 ng-if="subTitle" class="orange-text">{{subTitle}}</h2>
