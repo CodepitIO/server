@@ -156,7 +156,7 @@ exports.validateContest = (req, res, next) => {
     (next) => {
       // <<-- Validate descr -->>
       c.name = _.toString(data.name)
-      if (!_.inRange(c.name.length, 1, 50)) return res.status(400).send()
+      if (!_.inRange(c.name.length, 1, 51)) return res.status(400).send()
       if (!req.params.id) return next(null, null)
       Contest.findById(req.params.id, next)
     },
