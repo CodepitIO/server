@@ -1,6 +1,6 @@
 var app = angular.module('Problems')
 app.controller('ProblemController', function ($rootScope, $scope, $state, $stateParams, $sce, $window, OJName, problem) {
-    if ($state.is('problems')) $state.go('.view')
+    if ($state.is('problems')) return $state.go('.view')
     $rootScope.title = ''
     problem.printName = problem.name
     if ($stateParams.index) {

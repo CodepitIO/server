@@ -23,6 +23,7 @@ angular.module('General')
 		'spojbr': 'SpojBR',
 		'huxley': 'Huxley',
 		'timus': 'Timus',
+		'kattis': 'Kattis',
 	})
 	.value('Verdict', {
 		'-4': {

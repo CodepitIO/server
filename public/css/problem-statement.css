@@ -1,8 +1,9 @@
-.problem-statement, .timus-problem {
+.problem-statement, .timus-problem, .kattis-problem {
     margin: 0.5em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.5em;
     font-size: 1.4rem;
+    text-align: justify;
 }
 
 .problem-statement span {
@@ -121,6 +122,40 @@
     margin-bottom: 1em;
 }
 
+.kattis-problem table.sample {
+  /*display: block;*/
+  width: 100%;
+  table-layout: fixed;
+  border: 1px solid #888;
+  margin-bottom: 1em;
+  font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
+}
+
+.kattis-problem table.sample th {
+  font-size: 1em;
+  padding: 0.25em;
+  border-bottom: 1px solid #888;
+  text-transform: lowercase;
+  font-weight: bold;
+  border-right: 1px solid #888;
+}
+
+.kattis-problem table.sample td {
+  border-right: 1px solid #888;
+  background-color: #efefef;
+  vertical-align: top;
+}
+
+.kattis-problem table.sample pre {
+  line-height: 1.25em;
+  padding: 0.25em;
+  margin: 0;
+  background-color: #efefef;
+  border: none;
+  border-radius: 0px;
+  font-size: 0.9em;
+}
+
 .problem-statement .sample-tests .input, .problem-statement .sample-tests .output {
     border: 1px solid #888;
 }
@@ -141,8 +176,8 @@
 }
 
 .problem-statement .sample-tests, .timus-problem .sample pre {
-    font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
-    font-size: 0.9em;
+  font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
+  font-size: 0.9em;
 }
 
 .problem-statement .sample-tests .title {
@@ -199,7 +234,7 @@ div .problem-statement-overlay {
     font-size: 28px;
 }
 
-.problem-statement h2 {
+.problem-statement h2, .kattis-problem h2 {
     font-size: 18px;
     font-weight: bold;
     margin: 20px 0 10px;
@@ -462,4 +497,21 @@ div .problem-statement-overlay {
   .textLayer {
     display: none !important;
   }
+}
+
+.kattis-problem div.illustration {
+    float: right;
+    padding-left: 20px;
+}
+.kattis-problem div.illustration .illustration {
+    width: 70%;
+    border-radius: 4px;
+}
+.kattis-problem div.description {
+    color: #898992;
+    font-style: italic;
+    font-family: "Merriweather",serif;
+    font-size: 15px;
+    text-align: left;
+    margin-top: 5px;
 }
