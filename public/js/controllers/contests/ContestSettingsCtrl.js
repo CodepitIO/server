@@ -1,5 +1,5 @@
 var app = angular.module('Contests')
-app.controller('ContestSettingsController', function ($scope, $state, TimeState, ContestState, ContestAPI) {
+app.controller('ContestSettingsController', function ($scope, $state, $timeout, TimeState, ContestState, ContestAPI) {
     $scope.loading = false
     if ($state.is('contests.create')) {
       $scope.contest = {
@@ -13,8 +13,10 @@ app.controller('ContestSettingsController', function ($scope, $state, TimeState,
       }
     } else {
       $scope.isEdit = true
-      $scope.date_start=ContestState.date_start
-      $scope.contest = ContestState.editContest
+      $timeout(function() {
+        $scope.date_start = ContestState.date_start
+        $scope.contest = ContestState.editContest
+      }, 4000)
     }
     $scope.tab = 0
     $scope.nextTab = function() {
@@ -31,7 +33,7 @@ app.controller('ContestSettingsController', function ($scope, $state, TimeState,
       var date_start = $scope.date_start
       var minTime = Math.min(
         now - 60 * 60 * 1000,
-        date_start && date_start.getTime() || now
+        (date_start && date_start.getTime()) || now
       )
       var c = $scope.contest
       if (c.date_start && c.date_start.getTime) c.date_start = c.date_start.getTime()

@@ -1,13 +1,19 @@
 'use strict'
 
 const redis = require('redis'),
-  mongoose = require('mongoose')
+  mongoose = require('mongoose'),
+  async = require('async')
 
 const MONGO = require('../config/constants').MONGO,
   REDIS = require('../config/constants').REDIS
 
 mongoose.Promise = require('bluebird')
-mongoose.connect(`mongodb://${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`)
+async.retry({times: 5, interval: 5000}, mongoose.connect.bind(mongoose, `mongodb://${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`), function(err) {
+  if(err) {
+    console.log(err)
+    process.exit()
+  }
+})
 
 let redisClient = redis.createClient({
   host: REDIS.HOST,
