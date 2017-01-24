@@ -65,6 +65,7 @@ let filters = {
   },
   owned: {
     opts: function (req) {
+      if (!req.isAuthenticated()) return null;
       return {
         author: req.user._id
       }
@@ -101,6 +102,7 @@ let filters = {
   },
   joined: {
     opts: function (req) {
+      if (!req.isAuthenticated()) return null;
       return {
         'contestants.id': req.user.id
       }
@@ -110,6 +112,7 @@ let filters = {
   },
   joined_now: {
     opts: function (req) {
+      if (!req.isAuthenticated()) return null;
       let now = new Date()
       return {
         'contestants.id': req.user.id,
@@ -129,7 +132,7 @@ let filters = {
 exports.getList = (req, res) => {
   let filter = filters[req.params.type || '']
 
-  if (filter === undefined) {
+  if (!filter || !filter.opts(req)) {
     return res.status(400).send()
   }
 
