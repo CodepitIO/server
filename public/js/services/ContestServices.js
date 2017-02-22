@@ -166,6 +166,7 @@ angular.module('Contests')
             shouldSort = true
             o.accepted = true
             o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000)
+            o.upsolved = (timestamp > $scope.contest.date_end);
             _.update($scope.firstAccepted, pid, function(s) {
               if (s) return s
               return { rep: rep, timestamp: timestamp }

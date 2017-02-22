@@ -348,6 +348,15 @@ tr.submission-row-parent {
   background-color: #8BC34A;
   color: white;
 }
+.contest-view .scoreboard .accepted-cell.upsolved {
+  opacity: 0.75;
+}
+.contest-view .scoreboard .accepted-cell.upsolved .time-cell {
+  font-weight: 900;
+}
+.contest-view .scoreboard .accepted-cell.upsolved .time-cell:after {
+  content: "*";
+}
 .contest-view .scoreboard .rejected-cell {
   background-color: #FFA49C !important;
 }

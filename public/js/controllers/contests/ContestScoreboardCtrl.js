@@ -31,6 +31,7 @@ angular.module('Contests')
       if (score.accepted) {
         cls += 'accepted-cell '
         if (ContestState.firstAccepted[problem].rep === rep) cls += 'first-accepted '
+        if (score.upsolved) cls += 'upsolved ';
         return cls
       }
       if (score.pending > 0) cls += 'pending-cell '
