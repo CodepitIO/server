@@ -22,7 +22,8 @@ const UserCtrl = require('./controllers/user'),
 
 const User = require('./services/authorization'),
   Utils = require('./utils/utils'),
-  Recaptcha = require('./utils/recaptcha')
+  Recaptcha = require('./utils/recaptcha'),
+  cookieSlider = require('./services/cookie_slider')
 
 function APIRoutes () {
   let router = express.Router()
@@ -126,6 +127,7 @@ exports.configure = (app) => {
   app.use(passport.initialize())
   app.use(passport.session())
   app.use(User.middleware())
+  app.use(cookieSlider.middleware());
 
   app.use('/admin', AdminRoutes())
   app.use('/admin/mongo', mongo_express(require('./config/mongo_express')))
