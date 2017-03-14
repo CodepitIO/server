@@ -127,7 +127,7 @@ exports.configure = (app) => {
   app.use(passport.initialize())
   app.use(passport.session())
   app.use(User.middleware())
-  app.use(cookieSlider.middleware());
+  // app.use(cookieSlider.middleware()) -- disabled temporarily
 
   app.use('/admin', AdminRoutes())
   app.use('/admin/mongo', mongo_express(require('./config/mongo_express')))
