@@ -24,6 +24,7 @@ angular.module('General')
 		'huxley': 'Huxley',
 		'timus': 'Timus',
 		'kattis': 'Kattis',
+		'codechef': 'CodeChef',
 	})
 	.value('Verdict', {
 		'-4': {

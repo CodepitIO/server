@@ -102,11 +102,15 @@
     margin-bottom: 1em;
 }
 
-.problem-statement .section-title {
+.problem-statement .section-title, #codechef h3 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     /*font-family: arial,sans-serif;*/
     font-size: 115%;
     font-weight: bold;
+}
+
+#codechef h3 {
+  margin-bottom: 5px;
 }
 
 .problem-statement .input-specification,
