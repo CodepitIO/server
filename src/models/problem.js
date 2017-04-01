@@ -26,7 +26,8 @@ let problemSchema = mongoose.Schema({
   isPdf: {
     type: Boolean,
     default: false
-  }
+  },
+  supportedLangs: [ String ],
 }, {
   timestamps: true
 })
