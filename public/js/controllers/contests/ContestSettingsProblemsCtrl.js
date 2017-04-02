@@ -1,10 +1,37 @@
 var app = angular.module('Contests')
-app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAPI) {
+app.controller('ContestSettingsProblemsController', function ($scope, Languages, ProblemsAPI) {
+    $scope.Languages = Languages
     $scope.searchText = ''
     $scope.selectedProblem = null
+    $scope.contest.languages = _.mapValues(Languages, () => 1)
+    $scope.totalForbid = 0
+    var forbidLang = _.mapValues(Languages, () => 0)
+
+    $scope.checkLang = function(lang, val) {
+      return $scope.contest.languages[lang] === val
+    }
+
+    $scope.toggleLang = function(lang) {
+      if ($scope.contest.languages[lang] >= 0 && $scope.contest.languages[lang] <= 1) {
+        $scope.contest.languages[lang] = 1 - $scope.contest.languages[lang]
+      }
+    }
+
+    $scope.noLanguagesAvailable = function() {
+      return !_.some($scope.contest.languages, (o) => o === 1)
+    }
 
     $scope.select = function() {
       if ($scope.selectedProblem) {
+        $scope.selectedProblem.supportedLangs =
+          _.split($scope.selectedProblem.supportedLangs, ',')
+        _.forEach(Languages, (v,k) => {
+          if (!_.some($scope.selectedProblem.supportedLangs, o => o === k)) {
+            forbidLang[k]++
+            $scope.contest.languages[k] = -1
+            if (forbidLang[k] === 1) $scope.totalForbid++
+          }
+        })
         $scope.contest.problems.push($scope.selectedProblem)
       }
       $scope.selectedProblem = null
@@ -25,7 +52,20 @@ app.controller('ContestSettingsProblemsController', function ($scope, ProblemsAP
 
     $scope.removeProblem = function(id) {
       _.remove($scope.contest.problems, function(obj) {
-        return obj._id === id
+        if (obj._id !== id) {
+          return false
+        }
+        var plangs = _.split(obj.supportedLangs, ',')
+        _.forEach(Languages, (v,k) => {
+          if (!_.some(plangs, o => o == k)) {
+            forbidLang[k]--
+            if (forbidLang[k] === 0) {
+              $scope.contest.languages[k] = 0
+              $scope.totalForbid++
+            }
+          }
+        })
+        return true
       })
     }
 

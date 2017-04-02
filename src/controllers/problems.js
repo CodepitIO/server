@@ -46,8 +46,9 @@ exports.searchProblems = (req, res) => {
   let insertedProblems = req.body.problems || []
   if (!_.isString(substr) || !_.isArray(insertedProblems)) return res.status(400).send()
   if (substr.length < 3 || substr.length > 50 || insertedProblems.length > 26) return res.status(400).send()
+  let result = pindexer.match(substr, insertedProblems);
   return res.json({
-    list: pindexer.match(substr, insertedProblems)
+    list: result
   })
 }
 

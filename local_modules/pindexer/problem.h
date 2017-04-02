@@ -7,7 +7,7 @@
 using namespace std;
 
 string ProblemKeys[] = {"_id", "id", "name", "oj", "url", "originalUrl", "fullName",
-                      "timelimit", "memorylimit", "author"};
+                      "timelimit", "memorylimit", "author", "supportedLangs"};
 
 class Problem {
   public:

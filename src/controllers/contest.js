@@ -24,7 +24,7 @@ exports.getMetadata = (req, res) => {
     select: '_id local.username'
   }).populate({
     path: 'problems',
-    select: '_id name oj id fullName timelimit memorylimit'
+    select: '_id name oj id fullName timelimit memorylimit supportedLangs'
   }).then((contest) => {
     if (!contest) {
       return res.status(400).send()

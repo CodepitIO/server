@@ -1,5 +1,5 @@
 <div ng-controller="ContestSettingsProblemsController" class="contest-settings-container">
-  <div layout="row">
+  <div layout="row" layout-align="space-around center">
     <div flex="60">
       <form name="form" novalidate>
         <md-autocomplete
@@ -20,8 +20,24 @@
             Nenhum problema encontrado.
           </md-not-found>
         </md-autocomplete>
-        <md-subheader class="md-no-sticky" style="margin-top: 5px;">Problemas</md-subheader>
-        <small ng-if="!contest.problems.length" class="informative error">* Você deve inserir ao menos um problema.</small>
+        <md-subheader class="md-no-sticky" style="margin-top: 5px;">Problemas&nbsp;
+          <i class="fa fa-question">
+            <md-tooltip md-direction="top">
+              <p>Atualmente o Codepit suporta problemas dos seguintes juízes:<br />
+                - Codeforces (www.codeforces.com)<br />
+                - CodeChef (www.codechef.com)<br />
+                - Huxley (www.thehuxley.com)<br />
+                - Kattis (open.kattis.com)<br />
+                - LiveArchive (icpcarchive.ecs.baylor.edu)<br />
+                - Spoj (www.spoj.com)<br />
+                - SpojBR (br.spoj.com)<br />
+                - Timus (acm.timus.ru)<br />
+                - URI (www.urionlinejudge.com.br)<br />
+                - UVa (uva.onlinejudge.org)
+              </p>
+            </md-tooltip>
+          </i>
+        </md-subheader>
         <md-list ui-sortable="sortableOptions" ng-model="contest.problems">
           <md-list-item class="md-3-line" ng-repeat="problem in contest.problems">
             <div class="md-list-item-text move-handle" layout="column" flex="5">
@@ -44,10 +60,29 @@
             </div>
           </md-list-item>
         </md-list>
+        <small ng-if="!contest.problems.length" class="informative error">* Você deve inserir ao menos um problema.</small>
+        <small ng-if="noLanguagesAvailable()" class="informative error">* A competição deve suportar ao menos uma linguagem.</small>
         <div class="form-group">
-          <button type="submit" class="btn btn-block data-button" ng-click="nextTab()" ng-disabled="contest.problems.length === 0">Opções &#8594;</button>
+          <button type="submit" class="btn btn-block data-button" ng-click="nextTab()" ng-disabled="noLanguagesAvailable() || contest.problems.length === 0">
+            Opções &#8594;
+          </button>
         </div>
       </form>
+    </div>
+    <div flex="20">
+      <md-subheader class="md-no-sticky" style="margin-top: 5px;">Linguagens&nbsp;
+        <i class="fa fa-question">
+          <md-tooltip md-direction="top">
+            <p>As linguagens permitidas durante a competição.</p>
+          </md-tooltip>
+        </i>
+      </md-subheader>
+      <div ng-repeat="(key,lang) in Languages">
+        <md-checkbox ng-checked="checkLang(key,1)" ng-disabled="checkLang(key,-1)" ng-click="toggleLang(key)">
+          {{ lang }}
+        </md-checkbox>
+      </div>
+      <small ng-if="true" class="informative">* Um ou mais problemas inseridos não suportam todas as linguagens e, portanto, foram disabilitados.</small>
     </div>
   </div>
 </div>

@@ -80,10 +80,11 @@ app.controller('ContestSettingsController', function ($scope, $state, $timeout, 
       var c = $scope.contest
       var validateData = c.name && c.date_start && c.date_end
       var validateProblems = c.problems && c.problems.length > 0
+      var validateLanguages = _.some(c.languages, (o) => o === 1)
       var validateOptions =
         (!c.isPrivate || (c.password) && c.password.length > 0) &&
         (c.allowIndividual || c.allowTeam)
-      return validateData && validateProblems && validateOptions
+      return validateData && validateLanguages && validateProblems && validateOptions
     }
 
     function handleError() {
