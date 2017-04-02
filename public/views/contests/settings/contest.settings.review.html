@@ -28,6 +28,9 @@
     </div>
     <md-subheader>Informações</md-subheader>
     <div layout="column">
+      <div>
+        Linguagens permitidas: {{contest.languages | mrtParseLanguages}}
+      </div>
       <div ng-if="contest.hasFrozen || contest.hasBlind" style="padding-bottom: 20px;">
         <div ng-show="contest.hasFrozen">
           O modo <b>frozen</b> começará <span ng-bind-html="contest.frozen_time | mrtFilterTime"></span>, faltando {{(contest.date_end - contest.frozen_time) / 60000 | formatDuration}} para o término da competição.

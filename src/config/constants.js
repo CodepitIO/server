@@ -20,6 +20,8 @@ module.exports = {
     else return 'https://www.codepit.io'
   },
 
+  LANGUAGES: ['c', 'cpp', 'cpp11', 'java', 'python3'],
+
   // Dev
   ACCESS: {
     MEMBER: 0,

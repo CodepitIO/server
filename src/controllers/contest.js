@@ -9,6 +9,8 @@ const Contest = require('../models/contest'),
   Errors = require('../utils/errors'),
   Utils = require('../utils/utils')
 
+const LANGUAGES = require('../config/constants').LANGUAGES
+
 function canViewContest(contest, user) {
   return !contest.watchPrivate ||
     (user && (user.isAdmin || contest.userInContest(user) || contest.isAuthor(user)));
@@ -39,6 +41,7 @@ exports.getMetadata = (req, res) => {
       isPrivate: contest.isPrivate,
       watchPrivate: contest.watchPrivate,
       contestantType: contest.contestantType,
+      languages: contest.languages,
       problems: [],
 
       hasStarted: contest.hasStarted(),
@@ -181,8 +184,8 @@ exports.validateContest = (req, res, next) => {
           if (timeArr[i] > timeArr[i+1]) return res.status(400).send()
         }
 
-        let sixMonthsFromNow = now + 6 * 30 * 24 * 60 * 60 * 1000;
-        if (c.date_end > sixMonthsFromNow) return res.status(400).send()
+        let sevenMonthsFromNow = now + 7 * 30 * 24 * 60 * 60 * 1000;
+        if (c.date_end > sevenMonthsFromNow) return res.status(400).send()
         if (c.date_start < Math.min(now - 60 * 60 * 1000, contest && contest.date_start || now)) {
           return res.status(400).send()
         }
@@ -194,6 +197,14 @@ exports.validateContest = (req, res, next) => {
     },
     (next) => {
       // <<-- Validate options -->>
+      c.languages = data.languagesArr
+      if (!_.isArray(c.languages) || c.languages.length === 0) {
+        return res.status(400).send()
+      }
+      if (_.difference(c.languages, LANGUAGES).length > 0) {
+        return res.status(400).send()
+      }
+
       c.isPrivate = !!data.isPrivate
       c.password = _.toString(data.password)
       if (c.isPrivate && !_.inRange(c.password.length, 1, 100)) {
@@ -209,7 +220,7 @@ exports.validateContest = (req, res, next) => {
     (next) => {
       // <<-- Validate problems -->>
       c.problems = data.problems
-      if (!_.isArray(c.problems) || c.problems.length < 1 || c.problems.length > 26) {
+      if (!_.isArray(c.problems) || c.problems.length === 0 || c.problems.length > 26) {
         return res.status(400).send()
       }
       c.problems = _.chain(c.problems)
@@ -233,7 +244,7 @@ exports.createOrEdit = (req, res) => {
     req.body.author = req.user._id
     let contest = new Contest(req.body)
     return contest.save((err, contest) => {
-      if (err) return res.status(500).send()
+    if (err) return res.status(500).send()
       return res.json({id: contest._id})
     })
   } else {

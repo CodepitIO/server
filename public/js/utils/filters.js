@@ -66,6 +66,16 @@ app.filter('mrtTimezoneStrap', function () {
   }
 })
 
+app.filter('mrtParseLanguages', function (Languages) {
+  return function (langs) {
+    var arr = []
+    _.forEach(langs, (v,k) => {
+      if (v === 1) arr.push(k);
+    });
+    return _.chain(arr).map((o) => Languages[o]).join(', ').value()
+  }
+})
+
 app.filter('mrtHasError', function () {
   return function (obj) {
     return obj.$dirty && !_.isEmpty(obj.$error)

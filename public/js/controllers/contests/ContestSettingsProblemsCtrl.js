@@ -3,8 +3,8 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
     $scope.Languages = Languages
     $scope.searchText = ''
     $scope.selectedProblem = null
-    $scope.contest.languages = _.mapValues(Languages, () => 1)
     $scope.totalForbid = 0
+    $scope.contest.languages = _.mapValues(Languages, () => 1)
     var forbidLang = _.mapValues(Languages, () => 0)
 
     $scope.checkLang = function(lang, val) {
@@ -61,7 +61,7 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
             forbidLang[k]--
             if (forbidLang[k] === 0) {
               $scope.contest.languages[k] = 0
-              $scope.totalForbid++
+              $scope.totalForbid--
             }
           }
         })

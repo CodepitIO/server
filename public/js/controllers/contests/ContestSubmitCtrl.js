@@ -1,7 +1,7 @@
 angular.module('Contests')
   .controller('ContestSubmitController',
     function ($scope, Languages, TextEditorLanguageMode, ContestAPI, ContestState) {
-      $scope.languages = Languages
+      $scope.languagesDict = Languages
       $scope.editorOptions = {
         theme: 'blackboard',
         lineWrapping: true,

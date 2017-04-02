@@ -81,6 +81,7 @@ exports.submit = (req, res) => {
       if (results.problem && !results.contest.problemInContest(submission.problem) ||
           !results.contest.userInContest(userId)) return next(new Error())
       if (results.contest.date_start > new Date()) return next(new Error())
+      if (!_.some(submission.language, results.contest.languages)) return next(new Error())
       submission.rep = results.contest.getUserRepresentative(userId)
       problem = results.problem
       createSubmission(submission, userId, next)
@@ -91,7 +92,7 @@ exports.submit = (req, res) => {
       Queue.pushSubmission(problem.oj, submission, next)
     },
   ], (err) => {
-    if (err) return res.status(500).send()
+    if (err) return res.status(400).send()
     return res.json({
       submission: submission
     })

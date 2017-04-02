@@ -35,11 +35,12 @@
 					</md-option>
 				</md-select>
 			</md-input-container>
+			{{contest}}
 			<md-input-container>
 				<label>Linguagem</label>
 				<md-select ng-model="ContestState.submit.language" ng-change="updateTextMode()">
-					<md-option ng-repeat="(id,name) in languages" ng-value="id">
-						{{name}}
+					<md-option ng-repeat="lang in ContestState.contest.languages" ng-value="lang">
+						{{languagesDict[lang]}}
 					</md-option>
 				</md-select>
 			</md-input-container>

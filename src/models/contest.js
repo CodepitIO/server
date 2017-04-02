@@ -55,7 +55,8 @@ let schema = mongoose.Schema({
   watchPrivate: {
     type: Boolean,
     default: false
-  }
+  },
+  languages: [ String ],
 }, {
   timestamps: true
 })
