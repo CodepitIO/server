@@ -25,7 +25,9 @@ angular.module('General')
 		'timus': 'Timus',
 		'kattis': 'Kattis',
 		'codechef': 'CodeChef',
-		'pku': 'PKU',
+		'poj': 'POJ',
+		'zoj': 'ZOJ',
+		'toj': 'TOJ',
 	})
 	.value('Verdict', {
 		'-4': {

@@ -19,8 +19,8 @@ app.controller('ContestSettingsController', function ($scope, $stateParams, $int
         $interval.cancel(loading)
         $scope.date_start = ContestState.date_start
         $scope.contest = ContestState.editContest
-        $scope.contest.languages = _.mapValues(Languages, (v, k) => {
-          return _.some($scope.contest.languages, (o) => o == k) ? 1 : 0
+        $scope.contest.languages = _.mapValues(Languages, function(v, k) {
+          return _.some($scope.contest.languages, function(o) { return o === k}) ? 1 : 0
         })
       }
     }, 200)
@@ -88,7 +88,7 @@ app.controller('ContestSettingsController', function ($scope, $stateParams, $int
     if (!c) return
     var validateData = c.name && c.date_start && c.date_end
     var validateProblems = c.problems && c.problems.length > 0
-    var validateLanguages = _.some(c.languages, (o) => o === 1)
+    var validateLanguages = _.some(c.languages, function(o) { return o === 1})
     var validateOptions =
     (!c.isPrivate || (c.password) && c.password.length > 0) &&
     (c.allowIndividual || c.allowTeam)
@@ -103,7 +103,7 @@ app.controller('ContestSettingsController', function ($scope, $stateParams, $int
   $scope.createOrEdit = function() {
     $scope.loading = true
     $scope.contest.languagesArr = []
-    _.forEach($scope.contest.languages, (v,k) => {
+    _.forEach($scope.contest.languages, function (v,k) {
       if (v === 1) $scope.contest.languagesArr.push(k);
     });
     if (!$stateParams.id) ContestAPI.create($scope.contest, handleError)

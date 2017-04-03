@@ -4,8 +4,8 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
     $scope.searchText = ''
     $scope.selectedProblem = null
     $scope.totalForbid = 0
-    $scope.contest.languages = _.mapValues(Languages, () => 1)
-    var forbidLang = _.mapValues(Languages, () => 0)
+    $scope.contest.languages = _.mapValues(Languages, function() { return 1; } )
+    var forbidLang = _.mapValues(Languages, function() { return 0; })
 
     $scope.checkLang = function(lang, val) {
       return $scope.contest.languages[lang] === val
@@ -18,15 +18,15 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
     }
 
     $scope.noLanguagesAvailable = function() {
-      return !_.some($scope.contest.languages, (o) => o === 1)
+      return !_.some($scope.contest.languages, function(o) { return o === 1} )
     }
 
     $scope.select = function() {
       if ($scope.selectedProblem) {
         $scope.selectedProblem.supportedLangs =
           _.split($scope.selectedProblem.supportedLangs, ',')
-        _.forEach(Languages, (v,k) => {
-          if (!_.some($scope.selectedProblem.supportedLangs, o => o === k)) {
+        _.forEach(Languages, function (v,k) {
+          if (!_.some($scope.selectedProblem.supportedLangs, function(o) { return o === k} )) {
             forbidLang[k]++
             $scope.contest.languages[k] = -1
             if (forbidLang[k] === 1) $scope.totalForbid++
@@ -56,8 +56,8 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
           return false
         }
         var plangs = _.split(obj.supportedLangs, ',')
-        _.forEach(Languages, (v,k) => {
-          if (!_.some(plangs, o => o == k)) {
+        _.forEach(Languages, function(v,k) {
+          if (!_.some(plangs, function(o) { return o === k} )) {
             forbidLang[k]--
             if (forbidLang[k] === 0) {
               $scope.contest.languages[k] = 0

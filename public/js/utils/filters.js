@@ -69,10 +69,10 @@ app.filter('mrtTimezoneStrap', function () {
 app.filter('mrtParseLanguages', function (Languages) {
   return function (langs) {
     var arr = []
-    _.forEach(langs, (v,k) => {
+    _.forEach(langs, function(v,k) {
       if (v === 1) arr.push(k);
     });
-    return _.chain(arr).map((o) => Languages[o]).join(', ').value()
+    return _.chain(arr).map(function(o) { return Languages[o] }).join(', ').value()
   }
 })
 
