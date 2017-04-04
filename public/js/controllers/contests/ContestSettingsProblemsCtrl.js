@@ -60,7 +60,7 @@ app.controller('ContestSettingsProblemsController', function ($scope, Languages,
           if (!_.some(plangs, function(o) { return o === k} )) {
             forbidLang[k]--
             if (forbidLang[k] === 0) {
-              $scope.contest.languages[k] = 0
+              $scope.contest.languages[k] = 1
               $scope.totalForbid--
             }
           }

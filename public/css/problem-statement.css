@@ -1,4 +1,4 @@
-.problem-statement, .timus-problem, .kattis-problem {
+.problem-statement, .timus-problem, .kattis-problem, font {
     margin: 0.5em;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.5em;
@@ -102,11 +102,11 @@
     margin-bottom: 1em;
 }
 
-.problem-statement .section-title, #codechef h3 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.problem-statement .section-title, #codechef h3, .zoj-problem h4 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     /*font-family: arial,sans-serif;*/
-    font-size: 115%;
-    font-weight: bold;
+    font-size: 115% !important;
+    font-weight: bold !important;
 }
 
 #codechef h3 {
@@ -179,9 +179,10 @@
     border-radius: 0px;
 }
 
-.problem-statement .sample-tests, .timus-problem .sample pre {
-  font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier;
-  font-size: 0.9em;
+.problem-statement .sample-tests, .timus-problem .sample pre, .toj-problem pre {
+  font-family: Consolas, "Lucida Console", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier !important;
+  font-size: 0.9em !important;
+  font-weight: normal !important;
 }
 
 .problem-statement .sample-tests .title {
@@ -238,7 +239,18 @@ div .problem-statement-overlay {
     font-size: 28px;
 }
 
-.problem-statement h2, .kattis-problem h2 {
+.poj-problem p.pst {
+  margin: 10px 0 0 0 !important;
+}
+
+.toj-problem h3 {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  margin: 20px 0 10px !important;
+}
+
+.problem-statement h2, .kattis-problem h2,
+.poj-problem p.pst, .toj-problem h3 {
     font-size: 18px;
     font-weight: bold;
     margin: 20px 0 10px;

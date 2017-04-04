@@ -4,6 +4,7 @@ angular.module('General')
 		'cpp': 'C++',
 		'cpp11': 'C++11',
 		'java': 'Java',
+		'python2.7': 'Python 2.7',
 		'python3': 'Python 3',
 	})
 	.value('TextEditorLanguageMode', {
@@ -11,6 +12,7 @@ angular.module('General')
 		'cpp': 'text/x-c++src',
 		'cpp11': 'text/x-c++src',
 		'java': 'text/x-java',
+		'python2.7': 'text/x-python',
 		'python3': 'text/x-python',
 		'': '',
 	})

@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-const ValidateChain = require('../utils/utils').validateChain
+const ValidateChain = require('../utils/utils').validateChain,
+      Constants     = require('../config/constants')
 
 let schema = mongoose.Schema({
   contest: { type: ObjectId, ref: 'Contest' },
@@ -27,7 +28,7 @@ schema.index({ date: 1 })
 
 schema.statics.validateChain = ValidateChain({
   language: function() {
-    this.notEmpty().isIn(['c', 'cpp', 'cpp11', 'java', 'python3'])
+    this.notEmpty().isIn(Constants.LANGUAGES)
   },
   code: function() {
     this.notEmpty().isByteLength({min: 1, max: 64 * 1024})
