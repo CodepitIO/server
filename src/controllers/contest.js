@@ -1,15 +1,15 @@
 const async = require('async'),
   _ = require('lodash')
 
-const Contest = require('../models/contest'),
-  Team = require('../models/team'),
-  Submission = require('../models/submission'),
+const Contest = require('../../common/models/contest'),
+  Team = require('../../common/models/team'),
+  Submission = require('../../common/models/submission'),
   Redis = require('../services/dbs').redisClient,
   Problems = require('./problems'),
   Errors = require('../utils/errors'),
-  Utils = require('../utils/utils')
+  Utils = require('../../common/lib/utils')
 
-const LANGUAGES = require('../config/constants').LANGUAGES
+const LANGUAGES = require('../../common/constants').LANGUAGES
 
 function canViewContest(contest, user) {
   return !contest.watchPrivate ||
@@ -186,7 +186,7 @@ exports.validateContest = (req, res, next) => {
 
         let sevenMonthsFromNow = now + 7 * 30 * 24 * 60 * 60 * 1000;
         if (c.date_end > sevenMonthsFromNow) return res.status(400).send()
-        if (c.date_start < Math.min(now - 60 * 60 * 1000, contest && contest.date_start || now)) {
+        if (c.date_start < Math.min(now - 3 * 60 * 60 * 1000, contest && contest.date_start || now)) {
           return res.status(400).send()
         }
         return next()

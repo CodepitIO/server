@@ -2,7 +2,7 @@
 
 const ConnectRoles = require('connect-roles')
 
-const ACCESS = require('../config/constants').ACCESS
+const ACCESS = require('../../common/constants').SITE_VARS.ACCESS
 
 let user = new ConnectRoles({
   failureHandler: (req, res, action) => {

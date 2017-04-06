@@ -1,6 +1,6 @@
 'use strict'
 
-const Post = require('../models/post')
+const Post = require('../../common/models/post')
 
 const POSTS_PER_PAGE = 10
 

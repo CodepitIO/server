@@ -1,6 +1,6 @@
 'use strict'
 
-const MONGO = require('./constants').MONGO
+const MONGO = require('../../common/constants').CONN.MONGO
 
 let SECRET = process.env.COOKIE_SECRET || 'COOKIE_SECRET'
 

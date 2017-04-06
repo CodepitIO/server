@@ -1,6 +1,6 @@
 'use strict'
 
-const Contest = require('../models/contest'),
+const Contest = require('../../common/models/contest'),
   mongoose = require('mongoose'),
   _ = require('lodash')
 

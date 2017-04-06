@@ -5,7 +5,7 @@ const passport = require('passport'),
   crypto = require('crypto')
 
 const Errors = require('../utils/errors'),
-  User = require('../models/user'),
+  User = require('../../common/models/user'),
   Mailer = require('../services/mailer'),
   Redis = require('../services/dbs').redisClient
 

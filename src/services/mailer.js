@@ -7,25 +7,26 @@ const nodemailer = require('nodemailer'),
   _ = require('lodash')
 
 const Queue = require('./queue'),
-  Constants = require('../config/constants'),
   Redis = require('../services/dbs').redisClient
 
+const C = require('../../common/constants').CONN
+
 let transporter = nodemailer.createTransport(sesTransport({
-  region: Constants.MAILER.SES_REGION,
-  rateLimit: Constants.MAILER.RATE_LIMIT,
-  maxConnections: Constants.MAILER.MAX_CONN,
+  region: C.MAILER.SES_REGION,
+  rateLimit: C.MAILER.RATE_LIMIT,
+  maxConnections: C.MAILER.MAX_CONN,
 }))
 
 const TEMPLATE_URL = __dirname + '/templates/%s.html'
 let REGISTER_TMPL = _.template(fs.readFileSync(util.format(TEMPLATE_URL,'register'), 'utf8'))
 let RECOVER_TMPL = _.template(fs.readFileSync(util.format(TEMPLATE_URL,'recover'), 'utf8'))
 
-let domain = process.env.DOMAIN || Constants.GET_DOMAIN()
+let domain = process.env.DOMAIN || C.GET_DOMAIN()
 
 let mailHandler = {
   register: function(job, done) {
     Redis.set(`email:register:${job.data.id}`, 1)
-    Redis.expire(`email:register:${job.data.id}`, Constants.MAILER.TIMELIMIT_PER_USER)
+    Redis.expire(`email:register:${job.data.id}`, C.MAILER.TIMELIMIT_PER_USER)
     job.data.domain = domain
     let body = REGISTER_TMPL(job.data)
     var mailOptions = {
@@ -39,7 +40,7 @@ let mailHandler = {
   },
   recover: function(job, done) {
     Redis.set(`email:recover:${job.data.id}`, 1)
-    Redis.expire(`email:recover:${job.data.id}`, Constants.MAILER.TIMELIMIT_PER_USER)
+    Redis.expire(`email:recover:${job.data.id}`, C.MAILER.TIMELIMIT_PER_USER)
     job.data.domain = domain
     let body = RECOVER_TMPL(job.data)
     var mailOptions = {

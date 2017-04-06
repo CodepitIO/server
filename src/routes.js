@@ -21,7 +21,7 @@ const UserCtrl = require('./controllers/user'),
   TeamCtrl = require('./controllers/team')
 
 const User = require('./services/authorization'),
-  Utils = require('./utils/utils'),
+  Utils = require('../common/lib/utils'),
   Recaptcha = require('./utils/recaptcha'),
   cookieSlider = require('./services/cookie_slider')
 
@@ -130,7 +130,7 @@ exports.configure = (app) => {
   app.use(cookieSlider.middleware());
 
   app.use('/admin', AdminRoutes())
-  app.use('/admin/mongo', mongo_express(require('./config/mongo_express')))
+  app.use('/admin/mongo', mongo_express(require('./services/mongo_express')))
   app.use('/api/v1/', APIRoutes())
   app.use(OpenRoutes())
 }

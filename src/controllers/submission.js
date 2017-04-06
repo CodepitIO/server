@@ -1,10 +1,10 @@
 'use strict'
 
-const Submission = require('../models/submission'),
-  Problem = require('../models/problem'),
-  Contest = require('../models/contest'),
+const Submission = require('../../common/models/submission'),
+  Problem = require('../../common/models/problem'),
+  Contest = require('../../common/models/contest'),
   Queue = require('../services/queue'),
-  Utils = require('../utils/utils')
+  Utils = require('../../common/lib/utils')
 
 const async = require('async'),
   fs = require('fs'),

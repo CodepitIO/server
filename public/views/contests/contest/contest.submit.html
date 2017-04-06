@@ -44,6 +44,9 @@
 					</md-option>
 				</md-select>
 			</md-input-container>
+			<small ng-if="ContestState.submit.language === 'java'" class="informative">
+				Para submissões em Java, lembre-se de utilizar o nome de classe <b>Main</b>.
+			</small>
 			<div flex>
 				<md-button class="md-fab md-primary md-hue-2" ng-click="submit()" disabled="false" ng-disabled="form.$invalid || ContestState.submit.problem == null || !ContestState.submit.language">
 					<md-icon class="material-icons block">send</md-icon>

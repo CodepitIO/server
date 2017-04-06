@@ -7,7 +7,7 @@ const async = require('async'),
   _ = require('lodash'),
   CronJob = require('cron').CronJob
 
-const Problem = require('../models/problem')
+const Problem = require('../../common/models/problem')
 
 const INDEX_PROBLEMS_CRON = '00 00 04 * * *';
 const INDEX_PROBLEMS_TZ = 'America/Recife';

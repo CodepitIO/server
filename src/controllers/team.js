@@ -3,10 +3,10 @@
 const async = require('async'),
   _ = require('lodash')
 
-const Team = require('../models/team'),
-  User = require('../models/user'),
+const Team = require('../../common/models/team'),
+  User = require('../../common/models/user'),
   Errors = require('../utils/errors'),
-  Utils = require('../utils/utils')
+  Utils = require('../../common/lib/utils')
 
 const MAX_TEAMS_PER_USER = 20
 const MAX_USERS_PER_TEAM = 5

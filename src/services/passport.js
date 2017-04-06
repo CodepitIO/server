@@ -3,7 +3,7 @@
 const crypto = require('crypto'),
   LocalStrategy = require('passport-local').Strategy
 
-const User = require('../models/user'),
+const User = require('../../common/models/user'),
   Errors = require('../utils/errors')
 
 module.exports = (passport) => {
