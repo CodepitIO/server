@@ -20,6 +20,7 @@ angular.module('General')
 		'la': 'LiveArchive',
 		'uva': 'UVa',
 		'cf': 'Codeforces',
+		'cfgym': 'Codeforces Gym',
 		'uri': 'URI Online Judge',
 		'spoj': 'Spoj',
 		'spojbr': 'SpojBR',

@@ -9,9 +9,11 @@
       <span>{{problem.printName}}</span>
     </div>
     <div class="header metadata">
-      <span ng-if="problem.timelimit">Time limit: {{problem.timelimit}}s</span>
-      <span ng-if="problem.memorylimit">Memory limit: {{problem.memorylimit}}</span>
-      <span class="print-button no-print"><a class="small" href="" ng-click="print()" target="_blank">[imprimir]</a></div>
+        <span ng-if="problem.timelimit">Time limit: {{problem.timelimit}}s</span>
+        <span ng-if="problem.memorylimit">Memory limit: {{problem.memorylimit}}</span>
+        <span ng-if="problem.inputFile">Input: <b>{{problem.inputFile}}</b></span>
+        <span ng-if="problem.outputFile">Output: <b>{{problem.outputFile}}</b></span>
+        <span class="print-button no-print"><a class="small" href="" ng-click="print()" target="_blank">[imprimir]</a></span>
     </div>
   </div>
   <div ng-hide="problem.imported">
