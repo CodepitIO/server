@@ -27,7 +27,7 @@ https://docs.docker.com/compose/install/
 Clone the original repo to folder **web** inside the folder **codepit**:
 
 ```
-git clone https://github.com/godely/codepit.git web
+git clone https://github.com/godely/cpio-www.git web --recursive
 ```
 
 You can also fork the repo in GitHub and clone your repo.
