@@ -7,12 +7,18 @@ const redis = require('redis'),
 const CONN = require('../../common/constants').CONN;
 
 mongoose.Promise = require('bluebird')
-async.retry({times: 5, interval: 5000}, mongoose.connect.bind(mongoose, CONN.MONGO.GET_URL()), (err) => {
-  if (err) {
-    console.log(err)
-    process.exit(1);
+async.retry(
+  {times: 5, interval: 5000},
+  mongoose.connect.bind(mongoose, CONN.MONGO.GET_URL(), {
+    useMongoClient: true,
+  }),
+  (err) => {
+    if (err) {
+      console.log(err)
+      process.exit(1)
+    }
   }
-});
+);
 
 let redisClient = redis.createClient({
   host: CONN.REDIS.HOST,
