@@ -28,7 +28,7 @@
     "nodemailer-ses-transport": "^1.5.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "pindexer": "file:local_modules/pindexer",
+    "pindexer": "^1.0.0",
     "redis": "^2.7.1",
     "serve-favicon": "^2.4.3"
   },
