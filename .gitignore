@@ -17,6 +17,7 @@ results
 
 npm-debug.log
 node_modules/
+local_modules/pindexer/build/
 
 /public/imgs/site
 /public/dist

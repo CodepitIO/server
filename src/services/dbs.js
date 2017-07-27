@@ -34,8 +34,8 @@ exports.redisClient = redisClient
 
 exports.createRedisClient = () => {
   return redis.createClient({
-    host: REDIS.HOST,
-    port: REDIS.PORT,
+    host: CONN.REDIS.HOST,
+    port: CONN.REDIS.PORT,
     prefix: process.env.NODE_ENV
   })
 }

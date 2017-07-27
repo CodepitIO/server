@@ -2,13 +2,19 @@
 
 const kue = require('kue')
 
+const Dbs = require('./dbs')
+
 let PublishQueue = kue.createQueue({
-  redis: { host: 'redis' },
+  redis: {
+    createClientFactory: Dbs.createRedisClient,
+  },
   jobEvents: false
 })
 
 let SubscribeQueue = kue.createQueue({
-  redis: { host: 'redis' },
+  redis: {
+    createClientFactory: Dbs.createRedisClient,
+  },
   jobEvents: false
 })
 
