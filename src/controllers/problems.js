@@ -3,7 +3,7 @@
 const async = require('async'),
   fs = require('fs'),
   path = require('path'),
-  pindexer = require('pindexer'),
+  pindexer = require('cpio-pindexer'),
   _ = require('lodash'),
   CronJob = require('cron').CronJob
 
