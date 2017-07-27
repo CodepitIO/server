@@ -13,7 +13,6 @@ RUN apt-get update && \
 # Install node_modules and bower_components
 RUN npm install -g grunt-cli bower node-gyp
 COPY package.json /tmp/
-COPY local_modules/ /tmp/local_modules/
 RUN cd /tmp && npm install
 COPY [".bowerrc", "bower.json", "/tmp/"]
 RUN cd /tmp && bower install --allow-root
