@@ -98,6 +98,11 @@ angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvi
         templateUrl: 'views/user/profile.teams.html',
         controller: 'ProfileTeamsController'
       })
+      .state('profile.groups', {
+        url: '/groups',
+        templateUrl: 'views/user/profile.groups.html',
+        controller: 'ProfileGroupsController'
+      })
       .state('profile.posts', {
         url: '/posts?page',
         templateUrl: 'views/user/profile.posts.html',

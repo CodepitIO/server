@@ -1,0 +1,42 @@
+.create-group {
+  min-width: 500px;
+  padding: 30px;
+}
+
+.create-group .data-input {
+  width: 300px;
+  left: 30%;
+}
+
+.create-group input.data-input {
+  height: 40px;
+}
+
+.create-group textarea {
+  height: 80px;
+  resize: none;
+  border-color: #ddd;
+}
+
+.create-group div.flex-xs {
+  min-height: 40px; }
+
+.create-group .checkboxDemo1 div {
+  clear: both; }
+
+.create-group p {
+  padding-left: 8px; }
+
+.create-group fieldset.standard {
+  border-style: solid;
+  border-width: 1px; }
+
+.create-group legend {
+  color: #3F51B5; }
+
+.create-group legend code {
+  color: #3F51B5;
+  font-weight: normal; }
+
+.create-group .ipsum {
+  color: saddlebrown; }

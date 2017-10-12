@@ -1,0 +1,48 @@
+<form name="form" novalidate>
+  <div class="create-group md-padding">
+    <!-- <md-subheader>Dados Gerais</md-subheader>
+    <div layout="column" layout-align="center center">
+      <div class="form-group">
+        <input type="text" class="data-input" placeholder="Nome do grupo" ng-model="groups.name" name="name" maxlength="50" required/>
+        <small class="error" ng-show="form.name | mrtHasError">* o grupo precisa ter um nome</small>
+      </div>
+      <div class="form-group">
+        <textarea class="data-input" placeholder="Descrição" ng-model="groups.description" name="description" maxlength="500" required/>
+      </div>
+    </div> -->
+    <md-divider></md-divider>
+    <md-subheader>Privacidade&nbsp;
+      <i class="fa fa-question">
+        <md-tooltip md-direction="top">
+          <p>Como funciona a inscrição no grupo?</p>
+        </md-tooltip>
+      </i>
+    </md-subheader>
+    <div class="settings-options" layout="row" layout-align="start center" flex="45">
+      <div><span><i class="fa fa-unlock" style="display: inline;"></i>&nbsp;Aberto</span></div>
+      <div>
+        <md-switch class="md-primary" ng-model="group.isPrivate"></md-switch>
+      </div>
+      <div><span><i class="fa fa-lock" style="display: inline;"></i>&nbsp;Fechado</span></div>
+    </div>
+    <md-divider></md-divider>
+    <md-subheader>Apenas administradores podem...&nbsp;
+      <i class="fa fa-question">
+        <md-tooltip md-direction="top">
+          <p>Selecione as ações que apenas os administradores do grupo podem fazer. As opções não marcadas serão liberadas para todos os membros.</p>
+        </md-tooltip>
+      </i>
+    </md-subheader>
+    <div layout="column">
+      <md-checkbox ng-model="group.permissions.invite">
+        Convidar membros
+      </md-checkbox>
+      <md-checkbox ng-model="group.permissions.create">
+        Criar competições
+      </md-checkbox>
+      <md-checkbox ng-model="group.permissions.post">
+        Fazer posts
+      </md-checkbox>
+    </div>
+  </div>
+</form>
