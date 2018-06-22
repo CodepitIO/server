@@ -249,4 +249,4 @@ angular.module('General')
     { Name: 'Yemen', Code: 'ye' },
     { Name: 'Zambia', Code: 'zm' },
     { Name: 'Zimbabwe', Code: 'zw' }
-  ])
+  ]);

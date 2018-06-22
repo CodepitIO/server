@@ -1,7 +1,7 @@
 angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('home')
+    $urlRouterProvider.otherwise('home');
     //
     // Now set up the states
     $stateProvider
@@ -120,12 +120,12 @@ angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvi
         controller: 'ProblemController',
         resolve: {
           problem: function($q, $stateParams, ProblemsAPI) {
-            var deferred = $q.defer()
+            var deferred = $q.defer();
             ProblemsAPI.get($stateParams.id, function (err, data) {
-              if (err) deferred.reject(err)
-              else deferred.resolve(data)
-            })
-            return deferred.promise
+              if (err) deferred.reject(err);
+              else deferred.resolve(data);
+            });
+            return deferred.promise;
           }
         }
       })
@@ -134,5 +134,5 @@ angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvi
         templateProvider: function($templateFactory, problem) {
           return $templateFactory.fromUrl(problem.url);
         },
-      })
-  })
+      });
+  });

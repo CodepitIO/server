@@ -1773,10 +1773,10 @@
 
 				function IDNAToASCII(h) {
 					if ('' == h) {
-						invalid.call(this)
+						invalid.call(this);
 					}
 					// XXX
-					return h.toLowerCase()
+					return h.toLowerCase();
 				}
 
 				function percentEscape(c) {
@@ -1812,7 +1812,7 @@
 
 				function parse(input, stateOverride, base) {
 					function err(message) {
-						errors.push(message)
+						errors.push(message);
 					}
 
 					var state = stateOverride || 'scheme start',
@@ -1868,7 +1868,7 @@
 								} else if (EOF == c) {
 									break loop;
 								} else {
-									err('Code point not allowed in scheme: ' + c)
+									err('Code point not allowed in scheme: ' + c);
 									break loop;
 								}
 								break;
@@ -1904,7 +1904,7 @@
 								} else {
 									err('Expected /, got: ' + c);
 									state = 'relative';
-									continue
+									continue;
 								}
 								break;
 
@@ -1942,8 +1942,8 @@
 									this._password = base._password;
 									state = 'fragment';
 								} else {
-									var nextC = input[cursor + 1]
-									var nextNextC = input[cursor + 2]
+									var nextC = input[cursor + 1];
+									var nextNextC = input[cursor + 2];
 									if (
 										'file' != this._scheme || !ALPHA.test(c) ||
 										(nextC != ':' && nextC != '|') ||
@@ -15053,10 +15053,10 @@
 
 				function IDNAToASCII(h) {
 					if ('' == h) {
-						invalid.call(this)
+						invalid.call(this);
 					}
 					// XXX
-					return h.toLowerCase()
+					return h.toLowerCase();
 				}
 
 				function percentEscape(c) {
@@ -15092,7 +15092,7 @@
 
 				function parse(input, stateOverride, base) {
 					function err(message) {
-						errors.push(message)
+						errors.push(message);
 					}
 
 					var state = stateOverride || 'scheme start',
@@ -15148,7 +15148,7 @@
 								} else if (EOF == c) {
 									break loop;
 								} else {
-									err('Code point not allowed in scheme: ' + c)
+									err('Code point not allowed in scheme: ' + c);
 									break loop;
 								}
 								break;
@@ -15184,7 +15184,7 @@
 								} else {
 									err('Expected /, got: ' + c);
 									state = 'relative';
-									continue
+									continue;
 								}
 								break;
 
@@ -15222,8 +15222,8 @@
 									this._password = base._password;
 									state = 'fragment';
 								} else {
-									var nextC = input[cursor + 1]
-									var nextNextC = input[cursor + 2]
+									var nextC = input[cursor + 1];
+									var nextNextC = input[cursor + 2];
 									if (
 										'file' != this._scheme || !ALPHA.test(c) ||
 										(nextC != ':' && nextC != '|') ||

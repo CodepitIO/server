@@ -14,20 +14,20 @@ angular.module('User')
           closeTo: {
             left: 1500
           }
-        })
-      }
-      $scope.id = $stateParams.id
+        });
+      };
+      $scope.id = $stateParams.id;
     })
   .controller('ProfilePostsDialogController', function ($scope, $mdDialog, PostAPI, post) {
       $scope.post = {
         title: post && post.title || '',
         body: post && post.body || ''
-      }
-      $scope.create = (post && post.create === true)
+      };
+      $scope.create = (post && post.create === true);
       $scope.cancel = function () {
-        $mdDialog.cancel()
-      }
+        $mdDialog.cancel();
+      };
       $scope.submit = function () {
-        PostAPI.post($scope.post)
-      }
-    })
+        PostAPI.post($scope.post);
+      };
+    });

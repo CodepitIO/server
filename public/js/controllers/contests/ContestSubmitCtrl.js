@@ -1,30 +1,30 @@
 angular.module('Contests')
   .controller('ContestSubmitController',
     function ($scope, Languages, TextEditorLanguageMode, ContestAPI, ContestState) {
-      $scope.languagesDict = Languages
+      $scope.languagesDict = Languages;
       $scope.editorOptions = {
         theme: 'blackboard',
         lineWrapping: true,
         lineNumbers: true,
-      }
+      };
 
       $scope.updateTextMode = function () {
-        $scope.editorOptions.mode = TextEditorLanguageMode[ContestState.submit.language || '']
-      }
+        $scope.editorOptions.mode = TextEditorLanguageMode[ContestState.submit.language || ''];
+      };
       setTimeout(function() {
-        $scope.updateTextMode()
-      }, 0)
+        $scope.updateTextMode();
+      }, 0);
 
-      $scope.loading = false
+      $scope.loading = false;
       $scope.submit = function () {
-        $scope.loading = true
+        $scope.loading = true;
         ContestAPI.submit(ContestState.id, ContestState.submit, function (err, submission) {
-          $scope.loading = false
+          $scope.loading = false;
           if (submission) {
-            ContestState.submit = {}
-            ContestState.tryPushSubmission(submission)
-            $scope.updateTextMode()
+            ContestState.submit = {};
+            ContestState.tryPushSubmission(submission);
+            $scope.updateTextMode();
           }
-        })
-      }
-    })
+        });
+      };
+    });

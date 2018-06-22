@@ -1,30 +1,30 @@
 'use strict';
 
-const ConnectRoles = require('connect-roles')
+const ConnectRoles = require('connect-roles');
 
-const ACCESS = require('../../common/constants').SITE_VARS.ACCESS
+const ACCESS = require('../../common/constants').SITE_VARS.ACCESS;
 
 let user = new ConnectRoles({
   failureHandler: (req, res, action) => {
-    if (action === 'admin') return res.redirect('/')
-    return res.status(403).send()
+    if (action === 'admin') return res.redirect('/');
+    return res.status(403).send();
   }
-})
+});
 
 user.use((req) => {
-  if (req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN) return true
-})
+  if (req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN) return true;
+});
 
 user.use('logged', (req) => {
-  return req.isAuthenticated()
-})
+  return req.isAuthenticated();
+});
 
 user.use('logged-off', (req) => {
-  return !req.isAuthenticated()
-})
+  return !req.isAuthenticated();
+});
 
 user.use('admin', (req) => {
-  return req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN
-})
+  return req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN;
+});
 
-module.exports = user
+module.exports = user;

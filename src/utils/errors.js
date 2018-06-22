@@ -59,4 +59,4 @@ module.exports = {
       en: 'The validation token expired.'
     }
   },
-}
+};

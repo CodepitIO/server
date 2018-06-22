@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
 const Contest = require('../../common/models/contest'),
   mongoose = require('mongoose'),
-  _ = require('lodash')
+  _ = require('lodash');
 
 exports.create = (req, res) => {
-  var contest = req.body
+  var contest = req.body;
   if (contest.startDateTime <= new Date()) {
     return res.json({
       error: 'A competição deve ocorrer no futuro (o horário do servidor é ' + new Date() + ')'
-    })
+    });
   }
 
   var newContest = new Contest({
@@ -31,34 +31,34 @@ exports.create = (req, res) => {
     isPrivate: (contest.password.length > 0),
     watchPrivate: (contest.watchPrivate == 1)
   }).save((err, contest) => {
-    if (err) return res.status(500).send()
-    return res.json(contest)
-  })
-}
+    if (err) return res.status(500).send();
+    return res.json(contest);
+  });
+};
 
 let filters = {
   open: {
     opts: function () {
-      let now = new Date()
+      let now = new Date();
       return {
         date_end: {
           $gt: now
         }
-      }
+      };
     },
     sort: 'date_start',
     limit: 0
   },
   past: {
     opts: function (req) {
-      let last
-      if (req.params.from === '0') last = new Date()
-      else last = new Date(parseInt(req.params.from) || 0)
+      let last;
+      if (req.params.from === '0') last = new Date();
+      else last = new Date(parseInt(req.params.from) || 0);
       return {
         date_end: {
           $lt: last
         }
-      }
+      };
     },
     sort: '-date_end',
     limit: 20
@@ -68,14 +68,14 @@ let filters = {
       if (!req.isAuthenticated()) return null;
       return {
         author: req.user._id
-      }
+      };
     },
     sort: 'date_start',
     limit: 0
   },
   now: {
     opts: function () {
-      let now = new Date()
+      let now = new Date();
       return {
         date_start: {
           $lt: now
@@ -83,19 +83,19 @@ let filters = {
         date_end: {
           $gt: now
         }
-      }
+      };
     },
     sort: 'date_start',
     limit: 0
   },
   future: {
     opts: function () {
-      let now = new Date()
+      let now = new Date();
       return {
         date_start: {
           $gt: now
         }
-      }
+      };
     },
     sort: 'date_start',
     limit: 0
@@ -105,7 +105,7 @@ let filters = {
       if (!req.isAuthenticated()) return null;
       return {
         'contestants.id': req.user.id
-      }
+      };
     },
     sort: '-date_end',
     limit: 0
@@ -113,7 +113,7 @@ let filters = {
   joined_now: {
     opts: function (req) {
       if (!req.isAuthenticated()) return null;
-      let now = new Date()
+      let now = new Date();
       return {
         'contestants.id': req.user.id,
         date_start: {
@@ -122,18 +122,18 @@ let filters = {
         date_end: {
           $gt: now
         }
-      }
+      };
     },
     sort: '-date_start',
     limit: 0
   }
-}
+};
 
 exports.getList = (req, res) => {
-  let filter = filters[req.params.type || '']
+  let filter = filters[req.params.type || ''];
 
   if (!filter || !filter.opts(req)) {
-    return res.status(400).send()
+    return res.status(400).send();
   }
 
   Contest
@@ -145,9 +145,9 @@ exports.getList = (req, res) => {
       lean: true
     })
     .exec((err, contests) => {
-      if (err) return res.status(500).send()
+      if (err) return res.status(500).send();
       return res.json({
         contests: contests
-      })
-    })
-}
+      });
+    });
+};

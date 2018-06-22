@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
-const https = require('https')
+const https = require('https');
 
-let SECRET = process.env.RECAPTCHA_SECRET
+let SECRET = process.env.RECAPTCHA_SECRET;
 
 function verifyRecaptcha(key, callback) {
   https.get(`https://www.google.com/recaptcha/api/siteverify?secret=${SECRET}&response=${key}`, (res) => {
@@ -13,8 +13,8 @@ function verifyRecaptcha(key, callback) {
     res.on('end', () => {
       try {
         let parsedData = JSON.parse(data);
-        if (parsedData.success) return callback()
-        else return callback(new Error())
+        if (parsedData.success) return callback();
+        else return callback(new Error());
       } catch (e) {
         return callback(e);
       }
@@ -23,11 +23,11 @@ function verifyRecaptcha(key, callback) {
 }
 
 exports.check = (req, res, next) => {
-  if (!SECRET) return next()
-  if (!req.body || !req.body.recaptcha) return res.status(400).send()
-  let recaptcha = req.body.recaptcha
+  if (!SECRET) return next();
+  if (!req.body || !req.body.recaptcha) return res.status(400).send();
+  let recaptcha = req.body.recaptcha;
   verifyRecaptcha(recaptcha, (err) => {
-    if (err) return res.status(400).send()
-    return next()
-  })
-}
+    if (err) return res.status(400).send();
+    return next();
+  });
+};

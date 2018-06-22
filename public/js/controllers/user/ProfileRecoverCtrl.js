@@ -4,8 +4,8 @@ angular.module('User')
         hash: $stateParams.hash,
         password: '',
         confirmPassword: ''
-      }
+      };
       $scope.recover = function() {
-        UserAPI.recover($scope.user)
-      }
-    })
+        UserAPI.recover($scope.user);
+      };
+    });

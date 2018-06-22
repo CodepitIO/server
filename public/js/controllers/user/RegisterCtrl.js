@@ -9,14 +9,14 @@ angular.module('User')
         confirmPassword: '',
         username: '',
         recaptcha: null
-      }
+      };
 
-      $scope.loading = false
+      $scope.loading = false;
       $scope.register = function () {
-        $scope.loading = true
+        $scope.loading = true;
         UserAPI.register($scope.user, function() {
-          $scope.loading = false
-        })
-      }
+          $scope.loading = false;
+        });
+      };
     }
-  )
+  );

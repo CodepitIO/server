@@ -1,5 +1,5 @@
 /*jslint node: true */
-'use strict'
+'use strict';
 
 module.exports = function (grunt) {
   grunt.initConfig({
@@ -103,18 +103,18 @@ module.exports = function (grunt) {
         }]
       },
     },
-  })
+  });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-html2js')
-  grunt.loadNpmTasks('grunt-contrib-clean')
-  grunt.loadNpmTasks('grunt-contrib-concat')
-  grunt.loadNpmTasks('grunt-filerev')
-  grunt.loadNpmTasks('grunt-usemin')
-  grunt.loadNpmTasks('grunt-contrib-cssmin')
-  grunt.loadNpmTasks('grunt-contrib-copy')
-  grunt.loadNpmTasks('grunt-nodemon')
-  grunt.loadNpmTasks('grunt-ng-annotate')
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 
   grunt.registerTask('prod', [
     'clean:dist',
@@ -130,12 +130,12 @@ module.exports = function (grunt) {
     'filerev:prod',
     'usemin',
     'clean:tmp'
-  ])
+  ]);
   grunt.registerTask('dev', [
     'clean:dist',
     'html2js:dev',
     'clean:fonts',
     'copy:fonts',
     'nodemon'
-  ])
-}
+  ]);
+};

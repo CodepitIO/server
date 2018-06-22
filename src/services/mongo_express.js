@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
-const MONGO = require('../../common/constants').CONN.MONGO
+const MONGO = require('../../common/constants').CONN.MONGO;
 
-let SECRET = process.env.COOKIE_SECRET || 'COOKIE_SECRET'
+let SECRET = process.env.COOKIE_SECRET || 'COOKIE_SECRET';
 
 module.exports = {
   mongodb: {
@@ -47,4 +47,4 @@ module.exports = {
     collapsibleJSON: true,
     collapsibleJSONDefaultUnfold: 1
   }
-}
+};
