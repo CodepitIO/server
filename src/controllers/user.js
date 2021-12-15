@@ -37,7 +37,7 @@ exports.edit = (req, res) => {
         return res.json(Errors.InvalidPassword);
       }
       if (account.newPassword.length > 0) {
-        user.local.password = user.generateHash(account.newPassword);
+        user.local.password = user.generatePassword(account.newPassword);
       }
       user.local.name = account.name;
       user.local.surname = account.surname;
@@ -144,7 +144,7 @@ exports.recover = (req, res) => {
         if (err) return next(err);
         if (!exists) return res.json(Errors.EmailRecoverExpired);
         user.local.verifyHash = null;
-        user.local.password = User.generateHash(req.body.password);
+        user.local.password = User.generatePassword(req.body.password);
         user.save(next);
       });
     },

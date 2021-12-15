@@ -1,14 +1,15 @@
 # Set the base image to Ubuntu
-FROM    ubuntu:14.04
+FROM    ubuntu:20.04
 
 # File Author / Maintainer
-MAINTAINER Gustavo Stor
+LABEL org.opencontainers.image.authors="Gustavo Stor"
 
 # Install Node.js and other dependencies
-RUN apt-get update && \
-    apt-get -y install curl && \
-    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential vim
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install curl build-essential vim
+
+RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+RUN apt-get -y install nodejs
 
 RUN npm install -g grunt-cli nodemon bower node-gyp
 

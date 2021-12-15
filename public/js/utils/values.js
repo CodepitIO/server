@@ -18,7 +18,7 @@ angular.module('General')
 	})
 	.value('OJName', {
 		'la': 'LiveArchive',
-		'uva': 'UVa',
+		'oj': 'OnlineJudge',
 		'cf': 'Codeforces',
 		'cfgroups': 'Codeforces Gym',
 		'cfgym': 'Codeforces Gym',

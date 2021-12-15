@@ -15,6 +15,7 @@ const INDEX_PROBLEMS_TZ = 'America/Recife';
 let problems = {};
 
 function runProblemsIndexer() {
+  pindexer.setReturnSize(10);
   async.waterfall([
     (next) => {
       Problem.find({}, next);
