@@ -1,37 +1,33 @@
 # Set the base image to Ubuntu
-FROM    ubuntu:14.04
+FROM    ubuntu:20.04
 
 # File Author / Maintainer
-MAINTAINER Gustavo Stor
+LABEL org.opencontainers.image.authors="Gustavo Stor"
 
 # Install Node.js and other dependencies
-RUN apt-get update && \
-    apt-get -y install curl && \
-    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - && \
-    apt-get -y install nodejs git-all build-essential vim supervisor nginx
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install curl build-essential vim
+
+RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+RUN apt-get -y install nodejs
 
 # Install node_modules and bower_components
 RUN npm install -g grunt-cli bower node-gyp
-COPY package.json /tmp/
-RUN cd /tmp && npm install
-COPY [".bowerrc", "bower.json", "/tmp/"]
-RUN cd /tmp && bower install --allow-root
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install git-all 
 
 # Set up working directory
 RUN mkdir -p /www
 WORKDIR /www
 ADD . /www
 
+RUN mkdir -p /tmp
+COPY ["package.json", ".bowerrc", "bower.json", "/tmp/"]
+RUN cd /tmp && npm install && bower install --allow-root
 RUN cp -a /tmp/node_modules /www/ && \
     cp -a /tmp/public/bower_components /www/public/ && \
-    rm -rf /tmp && \
-    grunt prod && \
-    mkdir -p /var/log/supervisor && \
-    rm -rf /etc/nginx/conf.d/* && \
-    rm -rf /etc/nginx/sites-enabled/*
+    rm -rf /tmp
 
-# Set up config files
-COPY .prod/default.conf /etc/nginx/conf.d/
-COPY .prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN  cd /www && grunt prod
 
-CMD ["/usr/bin/supervisord"]
+CMD node main.js

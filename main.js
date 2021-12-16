@@ -9,8 +9,7 @@ const Routes = require('./src/routes');
 
 let app = express();
 Routes.configure(app);
-
-let port = process.env.PORT || 3000;
+let port = 3000;
 let server = require('http').Server(app);
 server.listen(port);
 

@@ -8,6 +8,9 @@ lib-cov
 *.gz
 *.DS_Store
 *.swp
+*.DS_STORE
+*.txt
+*.md5
 src/utils/tmp/
 test/
 
@@ -17,18 +20,8 @@ results
 
 npm-debug.log
 node_modules/
-package-lock.json
-yarn.lock
+./package-lock.json
+./yarn.lock
 
-/public/imgs/site
-/public/dist
-/public/fonts
-/public/bower_components
-/public/index.html
-/tmp
-
-*.DS_STORE
-*.txt
 .tmp
-*.md5
 nohup.out
