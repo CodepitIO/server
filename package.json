@@ -25,7 +25,7 @@
     "mongo-express": "^0.54.0",
     "mongoose": "^5.1.6",
     "multiparty": "^4.1.4",
-    "nodemailer": "^4.6.7",
+    "nodemailer": "^6.7.2",
     "nodemailer-ses-transport": "^1.5.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
