@@ -13,21 +13,21 @@
         </md-input-container>
         <md-radio-group ng-model="role" ng-show="ContestState.contest.contestantType === 3" ng-required="ContestState.contest.contestantType === 3">
           <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
-          <md-radio-button value="team">Participar <b>em time</b></md-radio-button>
+          <md-radio-button value="team" ng-disabled="teams.length === 0">Participar <b>em time</b></md-radio-button>
         </md-radio-group>
-        <div ng-show="isTeam()" layout-fill>
+        <small ng-show="ContestState.contest.contestantType !== 1 && teams.length === 0">Você não está em nenhum time.</small>
+        <div ng-show="isTeam() && teams.length > 0" layout-fill>
           <p>
             <i>Escolha um time</i>&nbsp;
             <i class="fa fa-question-circle" style="width: 50px;">
               <md-tooltip md-direction="bottom">
-                Se registrar na competição com um time X não irá automaticamente<br>
-                adicionar os outros membros do time X na competição. Para isso,<br>
+                Se registrar na competição com um time não irá automaticamente<br>
+                adicionar os outros membros deste time na competição. Para isso,<br>
                 cada membro do time também deve se cadastrar na competição.<br>
               </md-tooltip>
             </i>
           </p>
           <br>
-          <small ng-show="teams.length === 0">Você não está em nenhum time.</small>
           <md-input-container ng-show="teams.length > 0" layout-fill>
             <label>Time</label>
             <md-select ng-model="team" ng-required="isTeam()">
