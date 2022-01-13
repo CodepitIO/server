@@ -1,144 +1,392 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br" ng-app="mrtApp">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="/">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/" />
 
-	<title ng-bind="title">Codepit</title>
+    <title ng-bind="title">Codepit</title>
 
-	<link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600italic,700italic,600,700' async>
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons" async>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600italic,700italic,600,700"
+      async
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/icon?family=Material+Icons"
+      async
+    />
 
-  <!-- build:css dist/bootstrap.min.css -->
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-	<!-- endbuild -->
-	<!-- build:css dist/thirdparty.min.css -->
-	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
-	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="bower_components/codemirror/theme/blackboard.css">
-	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.min.css">
-	<link rel='stylesheet' type="text/css" href="bower_components/textAngular/dist/textAngular.css">
-	<!-- endbuild -->
-	<!-- build:css dist/app.min.css -->
-	<link rel="stylesheet" type="text/css" href="css/blog.css">
-	<link rel="stylesheet" type="text/css" href="css/contest.css">
-	<link rel="stylesheet" type="text/css" href="css/problem-statement.css">
-	<link rel="stylesheet" type="text/css" href="css/profile.css">
-	<link rel="stylesheet" type="text/css" href="css/team.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/ttypography.css">
-	<link rel="stylesheet" type="text/css" href="css/angular-material.css">
-	<link rel="stylesheet" type="text/css" href="css/pdf_viewer.css">
-	<!-- endbuild -->
-	<script type="text/javascript" src="//www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
-</head>
-<body>
+    <!-- build:css dist/bootstrap.min.css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <!-- endbuild -->
+    <!-- build:css dist/thirdparty.min.css -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/font-awesome/css/font-awesome.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/codemirror/lib/codemirror.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/codemirror/theme/blackboard.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/angular-material/angular-material.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="bower_components/textAngular/dist/textAngular.css"
+    />
+    <!-- endbuild -->
+    <!-- build:css dist/app.min.css -->
+    <link rel="stylesheet" type="text/css" href="css/blog.css" />
+    <link rel="stylesheet" type="text/css" href="css/contest.css" />
+    <link rel="stylesheet" type="text/css" href="css/problem-statement.css" />
+    <link rel="stylesheet" type="text/css" href="css/profile.css" />
+    <link rel="stylesheet" type="text/css" href="css/team.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/ttypography.css" />
+    <link rel="stylesheet" type="text/css" href="css/angular-material.css" />
+    <link rel="stylesheet" type="text/css" href="css/pdf_viewer.css" />
+    <!-- endbuild -->
+    <script
+      type="text/javascript"
+      src="//www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <ng-include src="'views/header.html'"></ng-include>
+    <div class="bs-component">
+      <div ui-view></div>
+    </div>
+    <ng-include src="'views/footer.html'"></ng-include>
 
-	<ng-include src="'views/header.html'"></ng-include>
-	<div class="bs-component">
-		<div ui-view></div>
-	</div>
-	<ng-include src="'views/footer.html'"></ng-include>
+    <!-- build:js dist/thirdparty.min.js -->
+    <script
+      type="text/javascript"
+      src="bower_components/jquery/dist/jquery.js"
+      type="text/javascript"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/jquery-ui/ui/jquery-ui.js"
+      type="text/javascript"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/moment/moment.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/moment/locale/pt-br.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/codemirror/lib/codemirror.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/codemirror/mode/clike/clike.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/codemirror/mode/python/python.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/lodash/dist/lodash.min.js"
+    ></script>
+    <!-- endbuild -->
+    <!-- build:js dist/bootstrap.min.js -->
+    <script
+      type="text/javascript"
+      src="bower_components/bootstrap/dist/js/bootstrap.js"
+      type="text/javascript"
+    ></script>
+    <!-- endbuild -->
+    <!-- build:js dist/angular.min.js -->
+    <script
+      type="text/javascript"
+      src="bower_components/angular/angular.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-material/angular-material.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-cookies/angular-cookies.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-ui-router/release/angular-ui-router.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-resource/angular-resource.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-i18n/angular-locale_pt-br.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-moment/angular-moment.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-ui-slider/src/slider.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-ui-sortable/sortable.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-animate/angular-animate.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-ui-codemirror/ui-codemirror.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-aria/angular-aria.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-messages/angular-messages.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/ng-file-upload/ng-file-upload.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/textAngular/dist/textAngular-rangy.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/textAngular/dist/textAngular-sanitize.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/textAngular/dist/textAngular.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="bower_components/angular-recaptcha/release/angular-recaptcha.js"
+    ></script>
+    <!-- endbuild -->
+    <!-- build:js dist/app.min.js -->
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/appRoutes.js"></script>
 
-	<!-- build:js dist/thirdparty.min.js -->
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript" src="bower_components/jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
-	<script type="text/javascript" src="bower_components/moment/moment.js"></script>
-	<script type="text/javascript" src="bower_components/moment/locale/pt-br.js"></script>
-	<script type="text/javascript" src="bower_components/codemirror/lib/codemirror.js"></script>
-	<script type="text/javascript" src="bower_components/codemirror/mode/clike/clike.js"></script>
-	<script type="text/javascript" src="bower_components/codemirror/mode/python/python.js"></script>
-	<script type="text/javascript" src="bower_components/lodash/dist/lodash.min.js"></script>
-	<!-- endbuild -->
-	<!-- build:js dist/bootstrap.min.js -->
-	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
-	<!-- endbuild -->
-	<!-- build:js dist/angular.min.js -->
-	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-material/angular-material.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-  <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
-	<script type="text/javascript" src="bower_components/angular-moment/angular-moment.js"></script>
-	<script type="text/javascript" src="bower_components/angular-ui-slider/src/slider.js"></script>
-	<script type="text/javascript" src="bower_components/angular-ui-sortable/sortable.js"></script>
-	<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
-  <script type="text/javascript" src="bower_components/angular-aria/angular-aria.min.js"></script>
-  <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
-	<script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
-	<script type="text/javascript" src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
-	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
-	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
-	<script type="text/javascript" src="bower_components/textAngular/dist/textAngular.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
-	<!-- endbuild -->
-	<!-- build:js dist/app.min.js -->
-	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/appRoutes.js"></script>
+    <script type="text/javascript" src="js/factories/UserFactories.js"></script>
+    <script type="text/javascript" src="js/factories/PostFactories.js"></script>
+    <script
+      type="text/javascript"
+      src="js/factories/ContestFactories.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/factories/ProblemsFactories.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/factories/SubmissionFactories.js"
+    ></script>
+    <script type="text/javascript" src="js/factories/TeamFactories.js"></script>
 
-	<script type="text/javascript" src="js/factories/UserFactories.js"></script>
-	<script type="text/javascript" src="js/factories/PostFactories.js"></script>
-	<script type="text/javascript" src="js/factories/ContestFactories.js"></script>
-	<script type="text/javascript" src="js/factories/ProblemsFactories.js"></script>
-	<script type="text/javascript" src="js/factories/SubmissionFactories.js"></script>
-	<script type="text/javascript" src="js/factories/TeamFactories.js"></script>
+    <script
+      type="text/javascript"
+      src="js/services/ContestServices.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/services/GeneralServices.js"
+    ></script>
+    <script type="text/javascript" src="js/services/UserServices.js"></script>
 
-	<script type="text/javascript" src="js/services/ContestServices.js"></script>
-	<script type="text/javascript" src="js/services/GeneralServices.js"></script>
-	<script type="text/javascript" src="js/services/UserServices.js"></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/LoginCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/ProfileCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/ProfilePostsCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/ProfileRecoverCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/ProfileTeamsCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/ProfileValidateCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/user/RegisterCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/SubmissionCtrl.js"
+    ></script>
+    <script type="text/javascript" src="js/controllers/ProblemCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/TeamCtrl.js"></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestListCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestScoreboardCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestSubmissionsCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestSubmitCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestJoinCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestSettingsCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestSettingsDataCtrl.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/controllers/contests/ContestSettingsProblemsCtrl.js"
+    ></script>
 
-	<script type="text/javascript" src="js/controllers/user/LoginCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/ProfileCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/ProfilePostsCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/ProfileRecoverCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/ProfileTeamsCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/ProfileValidateCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/user/RegisterCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/SubmissionCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/ProblemCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/TeamCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestListCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestScoreboardCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestSubmissionsCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestSubmitCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestJoinCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestSettingsCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestSettingsDataCtrl.js"></script>
-	<script type="text/javascript" src="js/controllers/contests/ContestSettingsProblemsCtrl.js"></script>
+    <script
+      type="text/javascript"
+      src="js/directives/ContestDirectives.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/directives/GeneralDirectives.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/directives/PdfDirectives.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="js/directives/UserDirectives.js"
+    ></script>
 
-	<script type="text/javascript" src="js/directives/ContestDirectives.js"></script>
-	<script type="text/javascript" src="js/directives/GeneralDirectives.js"></script>
-	<script type="text/javascript" src="js/directives/PdfDirectives.js"></script>
-	<script type="text/javascript" src="js/directives/UserDirectives.js"></script>
+    <script type="text/javascript" src="js/utils/config.js"></script>
+    <script type="text/javascript" src="js/utils/countries.js"></script>
+    <script type="text/javascript" src="js/utils/filters.js"></script>
+    <script type="text/javascript" src="js/utils/general.js"></script>
+    <script type="text/javascript" src="js/utils/request.js"></script>
+    <script type="text/javascript" src="js/utils/values.js"></script>
 
-	<script type="text/javascript" src="js/utils/config.js"></script>
-	<script type="text/javascript" src="js/utils/countries.js"></script>
-	<script type="text/javascript" src="js/utils/filters.js"></script>
-	<script type="text/javascript" src="js/utils/general.js"></script>
-	<script type="text/javascript" src="js/utils/request.js"></script>
-	<script type="text/javascript" src="js/utils/values.js"></script>
+    <script type="text/javascript" src="dist/templates.js"></script>
+    <!-- endbuild -->
+    <!-- build:js dist/pdf.min.js -->
+    <script type="text/javascript" src="js/utils/pdf/pdf.worker.js"></script>
+    <script type="text/javascript" src="js/utils/pdf/pdf.js"></script>
+    <script type="text/javascript" src="js/utils/pdf/pdf_viewer.js"></script>
+    <script type="text/javascript" src="js/utils/pdf/compatibility.js"></script>
+    <!-- endbuild -->
 
-	<script type="text/javascript" src="dist/templates.js"></script>
-	<!-- endbuild -->
-	<!-- build:js dist/pdf.min.js -->
-	<script type="text/javascript" src="js/utils/pdf/pdf.worker.js"></script>
-	<script type="text/javascript" src="js/utils/pdf/pdf.js"></script>
-	<script type="text/javascript" src="js/utils/pdf/pdf_viewer.js"></script>
-	<script type="text/javascript" src="js/utils/pdf/compatibility.js"></script>
-	<!-- endbuild -->
-
-	<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-	<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}});
-	</script>
-
-</body>
+    <style type="text/css">
+      .MJX_Assistive_MathML {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 1px 0 0 0 !important;
+        border: 0 !important;
+        height: 1px !important;
+        width: 1px !important;
+        overflow: hidden !important;
+        display: block !important;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .MJX_Assistive_MathML.MJX_Assistive_MathML_Block {
+        width: 100% !important;
+      }
+    </style>
+    <script type="text/x-mathjax-config;executed=true">
+       MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$$$','$$$']], displayMath: [['$$$$$$','$$$$$$']]}
+       });
+       MathJax.Hub.Register.StartupHook("End", function () {
+        Codeforces.runMathJaxListeners();
+       });
+    </script>
+    <script
+      type="text/javascript"
+      async
+      src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+  </body>
 </html>
