@@ -5,10 +5,10 @@
       <table class="table table-striped" infinite-scroll="fetchData()" infinite-scroll-distance="0">
         <thead>
           <tr>
-            <th class="col-md-3"><a class="link" ng-click="order('name')">Nome</a></th>
-            <th class="col-md-2"><a class="link" ng-click="order('date_start')">Início</a></th>
-            <th class="col-md-2"><a class="link" ng-click="order('date_end')">Fim</a></th>
-            <th class="col-md-1"><a class="link" ng-click="order('duration')">Duração</a></th>
+            <th class="col-md-3"><a class="link" ng-click="order('name')">Name</a></th>
+            <th class="col-md-2"><a class="link" ng-click="order('date_start')">Start</a></th>
+            <th class="col-md-2"><a class="link" ng-click="order('date_end')">End</a></th>
+            <th class="col-md-1"><a class="link" ng-click="order('duration')">Duration</a></th>
           </tr>
         </thead>
         <tbody>
@@ -20,10 +20,10 @@
                 new-flag="contest.isAdmin && isNewContest(contest.date_created) && newFlag">
               </mrt-contest-label>
               <i class="fa fa-lock contests-view-table-icon" ng-if="contest.isPrivate">
-                <md-tooltip md-direction="top">Possui senha para se registrar.</md-tooltip>
+                <md-tooltip md-direction="top">Password required to participate.</md-tooltip>
               </i>
               <i class="fa fa-user-secret contests-view-table-icon" ng-if="contest.watchPrivate">
-                <md-tooltip md-direction="top">Apenas quem está registrado pode entrar no link.</md-tooltip>
+                <md-tooltip md-direction="top">Private for people participating.</md-tooltip>
               </i>
             </td>
             <td><mrt-display-time date="contest.date_start"></mrt-display-time></td>

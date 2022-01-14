@@ -1,27 +1,28 @@
-<mrt-breadcrumbs
-  location="'Codepit / Competições'"
-  title="'Competições em aberto'">
+<mrt-breadcrumbs location="'Codepit / Contests'" title="'Open contests'">
 </mrt-breadcrumbs>
 
 <div class="contests-list-wrapper">
   <mrt-contest-list
     filter-type="joined_now"
-    sub-title="'Participando'"
-    empty-message="'Você não está participando de nenhuma competição que está acontecendo agora.'"
+    sub-title="'Joined'"
+    empty-message="'You are not participating in any current contest.'"
     admin-flag="true"
     not-show-empty="true"
-    ng-if="$root.user.isAuthenticated()">
+    ng-if="$root.user.isAuthenticated()"
+  >
   </mrt-contest-list>
   <mrt-contest-list
     filter-type="now"
-    sub-title="'Acontecendo agora'"
-    empty-message="'Nenhuma competição acontencendo.'"
-    admin-flag="true">
+    sub-title="'Happening now'"
+    empty-message="'No contest happening now.'"
+    admin-flag="true"
+  >
   </mrt-contest-list>
   <mrt-contest-list
     filter-type="future"
-    sub-title="'Próximas'"
-    empty-message="'Nenhuma competição futura.'"
-    admin-flag="true">
+    sub-title="'Upcoming'"
+    empty-message="'No future contest.'"
+    admin-flag="true"
+  >
   </mrt-contest-list>
 </div>

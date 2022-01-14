@@ -3,12 +3,6 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-footer {
-  margin-top: auto;
-  background: url("../imgs/footer_bg.png");
-  background-color: #263238;
-}
-
 .container,
 .container-fluid {
   font-family: "Open Sans", "HelveticaNeue-Light", Helvetica, Arial;
@@ -82,6 +76,12 @@ footer {
 }
 
 /* Footer */
+
+footer {
+  margin-top: auto;
+  background: url("../imgs/footer_bg.png");
+  background-color: #263238;
+}
 
 #footer-arrow {
   width: 50px;

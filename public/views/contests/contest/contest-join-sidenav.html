@@ -1,35 +1,54 @@
 <div ng-controller="ContestJoinController" id="join-contest-id">
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="join-contest-sidenav">
+  <md-sidenav
+    class="md-sidenav-right md-whiteframe-z2"
+    md-component-id="join-contest-sidenav"
+  >
     <form name="form" ng-submit="join()">
       <md-toolbar class="md-hue-2">
-        <div style="padding: 15px;">
-          Participar de <b>{{ContestState.contest.name}}</b>
+        <div style="padding: 15px">
+          Join <b>{{ContestState.contest.name}}</b>
         </div>
       </md-toolbar>
       <md-content layout-padding>
         <md-input-container ng-show="ContestState.contest.isPrivate">
-          <label>Senha</label>
-          <input type="password" ng-model="password" ng-required="ContestState.contest.isPrivate">
+          <label>Password</label>
+          <input
+            type="password"
+            ng-model="password"
+            ng-required="ContestState.contest.isPrivate"
+          />
         </md-input-container>
-        <md-radio-group ng-model="role" ng-show="ContestState.contest.contestantType === 3" ng-required="ContestState.contest.contestantType === 3">
-          <md-radio-button value="individual">Participar <b>individualmente</b></md-radio-button>
-          <md-radio-button value="team" ng-disabled="teams.length === 0">Participar <b>em time</b></md-radio-button>
+        <md-radio-group
+          ng-model="role"
+          ng-show="ContestState.contest.contestantType === 3"
+          ng-required="ContestState.contest.contestantType === 3"
+        >
+          <md-radio-button value="individual"
+            >Participate <b>individually</b></md-radio-button
+          >
+          <md-radio-button value="team" ng-disabled="teams.length === 0"
+            >Participate <b>with a team</b></md-radio-button
+          >
         </md-radio-group>
-        <small ng-show="ContestState.contest.contestantType !== 1 && teams.length === 0">Você não está em nenhum time.</small>
+        <small
+          ng-show="ContestState.contest.contestantType !== 1 && teams.length === 0"
+          >You are not in any team.</small
+        >
         <div ng-show="isTeam() && teams.length > 0" layout-fill>
           <p>
-            <i>Escolha um time</i>&nbsp;
-            <i class="fa fa-question-circle" style="width: 50px;">
+            <i>Pick a team</i>&nbsp;
+            <i class="fa fa-question-circle" style="width: 50px">
               <md-tooltip md-direction="bottom">
-                Se registrar na competição com um time não irá automaticamente<br>
-                adicionar os outros membros deste time na competição. Para isso,<br>
-                cada membro do time também deve se cadastrar na competição.<br>
+                Joining the contest with a team won't automatically<br />
+                add the other members of this team to the contest.<br />
+                For that, each team member must also register in the<br />
+                contest.<br />
               </md-tooltip>
             </i>
           </p>
-          <br>
+          <br />
           <md-input-container ng-show="teams.length > 0" layout-fill>
-            <label>Time</label>
+            <label>Team</label>
             <md-select ng-model="team" ng-required="isTeam()">
               <md-option ng-repeat="t in teams" ng-value="t._id">
                 {{t.name}}
@@ -38,13 +57,30 @@
           </md-input-container>
         </div>
         <div layout="row">
-          <md-button class="md-icon-button" ng-click="close()" style="margin-top: 5px;">
-            <md-icon class="material-icons" style="color:grey;">keyboard_return</md-icon>
+          <md-button
+            class="md-icon-button"
+            ng-click="close()"
+            style="margin-top: 5px"
+          >
+            <md-icon class="material-icons" style="color: grey"
+              >keyboard_return</md-icon
+            >
           </md-button>
-          <md-button class="md-fab md-mini md-primary" ng-click="join()" ng-disabled="form.$invalid" ng-hide="loading">
-            <md-icon class="material-icons" style="color:white;">person_add</md-icon>
+          <md-button
+            class="md-fab md-mini md-primary"
+            ng-click="join()"
+            ng-disabled="form.$invalid"
+            ng-hide="loading"
+          >
+            <md-icon class="material-icons" style="color: white"
+              >person_add</md-icon
+            >
           </md-button>
-          <md-progress-circular md-mode="indeterminate" md-diameter="60" ng-show="loading"></md-progress-circular>
+          <md-progress-circular
+            md-mode="indeterminate"
+            md-diameter="60"
+            ng-show="loading"
+          ></md-progress-circular>
         </div>
       </md-content>
     </form>

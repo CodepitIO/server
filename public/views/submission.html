@@ -1,32 +1,45 @@
-<mrt-breadcrumbs
-  location="'Codepit'"
-  title="'Submissão'">
-</mrt-breadcrumbs>
+<mrt-breadcrumbs location="'Codepit'" title="'Submissão'"> </mrt-breadcrumbs>
 
-<mrt-page-wrapper wait-for='submission'>
+<mrt-page-wrapper wait-for="submission">
   <div layout="row">
     <div layout="column" layout-align="center center" flex>
-      <md-subheader>Problema</md-subheader>
-      <p><a ui-sref="problems.view({id:submission.problem._id})">{{submission.problem.name}}</a></p>
+      <md-subheader>Problem</md-subheader>
+      <p>
+        <a ui-sref="problems.view({id:submission.problem._id})"
+          >{{submission.problem.name}}</a
+        >
+      </p>
     </div>
     <div layout="column" layout-align="center center" flex>
       <md-subheader>Contest</md-subheader>
-      <p><a ui-sref="contest.scoreboard({id:submission.contest._id})">{{submission.contest.name}}</a></p>
+      <p>
+        <a ui-sref="contest.scoreboard({id:submission.contest._id})"
+          >{{submission.contest.name}}</a
+        >
+      </p>
     </div>
     <div layout="column" layout-align="center center" flex>
-      <md-subheader>Usuário</md-subheader>
-      <p><a class="unrated-handle" ui-sref="profile({id:submission.contestant._id})">{{submission.contestant.local.username}}</a></p>
+      <md-subheader>User</md-subheader>
+      <p>
+        <a
+          class="unrated-handle"
+          ui-sref="profile({id:submission.contestant._id})"
+          >{{submission.contestant.local.username}}</a
+        >
+      </p>
     </div>
     <div layout="column" layout-align="center center" flex>
-      <md-subheader>Veredito</md-subheader>
-      <p class="verdict" ng-class="verdict[submission.verdict].class">{{verdict[submission.verdict].text}}</p>
+      <md-subheader>Verdict</md-subheader>
+      <p class="verdict" ng-class="verdict[submission.verdict].class">
+        {{verdict[submission.verdict].text}}
+      </p>
     </div>
     <div layout="column" layout-align="center center" flex>
-      <md-subheader>Data</md-subheader>
+      <md-subheader>Date</md-subheader>
       <mrt-display-time date="submission.date"></mrt-display-time>
     </div>
     <div layout="column" layout-align="center center" flex>
-      <md-subheader>Linguagem</md-subheader>
+      <md-subheader>Language</md-subheader>
       <p>{{languages[submission.language]}}</p>
     </div>
   </div>
@@ -36,9 +49,10 @@
     <ui-codemirror
       ng-model="submission.code"
       class="test"
-      style="text-align: left; cursor: text;"
+      style="text-align: left; cursor: text"
       ui-codemirror-opts="editorOptions"
-      ui-refresh="editorOptions.mode">
+      ui-refresh="editorOptions.mode"
+    >
     </ui-codemirror>
   </div>
 </mrt-page-wrapper>

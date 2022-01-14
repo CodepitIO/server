@@ -13,7 +13,7 @@
     margin: 30px;
   }
   a.button {
-    background-color: #00BCD4;
+    background-color: #00bcd4;
     padding: 10px;
     text-decoration: none;
     color: initial;
@@ -28,15 +28,26 @@
   }
 </style>
 <div class="container">
-  <img src="https://www.codepit.io/imgs/codepit-full-blue.png" width="300px"/>
-  <h2><p>Bem-vindo ao Codepit, <%- name %>!</p></h2>
+  <img src="https://www.codepit.io/imgs/codepit-full-blue.png" width="300px" />
+  <h2><p>Welcome to Codepit, <%- name %>!</p></h2>
   <div class="paragraph">
-    <p>Caso este e-mail não seja direcionado a você, apenas ignore a mensagem. Caso contrário, clique no botão a seguir para confirmar sua conta.</p>
+    <p>
+      If this e-mail is not directed to you, just ignore this message.
+      Otherwise, click on the following link to verify your account.
+    </p>
   </div>
   <div class="paragraph">
-    <a href="<%- domain %>/#/validate/<%- hash %>" class="button"><span>Verificar sua Conta</span></a>
+    <a href="<%- domain %>/#/validate/<%- hash %>" class="button"
+      ><span>Verify Account</span></a
+    >
   </div>
   <div class="paragraph">
-    <small>Caso o link não funcione, visite a seguinte URL manualmente: <%- domain %>/#/validate/<%- hash %></small>
+    <small
+      >If the link doesn't work, visit the following URL manually: <%- domain
+      %>/#/recover<%- hash %></small
+    >
+  </div>
+  <div class="paragraph">
+    <small>This link will expire in 30 minutes.</small>
   </div>
 </div>

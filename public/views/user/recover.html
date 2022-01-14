@@ -1,6 +1,4 @@
-<mrt-breadcrumbs
-  location="'Codepit / Usuários'"
-  title="'Recuperação de Senha'">
+<mrt-breadcrumbs location="'Codepit / Users'" title="'Password Recovery'">
 </mrt-breadcrumbs>
 
 <mrt-page-wrapper>
@@ -8,20 +6,60 @@
     <div class="col-md-6 col-md-offset-3">
       <form name="form" novalidate>
         <div class="form-group">
-          <input type="hidden" placeholder="Token de validação" ng-model="user.hash" name="hash" required/>
-          <small class="error" ng-show="form.hash | mrtHasError">* o token de validação é obrigatório</small>
+          <input
+            type="hidden"
+            placeholder="Token de validação"
+            ng-model="user.hash"
+            name="hash"
+            required
+          />
+          <small class="error" ng-show="form.hash | mrtHasError"
+            >* the validation token is required</small
+          >
         </div>
         <div class="form-group input-split">
-          <input type="password" name="password" placeholder="Nova senha" ng-model="user.password" maxlength="100" required/>
-          <input type="password" name="confirmPassword" placeholder="Repita a nova senha" ng-model="user.confirmPassword" name="confirmPass" mrt-match-field="{{user.password}}" maxlength="100" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="New password"
+            ng-model="user.password"
+            maxlength="100"
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Repeat new password"
+            ng-model="user.confirmPassword"
+            name="confirmPass"
+            mrt-match-field="{{user.password}}"
+            maxlength="100"
+            required
+          />
           <br style="clear: both" />
-          <small class="error" ng-show="form.password | mrtHasError">* você deve inserir uma senha.</small>
-          <small class="error" ng-show="form.confirmPassword | mrtHasError">* você deve confirmar a senha corretamente.</small>
+          <small class="error" ng-show="form.password | mrtHasError"
+            >* you must type a password.</small
+          >
+          <small class="error" ng-show="form.confirmPassword | mrtHasError"
+            >* you must confirm your password correctly.</small
+          >
         </div>
-        <div vc-recaptcha ng-model="user.recaptcha" style="margin: 0 auto; width: 304px;"></div>
+        <div
+          vc-recaptcha
+          ng-model="user.recaptcha"
+          style="margin: 0 auto; width: 304px"
+        ></div>
         <br style="clear: both" />
         <div class="form-group">
-          <button type="submit" class="btn btn-block" ng-click="recover()" class="btn btn-default btn-block" ng-disabled="form.$invalid">Mudar senha</button>
+          <button
+            type="submit"
+            class="btn btn-block"
+            ng-click="recover()"
+            class="btn btn-default btn-block"
+            ng-disabled="form.$invalid"
+          >
+            Change password
+          </button>
         </div>
       </form>
     </div>

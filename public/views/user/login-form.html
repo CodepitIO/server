@@ -4,17 +4,37 @@
       <form ng-submit="login()">
         <md-input-container class="form-group md-default-theme" flex>
           <label class="control-label">Email</label>
-          <input class="user-email" type="email" name="email" ng-model="data.email" class="form-control md-default-theme"/>
+          <input
+            class="user-email"
+            type="email"
+            name="email"
+            ng-model="data.email"
+            class="form-control md-default-theme"
+          />
         </md-input-container>
 
         <md-input-container class="form-group md-default-theme" flex>
-          <label class="control-label">Senha</label>
-          <input class="user-password" type="password" ng-model="data.password" class="form-control md-default-theme"/>
-          <div style="position: absolute; left: 3px; bottom: -14px; color: #aaa; font-size: 10px; ">
-            <span class="link" ng-click="openForgotPasswordDialog($event)">Esqueceu a senha?</span>
+          <label class="control-label">Password</label>
+          <input
+            class="user-password"
+            type="password"
+            ng-model="data.password"
+            class="form-control md-default-theme"
+          />
+          <div
+            style="
+              position: absolute;
+              left: 3px;
+              bottom: -14px;
+              color: #aaa;
+              font-size: 10px;
+            "
+          >
+            <span class="link" ng-click="openForgotPasswordDialog($event)"
+              >Forgot password?</span
+            >
           </div>
         </md-input-container>
-
 
         <div class="form-group">
           <button class="user-submit" type="submit" class="btn btn-default">
@@ -27,7 +47,7 @@
         <span>
           <i class="fa fa-user"></i>
         </span>
-        Registre-se
+        Register
       </a>
     </div>
     <div ng-show="$root.user.isAuthenticated()">
@@ -35,15 +55,20 @@
         <span>
           <i class="fa fa-user"></i>
         </span>
-        Sair
+        Logout
       </a>
       <a class="profile-link" ui-sref="profile({id:$root.user.getId()})">
-        <img ng-src="//www.gravatar.com/avatar/{{$root.user.getEmailHash()}}?d=identicon&s=50">
-        Perfil
+        <img
+          ng-src="//www.gravatar.com/avatar/{{$root.user.getEmailHash()}}?d=identicon&s=50"
+        />
+        Profile
       </a>
     </div>
   </div>
   <div ng-show="loading" layout="column" layout-align="center center">
-    <md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
+    <md-progress-circular
+      md-mode="indeterminate"
+      md-diameter="70"
+    ></md-progress-circular>
   </div>
 </div>

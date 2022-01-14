@@ -1,15 +1,28 @@
-<div ng-controller="ContestSettingsDataController" class="contest-settings-container">
+<div
+  ng-controller="ContestSettingsDataController"
+  class="contest-settings-container"
+>
   <div layout="row">
     <div layout="column" flex="60" class="settings-data">
       <form name="form" novalidate>
         <div class="form-group">
-          <input type="text" class="data-input" placeholder="Nome da competição" ng-model="contest.name" name="name" maxlength="50" required/>
-          <small class="error" ng-show="form.name | mrtHasError">* a competição precisa ter um nome</small>
+          <input
+            type="text"
+            class="data-input"
+            placeholder="Name"
+            ng-model="contest.name"
+            name="name"
+            maxlength="50"
+            required
+          />
+          <small class="error" ng-show="form.name | mrtHasError"
+            >* the contest must have a name</small
+          >
         </div>
         <div class="form-group" layout="row">
           <input
             show-button-bar="false"
-            placeholder="Início da competição"
+            placeholder="Start"
             class="data-input data-calendar-input"
             uib-datepicker-popup="EEE, d/MMM/yyyy"
             is-open="opened.start"
@@ -17,8 +30,16 @@
             ng-model="contest.date_start"
             ng-change="validateTimeRange()"
             ng-click="openDatepicker('start')"
-            readonly required/>
-          <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('start')"><i class="fa fa-calendar"></i></button>
+            readonly
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-default calendar-input"
+            ng-click="openDatepicker('start')"
+          >
+            <i class="fa fa-calendar"></i>
+          </button>
           <uib-timepicker
             class="time-input"
             show-spinners="false"
@@ -27,13 +48,14 @@
             hour-step="1"
             minute-step="5"
             show-meridian="false"
-            required>
+            required
+          >
           </uib-timepicker>
         </div>
         <div class="form-group" layout="row">
           <input
             show-button-bar="false"
-            placeholder="Fim da competição"
+            placeholder="End"
             class="data-input data-calendar-input"
             uib-datepicker-popup="EEE, d/MMM/yyyy"
             is-open="opened.end"
@@ -41,8 +63,16 @@
             ng-model="contest.date_end"
             ng-click="openDatepicker('end')"
             ng-change="validateTimeRange()"
-            readonly required/>
-          <button type="button" class="btn btn-default calendar-input" ng-click="openDatepicker('end')"><i class="fa fa-calendar"></i></button>
+            readonly
+            required
+          />
+          <button
+            type="button"
+            class="btn btn-default calendar-input"
+            ng-click="openDatepicker('end')"
+          >
+            <i class="fa fa-calendar"></i>
+          </button>
           <uib-timepicker
             class="time-input"
             show-spinners="false"
@@ -51,20 +81,41 @@
             hour-step="1"
             minute-step="5"
             show-meridian="false"
-            required>
+            required
+          >
           </uib-timepicker>
         </div>
-        <div ng-if="contest.date_start && contest.date_end" style="float: right; padding-bottom: 15px;">
-          <small><b>Duração</b>: {{(contest.date_end - contest.date_start) / 60000 | formatDuration}}</small>
+        <div
+          ng-if="contest.date_start && contest.date_end"
+          style="float: right; padding-bottom: 15px"
+        >
+          <small
+            ><b>Duration</b>: {{(contest.date_end - contest.date_start) / 60000
+            | formatDuration}}</small
+          >
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-block data-button" ng-click="nextTab()" ng-disabled="form.$invalid">Problemas &#8594;</button>
+          <button
+            type="submit"
+            class="btn btn-block data-button"
+            ng-click="nextTab()"
+            ng-disabled="form.$invalid"
+          >
+            Problems &#8594;
+          </button>
         </div>
       </form>
     </div>
-    <div layout="column" layout-align="end start" style="padding: 20px;">
-      <div><small>* As datas e horas utilizadas devem ser relativas ao horário da sua máquina:</small></div>
-      <div><small ng-bind-html="timeState.server.now | mrtFilterTime"></small></div>
+    <div layout="column" layout-align="end start" style="padding: 20px">
+      <div>
+        <small
+          >* The dates and times are in the same timezone as your
+          machine:</small
+        >
+      </div>
+      <div>
+        <small ng-bind-html="timeState.server.now | mrtFilterTime"></small>
+      </div>
     </div>
   </div>
 </div>

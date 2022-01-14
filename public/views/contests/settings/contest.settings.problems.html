@@ -6,7 +6,7 @@
     <div flex="60">
       <form name="form" novalidate>
         <md-autocomplete
-          placeholder="Buscar"
+          placeholder="Find"
           md-input-name="autocomplete"
           md-search-text="searchText"
           md-selected-item="selectedProblem"
@@ -20,26 +20,26 @@
           <md-item-template>
             <span>{{problem.fullName}}</span>
           </md-item-template>
-          <md-not-found> Nenhum problema encontrado. </md-not-found>
+          <md-not-found> No problem found. </md-not-found>
         </md-autocomplete>
         <md-subheader class="md-no-sticky" style="margin-top: 5px"
-          >Problemas&nbsp;
+          >Problems&nbsp;
           <i class="fa fa-question">
             <md-tooltip md-direction="top">
               <p>
-                Atualmente o Codepit suporta problemas dos seguintes juízes:<br />
+                Codepit currently supports problems from the following Online
+                Judges:<br />
                 - Beecrowd (www.beecrowd.com.br)<br />
                 - Codeforces (www.codeforces.com)<br />
                 - Codeforces Gym (www.codeforces.com/gyms)<br />
                 - CodeChef (www.codechef.com)<br />
                 - Kattis (open.kattis.com)<br />
                 - LiveArchive (icpcarchive.ecs.baylor.edu)<br />
+                - OnlineJudge (onlinejudge.org)<br />
                 - POJ (poj.org)<br />
                 - Spoj (www.spoj.com)<br />
                 - SpojBR (br.spoj.com)<br />
-                - Timus (acm.timus.ru)<br />
-                - OnlineJudge (onlinejudge.org)<br />
-                - ZOJ (acm.zju.edu.cn)
+                - Timus (acm.timus.ru)
               </p>
             </md-tooltip>
           </i>
@@ -94,10 +94,10 @@
           </md-list-item>
         </md-list>
         <small ng-if="!contest.problems.length" class="informative error"
-          >* Você deve inserir ao menos um problema.</small
+          >* You must insert at least one problem.</small
         >
         <small ng-if="noLanguagesAvailable()" class="informative error"
-          >* A competição deve suportar ao menos uma linguagem.</small
+          >* The contest must support at least one language.</small
         >
         <div class="form-group">
           <button
@@ -106,17 +106,17 @@
             ng-click="nextTab()"
             ng-disabled="noLanguagesAvailable() || contest.problems.length === 0"
           >
-            Opções &#8594;
+            Options &#8594;
           </button>
         </div>
       </form>
     </div>
     <div flex="20">
       <md-subheader class="md-no-sticky" style="margin-top: 5px"
-        >Linguagens&nbsp;
+        >Languages&nbsp;
         <i class="fa fa-question">
           <md-tooltip md-direction="top">
-            <p>As linguagens permitidas durante a competição.</p>
+            <p>Languages allowed during the contest.</p>
           </md-tooltip>
         </i>
       </md-subheader>
@@ -130,9 +130,9 @@
         </md-checkbox>
       </div>
       <small ng-if="totalForbid > 0" class="informative"
-        >* Um ou mais problemas inseridos não suportam certas linguagens e estas
-        foram, portanto, desabilitadas.</small
-      >
+        >* One or more problems inserted do not allow certain languages and
+        therefore they were disabled.
+      </small>
     </div>
   </div>
 </div>

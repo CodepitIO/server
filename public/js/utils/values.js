@@ -33,87 +33,87 @@ angular
   })
   .value("Verdict", {
     "-4": {
-      text: "Compilando...",
+      text: "Compiling...",
       class: "white-submission",
     },
     "-3": {
-      text: "Executando...",
+      text: "Running...",
       class: "white-submission",
     },
     "-2": {
-      text: "Compilando...",
+      text: "Compiling...",
       class: "white-submission",
     },
     "-1": {
-      text: "Enviado para Correção...",
+      text: "Sent to judger...",
       class: "white-submission",
     },
     0: {
-      text: "Pendendo",
+      text: "Pending",
       class: "white-submission",
     },
     1: {
-      text: "Aceito",
+      text: "Accepted",
       class: "green-submission",
       notification: "success",
     },
     2: {
-      text: "Resposta Errada",
+      text: "Wrong Answer",
       class: "red-submission",
       notification: "error",
     },
     3: {
-      text: "Tempo Limite Excedido",
+      text: "Time Limit Exceeded",
       class: "blue-submission",
       notification: "info",
     },
     4: {
-      text: "Erro de Compilação",
+      text: "Compile Error",
       class: "blue-submission",
       notification: "info",
     },
     5: {
-      text: "Erro durante Execução",
+      text: "Runtime Error",
       class: "blue-submission",
       notification: "info",
     },
     6: {
-      text: "Limite de Memória Excedido",
+      text: "Memory Limit Error",
       class: "blue-submission",
       notification: "info",
     },
     7: {
-      text: "Limite de Escrita Excedido",
+      text: "Output Limit Error",
       class: "blue-submission",
       notification: "info",
     },
     8: {
-      text: "Erro de Formatação",
+      text: "Formatting Error",
       class: "yellow-submission",
       notification: "warning",
     },
     9: {
-      text: "Erro Desconhecido",
+      text: "Unknown Error",
       class: "grey-submission",
       notification: "info",
     },
     10: {
-      text: "Uso de função restrita",
+      text: "Restricted function use",
       class: "blue-submission",
       notification: "info",
     },
     11: {
-      text: "Erro Interno",
+      text: "Internal Error",
       class: "grey-submission",
       notification: "info",
     },
     12: {
-      text: "Erro de Submissão",
+      text: "Submission Error",
       class: "grey-submission",
       notification: "info",
     },
     15: {
-      text: "Rascunho",
+      text: "Draft",
       class: "grey-submission",
     },
   });

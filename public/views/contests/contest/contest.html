@@ -1,5 +1,5 @@
 <mrt-breadcrumbs
-  location="'Codepit / Competições / ' + state.current.title"
+  location="'Codepit / Contests / ' + state.current.title"
   title="ContestState.contest.name">
 </mrt-breadcrumbs>
 
@@ -16,26 +16,26 @@
     <div class="col-sm-12 bs-component">
       <ul class="contest-tabs nav nav-tabs" style="margin-bottom: 15px;">
         <li class="join-button" ng-if="ContestState.contest.inContest === false && UserState.isAuthenticated()">
-          <a href="" ng-click="toggleRight()">Participar&nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i></a>
+          <a href="" ng-click="toggleRight()">Join&nbsp;<i class="fa fa-user-plus" aria-hidden="true"></i></a>
         </li>
         <li ng-class="{active: state.current.name === 'contest.scoreboard'}">
-          <a ui-sref=".scoreboard">Placar&nbsp;<i class="fa fa-trophy" aria-hidden="true"></i></a>
+          <a ui-sref=".scoreboard">Scoreboard&nbsp;<i class="fa fa-trophy" aria-hidden="true"></i></a>
         </li>
         <li ng-class="{active: state.current.name === 'contest.submit'}" ng-if="ContestState.contest.inContest && ContestState.contest.hasStarted">
-          <a ui-sref=".submit">Submeter&nbsp;<i class="fa fa-send" aria-hidden="true"></i></a>
+          <a ui-sref=".submit">Submit&nbsp;<i class="fa fa-send" aria-hidden="true"></i></a>
         </li>
         <li ng-class="{active: state.current.name === 'contest.submissions'}" ng-if="ContestState.contest.inContest && ContestState.contest.hasStarted">
-          <a ui-sref=".submissions">Submissões&nbsp;<i class="fa fa-bars" aria-hidden="true"></i></a>
+          <a ui-sref=".submissions">Submissions&nbsp;<i class="fa fa-bars" aria-hidden="true"></i></a>
         </li>
         <li class="manage" ng-class="{active: state.current.name === 'contest.edit'}" ng-if="ContestState.contest.isContestAdmin && !ContestState.contest.hasEnded">
-          <a ui-sref=".edit">Editar&nbsp;<i class="fa fa-wrench" aria-hidden="true"></i></a>
+          <a ui-sref=".edit">Edit&nbsp;<i class="fa fa-wrench" aria-hidden="true"></i></a>
         </li>
         <li class="leave-button" ng-if="ContestState.contest.inContest && ContestState.loadedSubmissions && ContestState.submissionsIds.length === 0">
           <md-tooltip md-direction="right">
-            Você pode se desregistrar da competição<br>
-            enquanto não tiver feito nenhuma ação nela.</br>
+            You can unregister from the contest while<br>
+            you haven't made any action on it.</br>
           </md-tooltip>
-          <a href="" mrt-confirm-click="leave()">Sair&nbsp;<i class="fa fa-user-times" aria-hidden="true"></i></a>
+          <a href="" mrt-confirm-click="leave()">Leave&nbsp;<i class="fa fa-user-times" aria-hidden="true"></i></a>
         </li>
       </ul>
       <div class="tab-content">

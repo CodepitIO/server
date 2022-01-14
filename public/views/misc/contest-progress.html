@@ -1,33 +1,65 @@
 <div>
-  <div ng-show="!hasContestEnded()" style="margin-bottom: 10px;" align="center">
-    <span style="font-weight: 200; font-size: 18px;">Tempo: {{getUptime()}}</span>
+  <div ng-show="!hasContestEnded()" style="margin-bottom: 10px" align="center">
+    <span style="font-weight: 200; font-size: 18px">Time: {{getUptime()}}</span>
   </div>
-  <div ng-show="hasContestEnded()" style="font-weight: 200; font-size: 18px; margin-bottom: 10px;" layout="row" layout-align="center center">
-    <div flex><span>Duração: {{getTotalTime()}}</span></div>
+  <div
+    ng-show="hasContestEnded()"
+    style="font-weight: 200; font-size: 18px; margin-bottom: 10px"
+    layout="row"
+    layout-align="center center"
+  >
+    <div flex><span>Duration: {{getTotalTime()}}</span></div>
     <div flex layout="row" layout-align="end center">
-      <div>Upsolving
+      <div>
+        Upsolving
         <sup>
           <i class="fa fa-question">
             <md-tooltip md-direction="top">
-              <p>Selecione <b>Upsolving</b> para visualizar o placar pós-<br />competição, o que não conta para o placar oficial.</p>
+              <p>
+                Select <b>Upsolving</b> to visualize the aftermatch <br />of the
+                contest, which doesn't contribute to the official scoreboard.
+              </p>
             </md-tooltip>
           </i>
         </sup>
         &nbsp;&nbsp;
       </div>
-      <div><md-switch class="md-primary" ng-model="ContestState.upsolving" ng-change="ContestState.changeUpsolving()"></md-switch></div>
+      <div>
+        <md-switch
+          class="md-primary"
+          ng-model="ContestState.upsolving"
+          ng-change="ContestState.changeUpsolving()"
+        ></md-switch>
+      </div>
     </div>
   </div>
-  <div ng-show="previewBar || isContestRunning()" layout="row" md-theme="progressBarTheme" style="width:100%; position: relative;">
-    <md-progress-linear ng-class="getClass()" md-mode="determinate" ng-value="getPercentage()"></md-progress-linear>
-    <div ng-show="showBar('frozen')" class="preview-bar frozen-bar" ng-style="{'width': getWidthOf('frozen')+'%'}">
-      <md-tooltip md-direction="bottom">Modo <b>frozen</b></md-tooltip>
+  <div
+    ng-show="previewBar || isContestRunning()"
+    layout="row"
+    md-theme="progressBarTheme"
+    style="width: 100%; position: relative"
+  >
+    <md-progress-linear
+      ng-class="getClass()"
+      md-mode="determinate"
+      ng-value="getPercentage()"
+    ></md-progress-linear>
+    <div
+      ng-show="showBar('frozen')"
+      class="preview-bar frozen-bar"
+      ng-style="{'width': getWidthOf('frozen')+'%'}"
+    >
+      <md-tooltip md-direction="bottom">Frozen <b>mode</b></md-tooltip>
     </div>
-    <div ng-show="showBar('blind')" class="preview-bar blind-bar" ng-style="{'width': getWidthOf('blind')+'%'}">
-      <md-tooltip md-direction="bottom">Modo <b>blind</b></md-tooltip>
+    <div
+      ng-show="showBar('blind')"
+      class="preview-bar blind-bar"
+      ng-style="{'width': getWidthOf('blind')+'%'}"
+    >
+      <md-tooltip md-direction="bottom">Blind <b>mode</b></md-tooltip>
     </div>
   </div>
   <div ng-show="isContestRunning()">
-    <span style="float: right; font-weight: 200;">restam {{getTimeLeft()}}</span>
+    <span style="float: right; font-weight: 200">{{getTimeLeft()}} left</span>
   </div>
 </div>

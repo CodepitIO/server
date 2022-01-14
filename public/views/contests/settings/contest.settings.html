@@ -1,21 +1,21 @@
 <div ng-controller="ContestSettingsController">
-  <mrt-page-wrapper wait-while='loading' class="contest-view">
+  <mrt-page-wrapper wait-while="loading" class="contest-view">
     <div layout="row">
       <div layout="column" flex="20">
         <ul class="nav nav-tabs nav-stacked nav-pills">
           <li ng-class="{'active': tab === 0}">
-            <a class="btn-lg" ng-click="changeTab(0)" href="">Dados</a>
+            <a class="btn-lg" ng-click="changeTab(0)" href="">Data</a>
           </li>
           <li ng-class="{'active': tab === 1}">
-            <a class="btn-lg" ng-click="changeTab(1)" href="">Problemas</a>
+            <a class="btn-lg" ng-click="changeTab(1)" href="">Problems</a>
           </li>
           <li ng-class="{'active': tab === 2}">
-            <a class="btn-lg" ng-click="changeTab(2)" href="">Opções</a>
+            <a class="btn-lg" ng-click="changeTab(2)" href="">Options</a>
           </li>
           <li ng-class="{'active': tab === 3}">
             <a class="btn-lg" ng-click="changeTab(3)" href="">
-              <span ng-if="isEdit">Revisar e editar</span>
-              <span ng-if="!isEdit">Revisar e criar</span>
+              <span ng-if="isEdit">Review and edit</span>
+              <span ng-if="!isEdit">Review and create</span>
             </a>
           </li>
         </ul>
@@ -23,16 +23,24 @@
       <div layout="column" flex="1">
         <div class="tab-content">
           <div ng-show="tab === 0">
-            <ng-include src="'views/contests/settings/contest.settings.data.html'"></ng-include>
+            <ng-include
+              src="'views/contests/settings/contest.settings.data.html'"
+            ></ng-include>
           </div>
           <div ng-show="tab === 1">
-            <ng-include src="'views/contests/settings/contest.settings.problems.html'"></ng-include>
+            <ng-include
+              src="'views/contests/settings/contest.settings.problems.html'"
+            ></ng-include>
           </div>
           <div ng-show="tab === 2">
-            <ng-include src="'views/contests/settings/contest.settings.options.html'"></ng-include>
+            <ng-include
+              src="'views/contests/settings/contest.settings.options.html'"
+            ></ng-include>
           </div>
           <div ng-show="tab === 3">
-            <ng-include src="'views/contests/settings/contest.settings.review.html'"></ng-include>
+            <ng-include
+              src="'views/contests/settings/contest.settings.review.html'"
+            ></ng-include>
           </div>
         </div>
       </div>
