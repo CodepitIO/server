@@ -4,17 +4,27 @@ angular
     c: "C",
     cpp: "C++",
     cpp11: "C++11",
+    cpp14: "C++14",
+    cpp17: "C++17",
+    cpp20: "C++20",
     java: "Java",
     "python2.7": "Python 2.7",
     python3: "Python 3",
+    go: "Go",
+    haskell: "Haskell",
   })
   .value("TextEditorLanguageMode", {
     c: "text/x-csrc",
     cpp: "text/x-c++src",
     cpp11: "text/x-c++src",
+    cpp14: "text/x-c++src",
+    cpp17: "text/x-c++src",
+    cpp20: "text/x-c++src",
     java: "text/x-java",
     "python2.7": "text/x-python",
     python3: "text/x-python",
+    go: "text/x-go",
+    haskell: "text/x-haskell",
     "": "",
   })
   .value("OJName", {

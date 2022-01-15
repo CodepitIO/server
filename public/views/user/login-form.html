@@ -3,10 +3,9 @@
     <div ng-hide="$root.user.isAuthenticated()">
       <form ng-submit="login()">
         <md-input-container class="form-group md-default-theme" flex>
-          <label class="control-label">Email</label>
+          <label class="control-label">E-mail or Username</label>
           <input
             class="user-email"
-            type="email"
             name="email"
             ng-model="data.email"
             class="form-control md-default-theme"

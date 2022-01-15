@@ -1,18 +1,28 @@
-angular.module('Contests')
-  .service('ContestState', function ($state, $stateParams, $interval, Notification, ContestAPI, Verdict) {
+angular
+  .module("Contests")
+  .service(
+    "ContestState",
+    function (
+      $state,
+      $stateParams,
+      $interval,
+      Notification,
+      ContestAPI,
+      Verdict
+    ) {
       var $scope = this;
 
       $scope.loading = true;
       $scope.id = null;
       var eventStartFrom,
-          markEvent,
-          pending,
-          currentProblemsHash,
-          currentContestants,
-          startTimestamp,
-          submissionStartFrom,
-          processInterval,
-          processing;
+        markEvent,
+        pending,
+        currentProblemsHash,
+        currentContestants,
+        startTimestamp,
+        submissionStartFrom,
+        processInterval,
+        processing;
       function reset() {
         $scope.id = null;
         $scope.contest = {};
@@ -35,7 +45,7 @@ angular.module('Contests')
         $scope.firstAccepted = {};
         $scope.canViewContest = false;
         $scope.loading = true;
-        $scope.upsolving = ($stateParams.upsolving === '1');
+        $scope.upsolving = $stateParams.upsolving === "1";
         eventStartFrom = 0;
         markEvent = {};
         pending = {};
@@ -49,34 +59,37 @@ angular.module('Contests')
       reset();
 
       function isActive() {
-        return $state.includes('contest');
+        return $state.includes("contest");
       }
 
       function getContestantRows(contestants) {
         return _.chain(contestants)
-          .groupBy(function(o) {
-            return o.team && o.team._id || o.id && o.id._id;
+          .groupBy(function (o) {
+            return (o.team && o.team._id) || (o.id && o.id._id);
           })
-          .map(function(o) {
+          .map(function (o) {
             if (o[0].team) {
               return {
                 id: o[0].team._id,
                 name: o[0].team.name,
-                handles: _.map(o, function(e) { return e.id && [e.id._id, e.id.local.username] || []; })
+                handles: _.map(o, function (e) {
+                  return (e.id && [e.id._id, e.id.local.username]) || [];
+                }),
               };
             } else {
-              if (o[0].id) return {id: o[0].id._id, name: o[0].id.local.username};
+              if (o[0].id)
+                return { id: o[0].id._id, name: o[0].id.local.username };
               else return {};
             }
           })
-          .keyBy(function(o) {
+          .keyBy(function (o) {
             return o.id;
           })
           .value();
       }
 
       function processContestMetadata(callback) {
-        ContestAPI.getContestMetadata($scope.id, function(err, data) {
+        ContestAPI.getContestMetadata($scope.id, function (err, data) {
           if (err || !data || !isActive()) return callback && callback();
           data.date_start = new Date(data.date_start);
           data.date_end = new Date(data.date_end);
@@ -85,9 +98,12 @@ angular.module('Contests')
           data.hasFrozen = data.frozen_time < data.date_end;
           data.hasBlind = data.blind_time < data.date_end;
           var now = new Date();
-          if (now >= data.frozen_time && now < data.blind_time) data.isFrozen = true;
-          else if (now >= data.blind_time && now < data.date_end) data.isBlind = true;
-          if (now >= data.date_start && now < data.date_end) data.isRunning = true;
+          if (now >= data.frozen_time && now < data.blind_time)
+            data.isFrozen = true;
+          else if (now >= data.blind_time && now < data.date_end)
+            data.isBlind = true;
+          if (now >= data.date_start && now < data.date_end)
+            data.isRunning = true;
           $scope.contest = data;
           if (!$scope.editContest.name) {
             _.assign($scope.editContest, $scope.contest);
@@ -101,15 +117,27 @@ angular.module('Contests')
           $scope.canViewContest = data.canViewContest;
           if (data.canViewContest) {
             if (!data.hasStarted) data.problems = [];
-            var problemsHash = _.join(_.map(data.problems, function(o) { return o._id; }), ',');
+            var problemsHash = _.join(
+              _.map(data.problems, function (o) {
+                return o._id;
+              }),
+              ","
+            );
             if (currentProblemsHash) {
-              if (currentProblemsHash != problemsHash || startTimestamp != data.date_start.getTime()) {
-                return $state.go($state.current, {id: $scope.id}, {reload: true});
+              if (
+                currentProblemsHash != problemsHash ||
+                startTimestamp != data.date_start.getTime()
+              ) {
+                return $state.go(
+                  $state.current,
+                  { id: $scope.id },
+                  { reload: true }
+                );
               }
             } else {
               currentProblemsHash = problemsHash;
               startTimestamp = data.date_start.getTime();
-              _.forEach(data.problems, function(value, key) {
+              _.forEach(data.problems, function (value, key) {
                 $scope.problemIndex[value._id] = key;
               });
               $scope.problems = data.problems;
@@ -129,12 +157,12 @@ angular.module('Contests')
       }
 
       function sortContestants(callback) {
-        $scope.contestantsIds.sort(function(a,b) {
-          var solvedA = $scope.scores[a] && $scope.scores[a].solved || 0;
-          var solvedB = $scope.scores[b] && $scope.scores[b].solved || 0;
+        $scope.contestantsIds.sort(function (a, b) {
+          var solvedA = ($scope.scores[a] && $scope.scores[a].solved) || 0;
+          var solvedB = ($scope.scores[b] && $scope.scores[b].solved) || 0;
           if (solvedA !== solvedB) return solvedB - solvedA;
-          var penaltyA = $scope.scores[a] && $scope.scores[a].penalty || 0;
-          var penaltyB = $scope.scores[b] && $scope.scores[b].penalty || 0;
+          var penaltyA = ($scope.scores[a] && $scope.scores[a].penalty) || 0;
+          var penaltyB = ($scope.scores[b] && $scope.scores[b].penalty) || 0;
           if (penaltyA !== penaltyB) return penaltyA - penaltyB;
           return a < b;
         });
@@ -143,41 +171,43 @@ angular.module('Contests')
 
       function updateScoreboard(ev) {
         var rep = ev[0],
-            pid = ev[1],
-            status = ev[2],
-            timestamp = ev[3],
-            shouldSort = false;
-        var pendingKey = _.join([rep,pid,timestamp], ',');
-        if (status === 'PENDING') {
+          pid = ev[1],
+          status = ev[2],
+          timestamp = ev[3],
+          shouldSort = false;
+        var pendingKey = _.join([rep, pid, timestamp], ",");
+        if (status === "PENDING") {
           eventStartFrom = Math.min(eventStartFrom, timestamp);
           pending[pendingKey] = true;
         }
-        var uid = _.join(ev, ',');
+        var uid = _.join(ev, ",");
         if (markEvent[uid]) return false;
         markEvent[uid] = true;
-        _.update($scope.scoreboard, [rep, pid], function(o) {
-          o = o || {err: 0, pending: 0, accepted: false};
-          if (status !== 'PENDING' && pending[pendingKey]) {
+        _.update($scope.scoreboard, [rep, pid], function (o) {
+          o = o || { err: 0, pending: 0, accepted: false };
+          if (status !== "PENDING" && pending[pendingKey]) {
             delete pending[pendingKey];
             o.pending--;
           }
           if (o.accepted) return o;
-          if (status === 'ACCEPTED') {
+          if (status === "ACCEPTED") {
             shouldSort = true;
             o.accepted = true;
-            o.time = Math.floor((timestamp - $scope.contest.date_start.getTime()) / 60000);
-            o.upsolved = (timestamp > $scope.contest.date_end);
-            _.update($scope.firstAccepted, pid, function(s) {
+            o.time = Math.floor(
+              (timestamp - $scope.contest.date_start.getTime()) / 60000
+            );
+            o.upsolved = timestamp > $scope.contest.date_end;
+            _.update($scope.firstAccepted, pid, function (s) {
               if (s) return s;
               return { rep: rep, timestamp: timestamp };
             });
-            _.update($scope.scores, rep, function(s) {
-              s = s || {solved: 0, penalty: 0};
+            _.update($scope.scores, rep, function (s) {
+              s = s || { solved: 0, penalty: 0 };
               s.solved++;
               s.penalty += o.time + o.err * 20;
               return s;
             });
-          } else if (status === 'REJECTED') {
+          } else if (status === "REJECTED") {
             o.err++;
           } else {
             o.pending++;
@@ -188,47 +218,63 @@ angular.module('Contests')
       }
 
       function processContestEvents(callback) {
-        ContestAPI.getContestEvents($scope.id, eventStartFrom, function(err, events) {
-          if (err || !_.isArray(events) || !isActive()) return callback && callback();
-          if (events.length > 0) eventStartFrom = _.last(events)[3]+1;
-          $scope.events = $scope.events.concat(events);
-          var shouldSort = false;
-          _.forEach(events, function(ev) {
-            if (ev[3] < $scope.contest.date_end || $scope.upsolving) {
-              shouldSort |= updateScoreboard(ev);
-            }
-          });
-          if (shouldSort) sortContestants(callback);
-          else callback && callback();
-        });
+        ContestAPI.getContestEvents(
+          $scope.id,
+          eventStartFrom,
+          function (err, events) {
+            if (err || !_.isArray(events) || !isActive())
+              return callback && callback();
+            if (events.length > 0) eventStartFrom = _.last(events)[3] + 1;
+            $scope.events = $scope.events.concat(events);
+            var shouldSort = false;
+            _.forEach(events, function (ev) {
+              if (ev[3] < $scope.contest.date_end || $scope.upsolving) {
+                shouldSort |= updateScoreboard(ev);
+              }
+            });
+            if (shouldSort) sortContestants(callback);
+            else callback && callback();
+          }
+        );
       }
 
       function processSubmissions() {
         var newSubmissionStartFrom = submissionStartFrom;
-        ContestAPI.getSubmissions($scope.id, submissionStartFrom, function(err, submissions) {
-          if (!isActive()) return;
-          if (submissions.length > 0) {
-            newSubmissionStartFrom = new Date(_.head(submissions).date).getTime()+1;
-          }
-          _.forEach(submissions, function(s) {
-            if (s.verdict <= 0) {
+        ContestAPI.getSubmissions(
+          $scope.id,
+          submissionStartFrom,
+          function (err, submissions) {
+            if (!isActive()) return;
+            if (submissions.length > 0) {
               newSubmissionStartFrom =
-                Math.min(newSubmissionStartFrom, new Date(s.date).getTime());
+                new Date(_.head(submissions).date).getTime() + 1;
             }
-            $scope.tryPushSubmission(s);
-          });
-          submissionStartFrom = newSubmissionStartFrom;
-          $scope.loadedSubmissions = true;
-        });
+            _.forEach(submissions, function (s) {
+              if (s.verdict <= 0) {
+                newSubmissionStartFrom = Math.min(
+                  newSubmissionStartFrom,
+                  new Date(s.date).getTime()
+                );
+              }
+              $scope.tryPushSubmission(s);
+            });
+            submissionStartFrom = newSubmissionStartFrom;
+            $scope.loadedSubmissions = true;
+          }
+        );
       }
 
-      $scope.changeUpsolving = function() {
-        $state.go($state.current, {upsolving: $scope.upsolving ? '1' : '0'}, {notify: false});
+      $scope.changeUpsolving = function () {
+        $state.go(
+          $state.current,
+          { upsolving: $scope.upsolving ? "1" : "0" },
+          { notify: false }
+        );
         markEvent = {};
         $scope.firstAccepted = {};
         $scope.scoreboard = {};
         $scope.scores = {};
-        _.forEach($scope.events, function(ev) {
+        _.forEach($scope.events, function (ev) {
           if (ev[3] < $scope.contest.date_end || $scope.upsolving) {
             updateScoreboard(ev);
           }
@@ -236,16 +282,19 @@ angular.module('Contests')
         sortContestants();
       };
 
-      $scope.tryPushSubmission = function(s) {
+      $scope.tryPushSubmission = function (s) {
         if (s.problem && $scope.problemIndex[s.problem] === undefined) return;
         if ($scope.submissions[s._id]) {
           var olds = $scope.submissions[s._id];
           if (olds.verdict <= 0 && s.verdict > 0) {
             Notification[Verdict[s.verdict].notification](
-              'Problema ' + String.fromCharCode(65 + olds.index) + ': ' + Verdict[s.verdict].text
+              "Problem " +
+                String.fromCharCode(65 + olds.index) +
+                ": " +
+                Verdict[s.verdict].text
             );
           }
-          return olds.verdict = s.verdict;
+          return (olds.verdict = s.verdict);
         }
         s.date = new Date(s.date);
         s.minutes = Math.floor((s.date - $scope.contest.date_start) / 60000);
@@ -254,20 +303,28 @@ angular.module('Contests')
         $scope.submissionsIds.unshift(s._id);
       };
 
-      $scope.start = function() {
+      $scope.start = function () {
         $interval.cancel(processInterval);
         // CHANGE THIS!!! NOT WORKING, SINCE SOME CALLS MAY FAIL AND EVERYTHING WILL FAIL AFTER
         reset();
         $scope.id = $stateParams.id;
         processing = true;
-        processContestMetadata(function() {
+        processContestMetadata(function () {
           $scope.loading = processing = false;
         });
-        processInterval = $interval(function() {
-          if (!processing && isActive()) {
-            processing = true;
-            processContestMetadata(function() { processing = false; });
-          }
-        }, 3000, 0, false);
+        processInterval = $interval(
+          function () {
+            if (!processing && isActive()) {
+              processing = true;
+              processContestMetadata(function () {
+                processing = false;
+              });
+            }
+          },
+          3000,
+          0,
+          false
+        );
       };
-    });
+    }
+  );
