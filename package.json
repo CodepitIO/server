@@ -23,7 +23,7 @@
     "lodash": "^4.17.10",
     "method-override": "^2.3.10",
     "mongo-express": "^0.54.0",
-    "mongoose": "^5.1.6",
+    "mongoose": "^6.1.7",
     "multiparty": "^4.1.4",
     "nodemailer": "^6.7.2",
     "nodemailer-ses-transport": "^1.5.1",
