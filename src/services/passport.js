@@ -24,23 +24,22 @@ module.exports = (passport) => {
         passReqToCallback: true,
       },
       (req, email, password, done) => {
+        let account = req.body;
         User.findOne(
           {
-            "local.email": email,
+            $or: [{ email: account.email }, { username: account.username }],
           },
           (err, user) => {
             if (err) return done();
-            if (user) return done(Errors.EmailAlreadyExists);
+            if (user) return done(Errors.EmailOrUsernameAlreadyExists);
 
-            let account = req.body;
             user = new User({
-              local: {
-                name: account.name,
-                surname: account.surname,
-                email: account.email,
-                username: account.username,
-                password: User.generatePassword(account.password),
-              },
+              firstName: account.firstName,
+              lastName: account.lastName,
+              username: account.username,
+              email: account.email,
+              country: account.country,
+              password: User.generatePassword(account.password),
             });
             user.save(done);
           }
@@ -53,24 +52,21 @@ module.exports = (passport) => {
     "local-login",
     new LocalStrategy(
       {
-        usernameField: "email",
+        usernameField: "emailOrUsername",
         passwordField: "password",
         passReqToCallback: true,
       },
       (req, emailOrUsername, password, done) => {
         User.findOne(
           {
-            $or: [
-              { "local.email": emailOrUsername },
-              { "local.username": emailOrUsername },
-            ],
+            $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
           },
           (err, user) => {
             if (err) return done();
             if (!user || !user.validPassword(password)) {
               return done(Errors.InvalidEmailOrPassword);
             }
-            user.local.lastAccess = new Date();
+            user.lastAccess = new Date();
             return user.save((err, user) => {
               done(null, user.toObject({ virtuals: true }));
             });

@@ -50,7 +50,7 @@ let job = new CronJob({
 job.start();
 
 exports.searchProblems = (req, res) => {
-  let substr = req.body.text;
+  let substr = req.params.query;
   let insertedProblems = req.body.problems || [];
   if (!_.isString(substr) || !_.isArray(insertedProblems))
     return res.status(400).send();
@@ -62,26 +62,27 @@ exports.searchProblems = (req, res) => {
   });
 };
 
-exports.getProblemMetadata = (req, res) => {
+exports.get = async (req, res) => {
   let id = req.params.id;
-  Problem.findById(id)
-    .select(
+  try {
+    let problem = await Problem.findById(id).select(
       "name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf"
-    )
-    .exec((err, problem) => {
-      if (err) return res.status(500).send();
-      if (!problem) return res.status(404).send();
-      return res.json(problem);
-    });
+    );
+    if (!problem) {
+      return res.status(404).send();
+    }
+    return res.json(problem);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send();
+  }
 };
 
 exports.isIndexed = (array) => {
-  if (!_.isArray(array)) array = [array];
+  if (!_.isArray(array)) return false;
   for (let i = 0; i < array.length; i++) {
-    let id = array[i];
+    const id = array[i];
     if (_.isString(id) && !problems[id]) return false;
-    else if (_.isObject(id) && _.isString(id._id) && !problems[id._id])
-      return false;
   }
   return true;
 };

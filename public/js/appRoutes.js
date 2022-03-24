@@ -1,137 +1,139 @@
-angular.module('appRoutes', []).config(function ($stateProvider, $urlRouterProvider) {
+angular
+  .module("appRoutes", [])
+  .config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('home');
+    $urlRouterProvider.otherwise("home");
     //
     // Now set up the states
     $stateProvider
-      .state('home', {
-        url: '^/home',
-        templateUrl: 'views/home.html'
+      .state("home", {
+        url: "^/home",
+        templateUrl: "views/home.html",
       })
-      .state('about', {
-        url: '^/about',
-        templateUrl: 'views/about.html'
+      .state("about", {
+        url: "^/about",
+        templateUrl: "views/about.html",
       })
-      .state('contests', {
+      .state("contests", {
         abstract: true,
-        url: '^/contests',
-        template: '<ui-view/>'
+        url: "^/contests",
+        template: "<ui-view/>",
       })
       // Controller is set on the directive
-      .state('contests.open', {
-        url: '/open',
-        templateUrl: 'views/contests/list/open.html'
+      .state("contests.open", {
+        url: "/open",
+        templateUrl: "views/contests/list/open.html",
       })
       // Controller is set on the directive
-      .state('contests.past', {
-        url: '/past',
-        templateUrl: 'views/contests/list/past.html'
+      .state("contests.past", {
+        url: "/past",
+        templateUrl: "views/contests/list/past.html",
       })
       // Controller is set on the directive
-      .state('contests.owned', {
-        url: '/owned',
-        templateUrl: 'views/contests/list/owned.html',
-        authenticate: true
-      })
-      // Controller is set on the directive
-      .state('contests.joined', {
-        url: '/joined',
-        templateUrl: 'views/contests/list/joined.html',
-        authenticate: true
-      })
-      .state('contests.create', {
-        url: '/create',
-        templateUrl: 'views/contests/settings/contest.create.html',
+      .state("contests.owned", {
+        url: "/owned",
+        templateUrl: "views/contests/list/owned.html",
         authenticate: true,
-        validate: true
       })
-      .state('contest', {
+      // Controller is set on the directive
+      .state("contests.joined", {
+        url: "/joined",
+        templateUrl: "views/contests/list/joined.html",
+        authenticate: true,
+      })
+      .state("contests.create", {
+        url: "/create",
+        templateUrl: "views/contests/settings/contest.create.html",
+        authenticate: true,
+        validate: true,
+      })
+      .state("contest", {
         abstract: true,
-        url: '^/contest/:id?upsolving',
-        templateUrl: 'views/contests/contest/contest.html',
-        controller: 'ContestController'
+        url: "^/contest/:id?upsolving",
+        templateUrl: "views/contests/contest/contest.html",
+        controller: "ContestController",
       })
-      .state('contest.scoreboard', {
-        url: '/view',
-        title: 'Placar'
+      .state("contest.scoreboard", {
+        url: "/view",
+        title: "Placar",
       })
-      .state('contest.submit', {
-        url: '/submit',
-        title: 'Submeter',
-        authenticate: true
+      .state("contest.submit", {
+        url: "/submit",
+        title: "Submeter",
+        authenticate: true,
       })
-      .state('contest.submissions', {
-        url: '/submissions',
-        title: 'Submissões',
-        authenticate: true
+      .state("contest.submissions", {
+        url: "/submissions",
+        title: "Submissões",
+        authenticate: true,
       })
-      .state('contest.edit', {
-        url: '/edit',
-        title: 'Editar',
-        authenticate: true
+      .state("contest.edit", {
+        url: "/edit",
+        title: "Editar",
+        authenticate: true,
       })
-      .state('register', {
-        url: '^/register',
-        templateUrl: 'views/user/register.html',
-        controller: 'RegisterController',
-        authenticate: false
+      .state("register", {
+        url: "^/register",
+        templateUrl: "views/user/register.html",
+        controller: "RegisterController",
+        authenticate: false,
       })
-      .state('validate', {
-        url: '^/validate/:hash',
-        templateUrl: 'views/user/validate.html',
-        controller: 'ProfileValidateController'
+      .state("validate", {
+        url: "^/validate/:hash",
+        templateUrl: "views/user/validate.html",
+        controller: "ProfileValidateController",
       })
-      .state('recover', {
-        url: '^/recover/:hash',
-        templateUrl: 'views/user/recover.html',
-        controller: 'ProfileRecoverController',
-        authenticate: false
+      .state("recover", {
+        url: "^/recover/:hash",
+        templateUrl: "views/user/recover.html",
+        controller: "ProfileRecoverController",
+        authenticate: false,
       })
-      .state('profile', {
-        url: '^/profile/:id',
-        templateUrl: 'views/user/profile.html',
-        controller: 'ProfileController'
+      .state("profile", {
+        url: "^/profile/:id",
+        templateUrl: "views/user/profile.html",
+        controller: "ProfileController",
       })
-      .state('profile.teams', {
-        url: '/teams',
-        templateUrl: 'views/user/profile.teams.html',
-        controller: 'ProfileTeamsController'
+      .state("profile.teams", {
+        url: "/teams",
+        templateUrl: "views/user/profile.teams.html",
+        controller: "ProfileTeamsController",
       })
-      .state('profile.posts', {
-        url: '/posts?page',
-        templateUrl: 'views/user/profile.posts.html',
-        controller: 'ProfilePostsController'
+      .state("profile.posts", {
+        url: "/posts?page",
+        templateUrl: "views/user/profile.posts.html",
+        controller: "ProfilePostsController",
       })
-      .state('team', {
-        url: '^/team/:id',
-        templateUrl: 'views/team/team.html',
-        controller: 'TeamController'
+      .state("team", {
+        url: "^/team/:id",
+        templateUrl: "views/team/team.html",
+        controller: "TeamController",
       })
-      .state('submission', {
-        url: '^/submission/:id',
-        templateUrl: 'views/submission.html',
-        controller: 'SubmissionController'
+      .state("submission", {
+        url: "^/submission/:id",
+        templateUrl: "views/submission.html",
+        controller: "SubmissionController",
       })
-      .state('problems', {
+      .state("problems", {
         abstract: true,
-        url: '^/problems/:id?index',
-        templateUrl: 'views/problem-view.html',
-        controller: 'ProblemController',
+        url: "^/problems/:id?index",
+        templateUrl: "views/problem-view.html",
+        controller: "ProblemController",
         resolve: {
-          problem: function($q, $stateParams, ProblemsAPI) {
+          problem: function ($q, $stateParams, ProblemsAPI) {
             var deferred = $q.defer();
             ProblemsAPI.get($stateParams.id, function (err, data) {
               if (err) deferred.reject(err);
               else deferred.resolve(data);
             });
             return deferred.promise;
-          }
-        }
+          },
+        },
       })
-      .state('problems.view', {
-        url: '/view',
-        templateProvider: function($templateFactory, problem) {
+      .state("problems.view", {
+        url: "/view",
+        templateProvider: function ($templateFactory, problem) {
           return $templateFactory.fromUrl(problem.url);
         },
       });

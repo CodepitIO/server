@@ -27,7 +27,6 @@
     "lodash": "~4.13.1"
   },
   "resolutions": {
-    "angular": "~1.5.5",
-    "pdfjs-dist": "~1.5.232"
+    "angular": "~1.5.5"
   }
 }
