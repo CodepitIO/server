@@ -78,7 +78,9 @@ exports.getMetadata = (req, res) => {
 
 exports.getEvents = (req, res) => {
   let id = req.params.id;
+  const now = new Date();
   let startFrom = _.toInteger(req.query.from) || 0;
+  let upTo = _.toInteger(req.query.to) || now.getTime();
   Contest.findById(id, (err, contest) => {
     if (err) return res.status(500).send();
     if (!contest || !canViewContest(contest, req.user)) {
@@ -90,14 +92,13 @@ exports.getEvents = (req, res) => {
       req.user && req.user._id,
       contest.author
     );
-    let upTo = new Date().getTime();
     if (
       !isAdmin &&
       !isContestAdmin &&
-      upTo >= contest.frozen_time &&
-      upTo < contest.date_end
+      now >= contest.frozen_time &&
+      now < contest.date_end
     ) {
-      upTo = contest.frozen_time.getTime();
+      upTo = new Date(contest.frozen_time).getTime();
     }
     async.parallel(
       {

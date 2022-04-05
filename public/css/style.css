@@ -79,7 +79,7 @@ body {
 
 footer {
   margin-top: auto;
-  background: url("../imgs/footer_bg.png");
+  background: url("/imgs/footer_bg.png");
   background-color: #263238;
 }
 

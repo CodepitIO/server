@@ -1,14 +1,19 @@
-'use strict';
+"use strict";
 
-const Contest = require('../../common/models/contest'),
-  mongoose = require('mongoose'),
-  _ = require('lodash');
+const Contest = require("../../common/models/contest"),
+  mongoose = require("mongoose"),
+  _ = require("lodash");
+
+const CONTESTS_PER_PAGE = 10;
 
 exports.create = (req, res) => {
   var contest = req.body;
   if (contest.startDateTime <= new Date()) {
     return res.json({
-      error: 'A competição deve ocorrer no futuro (o horário do servidor é ' + new Date() + ')'
+      error:
+        "A competição deve ocorrer no futuro (o horário do servidor é " +
+        new Date() +
+        ")",
     });
   }
 
@@ -28,9 +33,11 @@ exports.create = (req, res) => {
 
     contestantType: contest.contestantType,
     password: contest.password,
-    isPrivate: (contest.password.length > 0),
-    watchPrivate: (contest.watchPrivate == 1)
-  }).save((err, contest) => {
+    isPrivate: contest.password.length > 0,
+    watchPrivate: contest.watchPrivate == 1,
+  });
+
+  newContest.save((err, contest) => {
     if (err) return res.status(500).send();
     return res.json(contest);
   });
@@ -39,115 +46,68 @@ exports.create = (req, res) => {
 let filters = {
   open: {
     opts: function () {
-      let now = new Date();
       return {
         date_end: {
-          $gt: now
-        }
+          $gt: new Date(),
+        },
       };
     },
-    sort: 'date_start',
-    limit: 0
+    sort: "date_start",
+    limit: 10,
   },
   past: {
     opts: function (req) {
-      let last;
-      if (req.params.from === '0') last = new Date();
-      else last = new Date(parseInt(req.params.from) || 0);
       return {
         date_end: {
-          $lt: last
-        }
+          $lt: new Date(),
+        },
       };
     },
-    sort: '-date_end',
-    limit: 20
+    sort: "-date_end",
+    limit: 10,
   },
-  owned: {
+  created: {
     opts: function (req) {
       if (!req.isAuthenticated()) return null;
       return {
-        author: req.user._id
+        author: req.user._id,
       };
     },
-    sort: 'date_start',
-    limit: 0
-  },
-  now: {
-    opts: function () {
-      let now = new Date();
-      return {
-        date_start: {
-          $lt: now
-        },
-        date_end: {
-          $gt: now
-        }
-      };
-    },
-    sort: 'date_start',
-    limit: 0
-  },
-  future: {
-    opts: function () {
-      let now = new Date();
-      return {
-        date_start: {
-          $gt: now
-        }
-      };
-    },
-    sort: 'date_start',
-    limit: 0
+    sort: "-date_start",
+    limit: 10,
   },
   joined: {
     opts: function (req) {
       if (!req.isAuthenticated()) return null;
       return {
-        'contestants.id': req.user.id
+        "contestants.id": req.user.id,
       };
     },
-    sort: '-date_end',
-    limit: 0
+    sort: "-date_end",
+    limit: 10,
   },
-  joined_now: {
-    opts: function (req) {
-      if (!req.isAuthenticated()) return null;
-      let now = new Date();
-      return {
-        'contestants.id': req.user.id,
-        date_start: {
-          $lt: now
-        },
-        date_end: {
-          $gt: now
-        }
-      };
-    },
-    sort: '-date_start',
-    limit: 0
-  }
 };
 
-exports.getList = (req, res) => {
-  let filter = filters[req.params.type || ''];
+exports.getList = async (req, res) => {
+  let filter = filters[req.params.type || ""];
 
   if (!filter || !filter.opts(req)) {
     return res.status(400).send();
   }
 
-  Contest
-    .find(filter.opts(req))
-    .select('-problems -contestants -password')
-    .setOptions({
-      sort: filter.sort,
-      limit: filter.limit,
-      lean: true
-    })
-    .exec((err, contests) => {
-      if (err) return res.status(500).send();
-      return res.json({
-        contests: contests
-      });
-    });
+  const data = await Promise.all([
+    Contest.find(filter.opts(req))
+      .select("-problems -contestants -password")
+      .setOptions({
+        sort: filter.sort,
+        skip: req.query.page * CONTESTS_PER_PAGE,
+        limit: filter.limit,
+        lean: true,
+      }),
+    Contest.count(filter.opts(req)),
+  ]);
+  res.status(200).json({
+    list: data[0],
+    count: data[1],
+  });
 };
