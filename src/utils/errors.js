@@ -31,14 +31,14 @@ module.exports = {
   },
   UserNotFoundByEmail: {
     error: {
-      pt: "Não há usuário cadastrado com este email.",
-      en: "There's no user registered with this email.",
+      pt: "Não há usuário cadastrado com este email ou nome de usuário.",
+      en: "There's no user registered with this email or username.",
     },
   },
   UserAlreadyInTeam: {
     error: {
-      pt: "Um usuário com este email já está no seu time.",
-      en: "An user with this email is already on your team.",
+      pt: "Um usuário com este email ou nome de usuário já está no seu time.",
+      en: "An user with this email or username is already on your team.",
     },
   },
   UserTeamLimitExceed: {

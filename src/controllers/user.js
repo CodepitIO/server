@@ -98,24 +98,15 @@ exports.logout = (req, res) => {
   return res.json({});
 };
 
-exports.checkUsername = (req, res) => {
+exports.checkAvailableUsernameOrEmail = async (req, res) => {
   if (User.validateChain(req).seeUsername().notOk()) {
     return res.status(400).send();
   }
-  let username = req.params.username || "";
-  User.findOne({ username: username }, (err, user) => {
-    return res.json({ available: !user });
+  let usernameOrEmail = req.params.usernameOrEmail || ``;
+  const user = await User.findOne({
+    $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
   });
-};
-
-exports.checkEmail = (req, res) => {
-  if (User.validateChain(req).seeEmail().notOk()) {
-    return res.status(400).send();
-  }
-  let email = req.params.email || "";
-  User.findOne({ email: email }, (err, user) => {
-    return res.json({ available: !user });
-  });
+  return res.json({ available: !user });
 };
 
 exports.sendPasswordRecoveryEmail = (req, res) => {
@@ -203,7 +194,18 @@ exports.validate = (req, res) => {
 };
 
 exports.get = async (req, res) => {
-  return res.json(req.user);
+  const id = req.params.id;
+  if (!id) {
+    return res.json(req.user);
+  }
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(400).send();
+  }
+  delete user.password;
+  delete user.updatedAt;
+  delete user.updatedAt;
+  return res.json(user);
 };
 
 exports.status = (req, res) => {

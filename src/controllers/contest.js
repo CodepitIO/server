@@ -42,6 +42,7 @@ exports.getMetadata = (req, res) => {
       let obj = {
         _id: contest._id,
         name: contest.name,
+        author: contest.author,
         date_start: contest.date_start,
         date_end: contest.date_end,
         frozen_time: contest.frozen_time,
@@ -56,10 +57,7 @@ exports.getMetadata = (req, res) => {
         hasEnded: contest.hasEnded(),
         canViewContest: canViewContest(contest, req.user),
         inContest: contest.userInContest(userId),
-        isContestAdmin: Utils.cmpToString(
-          req.user && req.user._id,
-          contest.author
-        ),
+        isContestAdmin: Utils.cmpToString(req.user?._id, contest.author),
       };
 
       let isAdmin = req.user && req.user.isAdmin;
@@ -122,50 +120,31 @@ exports.getEvents = (req, res) => {
   });
 };
 
-exports.join = (req, res) => {
-  let id = req.params.id;
-  let password = req.body.password;
-  let teamId = req.body.team;
-  let userId = req.user._id;
-  async.auto(
-    {
-      contest: (next) => {
-        if (!id) return next();
-        Contest.findById(id, next);
-      },
-      team: (next) => {
-        if (!teamId) return next();
-        Team.count({ _id: teamId, members: userId }, next);
-      },
-      proc: [
-        "contest",
-        "team",
-        (results, next) => {
-          let contest = results.contest,
-            teamCount = results.team;
-          if (!contest) return res.status(400).send();
-          if (contest.contestantType === 1 && teamId)
-            return res.status(400).send();
-          if (contest.contestantType === 2 && !teamId)
-            return res.status(400).send();
-          if (teamId && teamCount === 0) return res.status(400).send();
-          if (contest.userInContest(userId)) return res.status(400).send();
-          if (contest.isPrivate && contest.password !== password) {
-            return res.json(Errors.InvalidPassword);
-          }
-          let contestant = { user: userId };
-          if (teamId) contestant.team = teamId;
-          contest.contestants.push(contestant);
-          contest.save();
-          return res.json({});
-        },
-      ],
-    },
-    (err) => {
-      if (err) return res.status(500).send();
-      return res.json();
+exports.join = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const password = req.body.password;
+    const teamId = req.body.team;
+    const userId = req.user._id;
+    const contestPromise = Contest.findById(id);
+    const countPromise = Team.count({ _id: teamId, members: userId });
+    const [contest, count] = await Promise.all([contestPromise, countPromise]);
+    if (!contest) return res.status(400).send();
+    if (contest.contestantType === 1 && teamId) return res.status(400).send();
+    if (contest.contestantType === 2 && !teamId) return res.status(400).send();
+    if (teamId && count === 0) return res.status(400).send();
+    if (contest.userInContest(userId)) return res.status(400).send();
+    if (contest.isPrivate && contest.password !== password) {
+      return res.json(Errors.InvalidPassword);
     }
-  );
+    let contestant = { user: userId };
+    if (teamId) contestant.team = teamId;
+    contest.contestants.push(contestant);
+    contest.save();
+    return res.json({});
+  } catch (err) {
+    return res.status(500).send();
+  }
 };
 
 exports.leave = (req, res) => {
@@ -272,7 +251,6 @@ exports.validateContest = (req, res, next) => {
         ) {
           return res.status(400).send();
         }
-        c.contestantType = data.contestantType;
         return next();
       },
       (next) => {

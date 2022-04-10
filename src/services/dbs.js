@@ -14,17 +14,15 @@ mongoose.connect(CONN.MONGO.GET_URL(), {}, (err) => {
   }
 });
 
-let redisClient = redis.createClient({
+exports.redisClient = redis.createClient({
   host: CONN.REDIS.HOST,
   port: CONN.REDIS.PORT,
   prefix: process.env.NODE_ENV,
 });
 
-redisClient.on("error", (err) => {
+exports.redisClient.on("error", (err) => {
   console.log(err);
 });
-
-exports.redisClient = redisClient;
 
 exports.createRedisClient = () => {
   return redis.createClient({

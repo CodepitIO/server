@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports.middleware = function (age) {
+exports.middleware = function (age) {
   var cookieAge = age || 24 * 60 * 60 * 1000;
   return function (req, res, next) {
     var session = req.cookies["session"],

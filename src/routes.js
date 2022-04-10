@@ -28,7 +28,9 @@ const User = require("./services/authorization"),
 
 function APIRoutes() {
   let router = express.Router();
-  router.param("id", Utils.isValidId);
+
+  // submissions
+  router.get("/submission/:id", SubmissionCtrl.getById);
 
   // utils
   router.get("/server/time", Utils.getTime);
@@ -40,9 +42,12 @@ function APIRoutes() {
   router.get("/user/logout", User.is("logged"), UserCtrl.logout);
   router.post("/user/edit", User.is("logged"), UserCtrl.edit);
   router.post("/user/register", Recaptcha.check, UserCtrl.register);
+  router.get("/user/teams/invites", User.is("logged"), TeamCtrl.getInvites);
   router.get("/user/teams", User.is("logged"), TeamCtrl.getByLoggedUser);
-  router.get("/user/check/username/:username", UserCtrl.checkUsername);
-  router.get("/user/check/email/:email", UserCtrl.checkEmail);
+  router.get(
+    "/user/check/:usernameOrEmail",
+    UserCtrl.checkAvailableUsernameOrEmail
+  );
   router.post(
     "/user/recover",
     User.is("logged-off"),
@@ -57,6 +62,7 @@ function APIRoutes() {
   router.get("/user/validate", User.is("logged"), UserCtrl.sendValidationEmail);
   router.get("/user/validate/:hash", UserCtrl.validate);
   router.get("/user/:id", UserCtrl.get);
+  router.get("/user/:id/teams", TeamCtrl.getByUser);
 
   // post
   router.post("/post", User.is("logged"), PostCtrl.post);
@@ -113,9 +119,6 @@ function APIRoutes() {
   // problems
   router.post("/problems/find/:query", ProblemsCtrl.searchProblems);
   router.get("/problems/:id", ProblemsCtrl.get);
-
-  // submissions
-  router.get("/submission/:id", SubmissionCtrl.getById);
 
   return router;
 }
