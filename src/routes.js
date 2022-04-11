@@ -41,6 +41,7 @@ function APIRoutes() {
   router.post("/user/login", UserCtrl.login);
   router.get("/user/logout", User.is("logged"), UserCtrl.logout);
   router.post("/user/edit", User.is("logged"), UserCtrl.edit);
+  router.post("/user/changePassword", UserCtrl.changePassword);
   router.post("/user/register", Recaptcha.check, UserCtrl.register);
   router.get("/user/teams/invites", User.is("logged"), TeamCtrl.getInvites);
   router.get("/user/teams", User.is("logged"), TeamCtrl.getByLoggedUser);

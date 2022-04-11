@@ -28,28 +28,37 @@ function sendMail(type, user, res) {
   });
 }
 
-exports.edit = (req, res) => {
-  let account = req.body;
-  async.waterfall(
-    [
-      async.apply(User.findOne, { email: account.email }),
-      (user, next) => {
-        if (!user.validPassword(account.password)) {
-          return res.json(Errors.InvalidPassword);
-        }
-        if (account.newPassword.length > 0) {
-          user.password = user.generatePassword(account.newPassword);
-        }
-        user.firstName = account.firstName;
-        user.lastName = account.lastName;
-        return user.save(next);
-      },
-    ],
-    (err, user) => {
-      if (err) return res.status(500).send();
-      return res.json(user);
+exports.changePassword = async (req, res) => {
+  try {
+    let account = req.body;
+    const user = await User.findById(req.user._id);
+    if (!user.validPassword(account.password)) {
+      return res.json(Errors.InvalidPassword);
     }
-  );
+    if (account.newPassword.length < 6) {
+      return res.status(400).send();
+    }
+    user.password = User.generatePassword(account.newPassword);
+    await user.save();
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).send();
+  }
+};
+
+exports.edit = async (req, res) => {
+  try {
+    let account = req.body;
+    const user = await User.findById(req.user._id);
+    user.firstName = account.firstName;
+    user.lastName = account.lastName;
+    user.country = account.country;
+    await user.save();
+    delete user.password;
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).send();
+  }
 };
 
 exports.register = (req, res) => {
