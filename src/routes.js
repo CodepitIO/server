@@ -162,7 +162,15 @@ exports.configure = (app) => {
   app.use(expressValidator());
   app.use(methodOverride("X-HTTP-Method-Override"));
   app.use(express.static(__dirname + "/../public"));
-  app.use(cors({ credentials: true, origin: "http://localhost" }));
+  app.use(
+    cors({
+      credentials: true,
+      origin:
+        process.env.NODE_ENV === `development`
+          ? `http://localhost`
+          : `codepit.io`,
+    })
+  );
 
   require("./services/passport")(passport); // pass passport for configuration
   app.use(passport.initialize());
