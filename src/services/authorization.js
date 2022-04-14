@@ -6,8 +6,7 @@ const ACCESS = require("../../common/constants").SITE_VARS.ACCESS;
 
 let user = new ConnectRoles({
   failureHandler: (req, res, action) => {
-    if (action === "admin") return res.redirect("/");
-    return res.status(403).send();
+    return res.status(403).json({ redirectTo: `/` });
   },
 });
 
@@ -16,7 +15,7 @@ user.use((req) => {
     return true;
 });
 
-user.use("logged", (req) => {
+user.use("logged", (req, res) => {
   return req.isAuthenticated();
 });
 

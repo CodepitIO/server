@@ -36,7 +36,7 @@ function APIRoutes() {
   router.get("/server/time", Utils.getTime);
 
   // user
-  router.get("/user", UserCtrl.get);
+  router.get("/user", UserCtrl.tryGetByLoggedUser);
   router.get("/user/status", UserCtrl.status);
   router.post("/user/login", UserCtrl.login);
   router.get("/user/logout", User.is("logged"), UserCtrl.logout);
@@ -62,8 +62,8 @@ function APIRoutes() {
   );
   router.get("/user/validate", User.is("logged"), UserCtrl.sendValidationEmail);
   router.get("/user/validate/:hash", UserCtrl.validate);
-  router.get("/user/:id", UserCtrl.get);
-  router.get("/user/:id/teams", TeamCtrl.getByUser);
+  router.get("/user/:id", Utils.isValidId, UserCtrl.get);
+  router.get("/user/:id/teams", Utils.isValidId, TeamCtrl.getByUser);
 
   // post
   router.post("/post", User.is("logged"), PostCtrl.post);
@@ -72,38 +72,88 @@ function APIRoutes() {
 
   // team
   router.post("/team/create", User.is("logged"), TeamCtrl.create);
-  router.post("/team/:id/edit", User.is("logged"), TeamCtrl.edit);
-  router.post("/team/:id/leave", User.is("logged"), TeamCtrl.leave);
-  router.post("/team/:id/invite", User.is("logged"), TeamCtrl.invite);
-  router.post("/team/:id/remove", User.is("logged"), TeamCtrl.remove);
-  router.post("/team/:id/accept", User.is("logged"), TeamCtrl.accept);
-  router.post("/team/:id/decline", User.is("logged"), TeamCtrl.decline);
-  router.get("/team/:id", TeamCtrl.getById);
+  router.post(
+    "/team/:id/edit",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.edit
+  );
+  router.post(
+    "/team/:id/leave",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.leave
+  );
+  router.post(
+    "/team/:id/invite",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.invite
+  );
+  router.post(
+    "/team/:id/remove",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.remove
+  );
+  router.post(
+    "/team/:id/accept",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.accept
+  );
+  router.post(
+    "/team/:id/decline",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.decline
+  );
+  router.get("/team/:id", Utils.isValidId, TeamCtrl.getById);
 
   // contests
   router.get("/contest/list/:type", ContestListCtrl.getList);
-  router.get("/contest/:id/metadata", ContestCtrl.getMetadata);
-  router.get("/contest/:id/events", ContestCtrl.getEvents);
+  router.get("/contest/:id/metadata", Utils.isValidId, ContestCtrl.getMetadata);
+  router.get("/contest/:id/events", Utils.isValidId, ContestCtrl.getEvents);
   router.get(
     "/contest/:id/submissions",
+    Utils.isValidId,
     User.is("logged"),
     SubmissionCtrl.getRepContestSubmissions
   );
   router.get(
     "/contest/:id/rep/:rid/problem/:pid",
+    Utils.isValidId,
     User.is("logged"),
     SubmissionCtrl.getRepProblemSubmissions
   );
-  router.post("/contest/:id/join", User.is("logged"), ContestCtrl.join);
-  router.post("/contest/:id/leave", User.is("logged"), ContestCtrl.leave);
+  router.get(
+    "/contest/:id/team/:teamId/users",
+    Utils.isValidId,
+    User.is("logged"),
+    TeamCtrl.getTeamMembersInContest
+  );
+  router.post(
+    "/contest/:id/join",
+    Utils.isValidId,
+    User.is("logged"),
+    ContestCtrl.join
+  );
+  router.post(
+    "/contest/:id/leave",
+    Utils.isValidId,
+    User.is("logged"),
+    ContestCtrl.leave
+  );
   router.post(
     "/contest/:id/submit",
+    Utils.isValidId,
     User.is("logged"),
     SubmissionCtrl.tryExtractFile,
     SubmissionCtrl.submit
   );
   router.post(
     "/contest/:id/edit",
+    Utils.isValidId,
     User.is("logged"),
     Recaptcha.check,
     ContestCtrl.validateContest,
@@ -119,7 +169,7 @@ function APIRoutes() {
 
   // problems
   router.post("/problems/find/:query", ProblemsCtrl.searchProblems);
-  router.get("/problems/:id", ProblemsCtrl.get);
+  router.get("/problems/:id", Utils.isValidId, ProblemsCtrl.get);
 
   return router;
 }
@@ -168,11 +218,11 @@ exports.configure = (app) => {
       origin:
         process.env.NODE_ENV === `development`
           ? `http://localhost`
-          : `codepit.io`,
+          : `https://www.codepit.io`,
     })
   );
-
-  require("./services/passport")(passport); // pass passport for configuration
+  //www.codepit.io
+  https: require("./services/passport")(passport); // pass passport for configuration
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(User.middleware());

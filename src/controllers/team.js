@@ -3,13 +3,33 @@
 const async = require("async"),
   _ = require("lodash");
 
-const Team = require("../../common/models/team"),
+const Contest = require("../../common/models/contest"),
+  Team = require("../../common/models/team"),
   User = require("../../common/models/user"),
   Errors = require("../utils/errors"),
   Utils = require("../../common/lib/utils");
 
 const MAX_TEAMS_PER_USER = 20;
 const MAX_USERS_PER_TEAM = 5;
+
+exports.getTeamMembersInContest = async (req, res) => {
+  try {
+    const contestId = req.params.id;
+    const teamId = req.params.teamId;
+    const team = await Contest.find({
+      _id: contestId,
+      contestants: { team: teamId, user: req.user?._id },
+    });
+    if (!team) {
+      return res.sendStatus(400);
+    }
+    return res.status(200).json({
+      data: team,
+    });
+  } catch (err) {
+    return res.sendStatus(500);
+  }
+};
 
 const getByUserId = async (userId) => {
   const memberPromise = Team.find(

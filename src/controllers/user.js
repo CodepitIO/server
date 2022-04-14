@@ -205,20 +205,43 @@ exports.validate = (req, res) => {
 exports.get = async (req, res) => {
   const id = req.params.id;
   if (!id) {
-    return res.json(req.user);
+    return res.status(400).json({ redirectTo: `/` });
   }
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(400).send();
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(400).json({ redirectTo: `/profile` });
+    }
+    delete user.password;
+    delete user.updatedAt;
+    delete user.updatedAt;
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).send();
   }
-  delete user.password;
-  delete user.updatedAt;
-  delete user.updatedAt;
-  return res.json(user);
+};
+
+exports.tryGetByLoggedUser = async (req, res) => {
+  const id = req.user?._id;
+  if (!id) {
+    return res.send();
+  }
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(400);
+    }
+    delete user.password;
+    delete user.updatedAt;
+    delete user.updatedAt;
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).send();
+  }
 };
 
 exports.status = (req, res) => {
-  if (req.user && req.user._id) {
+  if (req.user && req.user?._id) {
     req.user.lastAccess = new Date();
     req.user.save();
     return res.json({ user: req.user.toObject({ virtuals: true }) });
