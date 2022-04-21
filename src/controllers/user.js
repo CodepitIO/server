@@ -1,24 +1,24 @@
-"use strict";
+const passport = require(`passport`);
+const async = require(`async`);
 
-const passport = require("passport"),
-  async = require("async"),
-  crypto = require("crypto");
+const crypto = require(`crypto`);
 
-const Errors = require("../utils/errors"),
-  User = require("../../common/models/user"),
-  Mailer = require("../services/mailer"),
-  Redis = require("../services/dbs").redisClient;
+const Errors = require(`../utils/errors`);
+const User = require(`../../common/models/user`);
+const Mailer = require(`../services/mailer`);
+
+const Redis = require(`../services/dbs`).redisClient;
 
 function sendMail(type, user, res) {
   Redis.exists(`email:${type}:${user._id}`, (err, exists) => {
-    if (err) return res.status(500).send();
+    if (err) return res.sendStatus(500);
     if (exists) return res.json(Errors.EmailSendTimelimit);
     if (!user.verifyHash) {
-      user.verifyHash = crypto.randomBytes(8).toString("hex");
+      user.verifyHash = crypto.randomBytes(8).toString(`hex`);
       user.save();
     }
     Mailer.sendMail({
-      type: type,
+      type,
       id: user._id,
       to: user.email,
       firstName: user.firstName,
@@ -30,25 +30,25 @@ function sendMail(type, user, res) {
 
 exports.changePassword = async (req, res) => {
   try {
-    let account = req.body;
+    const account = req.body;
     const user = await User.findById(req.user._id);
     if (!user.validPassword(account.password)) {
       return res.json(Errors.InvalidPassword);
     }
     if (account.newPassword.length < 6) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
     user.password = User.generatePassword(account.newPassword);
     await user.save();
     return res.json(user);
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
 exports.edit = async (req, res) => {
   try {
-    let account = req.body;
+    const account = req.body;
     const user = await User.findById(req.user._id);
     user.firstName = account.firstName;
     user.lastName = account.lastName;
@@ -57,13 +57,13 @@ exports.edit = async (req, res) => {
     delete user.password;
     return res.json(user);
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
 exports.register = (req, res) => {
   if (req.isAuthenticated()) req.logout();
-  let valid =
+  const valid =
     User.validateChain(req)
       .seeFirstName()
       .seeLastName()
@@ -71,34 +71,34 @@ exports.register = (req, res) => {
       .seeEmail()
       .seePassword()
       .ok() && req.body.country;
-  if (!valid) return res.status(400).send();
-  passport.authenticate("local-signup", (err, user) => {
-    if (err) return res.status(400).send();
-    if (!user) return res.status(500).send();
-    sendMail("register", user);
+  if (!valid) return res.sendStatus(400);
+  passport.authenticate(`local-signup`, (err, user) => {
+    if (err) return res.status(200).json(err);
+    if (!user) return res.sendStatus(500);
+    sendMail(`register`, user);
     req.logIn(user, (err) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       return res.json(user.toObject({ virtuals: true }));
     });
   })(req, res, (err) => {
-    res.status(500).send();
+    res.sendStatus(500);
   });
 };
 
 exports.login = (req, res) => {
   if (req.isAuthenticated()) req.logout();
   if (User.validateChain(req).seeEmailOrUsername().seePassword().notOk()) {
-    return res.status(400).send();
+    return res.sendStatus(400);
   }
-  passport.authenticate("local-login", (err, user) => {
+  passport.authenticate(`local-login`, (err, user) => {
     if (err) return res.json(err);
-    if (!user) return res.status(500).send();
+    if (!user) return res.sendStatus(500);
     req.logIn(user, (err) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       return res.json(req.user);
     });
   })(req, res, (err) => {
-    res.status(500).send();
+    res.sendStatus(500);
   });
 };
 
@@ -108,36 +108,36 @@ exports.logout = (req, res) => {
 };
 
 exports.checkAvailableUsernameOrEmail = async (req, res) => {
-  if (User.validateChain(req).seeUsername().notOk()) {
-    return res.status(400).send();
+  const usernameOrEmail = req.params.usernameOrEmail || ``;
+  try {
+    const user = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
+    return res.status(200).json({ available: !user });
+  } catch (err) {
+    return res.sendStatus(500);
   }
-  let usernameOrEmail = req.params.usernameOrEmail || ``;
-  const user = await User.findOne({
-    $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
-  });
-  return res.json({ available: !user });
 };
 
 exports.sendPasswordRecoveryEmail = (req, res) => {
-  let user = req.params.user;
+  const { user } = req.params;
   User.findOne(
     {
       $or: [{ email: user }, { username: user }],
       verified: true,
     },
     (err, user) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       if (!user) return res.json(Errors.PasswordRecoveryFindFail);
       user.verifyHash = null;
-      sendMail("recover", user, res);
+      sendMail(`recover`, user, res);
     }
   );
 };
 
 exports.recover = (req, res) => {
-  let hash = req.body.hash;
-  if (!User.validateChain(req).seePassword().ok())
-    return res.status(400).send();
+  const { hash } = req.body;
+  if (!User.validateChain(req).seePassword().ok()) return res.sendStatus(400);
   let user;
   async.waterfall(
     [
@@ -145,7 +145,7 @@ exports.recover = (req, res) => {
         User.findOne({ verifyHash: hash }, next);
       },
       (user, next) => {
-        if (!user) return res.status(400).send();
+        if (!user) return res.sendStatus(400);
         Redis.exists(`email:recover:${user._id}`, (err, exists) => {
           if (err) return next(err);
           if (!exists) return res.json(Errors.EmailRecoverExpired);
@@ -161,30 +161,28 @@ exports.recover = (req, res) => {
         });
       },
     ],
-    (err) => {
-      return res.status(500).send();
-    }
+    (err) => res.sendStatus(500)
   );
 };
 
 exports.sendValidationEmail = (req, res) => {
-  if (req.user.verified) return res.status(400).send();
+  if (req.user.verified) return res.sendStatus(400);
   Redis.exists(`email:register:${req.user._id}`, (err, exists) => {
-    if (err) return res.status(500).send();
+    if (err) return res.sendStatus(500);
     if (exists) return res.json(Errors.EmailSendTimelimit);
-    sendMail("register", req.user, res);
+    sendMail(`register`, req.user, res);
   });
 };
 
 exports.validate = (req, res) => {
-  let hash = req.params.hash;
+  const { hash } = req.params;
   async.waterfall(
     [
       (next) => {
         User.findOne({ verifyHash: hash, verified: false }, next);
       },
       (user, next) => {
-        if (!user) return res.status(400).send();
+        if (!user) return res.sendStatus(400);
         user.verified = true;
         user.save(next);
       },
@@ -196,14 +194,12 @@ exports.validate = (req, res) => {
         });
       },
     ],
-    (err) => {
-      return res.status(500).send();
-    }
+    (err) => res.sendStatus(500)
   );
 };
 
 exports.get = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (!id) {
     return res.status(400).json({ redirectTo: `/` });
   }
@@ -217,7 +213,7 @@ exports.get = async (req, res) => {
     delete user.updatedAt;
     return res.json(user);
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
@@ -233,10 +229,9 @@ exports.tryGetByLoggedUser = async (req, res) => {
     }
     delete user.password;
     delete user.updatedAt;
-    delete user.updatedAt;
     return res.json(user);
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 

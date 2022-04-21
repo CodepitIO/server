@@ -13,6 +13,7 @@ lib-cov
 *.swp
 *.bower.json.md5
 *.package.json.md5
+tsconfig.tsbuildinfo
 test/
 
 pids

@@ -38,7 +38,7 @@ exports.create = (req, res) => {
   });
 
   newContest.save((err, contest) => {
-    if (err) return res.status(500).send();
+    if (err) return res.sendStatus(500);
     return res.json(contest);
   });
 };
@@ -92,7 +92,7 @@ exports.getList = async (req, res) => {
   let filter = filters[req.params.type || ""];
 
   if (!filter || !filter.opts(req)) {
-    return res.status(400).send();
+    return res.sendStatus(400);
   }
 
   const data = await Promise.all([

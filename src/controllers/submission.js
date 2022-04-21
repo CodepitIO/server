@@ -51,7 +51,7 @@ exports.tryExtractFile = (req, res, next) => {
       },
     ],
     (err) => {
-      if (err) return res.status(400).send();
+      if (err) return res.sendStatus(400);
       return next();
     }
   );
@@ -65,7 +65,7 @@ exports.submit = async (req, res) => {
       userId = req.user._id;
 
     if (Submission.validateChain(req).seeLanguage().seeCode().notOk()) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
 
     if (submission.problem === 0) {
@@ -76,18 +76,18 @@ exports.submit = async (req, res) => {
       "contestants problems"
     );
     if (!contest.userInContest(userId)) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
     if (contest.date_start > new Date()) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
     if (!_.some(submission.language, contest.languages)) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
     let problem = null;
     if (submission.problem) {
       if (!contest.problemInContest(submission.problem)) {
-        return res.status(400).send();
+        return res.sendStatus(400);
       }
       problem = await Problem.findById(submission.problem);
     }
@@ -105,7 +105,7 @@ exports.submit = async (req, res) => {
       });
     }
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
@@ -115,12 +115,12 @@ exports.getById = async (req, res) => {
       .populate({ path: "contest", select: "name" })
       .populate({ path: "contestant", select: "username" })
       .populate({ path: "problem", select: "name" });
-    if (!submission) return res.status(400).send();
+    if (!submission) return res.sendStatus(400);
     return res.json({
       submission: submission,
     });
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
@@ -157,11 +157,11 @@ exports.getRepProblemSubmissions = (req, res) => {
   let repId = req.params.rid;
   let problemId = req.params.pid;
   Contest.findById(contestId, (err, contest) => {
-    if (err) return res.status(500).send();
-    if (!contest) return res.status(400).send();
+    if (err) return res.sendStatus(500);
+    if (!contest) return res.sendStatus(400);
     let rep = contest.getUserRepresentative(req.user._id);
     if (!req.user.isAdmin && !Utils.cmpToString(req.user._id, contest.author)) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
     Submission.find({
       contest: contestId,
@@ -171,7 +171,7 @@ exports.getRepProblemSubmissions = (req, res) => {
       .select("_id date verdict language problem")
       .sort("-date")
       .exec((err, submissions) => {
-        if (err) return res.status(500).send();
+        if (err) return res.sendStatus(500);
         return res.json({ submissions: submissions });
       });
   });

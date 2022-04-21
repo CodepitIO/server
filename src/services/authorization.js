@@ -1,30 +1,25 @@
-"use strict";
+const ConnectRoles = require(`connect-roles`);
 
-const ConnectRoles = require("connect-roles");
+const ADMIN_ACCESS = 10;
 
-const ACCESS = require("../../common/constants").SITE_VARS.ACCESS;
-
-let user = new ConnectRoles({
-  failureHandler: (req, res, action) => {
+const UserACL = {
+  UserStateHandlerFn: {},
+  use: (state, fn) => {
+    UserACL.UserStateHandlerFn[state] = fn;
+  },
+  is: (state) => (req, res, next) => {
+    if (UserACL.UserStateHandlerFn[state](req, res)) {
+      return next();
+    }
     return res.status(403).json({ redirectTo: `/` });
   },
-});
+};
 
-user.use((req) => {
-  if (req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN)
-    return true;
-});
+UserACL.use(`logged`, (req, res) => req.isAuthenticated());
+UserACL.use(`logged-off`, (req) => !req.isAuthenticated());
+UserACL.use(
+  `admin`,
+  (req) => req.isAuthenticated() && (req.user.access || 0) >= ADMIN_ACCESS
+);
 
-user.use("logged", (req, res) => {
-  return req.isAuthenticated();
-});
-
-user.use("logged-off", (req) => {
-  return !req.isAuthenticated();
-});
-
-user.use("admin", (req) => {
-  return req.isAuthenticated() && (req.user.access || 0) >= ACCESS.ADMIN;
-});
-
-module.exports = user;
+export default UserACL;

@@ -53,9 +53,9 @@ exports.searchProblems = (req, res) => {
   let substr = req.params.query;
   let insertedProblems = req.body.problems || [];
   if (!_.isString(substr) || !_.isArray(insertedProblems))
-    return res.status(400).send();
+    return res.sendStatus(400);
   if (substr.length < 3 || substr.length > 50 || insertedProblems.length > 26)
-    return res.status(400).send();
+    return res.sendStatus(400);
   let result = pindexer.match(substr, insertedProblems);
   return res.json({
     list: result,
@@ -69,12 +69,12 @@ exports.get = async (req, res) => {
       "name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf"
     );
     if (!problem) {
-      return res.status(404).send();
+      return res.sendStatus(404);
     }
     return res.json(problem);
   } catch (err) {
     console.log(err);
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 

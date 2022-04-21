@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer"),
   sesTransport = require("nodemailer-ses-transport"),
   fs = require("fs"),
   util = require("util"),
+  path = require("path"),
   _ = require("lodash");
 
 const Queue = require("./queue"),
@@ -19,7 +20,7 @@ let transporter = nodemailer.createTransport(
   })
 );
 
-const TEMPLATE_URL = __dirname + "/templates/%s.html";
+const TEMPLATE_URL = path.join(__dirname, "../../public/templates/%s.html");
 let REGISTER_TMPL = _.template(
   fs.readFileSync(util.format(TEMPLATE_URL, "register"), "utf8")
 );

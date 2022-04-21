@@ -27,10 +27,10 @@ function verifyRecaptcha(key, callback) {
 
 exports.check = (req, res, next) => {
   if (!SECRET) return next();
-  if (!req.body || !req.body.recaptcha) return res.status(400).send();
+  if (!req.body || !req.body.recaptcha) return res.sendStatus(400);
   let recaptcha = req.body.recaptcha;
   verifyRecaptcha(recaptcha, (err) => {
-    if (err) return res.status(400).send();
+    if (err) return res.sendStatus(400);
     return next();
   });
 };

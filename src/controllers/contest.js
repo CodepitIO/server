@@ -36,7 +36,7 @@ exports.getMetadata = (req, res) => {
     })
     .then((contest) => {
       if (!contest) {
-        return res.status(400).send();
+        return res.sendStatus(400);
       }
       let userId = req.user && req.user._id;
       let obj = {
@@ -80,9 +80,9 @@ exports.getEvents = (req, res) => {
   let startFrom = _.toInteger(req.query.from) || 0;
   let upTo = _.toInteger(req.query.to) || now.getTime();
   Contest.findById(id, (err, contest) => {
-    if (err) return res.status(500).send();
+    if (err) return res.sendStatus(500);
     if (!contest || !canViewContest(contest, req.user)) {
-      return res.status(400).send();
+      return res.sendStatus(400);
     }
 
     let isAdmin = req.user && req.user.isAdmin;
@@ -112,7 +112,7 @@ exports.getEvents = (req, res) => {
       },
       (err, results) => {
         if (err) {
-          return res.status(500).send();
+          return res.sendStatus(500);
         }
         return res.json(results);
       }
@@ -129,11 +129,11 @@ exports.join = async (req, res) => {
     const contestPromise = Contest.findById(id);
     const countPromise = Team.count({ _id: teamId, members: userId });
     const [contest, count] = await Promise.all([contestPromise, countPromise]);
-    if (!contest) return res.status(400).send();
-    if (contest.contestantType === 1 && teamId) return res.status(400).send();
-    if (contest.contestantType === 2 && !teamId) return res.status(400).send();
-    if (teamId && count === 0) return res.status(400).send();
-    if (contest.userInContest(userId)) return res.status(400).send();
+    if (!contest) return res.sendStatus(400);
+    if (contest.contestantType === 1 && teamId) return res.sendStatus(400);
+    if (contest.contestantType === 2 && !teamId) return res.sendStatus(400);
+    if (teamId && count === 0) return res.sendStatus(400);
+    if (contest.userInContest(userId)) return res.sendStatus(400);
     if (contest.isPrivate && contest.password !== password) {
       return res.json(Errors.InvalidPassword);
     }
@@ -143,7 +143,7 @@ exports.join = async (req, res) => {
     contest.save();
     return res.json({});
   } catch (err) {
-    return res.status(500).send();
+    return res.sendStatus(500);
   }
 };
 
@@ -156,7 +156,7 @@ exports.leave = (req, res) => {
         Submission.count({ contest: id, rep: userId }, next);
       },
       (count, next) => {
-        if (count > 0) return res.status(400).send();
+        if (count > 0) return res.sendStatus(400);
         Contest.findByIdAndUpdate(
           id,
           { $pull: { contestants: { user: userId } } },
@@ -165,14 +165,14 @@ exports.leave = (req, res) => {
       },
     ],
     (err) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       return res.json({});
     }
   );
 };
 
 exports.validateContest = (req, res, next) => {
-  if (!req.user.verified) return res.status(400).send();
+  if (!req.user.verified) return res.sendStatus(400);
   let c = {},
     data = req.body;
   async.waterfall(
@@ -180,7 +180,7 @@ exports.validateContest = (req, res, next) => {
       (next) => {
         // <<-- Validate descr -->>
         c.name = _.toString(data.name);
-        if (!_.inRange(c.name.length, 1, 51)) return res.status(400).send();
+        if (!_.inRange(c.name.length, 1, 51)) return res.sendStatus(400);
         if (!req.params.id) return next(null, null);
         Contest.findById(req.params.id, next);
       },
@@ -189,8 +189,8 @@ exports.validateContest = (req, res, next) => {
         let now = new Date().getTime();
         if (contest) {
           if (!Utils.cmpToString(req.user._id, contest.author))
-            return res.status(400).send();
-          if (contest && contest.date_end < now) return res.status(400).send();
+            return res.sendStatus(400);
+          if (contest && contest.date_end < now) return res.sendStatus(400);
         }
         try {
           c.date_start = new Date(data.startDateTime);
@@ -207,13 +207,13 @@ exports.validateContest = (req, res, next) => {
             c.blind_time,
             c.date_end,
           ];
-          if (_.some(timeArr, _.isNaN)) return res.status(400).send();
+          if (_.some(timeArr, _.isNaN)) return res.sendStatus(400);
           for (let i = 0; i < 3; i++) {
-            if (timeArr[i] > timeArr[i + 1]) return res.status(400).send();
+            if (timeArr[i] > timeArr[i + 1]) return res.sendStatus(400);
           }
 
           const sevenMonthsFromNow = now + 7 * 30 * 24 * 60 * 60 * 1000;
-          if (c.date_end > sevenMonthsFromNow) return res.status(400).send();
+          if (c.date_end > sevenMonthsFromNow) return res.sendStatus(400);
           if (
             c.date_start <
             Math.min(
@@ -221,27 +221,27 @@ exports.validateContest = (req, res, next) => {
               (contest && contest.date_start) || now
             )
           ) {
-            return res.status(400).send();
+            return res.sendStatus(400);
           }
           return next();
         } catch (err) {
           console.log(err);
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
       },
       (next) => {
         // <<-- Validate options -->>
         c.languages = data.languages;
         if (!_.isArray(c.languages) || c.languages.length === 0) {
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
         if (_.difference(c.languages, LANGUAGES).length > 0) {
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
         c.isPrivate = !!data.password;
         c.password = _.toString(data.password);
         if (c.isPrivate && !_.inRange(c.password.length, 1, 100)) {
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
         c.watchPrivate = data.visibility === "closed";
         if (
@@ -249,7 +249,7 @@ exports.validateContest = (req, res, next) => {
           data.contestantType < 1 ||
           data.contestantType > 3
         ) {
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
         return next();
       },
@@ -261,7 +261,7 @@ exports.validateContest = (req, res, next) => {
           _.isEmpty(c.problems) === 0 ||
           c.problems.length > 26
         ) {
-          return res.status(400).send();
+          return res.sendStatus(400);
         }
         c.problems = _.chain(c.problems)
           .map((obj) => {
@@ -270,12 +270,12 @@ exports.validateContest = (req, res, next) => {
           .compact()
           .uniq()
           .value();
-        if (!Problems.isIndexed(c.problems)) return res.status(400).send();
+        if (!Problems.isIndexed(c.problems)) return res.sendStatus(400);
         return next();
       },
     ],
     (err) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       req.body = c;
       return next();
     }
@@ -288,12 +288,12 @@ exports.createOrEdit = (req, res) => {
     req.body.author = req.user._id;
     let contest = new Contest(req.body);
     return contest.save((err, contest) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       return res.json({ id: contest._id });
     });
   } else {
     Contest.findOneAndUpdate({ _id: id }, req.body, (err, contest) => {
-      if (err) return res.status(500).send();
+      if (err) return res.sendStatus(500);
       return res.json({});
     });
   }

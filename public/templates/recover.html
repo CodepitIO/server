@@ -29,22 +29,24 @@
 </style>
 <div class="container">
   <img src="https://www.codepit.io/imgs/codepit-full-blue.png" width="300px" />
-  <h2><p>Welcome to Codepit, <%- firstName %>!</p></h2>
+  <h2><p>Hi, <%- firstName %>!</p></h2>
   <div class="paragraph">
     <p>
-      If this e-mail is not directed to you, just ignore this message.
-      Otherwise, click on the following link to verify your account.
+      Recently someone requested to reset your password on Codepit. If that
+      someone wasn't you, ignore this e-mail. Otherwise, click the following
+      link to reset your password.
     </p>
   </div>
   <div class="paragraph">
-    <a href="<%- domain %>/profile/verify/<%- hash %>" class="button"
-      ><span>Verify Account</span></a
+    <a href="<%- domain %>/#/recover/<%- hash %>" class="button"
+      ><span>Reset Password</span></a
     >
   </div>
   <div class="paragraph">
     <small
-      >If the link doesn't work, visit the following URL manually: <%- domain
-      %>/profile/verify/<%- hash %></small
+      >Remember you must be logged off any account on Codepit to access the
+      link. If even then the link doesn't work, visit the following URL
+      manually: <%- domain %>/#/recover<%- hash %></small
     >
   </div>
   <div class="paragraph">

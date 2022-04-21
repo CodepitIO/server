@@ -1,10 +1,8 @@
-"use strict";
+const crypto = require(`crypto`);
+const LocalStrategy = require(`passport-local`).Strategy;
 
-const crypto = require("crypto"),
-  LocalStrategy = require("passport-local").Strategy;
-
-const User = require("../../common/models/user"),
-  Errors = require("../utils/errors");
+const User = require(`../../common/models/user`);
+const Errors = require(`../utils/errors`);
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
@@ -16,15 +14,15 @@ module.exports = (passport) => {
   });
 
   passport.use(
-    "local-signup",
+    `local-signup`,
     new LocalStrategy(
       {
-        usernameField: "email",
-        passwordField: "password",
+        usernameField: `email`,
+        passwordField: `password`,
         passReqToCallback: true,
       },
       (req, email, password, done) => {
-        let account = req.body;
+        const account = req.body;
         User.findOne(
           {
             $or: [{ email: account.email }, { username: account.username }],
@@ -49,11 +47,11 @@ module.exports = (passport) => {
   );
 
   passport.use(
-    "local-login",
+    `local-login`,
     new LocalStrategy(
       {
-        usernameField: "emailOrUsername",
-        passwordField: "password",
+        usernameField: `emailOrUsername`,
+        passwordField: `password`,
         passReqToCallback: true,
       },
       (req, emailOrUsername, password, done) => {

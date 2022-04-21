@@ -11,6 +11,7 @@ lib-cov
 *.DS_STORE
 *.txt
 *.md5
+tsconfig.tsbuildinfo
 src/utils/tmp/
 test/
 
