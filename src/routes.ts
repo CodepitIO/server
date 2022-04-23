@@ -204,7 +204,6 @@ export const configure = (app: any) => {
   app.use(cookieParser());
   app.use(cookieSession({ secret: cookieSecret, maxAge: 24 * 60 * 60 * 1000 }));
   app.use(compression());
-  app.use(favicon(path.join(__dirname, `../public/imgs/favicon.ico`)));
   app.use(bodyParser.json());
   app.use(bodyParser.json({ type: `application/vnd.api+json` }));
   app.use(bodyParser.urlencoded({ extended: true }));

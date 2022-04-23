@@ -20,8 +20,8 @@ LABEL org.opencontainers.image.authors="Gustavo Stor"
 RUN yarn global add eslint
 RUN apk add --no-cache python3
 WORKDIR /server
-COPY --from=builder /server/common/* ./
-COPY --from=builder /server/public ./
-COPY --from=builder /server/node_modules ./
-COPY --from=builder /server/package.json ./
+COPY --from=builder /server/lib ./
+COPY --from=builder /server/public ./public
+COPY --from=builder /server/node_modules ./node_modules
+COPY --from=builder /server/package.json ./package.json
 CMD node main.js
