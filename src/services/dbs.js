@@ -1,6 +1,7 @@
 const redis = require(`redis`);
 const mongoose = require(`mongoose`);
 const async = require(`async`);
+const aws = require(`aws-sdk`);
 
 const { CONN } = require(`../../common/constants`);
 

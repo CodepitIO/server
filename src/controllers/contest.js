@@ -1,15 +1,16 @@
-const async = require("async"),
-  _ = require("lodash");
+const async = require(`async`);
+const _ = require(`lodash`);
 
-const Contest = require("../../common/models/contest"),
-  Team = require("../../common/models/team"),
-  Submission = require("../../common/models/submission"),
-  Redis = require("../services/dbs").redisClient,
-  Problems = require("./problems"),
-  Errors = require("../utils/errors"),
-  Utils = require("../../common/lib/utils");
+const Contest = require(`../../common/models/contest`);
+const Team = require(`../../common/models/team`);
+const Submission = require(`../../common/models/submission`);
+const Redis = require(`../services/dbs`).redisClient;
+const Problems = require(`./problems`);
+const Errors = require(`../utils/errors`);
 
-const LANGUAGES = require("../../common/constants").LANGUAGES;
+const Utils = require(`../../common/lib/utils`);
+
+const { LANGUAGES } = require(`../../common/constants`);
 
 function canViewContest(contest, user) {
   return (
@@ -20,26 +21,26 @@ function canViewContest(contest, user) {
 }
 
 exports.getMetadata = (req, res) => {
-  let id = req.params.id;
+  const { id } = req.params;
   Contest.findById(id)
     .populate({
-      path: "contestants.team",
-      select: "_id name",
+      path: `contestants.team`,
+      select: `_id name`,
     })
     .populate({
-      path: "contestants.user",
-      select: "_id username",
+      path: `contestants.user`,
+      select: `_id username`,
     })
     .populate({
-      path: "problems",
-      select: "_id name oj id fullName timelimit memorylimit supportedLangs",
+      path: `problems`,
+      select: `_id name oj id fullName timelimit memorylimit supportedLangs`,
     })
     .then((contest) => {
       if (!contest) {
         return res.sendStatus(400);
       }
-      let userId = req.user && req.user._id;
-      let obj = {
+      const userId = req.user && req.user._id;
+      const obj = {
         _id: contest._id,
         name: contest.name,
         author: contest.author,
@@ -60,9 +61,9 @@ exports.getMetadata = (req, res) => {
         isContestAdmin: Utils.cmpToString(req.user?._id, contest.author),
       };
 
-      let isAdmin = req.user && req.user.isAdmin;
-      let canViewContestants = obj.canViewContest;
-      let canViewProblems =
+      const isAdmin = req.user && req.user.isAdmin;
+      const canViewContestants = obj.canViewContest;
+      const canViewProblems =
         obj.canViewContest &&
         (isAdmin || contest.isAuthor(req.user) || obj.hasStarted);
 
@@ -74,19 +75,21 @@ exports.getMetadata = (req, res) => {
     });
 };
 
-exports.getEvents = (req, res) => {
-  let id = req.params.id;
+exports.getEvents = async (req, res) => {
+  const { id } = req.params;
   const now = new Date();
-  let startFrom = _.toInteger(req.query.from) || 0;
+  const startFrom = _.toInteger(req.query.from) || 0;
   let upTo = _.toInteger(req.query.to) || now.getTime();
-  Contest.findById(id, (err, contest) => {
-    if (err) return res.sendStatus(500);
-    if (!contest || !canViewContest(contest, req.user)) {
+  try {
+    const contest = Contest.findById(id);
+    if (!contest) {
       return res.sendStatus(400);
     }
-
-    let isAdmin = req.user && req.user.isAdmin;
-    let isContestAdmin = Utils.cmpToString(
+    if (!canViewContest(contest, req.user)) {
+      return res.status(200).json({});
+    }
+    const isAdmin = req.user && req.user.isAdmin;
+    const isContestAdmin = Utils.cmpToString(
       req.user && req.user._id,
       contest.author
     );
@@ -98,32 +101,24 @@ exports.getEvents = (req, res) => {
     ) {
       upTo = new Date(contest.frozen_time).getTime();
     }
-    async.parallel(
-      {
-        pending: (next) => {
-          return Redis.zrangebyscore(`${id}:PENDING`, startFrom, upTo, next);
-        },
-        rejected: (next) => {
-          return Redis.zrangebyscore(`${id}:REJECTED`, startFrom, upTo, next);
-        },
-        accepted: (next) => {
-          return Redis.zrangebyscore(`${id}:ACCEPTED`, startFrom, upTo, next);
-        },
-      },
-      (err, results) => {
-        if (err) {
-          return res.sendStatus(500);
-        }
-        return res.json(results);
-      }
-    );
-  });
+    const results = await async.parallel({
+      pending: (next) =>
+        Redis.zrangebyscore(`${id}:PENDING`, startFrom, upTo, next),
+      rejected: (next) =>
+        Redis.zrangebyscore(`${id}:REJECTED`, startFrom, upTo, next),
+      accepted: (next) =>
+        Redis.zrangebyscore(`${id}:ACCEPTED`, startFrom, upTo, next),
+    });
+    return res.json(results);
+  } catch {
+    return res.sendStatus(500);
+  }
 };
 
 exports.join = async (req, res) => {
   try {
-    const id = req.params.id;
-    const password = req.body.password;
+    const { id } = req.params;
+    const { password } = req.body;
     const teamId = req.body.team;
     const userId = req.user._id;
     const contestPromise = Contest.findById(id);
@@ -137,7 +132,7 @@ exports.join = async (req, res) => {
     if (contest.isPrivate && contest.password !== password) {
       return res.json(Errors.InvalidPassword);
     }
-    let contestant = { user: userId };
+    const contestant = { user: userId };
     if (teamId) contestant.team = teamId;
     contest.contestants.push(contestant);
     contest.save();
@@ -147,34 +142,25 @@ exports.join = async (req, res) => {
   }
 };
 
-exports.leave = (req, res) => {
-  let id = req.params.id;
-  let userId = req.user._id;
-  async.waterfall(
-    [
-      (next) => {
-        Submission.count({ contest: id, rep: userId }, next);
-      },
-      (count, next) => {
-        if (count > 0) return res.sendStatus(400);
-        Contest.findByIdAndUpdate(
-          id,
-          { $pull: { contestants: { user: userId } } },
-          next
-        );
-      },
-    ],
-    (err) => {
-      if (err) return res.sendStatus(500);
-      return res.json({});
-    }
-  );
+exports.leave = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user._id;
+  try {
+    const count = await Submission.count({ contest: id, rep: userId });
+    if (count > 0) return res.sendStatus(400);
+    await Contest.findByIdAndUpdate(id, {
+      $pull: { contestants: { user: userId } },
+    });
+    return res.json({});
+  } catch {
+    return res.sendStatus(500);
+  }
 };
 
 exports.validateContest = (req, res, next) => {
   if (!req.user.verified) return res.sendStatus(400);
-  let c = {},
-    data = req.body;
+  const c = {};
+  const data = req.body;
   async.waterfall(
     [
       (next) => {
@@ -186,7 +172,7 @@ exports.validateContest = (req, res, next) => {
       },
       (contest, next) => {
         // <<-- Validate author and dates -->>
-        let now = new Date().getTime();
+        const now = new Date().getTime();
         if (contest) {
           if (!Utils.cmpToString(req.user._id, contest.author))
             return res.sendStatus(400);
@@ -243,7 +229,7 @@ exports.validateContest = (req, res, next) => {
         if (c.isPrivate && !_.inRange(c.password.length, 1, 100)) {
           return res.sendStatus(400);
         }
-        c.watchPrivate = data.visibility === "closed";
+        c.watchPrivate = data.visibility === `closed`;
         if (
           typeof data.contestantType !== `number` ||
           data.contestantType < 1 ||
@@ -264,9 +250,7 @@ exports.validateContest = (req, res, next) => {
           return res.sendStatus(400);
         }
         c.problems = _.chain(c.problems)
-          .map((obj) => {
-            return _.toString(obj?._id);
-          })
+          .map((obj) => _.toString(obj?._id))
           .compact()
           .uniq()
           .value();
@@ -283,18 +267,17 @@ exports.validateContest = (req, res, next) => {
 };
 
 exports.createOrEdit = (req, res) => {
-  let id = req.params.id;
+  const { id } = req.params;
   if (!id) {
     req.body.author = req.user._id;
-    let contest = new Contest(req.body);
-    return contest.save((err, contest) => {
+    const contestModel = new Contest(req.body);
+    return contestModel.save((err, contest) => {
       if (err) return res.sendStatus(500);
       return res.json({ id: contest._id });
     });
-  } else {
-    Contest.findOneAndUpdate({ _id: id }, req.body, (err, contest) => {
-      if (err) return res.sendStatus(500);
-      return res.json({});
-    });
   }
+  return Contest.findOneAndUpdate({ _id: id }, req.body, (err, contest) => {
+    if (err) return res.sendStatus(500);
+    return res.json({});
+  });
 };

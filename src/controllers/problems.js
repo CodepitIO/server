@@ -1,18 +1,16 @@
-"use strict";
+const async = require(`async`);
+const fs = require(`fs`);
+const path = require(`path`);
+const pindexer = require(`cpio-pindexer`);
+const _ = require(`lodash`);
+const { CronJob } = require(`cron`);
 
-const async = require("async"),
-  fs = require("fs"),
-  path = require("path"),
-  pindexer = require("cpio-pindexer"),
-  _ = require("lodash"),
-  CronJob = require("cron").CronJob;
+const Problem = require(`../../common/models/problem`);
 
-const Problem = require("../../common/models/problem");
+const INDEX_PROBLEMS_CRON = `00 00 04 * * *`;
+const INDEX_PROBLEMS_TZ = `America/Recife`;
 
-const INDEX_PROBLEMS_CRON = "00 00 04 * * *";
-const INDEX_PROBLEMS_TZ = "America/Recife";
-
-let problems = {};
+const problems = {};
 
 function runProblemsIndexer() {
   pindexer.setReturnSize(10);
@@ -36,12 +34,12 @@ function runProblemsIndexer() {
       },
     ],
     () => {
-      console.log("Finished indexing problems.");
+      console.log(`Finished indexing problems.`);
     }
   );
 }
 
-let job = new CronJob({
+const job = new CronJob({
   cronTime: INDEX_PROBLEMS_CRON,
   onTick: runProblemsIndexer,
   timeZone: INDEX_PROBLEMS_TZ,
@@ -50,23 +48,23 @@ let job = new CronJob({
 job.start();
 
 exports.searchProblems = (req, res) => {
-  let substr = req.params.query;
-  let insertedProblems = req.body.problems || [];
+  const substr = req.params.query;
+  const insertedProblems = req.body.problems || [];
   if (!_.isString(substr) || !_.isArray(insertedProblems))
     return res.sendStatus(400);
   if (substr.length < 3 || substr.length > 50 || insertedProblems.length > 26)
     return res.sendStatus(400);
-  let result = pindexer.match(substr, insertedProblems);
+  const result = pindexer.match(substr, insertedProblems);
   return res.json({
     list: result,
   });
 };
 
 exports.get = async (req, res) => {
-  let id = req.params.id;
+  const { id } = req.params;
   try {
-    let problem = await Problem.findById(id).select(
-      "name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf"
+    const problem = await Problem.findById(id).select(
+      `name oj id url originalUrl source timelimit memorylimit inputFile outputFile imported isPdf`
     );
     if (!problem) {
       return res.sendStatus(404);

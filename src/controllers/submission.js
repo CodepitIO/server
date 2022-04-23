@@ -1,18 +1,18 @@
-"use strict";
+const Submission = require(`../../common/models/submission`);
+const Problem = require(`../../common/models/problem`);
+const Contest = require(`../../common/models/contest`);
+const Queue = require(`../services/queue`);
 
-const Submission = require("../../common/models/submission"),
-  Problem = require("../../common/models/problem"),
-  Contest = require("../../common/models/contest"),
-  Queue = require("../services/queue"),
-  Utils = require("../../common/lib/utils");
+const Utils = require(`../../common/lib/utils`);
 
-const async = require("async"),
-  fs = require("fs"),
-  multiparty = require("multiparty"),
-  _ = require("lodash");
+const async = require(`async`);
+const fs = require(`fs`);
+const multiparty = require(`multiparty`);
+
+const _ = require(`lodash`);
 
 const createSubmission = async (submission, userId) => {
-  let sub = new Submission({
+  const sub = new Submission({
     contest: submission.contest,
     contestant: userId,
     rep: submission.rep,
@@ -26,8 +26,8 @@ const createSubmission = async (submission, userId) => {
 
 exports.tryExtractFile = (req, res, next) => {
   if (req.body.code) return next();
-  let form = new multiparty.Form(),
-    fpath;
+  const form = new multiparty.Form();
+  let fpath;
   async.waterfall(
     [
       (callback) => {
@@ -43,7 +43,7 @@ exports.tryExtractFile = (req, res, next) => {
         } catch (err) {
           return callback(err);
         }
-        fs.readFile(fpath, "utf8", callback);
+        fs.readFile(fpath, `utf8`, callback);
       },
       (code, callback) => {
         req.body.code = code;
@@ -61,8 +61,8 @@ exports.submit = async (req, res) => {
   req.body.contest = req.params.id;
 
   try {
-    const submission = req.body,
-      userId = req.user._id;
+    const submission = req.body;
+    const userId = req.user._id;
 
     if (Submission.validateChain(req).seeLanguage().seeCode().notOk()) {
       return res.sendStatus(400);
@@ -73,7 +73,7 @@ exports.submit = async (req, res) => {
     }
     const contest = await Contest.findById(
       submission.contest,
-      "contestants problems"
+      `contestants problems`
     );
     if (!contest.userInContest(userId)) {
       return res.sendStatus(400);
@@ -94,11 +94,11 @@ exports.submit = async (req, res) => {
     submission.rep = contest.getUserRepresentative(userId);
     const savedSubmission = await createSubmission(submission, userId);
     if (problem) {
-      Queue.pushSubmission(problem.oj, savedSubmission, () => {
-        return res.json({
+      Queue.pushSubmission(problem.oj, savedSubmission, () =>
+        res.json({
           submission: savedSubmission,
-        });
-      });
+        })
+      );
     } else {
       return res.json({
         submission: savedSubmission,
@@ -112,12 +112,12 @@ exports.submit = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const submission = await Submission.findById(req.params.id)
-      .populate({ path: "contest", select: "name" })
-      .populate({ path: "contestant", select: "username" })
-      .populate({ path: "problem", select: "name" });
+      .populate({ path: `contest`, select: `name` })
+      .populate({ path: `contestant`, select: `username` })
+      .populate({ path: `problem`, select: `name` });
     if (!submission) return res.sendStatus(400);
     return res.json({
-      submission: submission,
+      submission,
     });
   } catch (err) {
     return res.sendStatus(500);
@@ -125,41 +125,41 @@ exports.getById = async (req, res) => {
 };
 
 exports.getRepContestSubmissions = async (req, res) => {
-  let contestId = req.params.id;
-  let startFrom = new Date(_.toInteger(req.query.from) || 0);
+  const contestId = req.params.id;
+  const startFrom = new Date(_.toInteger(req.query.from) || 0);
   try {
     const contest = await Contest.findById(contestId);
     if (!contest) return res.sendStatus(400);
-    let rep = contest.getUserRepresentative(req.user._id);
-    if (!rep) return res.sendStatus(400);
+    const rep = contest.getUserRepresentative(req.user._id);
+    if (!rep) return res.status(200).json({});
     let submissions = await Submission.find({
       contest: contestId,
-      rep: rep,
+      rep,
       date: { $gt: startFrom },
     })
-      .select("_id id date verdict language problem")
-      .sort("-date");
-    let isBlind = !contest.hasEnded() && new Date() >= contest.blind_time;
+      .select(`_id id date verdict language problem`)
+      .sort(`-date`);
+    const isBlind = !contest.hasEnded() && new Date() >= contest.blind_time;
     if (isBlind) {
       submissions = _.map(submissions, (s) => {
         if (s.date >= contest.blind_time) s.verdict = 0;
         return s;
       });
     }
-    return res.json({ submissions: submissions });
+    return res.json({ submissions });
   } catch (err) {
     return res.sendStatus(500);
   }
 };
 
 exports.getRepProblemSubmissions = (req, res) => {
-  let contestId = req.params.id;
-  let repId = req.params.rid;
-  let problemId = req.params.pid;
+  const contestId = req.params.id;
+  const repId = req.params.rid;
+  const problemId = req.params.pid;
   Contest.findById(contestId, (err, contest) => {
     if (err) return res.sendStatus(500);
     if (!contest) return res.sendStatus(400);
-    let rep = contest.getUserRepresentative(req.user._id);
+    const rep = contest.getUserRepresentative(req.user._id);
     if (!req.user.isAdmin && !Utils.cmpToString(req.user._id, contest.author)) {
       return res.sendStatus(400);
     }
@@ -168,11 +168,11 @@ exports.getRepProblemSubmissions = (req, res) => {
       rep: repId,
       problem: problemId,
     })
-      .select("_id date verdict language problem")
-      .sort("-date")
+      .select(`_id date verdict language problem`)
+      .sort(`-date`)
       .exec((err, submissions) => {
         if (err) return res.sendStatus(500);
-        return res.json({ submissions: submissions });
+        return res.json({ submissions });
       });
   });
 };
