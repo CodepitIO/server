@@ -13,10 +13,8 @@ function sendMail(type, user, res) {
   Redis.exists(`email:${type}:${user._id}`, (err, exists) => {
     if (err) return res.sendStatus(500);
     if (exists) return res.json(Errors.EmailSendTimelimit);
-    if (!user.verifyHash) {
-      user.verifyHash = crypto.randomBytes(8).toString(`hex`);
-      user.save();
-    }
+    user.verifyHash = crypto.randomBytes(8).toString(`hex`);
+    user.save();
     Mailer.sendMail({
       type,
       id: user._id,
@@ -90,7 +88,7 @@ exports.login = (req, res) => {
   if (User.validateChain(req).seeEmailOrUsername().seePassword().notOk()) {
     return res.sendStatus(400);
   }
-  passport.authenticate(`local-login`, (err, user) => {
+  return passport.authenticate(`local-login`, (err, user) => {
     if (err) return res.json(err);
     if (!user) return res.sendStatus(500);
     req.logIn(user, (err) => {
@@ -119,20 +117,19 @@ exports.checkAvailableUsernameOrEmail = async (req, res) => {
   }
 };
 
-exports.sendPasswordRecoveryEmail = (req, res) => {
-  const { user } = req.params;
-  User.findOne(
-    {
-      $or: [{ email: user }, { username: user }],
-      verified: true,
-    },
-    (err, user) => {
-      if (err) return res.sendStatus(500);
-      if (!user) return res.json(Errors.PasswordRecoveryFindFail);
-      user.verifyHash = null;
-      sendMail(`recover`, user, res);
+exports.sendPasswordRecoveryEmail = async (req, res) => {
+  const { usernameOrEmail } = req.body;
+  try {
+    const user = await User.findOne({
+      $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
+    if (!user) {
+      return res.json(Errors.PasswordRecoveryFindFail);
     }
-  );
+    return sendMail(`recover`, user, res);
+  } catch {
+    return res.sendStatus(500);
+  }
 };
 
 exports.recover = (req, res) => {
@@ -220,12 +217,12 @@ exports.get = async (req, res) => {
 exports.tryGetByLoggedUser = async (req, res) => {
   const id = req.user?._id;
   if (!id) {
-    return res.send();
+    return res.status(200).json({});
   }
   try {
     const user = await User.findById(id);
     if (!user) {
-      return res.status(400);
+      return res.sendStatus(400);
     }
     delete user.password;
     delete user.updatedAt;

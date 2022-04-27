@@ -50,15 +50,11 @@ function APIRoutes() {
     `/user/check/:usernameOrEmail`,
     UserCtrl.checkAvailableUsernameOrEmail
   );
+
   router.post(
     `/user/recover`,
     UserACL.is(`logged-off`),
     Recaptcha.check,
-    UserCtrl.recover
-  );
-  router.get(
-    `/user/recover/:user`,
-    UserACL.is(`logged-off`),
     UserCtrl.sendPasswordRecoveryEmail
   );
   router.get(`/user/posts`, UserACL.is(`logged`), BlogCtrl.getByUser);
@@ -200,7 +196,7 @@ function AdminRoutes() {
 }
 
 export const configure = (app: any) => {
-  const cookieSecret = `ub8yi3959nMtGYT52MJcMyepDF1vzd5q`;
+  const cookieSecret = process.env.COOKIE_SECRET;
   app.use(cookieParser());
   app.use(cookieSession({ secret: cookieSecret, maxAge: 24 * 60 * 60 * 1000 }));
   app.use(compression());

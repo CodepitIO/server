@@ -149,7 +149,6 @@ exports.invite = async (req, res) => {
     await team.save();
     return res.json({ invited: invited.toObject({ virtuals: true }) });
   } catch (err) {
-    console.log(err);
     return res.sendStatus(500);
   }
 };

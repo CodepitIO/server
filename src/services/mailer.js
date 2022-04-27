@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport(
   })
 );
 
-const TEMPLATE_URL = path.join(__dirname, `../../public/templates/%s.html`);
+const TEMPLATE_URL = path.join(__dirname, `./templates/%s.html`);
 const REGISTER_TMPL = _.template(
   fs.readFileSync(util.format(TEMPLATE_URL, `register`), `utf8`)
 );
@@ -32,7 +32,6 @@ const domain = process.env.DOMAIN || C.GET_DOMAIN();
 const mailHandler = {
   register(job, done) {
     Redis.set(`email:register:${job.data.id}`, 1);
-    Redis.expire(`email:register:${job.data.id}`, C.MAILER.TIMELIMIT_PER_USER);
     job.data.domain = domain;
     const body = REGISTER_TMPL(job.data);
     const mailOptions = {
