@@ -127,10 +127,10 @@ exports.getById = async (req, res) => {
 exports.getRepContestSubmissions = async (req, res) => {
   const contestId = req.params.id;
   const startFrom = new Date(_.toInteger(req.query.from) || 0);
+  const rep = req.user?._id;
   try {
     const contest = await Contest.findById(contestId);
     if (!contest) return res.sendStatus(400);
-    const rep = contest.getUserRepresentative(req.user._id);
     if (!rep) return res.status(200).json({});
     let submissions = await Submission.find({
       contest: contestId,
